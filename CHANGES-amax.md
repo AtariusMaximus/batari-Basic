@@ -1,6 +1,7 @@
 # Batari Basic - Atarius Maximus (amax) Branch Changes
 
-This fork is intended to introduce some enhancements. Currently there is only one.
+This fork is intended to introduce some enhancements. Currently there is only one.  
+Note that this build is purely experimental and may break something, I'm just testing changes at this point.
 
 ## 1. Multi-line Block `if...then...endif` Support
 
