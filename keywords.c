@@ -12,9 +12,12 @@ extern int numelses;
 extern int numthens;
 
 
-// SE
+// amax additions:
 extern void doendif();
 extern void doelse();
+extern void dosetbit(char **);
+extern void doclearbit(char **);
+extern void dotogglebit(char **);
 
 int swaptest(char *value)	// check for then, && or ||
 {
@@ -329,6 +332,17 @@ void keywords(char **cstatement)
 	    doelse();
 	    break;
 	}
+	else if (!strncmp(statement[1], "else", 4))
+	{
+	    doelse();
+	    break;
+	}
+    else if (!strncmp(statement[1], "setbit", 6))
+	    dosetbit(statement);
+	else if (!strncmp(statement[1], "clearbit", 8))
+	    doclearbit(statement);
+	else if (!strncmp(statement[1], "togglebit", 9))
+	    dotogglebit(statement);
 	else if (!strncmp(statement[1], "goto", 5))
 	    dogoto(statement);
 	else if (!strncmp(statement[1], "bank", 5))

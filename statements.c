@@ -6196,3 +6196,50 @@ void doelse()
     // 3. Push our new end label onto the stack so doendif() can close it
     sprintf(if_stack[if_stack_ptr++], "blockend%d", numelses++);
 }
+void dosetbit(char **statement)
+{
+    int bit;
+    assertminimumargs(statement, "setbit", 2);
+    removeCR(statement[3]);
+    bit = atoi(statement[3]);
+    
+    if (bit < 0 || bit > 7) 
+        prerror("Bit must be 0-7");
+    
+    invalidate_Areg();
+    printf("	LDA %s\n", statement[2]);
+    printf("	ORA #%d\n", 1 << bit);
+    printf("	STA %s\n", statement[2]);
+}
+
+void doclearbit(char **statement)
+{
+    int bit;
+    assertminimumargs(statement, "clearbit", 2);
+    removeCR(statement[3]);
+    bit = atoi(statement[3]);
+    
+    if (bit < 0 || bit > 7) 
+        prerror("Bit must be 0-7");
+    
+    invalidate_Areg();
+    printf("	LDA %s\n", statement[2]);
+    printf("	AND #%d\n", 255 ^ (1 << bit));
+    printf("	STA %s\n", statement[2]);
+}
+
+void dotogglebit(char **statement)
+{
+    int bit;
+    assertminimumargs(statement, "togglebit", 2);
+    removeCR(statement[3]);
+    bit = atoi(statement[3]);
+    
+    if (bit < 0 || bit > 7) 
+        prerror("Bit must be 0-7");
+    
+    invalidate_Areg();
+    printf("	LDA %s\n", statement[2]);
+    printf("	EOR #%d\n", 1 << bit);
+    printf("	STA %s\n", statement[2]);
+}
