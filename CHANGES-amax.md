@@ -43,7 +43,7 @@ The compiler now includes native commands to manipulate individual bits within a
  togglebit playerflags 1
 ```
 
-# amax.4. Native `switch...case` Block Support
+## amax.4. Native `switch...case` Block Support
 
 The compiler now supports structural state machine blocks using `switch`, `case`, and `default`. Unlike `on...goto` jump tables, this generates optimized local branch sequences (`CMP` and `BNE`). This allows your cases to jump to routines in other banks.
 
