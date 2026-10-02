@@ -27,16 +27,19 @@ The compiler now natively supports multi-line conditional blocks with if/then/en
  endif
 ```
 
-Compiler Modifications:
+## amax.3. Native Bitwise Macros (`setbit`, `clearbit`, `togglebit`)
 
-statements.c
+The compiler now includes native commands to manipulate individual bits within a variable directly. This eliminates the need to use raw binary math (like `var = var | %00000100`or the `{}` syntax)
 
-State Management: Added if_stack array and if_stack_ptr global variables to track open branch labels, enabling support for nested if evaluations.  
-Label Parsing: Updated the findlabel function to explicitly identify newline characters following then as block statements rather than unindented line labels.  
-Execution Routing: Modified the seven condition execution paths inside the doif function. If the line ends after then, the compiler now pushes the auto-generated branch label to the stack instead of printing it immediately.  
-Block Closure: Added the doendif function to pop the matched label from the stack and emit the branch closure to the assembly output.  
+### Syntax Example:
+```basic
+ rem Turn ON bit 0 (adds 1)
+ setbit playerflags 0
 
-keywords.c
+ rem Turn OFF bit 4 (subtracts 16)
+ clearbit playerflags 4
 
-Registered extern void doendif();.  
-Added the endif keyword routing to the main keywords lookup sequence to trigger the block closure.  
+ rem Flip bit 1 to the opposite state (+2 / -2)
+ togglebit playerflags 1
+```
+
