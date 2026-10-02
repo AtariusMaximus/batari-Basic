@@ -33,13 +33,13 @@ The compiler now includes native commands to manipulate individual bits within a
 
 ### Syntax Example:
 ```basic
- rem Turn ON bit 0 (adds 1)
+ rem Turn ON bit 0
  setbit playerflags 0
 
- rem Turn OFF bit 4 (subtracts 16)
+ rem Turn OFF bit 4
  clearbit playerflags 4
 
- rem Flip bit 1 to the opposite state (+2 / -2)
+ rem Flip bit 1 to the opposite state
  togglebit playerflags 1
 ```
 
