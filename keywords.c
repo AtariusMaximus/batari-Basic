@@ -11,6 +11,11 @@ extern int ors;
 extern int numelses;
 extern int numthens;
 
+
+// SE
+extern void doendif();
+extern void doelse();
+
 int swaptest(char *value)	// check for then, && or ||
 {
     if (!strncmp(value, "then\0", 4) || !strncmp(value, "&&\0", 2) || !strncmp(value, "||\0", 2))
@@ -312,6 +317,16 @@ void keywords(char **cstatement)
 	else if (!strncmp(statement[1], "if", 3))
 	{
 	    doif(statement);
+	    break;
+	}
+	else if (!strncmp(statement[1], "endif", 5))
+	{
+	    doendif();
+	    break;
+	}
+	else if (!strncmp(statement[1], "else", 4))
+	{
+	    doelse();
 	    break;
 	}
 	else if (!strncmp(statement[1], "goto", 5))

@@ -1,0 +1,6 @@
+*.swp
+.DS_Store
+Session.vim
+go.work
+examples
+ace/United-Carts-of-Atari

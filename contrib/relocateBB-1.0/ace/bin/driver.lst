@@ -1,0 +1,68 @@
+------- FILE src/ace.asm LEVEL 1 PASS 2
+      1  0c00 ????
+      2  0c00 ????				      processor	6502
+      3  0c00 ????
+      4  0c00 ????				      SEG	BANK00
+      5  0000					      ORG	$0000
+      6  0000					      RORG	$0000
+      7  0000
+      8  0000				   ACE-UF00
+      9  0000		       41		      .byte.b	$41
+     10  0001		       43		      .byte.b	$43
+     11  0002		       45		      .byte.b	$45
+     12  0003		       2d		      .byte.b	$2D
+     13  0004		       55		      .byte.b	$55
+     14  0005		       46		      .byte.b	$46
+     15  0006		       30		      .byte.b	$30
+     16  0007		       30		      .byte.b	$30
+     17  0008
+     18  0008
+     19  0008				   ACE-Driver
+     20  0008							; the ALT symbol must be defined
+     21  0008				  -	      IFNCONST	ALT
+     22  0008				  -	      ECHO	"ALT is not defined"
+     23  0008				  -	      ERR
+     24  0008					      ENDIF
+     25  0008
+     26  0008							; driver name should always begin with the string "DPCp " (including the space)
+     27  0008							;
+     28  0008							; it should also include a version string of the form "vX.YY" where X and YY are
+     29  0008							; integers. for the 'alt' driver the suffix 'a' should be included
+     30  0008							;
+     31  0008							; nothing else should be included in the driver name apart from whitespace
+     32  0008							;
+     33  0008							; finally, the driver name should be exactly string 16 chars wide exactly
+     34  0008							;		     " 	       "
+     35  0008				  -	      IF	ALT == 1
+     36  0008				  -	      dc.b	"DPCp v1.07a	  "
+     37  0008					      ELSE
+     38  0008		       44 50 43 70*	      dc.b	"DPCp v1.07	  "
+     39  0018					      ENDIf
+     40  0018
+     41  0018				   ACE-Driver-Version
+     42  0018		       00		      .byte.b	$00
+     43  0019		       00		      .byte.b	$00
+     44  001a		       00		      .byte.b	$00
+     45  001b		       00		      .byte.b	$00
+     46  001c
+     47  001c				   ACE-RomSize
+     48  001c		       00 80 00 00	      .long.l	$8000
+     49  0020
+     50  0020				   ACE-RomChecksum
+     51  0020		       00		      .byte.b	$00
+     52  0021		       00		      .byte.b	$00
+     53  0022		       00		      .byte.b	$00
+     54  0023		       00		      .byte.b	$00
+     55  0024
+     56  0024				   ACE_Offset
+     57  0024		       31 00 00 00	      .long.l	ARMCODE + $00000001	; + $08020200
+     58  0028		       44 50 43 70*	      dc.b	"DPCpUF0"
+     59  002f
+     60  0030		       00		      align	16
+     61  0030				   ARMCODE
+     62  0030					      incbin	"driver.bin"
+     63  0a28
+     64  0bff					      org	$0bff
+     65  0bff		       00		      .byte.b	$00
+     66  0c00
+     67  0c00					      END

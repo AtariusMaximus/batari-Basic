@@ -1,0 +1,1542 @@
+
+bin/custom.elf:     file format elf32-littlearm
+
+
+Disassembly of section .bootcode:
+
+20000c00 <Custom>:
+_sboot():
+20000c00:	e28f0001 	add	r0, pc, #1
+20000c04:	e12fff10 	bx	r0
+20000c08:	480b      	ldr	r0, [pc, #44]	; (20000c38 <return_to_DPC+0x4>)
+20000c0a:	6802      	ldr	r2, [r0, #0]
+20000c0c:	2a00      	cmp	r2, #0
+20000c0e:	d40c      	bmi.n	20000c2a <skipcopy>
+20000c10:	3201      	adds	r2, #1
+20000c12:	6002      	str	r2, [r0, #0]
+20000c14:	2a01      	cmp	r2, #1
+20000c16:	d108      	bne.n	20000c2a <skipcopy>
+20000c18:	4808      	ldr	r0, [pc, #32]	; (20000c3c <return_to_DPC+0x8>)
+20000c1a:	4909      	ldr	r1, [pc, #36]	; (20000c40 <return_to_DPC+0xc>)
+20000c1c:	4a09      	ldr	r2, [pc, #36]	; (20000c44 <return_to_DPC+0x10>)
+20000c1e:	1a89      	subs	r1, r1, r2
+
+20000c20 <copyloop>:
+copyloop():
+20000c20:	3904      	subs	r1, #4
+20000c22:	d402      	bmi.n	20000c2a <skipcopy>
+20000c24:	5843      	ldr	r3, [r0, r1]
+20000c26:	5053      	str	r3, [r2, r1]
+20000c28:	d1fa      	bne.n	20000c20 <copyloop>
+
+20000c2a <skipcopy>:
+skipcopy():
+20000c2a:	b500      	push	{lr}
+20000c2c:	4806      	ldr	r0, [pc, #24]	; (20000c48 <return_to_DPC+0x14>)
+20000c2e:	4686      	mov	lr, r0
+20000c30:	4806      	ldr	r0, [pc, #24]	; (20000c4c <return_to_DPC+0x18>)
+20000c32:	4700      	bx	r0
+
+20000c34 <return_to_DPC>:
+return_to_DPC():
+20000c34:	bc02      	pop	{r1}
+20000c36:	4708      	bx	r1
+20000c38:	20010024 	.word	0x20010024
+20000c3c:	200013d0 	.word	0x200013d0
+20000c40:	20011c2c 	.word	0x20011c2c
+20000c44:	20011c00 	.word	0x20011c00
+20000c48:	20000c35 	.word	0x20000c35
+20000c4c:	20000e09 	.word	0x20000e09
+
+Disassembly of section .text:
+
+20000c80 <my_memcpy>:
+my_memcpy():
+/home/steve/relocateBB/custom/main.c:177
+#define    scorepointer(a)  fetcheraddr[(a)+56]
+#define    Hmval(a)  fetcheraddr[(a)+58]
+#define    Hmval74(a)  fetcheraddr[(a)+66]
+
+void my_memcpy(unsigned char* destination, unsigned char* source, int offset, int count)
+{ 
+20000c80:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
+20000c82:	9301      	str	r3, [sp, #4]
+/home/steve/relocateBB/custom/main.c:179
+        int i; //saves a few bytes
+        for(i=0;i<count;i++)
+20000c84:	2300      	movs	r3, #0
+/home/steve/relocateBB/custom/main.c:180
+                destination[(i+offset)&255] = source[i]&mask;
+20000c86:	4f07      	ldr	r7, [pc, #28]	; (20000ca4 <my_memcpy+0x24>)
+/home/steve/relocateBB/custom/main.c:179 (discriminator 1)
+        for(i=0;i<count;i++)
+20000c88:	9c01      	ldr	r4, [sp, #4]
+20000c8a:	42a3      	cmp	r3, r4
+20000c8c:	db00      	blt.n	20000c90 <my_memcpy+0x10>
+/home/steve/relocateBB/custom/main.c:181
+} 
+20000c8e:	bdf7      	pop	{r0, r1, r2, r4, r5, r6, r7, pc}
+/home/steve/relocateBB/custom/main.c:180 (discriminator 3)
+                destination[(i+offset)&255] = source[i]&mask;
+20000c90:	25ff      	movs	r5, #255	; 0xff
+20000c92:	18d4      	adds	r4, r2, r3
+20000c94:	5cce      	ldrb	r6, [r1, r3]
+20000c96:	402c      	ands	r4, r5
+20000c98:	683d      	ldr	r5, [r7, #0]
+/home/steve/relocateBB/custom/main.c:179 (discriminator 3)
+        for(i=0;i<count;i++)
+20000c9a:	3301      	adds	r3, #1
+/home/steve/relocateBB/custom/main.c:180 (discriminator 3)
+                destination[(i+offset)&255] = source[i]&mask;
+20000c9c:	4035      	ands	r5, r6
+20000c9e:	5505      	strb	r5, [r0, r4]
+/home/steve/relocateBB/custom/main.c:179 (discriminator 3)
+        for(i=0;i<count;i++)
+20000ca0:	e7f2      	b.n	20000c88 <my_memcpy+0x8>
+20000ca2:	46c0      	nop			; (mov r8, r8)
+20000ca4:	20011c2c 	.word	0x20011c2c
+
+20000ca8 <my_memset>:
+my_memset():
+/home/steve/relocateBB/custom/main.c:186
+
+void my_memset(unsigned char* destination, int fill_value, int count)
+{
+        int i; //saves a few bytes
+        for (i=0;i<count;i++)
+20000ca8:	2300      	movs	r3, #0
+/home/steve/relocateBB/custom/main.c:186 (discriminator 1)
+20000caa:	4293      	cmp	r3, r2
+20000cac:	db00      	blt.n	20000cb0 <my_memset+0x8>
+/home/steve/relocateBB/custom/main.c:188
+                destination[i]=fill_value;
+}
+20000cae:	4770      	bx	lr
+/home/steve/relocateBB/custom/main.c:187 (discriminator 3)
+                destination[i]=fill_value;
+20000cb0:	54c1      	strb	r1, [r0, r3]
+/home/steve/relocateBB/custom/main.c:186 (discriminator 3)
+        for (i=0;i<count;i++)
+20000cb2:	3301      	adds	r3, #1
+20000cb4:	e7f9      	b.n	20000caa <my_memset+0x2>
+
+20000cb6 <reverse>:
+reverse():
+/home/steve/relocateBB/custom/main.c:191
+
+void reverse(int i, int j, unsigned char* x)
+{ 
+20000cb6:	b510      	push	{r4, lr}
+/home/steve/relocateBB/custom/main.c:193
+        int t;
+        while (i < j) 
+20000cb8:	4288      	cmp	r0, r1
+20000cba:	db00      	blt.n	20000cbe <reverse+0x8>
+/home/steve/relocateBB/custom/main.c:199
+        {
+              t = x[i]; x[i] = x[j]; x[j] = t;
+              i++;
+              j--;
+        }
+}
+20000cbc:	bd10      	pop	{r4, pc}
+/home/steve/relocateBB/custom/main.c:195
+              t = x[i]; x[i] = x[j]; x[j] = t;
+20000cbe:	5c13      	ldrb	r3, [r2, r0]
+20000cc0:	5c54      	ldrb	r4, [r2, r1]
+20000cc2:	5414      	strb	r4, [r2, r0]
+20000cc4:	5453      	strb	r3, [r2, r1]
+/home/steve/relocateBB/custom/main.c:196
+              i++;
+20000cc6:	3001      	adds	r0, #1
+/home/steve/relocateBB/custom/main.c:197
+              j--;
+20000cc8:	3901      	subs	r1, #1
+20000cca:	e7f5      	b.n	20000cb8 <reverse+0x2>
+
+20000ccc <memscroll>:
+memscroll():
+/home/steve/relocateBB/custom/main.c:202
+
+void memscroll(unsigned char* qmemory, unsigned char offset)
+{
+20000ccc:	b570      	push	{r4, r5, r6, lr}
+20000cce:	0004      	movs	r4, r0
+20000cd0:	000d      	movs	r5, r1
+/home/steve/relocateBB/custom/main.c:204
+        // the classic "shift N elements through reversal" algorithm
+        reverse(0,offset-1,qmemory);
+20000cd2:	0002      	movs	r2, r0
+20000cd4:	3901      	subs	r1, #1
+20000cd6:	2000      	movs	r0, #0
+20000cd8:	f7ff ffed 	bl	20000cb6 <reverse>
+/home/steve/relocateBB/custom/main.c:205
+        reverse(offset,255,qmemory);
+20000cdc:	0028      	movs	r0, r5
+20000cde:	0022      	movs	r2, r4
+20000ce0:	21ff      	movs	r1, #255	; 0xff
+20000ce2:	f7ff ffe8 	bl	20000cb6 <reverse>
+/home/steve/relocateBB/custom/main.c:206
+        reverse(0,255,qmemory);
+20000ce6:	0022      	movs	r2, r4
+20000ce8:	21ff      	movs	r1, #255	; 0xff
+20000cea:	2000      	movs	r0, #0
+20000cec:	f7ff ffe3 	bl	20000cb6 <reverse>
+/home/steve/relocateBB/custom/main.c:207
+}
+20000cf0:	bd70      	pop	{r4, r5, r6, pc}
+	...
+
+20000cf4 <get32bitdff>:
+get32bitdff():
+/home/steve/relocateBB/custom/main.c:211
+
+unsigned int get32bitdff(int offset)
+{
+  return((dffrachi(offset)<<8)+dffraclo(offset));
+20000cf4:	4b05      	ldr	r3, [pc, #20]	; (20000d0c <get32bitdff+0x18>)
+20000cf6:	685b      	ldr	r3, [r3, #4]
+20000cf8:	181b      	adds	r3, r3, r0
+20000cfa:	001a      	movs	r2, r3
+20000cfc:	322e      	adds	r2, #46	; 0x2e
+20000cfe:	7810      	ldrb	r0, [r2, #0]
+20000d00:	3307      	adds	r3, #7
+20000d02:	7fdb      	ldrb	r3, [r3, #31]
+20000d04:	0200      	lsls	r0, r0, #8
+20000d06:	18c0      	adds	r0, r0, r3
+/home/steve/relocateBB/custom/main.c:212
+}
+20000d08:	4770      	bx	lr
+20000d0a:	46c0      	nop			; (mov r8, r8)
+20000d0c:	20011c2c 	.word	0x20011c2c
+
+20000d10 <get32bitdf>:
+get32bitdf():
+/home/steve/relocateBB/custom/main.c:216
+
+unsigned int get32bitdf(int offset)
+{
+  return((dfhigh(offset)<<8)+dflow(offset));
+20000d10:	4b03      	ldr	r3, [pc, #12]	; (20000d20 <get32bitdf+0x10>)
+20000d12:	685b      	ldr	r3, [r3, #4]
+20000d14:	181b      	adds	r3, r3, r0
+20000d16:	7f98      	ldrb	r0, [r3, #30]
+20000d18:	7d9b      	ldrb	r3, [r3, #22]
+20000d1a:	0200      	lsls	r0, r0, #8
+20000d1c:	18c0      	adds	r0, r0, r3
+/home/steve/relocateBB/custom/main.c:217
+}
+20000d1e:	4770      	bx	lr
+20000d20:	20011c2c 	.word	0x20011c2c
+
+20000d24 <checkswap>:
+checkswap():
+/home/steve/relocateBB/custom/main.c:235
+  if (((a+b)&255)<b) return 0;
+  return a;
+}
+
+int checkswap(int a, int b)
+{
+20000d24:	b510      	push	{r4, lr}
+/home/steve/relocateBB/custom/main.c:239
+  signed int temp1;
+  char s1,s2;
+
+  s1=checkwrap(RIOT[player1y+a],RIOT[player1height+a]);
+20000d26:	4b10      	ldr	r3, [pc, #64]	; (20000d68 <checkswap+0x44>)
+20000d28:	681a      	ldr	r2, [r3, #0]
+20000d2a:	1810      	adds	r0, r2, r0
+20000d2c:	7d43      	ldrb	r3, [r0, #21]
+20000d2e:	3002      	adds	r0, #2
+20000d30:	7fc4      	ldrb	r4, [r0, #31]
+checkwrap():
+/home/steve/relocateBB/custom/main.c:230
+  if (((a+b)&255)<b) return 0;
+20000d32:	1918      	adds	r0, r3, r4
+20000d34:	b2c0      	uxtb	r0, r0
+20000d36:	4284      	cmp	r4, r0
+20000d38:	d900      	bls.n	20000d3c <checkswap+0x18>
+20000d3a:	2300      	movs	r3, #0
+checkswap():
+/home/steve/relocateBB/custom/main.c:240
+  s2=checkwrap(RIOT[player1y+b],RIOT[player1height+b]);
+20000d3c:	1852      	adds	r2, r2, r1
+20000d3e:	7d51      	ldrb	r1, [r2, #21]
+20000d40:	3202      	adds	r2, #2
+20000d42:	7fd2      	ldrb	r2, [r2, #31]
+checkwrap():
+/home/steve/relocateBB/custom/main.c:230
+  if (((a+b)&255)<b) return 0;
+20000d44:	1888      	adds	r0, r1, r2
+20000d46:	b2c0      	uxtb	r0, r0
+20000d48:	4282      	cmp	r2, r0
+20000d4a:	d900      	bls.n	20000d4e <checkswap+0x2a>
+20000d4c:	2100      	movs	r1, #0
+checkswap():
+/home/steve/relocateBB/custom/main.c:249
+  { // larger is higher
+    if ((temp1-=5)>0)
+    {// not overlapping
+      if (temp1>RIOT[player1height+b])
+	return SKIP;
+      else return OVERLAP;
+20000d4e:	2001      	movs	r0, #1
+/home/steve/relocateBB/custom/main.c:242
+  temp1=s1-s2;
+20000d50:	1a5b      	subs	r3, r3, r1
+/home/steve/relocateBB/custom/main.c:243
+  if (temp1>0)
+20000d52:	2b00      	cmp	r3, #0
+20000d54:	dd06      	ble.n	20000d64 <checkswap+0x40>
+/home/steve/relocateBB/custom/main.c:245
+    if ((temp1-=5)>0)
+20000d56:	3b05      	subs	r3, #5
+20000d58:	2b00      	cmp	r3, #0
+20000d5a:	dd03      	ble.n	20000d64 <checkswap+0x40>
+/home/steve/relocateBB/custom/main.c:247
+      if (temp1>RIOT[player1height+b])
+20000d5c:	17d0      	asrs	r0, r2, #31
+20000d5e:	0fd9      	lsrs	r1, r3, #31
+20000d60:	429a      	cmp	r2, r3
+20000d62:	4148      	adcs	r0, r1
+/home/steve/relocateBB/custom/main.c:265
+      if (temp1>RIOT[player1height+b])
+        return NOOVERLAP;
+      else return OVERLAP;
+    }
+  }
+}
+20000d64:	bd10      	pop	{r4, pc}
+20000d66:	46c0      	nop			; (mov r8, r8)
+20000d68:	20011c00 	.word	0x20011c00
+
+20000d6c <copynybble>:
+copynybble():
+/home/steve/relocateBB/custom/main.c:268
+
+void copynybble(unsigned char num)
+{
+20000d6c:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
+/home/steve/relocateBB/custom/main.c:272
+    int i;
+    unsigned char *destination;
+    unsigned char *source;
+    destination=queue+(scorepointer(1)<<8)+scorepointer(0)+((temp5++)<<3);
+20000d6e:	4a14      	ldr	r2, [pc, #80]	; (20000dc0 <copynybble+0x54>)
+20000d70:	4f14      	ldr	r7, [pc, #80]	; (20000dc4 <copynybble+0x58>)
+20000d72:	6851      	ldr	r1, [r2, #4]
+/home/steve/relocateBB/custom/main.c:268
+{
+20000d74:	9001      	str	r0, [sp, #4]
+/home/steve/relocateBB/custom/main.c:272
+    destination=queue+(scorepointer(1)<<8)+scorepointer(0)+((temp5++)<<3);
+20000d76:	000b      	movs	r3, r1
+20000d78:	3339      	adds	r3, #57	; 0x39
+20000d7a:	781d      	ldrb	r5, [r3, #0]
+20000d7c:	3b01      	subs	r3, #1
+20000d7e:	781e      	ldrb	r6, [r3, #0]
+20000d80:	6893      	ldr	r3, [r2, #8]
+20000d82:	687c      	ldr	r4, [r7, #4]
+20000d84:	1c58      	adds	r0, r3, #1
+20000d86:	6090      	str	r0, [r2, #8]
+/home/steve/relocateBB/custom/main.c:273
+    source=flashdata+(scoregraphics(1)<<8)+scoregraphics(0)+((num&0x0F)<<3);
+20000d88:	68ba      	ldr	r2, [r7, #8]
+20000d8a:	2778      	movs	r7, #120	; 0x78
+20000d8c:	9801      	ldr	r0, [sp, #4]
+/home/steve/relocateBB/custom/main.c:272
+    destination=queue+(scorepointer(1)<<8)+scorepointer(0)+((temp5++)<<3);
+20000d8e:	00db      	lsls	r3, r3, #3
+/home/steve/relocateBB/custom/main.c:273
+    source=flashdata+(scoregraphics(1)<<8)+scoregraphics(0)+((num&0x0F)<<3);
+20000d90:	00c0      	lsls	r0, r0, #3
+20000d92:	4038      	ands	r0, r7
+20000d94:	000f      	movs	r7, r1
+20000d96:	3137      	adds	r1, #55	; 0x37
+20000d98:	7809      	ldrb	r1, [r1, #0]
+20000d9a:	3736      	adds	r7, #54	; 0x36
+20000d9c:	783f      	ldrb	r7, [r7, #0]
+20000d9e:	0209      	lsls	r1, r1, #8
+20000da0:	4339      	orrs	r1, r7
+20000da2:	1840      	adds	r0, r0, r1
+/home/steve/relocateBB/custom/main.c:272
+    destination=queue+(scorepointer(1)<<8)+scorepointer(0)+((temp5++)<<3);
+20000da4:	022d      	lsls	r5, r5, #8
+20000da6:	199b      	adds	r3, r3, r6
+20000da8:	1811      	adds	r1, r2, r0
+20000daa:	195b      	adds	r3, r3, r5
+20000dac:	3a08      	subs	r2, #8
+20000dae:	18e4      	adds	r4, r4, r3
+20000db0:	1812      	adds	r2, r2, r0
+/home/steve/relocateBB/custom/main.c:275 (discriminator 3)
+    for(i=0;i<8;i++)
+      destination[i] = source[7-i];
+20000db2:	79cb      	ldrb	r3, [r1, #7]
+/home/steve/relocateBB/custom/main.c:274 (discriminator 3)
+    for(i=0;i<8;i++)
+20000db4:	3901      	subs	r1, #1
+/home/steve/relocateBB/custom/main.c:275 (discriminator 3)
+      destination[i] = source[7-i];
+20000db6:	7023      	strb	r3, [r4, #0]
+/home/steve/relocateBB/custom/main.c:274 (discriminator 3)
+    for(i=0;i<8;i++)
+20000db8:	3401      	adds	r4, #1
+20000dba:	4291      	cmp	r1, r2
+20000dbc:	d1f9      	bne.n	20000db2 <copynybble+0x46>
+/home/steve/relocateBB/custom/main.c:276
+}
+20000dbe:	bdf7      	pop	{r0, r1, r2, r4, r5, r6, r7, pc}
+20000dc0:	20011c2c 	.word	0x20011c2c
+20000dc4:	20011c00 	.word	0x20011c00
+
+20000dc8 <on_off_flip>:
+on_off_flip():
+/home/steve/relocateBB/custom/main.c:280
+
+void on_off_flip(unsigned int loc, unsigned int fnmask)
+{
+  switch(C_function[0]&3)
+20000dc8:	2203      	movs	r2, #3
+20000dca:	4b0d      	ldr	r3, [pc, #52]	; (20000e00 <on_off_flip+0x38>)
+20000dcc:	68db      	ldr	r3, [r3, #12]
+20000dce:	781b      	ldrb	r3, [r3, #0]
+20000dd0:	4013      	ands	r3, r2
+20000dd2:	2b01      	cmp	r3, #1
+20000dd4:	d009      	beq.n	20000dea <on_off_flip+0x22>
+20000dd6:	2b02      	cmp	r3, #2
+20000dd8:	d00c      	beq.n	20000df4 <on_off_flip+0x2c>
+20000dda:	2b00      	cmp	r3, #0
+20000ddc:	d104      	bne.n	20000de8 <on_off_flip+0x20>
+/home/steve/relocateBB/custom/main.c:283
+  {
+    case 0://on
+      pfpixel[loc]|=fnmask;
+20000dde:	4b09      	ldr	r3, [pc, #36]	; (20000e04 <on_off_flip+0x3c>)
+20000de0:	68da      	ldr	r2, [r3, #12]
+20000de2:	5c13      	ldrb	r3, [r2, r0]
+20000de4:	430b      	orrs	r3, r1
+/home/steve/relocateBB/custom/main.c:289
+      return;
+    case 1://off
+      pfpixel[loc]&=~fnmask;
+      return;
+    case 2://flip
+      pfpixel[loc]^=fnmask;
+20000de6:	5413      	strb	r3, [r2, r0]
+/home/steve/relocateBB/custom/main.c:294
+      return;
+    default://reserved (for what?)
+      break;
+  }
+}
+20000de8:	4770      	bx	lr
+/home/steve/relocateBB/custom/main.c:286
+      pfpixel[loc]&=~fnmask;
+20000dea:	4b06      	ldr	r3, [pc, #24]	; (20000e04 <on_off_flip+0x3c>)
+20000dec:	68da      	ldr	r2, [r3, #12]
+20000dee:	5c13      	ldrb	r3, [r2, r0]
+20000df0:	438b      	bics	r3, r1
+20000df2:	e7f8      	b.n	20000de6 <on_off_flip+0x1e>
+/home/steve/relocateBB/custom/main.c:289
+      pfpixel[loc]^=fnmask;
+20000df4:	4b03      	ldr	r3, [pc, #12]	; (20000e04 <on_off_flip+0x3c>)
+20000df6:	68da      	ldr	r2, [r3, #12]
+20000df8:	5c13      	ldrb	r3, [r2, r0]
+20000dfa:	404b      	eors	r3, r1
+20000dfc:	e7f3      	b.n	20000de6 <on_off_flip+0x1e>
+20000dfe:	46c0      	nop			; (mov r8, r8)
+20000e00:	20011c00 	.word	0x20011c00
+20000e04:	20011c2c 	.word	0x20011c2c
+
+20000e08 <main>:
+main():
+/home/steve/relocateBB/custom/main.c:298
+
+// main() is what gets called when you store 0xFF into DPC+ register CALLFUNCTION in your 6507 code.
+int main()
+{
+20000e08:	b5f0      	push	{r4, r5, r6, r7, lr}
+20000e0a:	b091      	sub	sp, #68	; 0x44
+/home/steve/relocateBB/custom/main.c:307
+  // moving the the scope of these variables saved a *lot* of space. 
+  int temp2;
+  int temp3;
+  int Gfxindex;
+  unsigned char *HMdiv=(unsigned char *)(0x20000c00+0x1000);
+  const unsigned char setbyte[32]=
+20000e0c:	2220      	movs	r2, #32
+20000e0e:	49ca      	ldr	r1, [pc, #808]	; (20001138 <main+0x330>)
+20000e10:	a808      	add	r0, sp, #32
+20000e12:	f000 fa73 	bl	200012fc <memcpy>
+/home/steve/relocateBB/custom/main.c:313
+	{0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01,
+	 0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80,
+	 0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01,
+	 0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
+
+  fetcheraddr=flashdata+fetcher_address_table[0];
+20000e16:	4cc9      	ldr	r4, [pc, #804]	; (2000113c <main+0x334>)
+20000e18:	4ec9      	ldr	r6, [pc, #804]	; (20001140 <main+0x338>)
+20000e1a:	6923      	ldr	r3, [r4, #16]
+20000e1c:	881a      	ldrh	r2, [r3, #0]
+20000e1e:	68a3      	ldr	r3, [r4, #8]
+20000e20:	189b      	adds	r3, r3, r2
+20000e22:	2203      	movs	r2, #3
+20000e24:	6073      	str	r3, [r6, #4]
+/home/steve/relocateBB/custom/main.c:316
+
+  // preindex these to save some space...
+  unsigned char C_function1=C_function[1];
+20000e26:	68e3      	ldr	r3, [r4, #12]
+20000e28:	9302      	str	r3, [sp, #8]
+20000e2a:	785b      	ldrb	r3, [r3, #1]
+20000e2c:	9301      	str	r3, [sp, #4]
+/home/steve/relocateBB/custom/main.c:317
+  unsigned char C_function2=C_function[2];
+20000e2e:	9b02      	ldr	r3, [sp, #8]
+20000e30:	789d      	ldrb	r5, [r3, #2]
+/home/steve/relocateBB/custom/main.c:318
+  unsigned char C_function3=C_function[3];
+20000e32:	78df      	ldrb	r7, [r3, #3]
+/home/steve/relocateBB/custom/main.c:320
+
+  switch (C_function[0]&0xFC)
+20000e34:	781b      	ldrb	r3, [r3, #0]
+20000e36:	4393      	bics	r3, r2
+20000e38:	2b14      	cmp	r3, #20
+20000e3a:	d100      	bne.n	20000e3e <main+0x36>
+20000e3c:	e0dd      	b.n	20000ffa <main+0x1f2>
+20000e3e:	d900      	bls.n	20000e42 <main+0x3a>
+20000e40:	e090      	b.n	20000f64 <main+0x15c>
+20000e42:	2b0c      	cmp	r3, #12
+20000e44:	d100      	bne.n	20000e48 <main+0x40>
+20000e46:	e0cc      	b.n	20000fe2 <main+0x1da>
+20000e48:	d900      	bls.n	20000e4c <main+0x44>
+20000e4a:	e082      	b.n	20000f52 <main+0x14a>
+20000e4c:	2b04      	cmp	r3, #4
+20000e4e:	d100      	bne.n	20000e52 <main+0x4a>
+20000e50:	e0a3      	b.n	20000f9a <main+0x192>
+20000e52:	2b08      	cmp	r3, #8
+20000e54:	d100      	bne.n	20000e58 <main+0x50>
+20000e56:	e0c0      	b.n	20000fda <main+0x1d2>
+/home/steve/relocateBB/custom/main.c:405
+  //passed the sprite max as a parameter instead
+  maxsprites=C_function1;
+
+  for (i=0;i<maxsprites;i++)
+  {
+    myGfxIndex[i]=spritesort[i];
+20000e58:	0020      	movs	r0, r4
+/home/steve/relocateBB/custom/main.c:401
+  maxsprites=C_function1;
+20000e5a:	9b01      	ldr	r3, [sp, #4]
+/home/steve/relocateBB/custom/main.c:405
+    myGfxIndex[i]=spritesort[i];
+20000e5c:	341e      	adds	r4, #30
+20000e5e:	001a      	movs	r2, r3
+20000e60:	0021      	movs	r1, r4
+20000e62:	3014      	adds	r0, #20
+/home/steve/relocateBB/custom/main.c:401
+  maxsprites=C_function1;
+20000e64:	7433      	strb	r3, [r6, #16]
+/home/steve/relocateBB/custom/main.c:405
+    myGfxIndex[i]=spritesort[i];
+20000e66:	f000 fa49 	bl	200012fc <memcpy>
+/home/steve/relocateBB/custom/main.c:408
+  }
+//loop
+  temp3=maxsprites-1;
+20000e6a:	9b01      	ldr	r3, [sp, #4]
+20000e6c:	1e5f      	subs	r7, r3, #1
+/home/steve/relocateBB/custom/main.c:410
+  temp2=maxsprites-2;
+ while (temp2>=0)
+20000e6e:	1e9d      	subs	r5, r3, #2
+20000e70:	1966      	adds	r6, r4, r5
+/home/steve/relocateBB/custom/main.c:408
+  temp3=maxsprites-1;
+20000e72:	9702      	str	r7, [sp, #8]
+/home/steve/relocateBB/custom/main.c:410
+ while (temp2>=0)
+20000e74:	2d00      	cmp	r5, #0
+20000e76:	db00      	blt.n	20000e7a <main+0x72>
+20000e78:	e12c      	b.n	200010d4 <main+0x2cc>
+/home/steve/relocateBB/custom/main.c:437
+  i=spritesort[temp2+1];
+  spritesort[temp2+1]=spritesort[temp2];
+  spritesort[temp2]=i;
+  temp2--;
+ }
+  for (i=0;i<maxsprites;i++)
+20000e7a:	2300      	movs	r3, #0
+/home/steve/relocateBB/custom/main.c:438
+    RIOT[SpriteGfxIndex+i]=myGfxIndex[i];
+20000e7c:	4caf      	ldr	r4, [pc, #700]	; (2000113c <main+0x334>)
+/home/steve/relocateBB/custom/main.c:437
+  for (i=0;i<maxsprites;i++)
+20000e7e:	4db0      	ldr	r5, [pc, #704]	; (20001140 <main+0x338>)
+/home/steve/relocateBB/custom/main.c:438
+    RIOT[SpriteGfxIndex+i]=myGfxIndex[i];
+20000e80:	48b0      	ldr	r0, [pc, #704]	; (20001144 <main+0x33c>)
+/home/steve/relocateBB/custom/main.c:437 (discriminator 1)
+  for (i=0;i<maxsprites;i++)
+20000e82:	7c29      	ldrb	r1, [r5, #16]
+/home/steve/relocateBB/custom/main.c:438 (discriminator 1)
+    RIOT[SpriteGfxIndex+i]=myGfxIndex[i];
+20000e84:	6822      	ldr	r2, [r4, #0]
+/home/steve/relocateBB/custom/main.c:437 (discriminator 1)
+  for (i=0;i<maxsprites;i++)
+20000e86:	4299      	cmp	r1, r3
+20000e88:	dd00      	ble.n	20000e8c <main+0x84>
+20000e8a:	e151      	b.n	20001130 <main+0x328>
+/home/steve/relocateBB/custom/main.c:439
+  RIOT[spritedisplay]=temp3;
+20000e8c:	9b02      	ldr	r3, [sp, #8]
+/home/steve/relocateBB/custom/main.c:442
+  // fetcher setup
+  //my_memset(queue+(dfhigh(3)<<8)+dflow(3),0,192);
+  my_memset(queue+get32bitdf(3),0,192);
+20000e8e:	2003      	movs	r0, #3
+/home/steve/relocateBB/custom/main.c:439
+  RIOT[spritedisplay]=temp3;
+20000e90:	7253      	strb	r3, [r2, #9]
+/home/steve/relocateBB/custom/main.c:442
+  my_memset(queue+get32bitdf(3),0,192);
+20000e92:	f7ff ff3d 	bl	20000d10 <get32bitdf>
+20000e96:	6866      	ldr	r6, [r4, #4]
+20000e98:	22c0      	movs	r2, #192	; 0xc0
+20000e9a:	2100      	movs	r1, #0
+20000e9c:	1830      	adds	r0, r6, r0
+20000e9e:	f7ff ff03 	bl	20000ca8 <my_memset>
+/home/steve/relocateBB/custom/main.c:445
+
+  //my_memset(queue+(dfhigh(1)<<8)+dflow(1),RIOT[COLUM1],192); // clear multiplexed sprites and fill colors
+  my_memset(queue+get32bitdf(1),RIOT[COLUM1],192); // clear multiplexed sprites and fill colors
+20000ea2:	2001      	movs	r0, #1
+20000ea4:	f7ff ff34 	bl	20000d10 <get32bitdf>
+20000ea8:	6823      	ldr	r3, [r4, #0]
+20000eaa:	6866      	ldr	r6, [r4, #4]
+20000eac:	3337      	adds	r3, #55	; 0x37
+20000eae:	7819      	ldrb	r1, [r3, #0]
+20000eb0:	22c0      	movs	r2, #192	; 0xc0
+20000eb2:	1830      	adds	r0, r6, r0
+20000eb4:	f7ff fef8 	bl	20000ca8 <my_memset>
+/home/steve/relocateBB/custom/main.c:447
+  //my_memset(queue+(dfhigh(0)<<8)+dflow(0)-1,RIOT[COLUM0],193); // fill COLUM0 colors
+  my_memset(queue+get32bitdf(0)-1,RIOT[COLUM0],193); // fill COLUM0 colors
+20000eb8:	2000      	movs	r0, #0
+20000eba:	f7ff ff29 	bl	20000d10 <get32bitdf>
+20000ebe:	6823      	ldr	r3, [r4, #0]
+20000ec0:	6866      	ldr	r6, [r4, #4]
+20000ec2:	3336      	adds	r3, #54	; 0x36
+20000ec4:	3801      	subs	r0, #1
+20000ec6:	7819      	ldrb	r1, [r3, #0]
+20000ec8:	22c1      	movs	r2, #193	; 0xc1
+20000eca:	1830      	adds	r0, r6, r0
+20000ecc:	f7ff feec 	bl	20000ca8 <my_memset>
+/home/steve/relocateBB/custom/main.c:451
+
+  // fill color from player0, wrapping if necessary...
+  //my_memcpy(queue+(dfhigh(0)<<8)+dflow(0),
+  my_memcpy(queue+get32bitdf(0),
+20000ed0:	2000      	movs	r0, #0
+20000ed2:	f7ff ff1d 	bl	20000d10 <get32bitdf>
+/home/steve/relocateBB/custom/main.c:452
+            flashdata+(RIOT[player0color+1]<<8)+RIOT[player0color], RIOT[player0y],
+20000ed6:	6821      	ldr	r1, [r4, #0]
+/home/steve/relocateBB/custom/main.c:451
+  my_memcpy(queue+get32bitdf(0),
+20000ed8:	6866      	ldr	r6, [r4, #4]
+20000eda:	7d0a      	ldrb	r2, [r1, #20]
+/home/steve/relocateBB/custom/main.c:452
+            flashdata+(RIOT[player0color+1]<<8)+RIOT[player0color], RIOT[player0y],
+20000edc:	7f8f      	ldrb	r7, [r1, #30]
+/home/steve/relocateBB/custom/main.c:453
+            RIOT[player0height]);
+20000ede:	1c4b      	adds	r3, r1, #1
+/home/steve/relocateBB/custom/main.c:452
+            flashdata+(RIOT[player0color+1]<<8)+RIOT[player0color], RIOT[player0y],
+20000ee0:	7fc9      	ldrb	r1, [r1, #31]
+/home/steve/relocateBB/custom/main.c:451
+  my_memcpy(queue+get32bitdf(0),
+20000ee2:	7fdb      	ldrb	r3, [r3, #31]
+/home/steve/relocateBB/custom/main.c:452
+            flashdata+(RIOT[player0color+1]<<8)+RIOT[player0color], RIOT[player0y],
+20000ee4:	0209      	lsls	r1, r1, #8
+20000ee6:	4339      	orrs	r1, r7
+20000ee8:	68a7      	ldr	r7, [r4, #8]
+/home/steve/relocateBB/custom/main.c:451
+  my_memcpy(queue+get32bitdf(0),
+20000eea:	1830      	adds	r0, r6, r0
+/home/steve/relocateBB/custom/main.c:452
+            flashdata+(RIOT[player0color+1]<<8)+RIOT[player0color], RIOT[player0y],
+20000eec:	1879      	adds	r1, r7, r1
+/home/steve/relocateBB/custom/main.c:451
+  my_memcpy(queue+get32bitdf(0),
+20000eee:	f7ff fec7 	bl	20000c80 <my_memcpy>
+/home/steve/relocateBB/custom/main.c:456
+
+  //my_memcpy(queue+(dfhigh(2)<<8)+dflow(2),
+  my_memcpy(queue+get32bitdf(2),
+20000ef2:	2002      	movs	r0, #2
+20000ef4:	f7ff ff0c 	bl	20000d10 <get32bitdf>
+/home/steve/relocateBB/custom/main.c:457
+            flashdata+(RIOT[player0pointerhi]<<8)+RIOT[player0pointerlo], 0,
+20000ef8:	6822      	ldr	r2, [r4, #0]
+/home/steve/relocateBB/custom/main.c:456
+  my_memcpy(queue+get32bitdf(2),
+20000efa:	6866      	ldr	r6, [r4, #4]
+/home/steve/relocateBB/custom/main.c:457
+            flashdata+(RIOT[player0pointerhi]<<8)+RIOT[player0pointerlo], 0,
+20000efc:	0011      	movs	r1, r2
+/home/steve/relocateBB/custom/main.c:458
+            RIOT[player0height]);
+20000efe:	1c53      	adds	r3, r2, #1
+/home/steve/relocateBB/custom/main.c:457
+            flashdata+(RIOT[player0pointerhi]<<8)+RIOT[player0pointerlo], 0,
+20000f00:	3239      	adds	r2, #57	; 0x39
+20000f02:	7812      	ldrb	r2, [r2, #0]
+20000f04:	3138      	adds	r1, #56	; 0x38
+20000f06:	7809      	ldrb	r1, [r1, #0]
+20000f08:	0212      	lsls	r2, r2, #8
+20000f0a:	430a      	orrs	r2, r1
+20000f0c:	68a1      	ldr	r1, [r4, #8]
+/home/steve/relocateBB/custom/main.c:456
+  my_memcpy(queue+get32bitdf(2),
+20000f0e:	7fdb      	ldrb	r3, [r3, #31]
+/home/steve/relocateBB/custom/main.c:457
+            flashdata+(RIOT[player0pointerhi]<<8)+RIOT[player0pointerlo], 0,
+20000f10:	1889      	adds	r1, r1, r2
+/home/steve/relocateBB/custom/main.c:456
+  my_memcpy(queue+get32bitdf(2),
+20000f12:	1830      	adds	r0, r6, r0
+20000f14:	2200      	movs	r2, #0
+20000f16:	f7ff feb3 	bl	20000c80 <my_memcpy>
+/home/steve/relocateBB/custom/main.c:460
+
+  count=0;
+20000f1a:	2300      	movs	r3, #0
+20000f1c:	61ab      	str	r3, [r5, #24]
+/home/steve/relocateBB/custom/main.c:461
+  temp4=0;
+20000f1e:	616b      	str	r3, [r5, #20]
+/home/steve/relocateBB/custom/main.c:462
+  while (temp4 != 511)
+20000f20:	4987      	ldr	r1, [pc, #540]	; (20001140 <main+0x338>)
+/home/steve/relocateBB/custom/main.c:472
+  //  {
+
+ // masking: NUSIZ bit 7=on/off, NUSIZ 6=L/R
+ // appears to happen @ 0x99-0x9F
+      mask = 0xFF;
+      if (RIOT[_NUSIZ1+Gfxindex]>127)
+20000f22:	4d86      	ldr	r5, [pc, #536]	; (2000113c <main+0x334>)
+/home/steve/relocateBB/custom/main.c:462
+  while (temp4 != 511)
+20000f24:	694b      	ldr	r3, [r1, #20]
+20000f26:	4a88      	ldr	r2, [pc, #544]	; (20001148 <main+0x340>)
+/home/steve/relocateBB/custom/main.c:472
+      if (RIOT[_NUSIZ1+Gfxindex]>127)
+20000f28:	682c      	ldr	r4, [r5, #0]
+/home/steve/relocateBB/custom/main.c:462
+  while (temp4 != 511)
+20000f2a:	4293      	cmp	r3, r2
+20000f2c:	d000      	beq.n	20000f30 <main+0x128>
+20000f2e:	e10f      	b.n	20001150 <main+0x348>
+/home/steve/relocateBB/custom/main.c:516
+    queue[get32bitdf(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+    //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+    queue[get32bitdf(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+    count++;
+  }
+  temp5=1;
+20000f30:	2301      	movs	r3, #1
+/home/steve/relocateBB/custom/main.c:518
+
+  for (i = score; i <= score3; i++) {
+20000f32:	2433      	movs	r4, #51	; 0x33
+/home/steve/relocateBB/custom/main.c:516
+  temp5=1;
+20000f34:	608b      	str	r3, [r1, #8]
+/home/steve/relocateBB/custom/main.c:519 (discriminator 3)
+    copynybble(RIOT[i]);
+20000f36:	682b      	ldr	r3, [r5, #0]
+20000f38:	5d18      	ldrb	r0, [r3, r4]
+20000f3a:	f7ff ff17 	bl	20000d6c <copynybble>
+/home/steve/relocateBB/custom/main.c:520 (discriminator 3)
+    copynybble(RIOT[i] >> 4);
+20000f3e:	682b      	ldr	r3, [r5, #0]
+20000f40:	5d18      	ldrb	r0, [r3, r4]
+/home/steve/relocateBB/custom/main.c:518 (discriminator 3)
+  for (i = score; i <= score3; i++) {
+20000f42:	3401      	adds	r4, #1
+/home/steve/relocateBB/custom/main.c:520 (discriminator 3)
+    copynybble(RIOT[i] >> 4);
+20000f44:	0900      	lsrs	r0, r0, #4
+20000f46:	f7ff ff11 	bl	20000d6c <copynybble>
+/home/steve/relocateBB/custom/main.c:518 (discriminator 3)
+  for (i = score; i <= score3; i++) {
+20000f4a:	2c36      	cmp	r4, #54	; 0x36
+20000f4c:	d1f3      	bne.n	20000f36 <main+0x12e>
+/home/steve/relocateBB/custom/main.c:524
+  }
+
+  return 0;
+}
+20000f4e:	2000      	movs	r0, #0
+20000f50:	e02c      	b.n	20000fac <main+0x1a4>
+/home/steve/relocateBB/custom/main.c:320
+  switch (C_function[0]&0xFC)
+20000f52:	2b10      	cmp	r3, #16
+20000f54:	d180      	bne.n	20000e58 <main+0x50>
+/home/steve/relocateBB/custom/main.c:348
+      my_memset(RIOT+player1pointerlo,0,4096-0x1a8-player1pointerlo);
+20000f56:	2100      	movs	r1, #0
+20000f58:	6820      	ldr	r0, [r4, #0]
+20000f5a:	4a7c      	ldr	r2, [pc, #496]	; (2000114c <main+0x344>)
+20000f5c:	303a      	adds	r0, #58	; 0x3a
+/home/steve/relocateBB/custom/main.c:386
+      my_memset(queue+get32bitdff(0),C_function1,1024);
+20000f5e:	f7ff fea3 	bl	20000ca8 <my_memset>
+/home/steve/relocateBB/custom/main.c:387
+      return;
+20000f62:	e023      	b.n	20000fac <main+0x1a4>
+/home/steve/relocateBB/custom/main.c:320
+  switch (C_function[0]&0xFC)
+20000f64:	2b1c      	cmp	r3, #28
+20000f66:	d100      	bne.n	20000f6a <main+0x162>
+20000f68:	e09c      	b.n	200010a4 <main+0x29c>
+/home/steve/relocateBB/custom/main.c:391
+      for(temp3=C_function2;temp3<C_function3;temp3++)
+20000f6a:	9503      	str	r5, [sp, #12]
+/home/steve/relocateBB/custom/main.c:320
+  switch (C_function[0]&0xFC)
+20000f6c:	2b20      	cmp	r3, #32
+20000f6e:	d100      	bne.n	20000f72 <main+0x16a>
+20000f70:	e0ac      	b.n	200010cc <main+0x2c4>
+20000f72:	2b18      	cmp	r3, #24
+20000f74:	d000      	beq.n	20000f78 <main+0x170>
+20000f76:	e76f      	b.n	20000e58 <main+0x50>
+/home/steve/relocateBB/custom/main.c:380
+      pfpixel=queue+get32bitdff(C_function1>>3); // physical addy of xpos (pf)
+20000f78:	9b01      	ldr	r3, [sp, #4]
+20000f7a:	6864      	ldr	r4, [r4, #4]
+20000f7c:	08d8      	lsrs	r0, r3, #3
+20000f7e:	f7ff feb9 	bl	20000cf4 <get32bitdff>
+/home/steve/relocateBB/custom/main.c:381
+      C_function[3]=(!(pfpixel[C_function2]&setbyte[C_function1]));
+20000f82:	9901      	ldr	r1, [sp, #4]
+/home/steve/relocateBB/custom/main.c:380
+      pfpixel=queue+get32bitdff(C_function1>>3); // physical addy of xpos (pf)
+20000f84:	1824      	adds	r4, r4, r0
+20000f86:	60f4      	str	r4, [r6, #12]
+/home/steve/relocateBB/custom/main.c:381
+      C_function[3]=(!(pfpixel[C_function2]&setbyte[C_function1]));
+20000f88:	ab08      	add	r3, sp, #32
+20000f8a:	5d62      	ldrb	r2, [r4, r5]
+20000f8c:	5c5b      	ldrb	r3, [r3, r1]
+20000f8e:	4013      	ands	r3, r2
+20000f90:	425a      	negs	r2, r3
+20000f92:	4153      	adcs	r3, r2
+20000f94:	9a02      	ldr	r2, [sp, #8]
+20000f96:	70d3      	strb	r3, [r2, #3]
+/home/steve/relocateBB/custom/main.c:382
+      return;
+20000f98:	e008      	b.n	20000fac <main+0x1a4>
+/home/steve/relocateBB/custom/main.c:324
+      pfpixel=queue+get32bitdff(C_function3>>3); // physical addy of xpos (pf)
+20000f9a:	08f8      	lsrs	r0, r7, #3
+20000f9c:	f7ff feaa 	bl	20000cf4 <get32bitdff>
+20000fa0:	6864      	ldr	r4, [r4, #4]
+20000fa2:	1824      	adds	r4, r4, r0
+20000fa4:	60f4      	str	r4, [r6, #12]
+/home/steve/relocateBB/custom/main.c:325 (discriminator 1)
+      for (i=C_function2;i<=C_function1;++i)
+20000fa6:	9b01      	ldr	r3, [sp, #4]
+20000fa8:	42ab      	cmp	r3, r5
+20000faa:	da01      	bge.n	20000fb0 <main+0x1a8>
+/home/steve/relocateBB/custom/main.c:524
+}
+20000fac:	b011      	add	sp, #68	; 0x44
+20000fae:	bdf0      	pop	{r4, r5, r6, r7, pc}
+/home/steve/relocateBB/custom/main.c:327 (discriminator 3)
+        on_off_flip(i,setbyte[C_function3]);
+20000fb0:	ab08      	add	r3, sp, #32
+20000fb2:	0028      	movs	r0, r5
+20000fb4:	5dd9      	ldrb	r1, [r3, r7]
+20000fb6:	f7ff ff07 	bl	20000dc8 <on_off_flip>
+/home/steve/relocateBB/custom/main.c:325 (discriminator 3)
+      for (i=C_function2;i<=C_function1;++i)
+20000fba:	3501      	adds	r5, #1
+20000fbc:	e7f3      	b.n	20000fa6 <main+0x19e>
+/home/steve/relocateBB/custom/main.c:335 (discriminator 3)
+        pfpixel=queue+get32bitdff(i>>3); // physical addy of xpos (pf)
+20000fbe:	6863      	ldr	r3, [r4, #4]
+20000fc0:	10f8      	asrs	r0, r7, #3
+20000fc2:	9302      	str	r3, [sp, #8]
+20000fc4:	f7ff fe96 	bl	20000cf4 <get32bitdff>
+20000fc8:	9b02      	ldr	r3, [sp, #8]
+20000fca:	1818      	adds	r0, r3, r0
+/home/steve/relocateBB/custom/main.c:336 (discriminator 3)
+        on_off_flip(C_function2,setbyte[i]);
+20000fcc:	ab08      	add	r3, sp, #32
+20000fce:	5dd9      	ldrb	r1, [r3, r7]
+/home/steve/relocateBB/custom/main.c:335 (discriminator 3)
+        pfpixel=queue+get32bitdff(i>>3); // physical addy of xpos (pf)
+20000fd0:	60f0      	str	r0, [r6, #12]
+/home/steve/relocateBB/custom/main.c:336 (discriminator 3)
+        on_off_flip(C_function2,setbyte[i]);
+20000fd2:	0028      	movs	r0, r5
+20000fd4:	f7ff fef8 	bl	20000dc8 <on_off_flip>
+/home/steve/relocateBB/custom/main.c:333 (discriminator 3)
+      for (i=C_function3;i<=C_function1;++i)
+20000fd8:	3701      	adds	r7, #1
+/home/steve/relocateBB/custom/main.c:333 (discriminator 1)
+20000fda:	9b01      	ldr	r3, [sp, #4]
+20000fdc:	42bb      	cmp	r3, r7
+20000fde:	daee      	bge.n	20000fbe <main+0x1b6>
+20000fe0:	e7e4      	b.n	20000fac <main+0x1a4>
+/home/steve/relocateBB/custom/main.c:342
+      pfpixel=queue+get32bitdff(C_function3>>3); // physical addy of xpos (pf)
+20000fe2:	08f8      	lsrs	r0, r7, #3
+20000fe4:	f7ff fe86 	bl	20000cf4 <get32bitdff>
+20000fe8:	6864      	ldr	r4, [r4, #4]
+/home/steve/relocateBB/custom/main.c:343
+      on_off_flip(C_function2,setbyte[C_function3]);
+20000fea:	ab08      	add	r3, sp, #32
+/home/steve/relocateBB/custom/main.c:342
+      pfpixel=queue+get32bitdff(C_function3>>3); // physical addy of xpos (pf)
+20000fec:	1824      	adds	r4, r4, r0
+/home/steve/relocateBB/custom/main.c:343
+      on_off_flip(C_function2,setbyte[C_function3]);
+20000fee:	5dd9      	ldrb	r1, [r3, r7]
+20000ff0:	0028      	movs	r0, r5
+/home/steve/relocateBB/custom/main.c:342
+      pfpixel=queue+get32bitdff(C_function3>>3); // physical addy of xpos (pf)
+20000ff2:	60f4      	str	r4, [r6, #12]
+/home/steve/relocateBB/custom/main.c:343
+      on_off_flip(C_function2,setbyte[C_function3]);
+20000ff4:	f7ff fee8 	bl	20000dc8 <on_off_flip>
+/home/steve/relocateBB/custom/main.c:344
+      return;
+20000ff8:	e7d8      	b.n	20000fac <main+0x1a4>
+/home/steve/relocateBB/custom/main.c:356
+      C_function[3]=0;
+20000ffa:	2300      	movs	r3, #0
+20000ffc:	9a02      	ldr	r2, [sp, #8]
+20000ffe:	70d3      	strb	r3, [r2, #3]
+/home/steve/relocateBB/custom/main.c:358
+      for (i=RIOT[player0y+C_function2];i<RIOT[player0y+C_function2]+RIOT[player0height+C_function2];++i) 
+20001000:	6822      	ldr	r2, [r4, #0]
+20001002:	1957      	adds	r7, r2, r5
+20001004:	1c7b      	adds	r3, r7, #1
+20001006:	7d3e      	ldrb	r6, [r7, #20]
+20001008:	7fdb      	ldrb	r3, [r3, #31]
+/home/steve/relocateBB/custom/main.c:366
+            temp2=((flashdata[(RIOT[player0pointerhi+C_function2*2]<<8)+RIOT[player0pointerlo+C_function2*2]+i-RIOT[player0y+C_function2]])<<7)
+2000100a:	006d      	lsls	r5, r5, #1
+/home/steve/relocateBB/custom/main.c:358
+      for (i=RIOT[player0y+C_function2];i<RIOT[player0y+C_function2]+RIOT[player0height+C_function2];++i) 
+2000100c:	199b      	adds	r3, r3, r6
+2000100e:	9306      	str	r3, [sp, #24]
+/home/steve/relocateBB/custom/main.c:366
+            temp2=((flashdata[(RIOT[player0pointerhi+C_function2*2]<<8)+RIOT[player0pointerlo+C_function2*2]+i-RIOT[player0y+C_function2]])<<7)
+20001010:	68a3      	ldr	r3, [r4, #8]
+20001012:	469c      	mov	ip, r3
+20001014:	002b      	movs	r3, r5
+20001016:	3339      	adds	r3, #57	; 0x39
+20001018:	18d3      	adds	r3, r2, r3
+2000101a:	3538      	adds	r5, #56	; 0x38
+2000101c:	9302      	str	r3, [sp, #8]
+2000101e:	1953      	adds	r3, r2, r5
+20001020:	9303      	str	r3, [sp, #12]
+/home/steve/relocateBB/custom/main.c:367
+                & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_function1*2]+i-RIOT[player0y+C_function1]])<<temp3);
+20001022:	9b01      	ldr	r3, [sp, #4]
+20001024:	005b      	lsls	r3, r3, #1
+20001026:	0019      	movs	r1, r3
+20001028:	3139      	adds	r1, #57	; 0x39
+2000102a:	1851      	adds	r1, r2, r1
+2000102c:	9104      	str	r1, [sp, #16]
+/home/steve/relocateBB/custom/main.c:358
+      for (i=RIOT[player0y+C_function2];i<RIOT[player0y+C_function2]+RIOT[player0height+C_function2];++i) 
+2000102e:	0031      	movs	r1, r6
+/home/steve/relocateBB/custom/main.c:367
+                & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_function1*2]+i-RIOT[player0y+C_function1]])<<temp3);
+20001030:	3338      	adds	r3, #56	; 0x38
+20001032:	18d3      	adds	r3, r2, r3
+20001034:	9305      	str	r3, [sp, #20]
+/home/steve/relocateBB/custom/main.c:360
+        if ((i>=RIOT[player0y+C_function1]) && (i<RIOT[player0y+C_function1]+RIOT[player0height+C_function1]))
+20001036:	9b01      	ldr	r3, [sp, #4]
+20001038:	18d2      	adds	r2, r2, r3
+2000103a:	1c53      	adds	r3, r2, #1
+2000103c:	9307      	str	r3, [sp, #28]
+/home/steve/relocateBB/custom/main.c:358 (discriminator 1)
+      for (i=RIOT[player0y+C_function2];i<RIOT[player0y+C_function2]+RIOT[player0height+C_function2];++i) 
+2000103e:	9b06      	ldr	r3, [sp, #24]
+20001040:	428b      	cmp	r3, r1
+20001042:	ddb3      	ble.n	20000fac <main+0x1a4>
+/home/steve/relocateBB/custom/main.c:360
+        if ((i>=RIOT[player0y+C_function1]) && (i<RIOT[player0y+C_function1]+RIOT[player0height+C_function1]))
+20001044:	7d15      	ldrb	r5, [r2, #20]
+20001046:	428d      	cmp	r5, r1
+20001048:	dc2a      	bgt.n	200010a0 <main+0x298>
+/home/steve/relocateBB/custom/main.c:360 (discriminator 1)
+2000104a:	9b07      	ldr	r3, [sp, #28]
+2000104c:	7fdb      	ldrb	r3, [r3, #31]
+2000104e:	195b      	adds	r3, r3, r5
+20001050:	428b      	cmp	r3, r1
+20001052:	dd25      	ble.n	200010a0 <main+0x298>
+/home/steve/relocateBB/custom/main.c:363
+          temp3=RIOT[player0x+C_function2]-RIOT[player0x+C_function1]+7; //-7 to +7 -> 0 to 14
+20001054:	7ab8      	ldrb	r0, [r7, #10]
+20001056:	7a93      	ldrb	r3, [r2, #10]
+20001058:	1ac0      	subs	r0, r0, r3
+2000105a:	3007      	adds	r0, #7
+/home/steve/relocateBB/custom/main.c:364
+          if (temp3<15)
+2000105c:	280e      	cmp	r0, #14
+2000105e:	dc1f      	bgt.n	200010a0 <main+0x298>
+/home/steve/relocateBB/custom/main.c:366
+            temp2=((flashdata[(RIOT[player0pointerhi+C_function2*2]<<8)+RIOT[player0pointerlo+C_function2*2]+i-RIOT[player0y+C_function2]])<<7)
+20001060:	9b02      	ldr	r3, [sp, #8]
+20001062:	9c03      	ldr	r4, [sp, #12]
+20001064:	781b      	ldrb	r3, [r3, #0]
+20001066:	7824      	ldrb	r4, [r4, #0]
+20001068:	021b      	lsls	r3, r3, #8
+2000106a:	191b      	adds	r3, r3, r4
+2000106c:	185b      	adds	r3, r3, r1
+2000106e:	1b9b      	subs	r3, r3, r6
+20001070:	4463      	add	r3, ip
+20001072:	781b      	ldrb	r3, [r3, #0]
+20001074:	9301      	str	r3, [sp, #4]
+/home/steve/relocateBB/custom/main.c:367
+                & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_function1*2]+i-RIOT[player0y+C_function1]])<<temp3);
+20001076:	9b04      	ldr	r3, [sp, #16]
+20001078:	781b      	ldrb	r3, [r3, #0]
+2000107a:	021b      	lsls	r3, r3, #8
+2000107c:	001c      	movs	r4, r3
+2000107e:	9b05      	ldr	r3, [sp, #20]
+20001080:	781b      	ldrb	r3, [r3, #0]
+20001082:	18e3      	adds	r3, r4, r3
+20001084:	185b      	adds	r3, r3, r1
+20001086:	1b5b      	subs	r3, r3, r5
+20001088:	4463      	add	r3, ip
+2000108a:	781b      	ldrb	r3, [r3, #0]
+/home/steve/relocateBB/custom/main.c:366
+            temp2=((flashdata[(RIOT[player0pointerhi+C_function2*2]<<8)+RIOT[player0pointerlo+C_function2*2]+i-RIOT[player0y+C_function2]])<<7)
+2000108c:	9c01      	ldr	r4, [sp, #4]
+/home/steve/relocateBB/custom/main.c:367
+                & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_function1*2]+i-RIOT[player0y+C_function1]])<<temp3);
+2000108e:	4083      	lsls	r3, r0
+/home/steve/relocateBB/custom/main.c:366
+            temp2=((flashdata[(RIOT[player0pointerhi+C_function2*2]<<8)+RIOT[player0pointerlo+C_function2*2]+i-RIOT[player0y+C_function2]])<<7)
+20001090:	01e4      	lsls	r4, r4, #7
+/home/steve/relocateBB/custom/main.c:369
+	  if (temp2) 
+20001092:	4223      	tst	r3, r4
+20001094:	d004      	beq.n	200010a0 <main+0x298>
+/home/steve/relocateBB/custom/main.c:371
+	    C_function[3]=255;
+20001096:	22ff      	movs	r2, #255	; 0xff
+20001098:	4b28      	ldr	r3, [pc, #160]	; (2000113c <main+0x334>)
+2000109a:	68db      	ldr	r3, [r3, #12]
+2000109c:	70da      	strb	r2, [r3, #3]
+/home/steve/relocateBB/custom/main.c:372
+	    return;
+2000109e:	e785      	b.n	20000fac <main+0x1a4>
+/home/steve/relocateBB/custom/main.c:358 (discriminator 2)
+      for (i=RIOT[player0y+C_function2];i<RIOT[player0y+C_function2]+RIOT[player0height+C_function2];++i) 
+200010a0:	3101      	adds	r1, #1
+200010a2:	e7cc      	b.n	2000103e <main+0x236>
+/home/steve/relocateBB/custom/main.c:386
+      my_memset(queue+get32bitdff(0),C_function1,1024);
+200010a4:	2000      	movs	r0, #0
+200010a6:	f7ff fe25 	bl	20000cf4 <get32bitdff>
+200010aa:	2280      	movs	r2, #128	; 0x80
+200010ac:	6864      	ldr	r4, [r4, #4]
+200010ae:	9901      	ldr	r1, [sp, #4]
+200010b0:	1820      	adds	r0, r4, r0
+200010b2:	00d2      	lsls	r2, r2, #3
+200010b4:	e753      	b.n	20000f5e <main+0x156>
+/home/steve/relocateBB/custom/main.c:392 (discriminator 3)
+        memscroll(queue+get32bitdff(temp3),C_function1);
+200010b6:	9803      	ldr	r0, [sp, #12]
+200010b8:	f7ff fe1c 	bl	20000cf4 <get32bitdff>
+200010bc:	6865      	ldr	r5, [r4, #4]
+200010be:	9901      	ldr	r1, [sp, #4]
+200010c0:	1828      	adds	r0, r5, r0
+200010c2:	f7ff fe03 	bl	20000ccc <memscroll>
+/home/steve/relocateBB/custom/main.c:391 (discriminator 3)
+      for(temp3=C_function2;temp3<C_function3;temp3++)
+200010c6:	9b03      	ldr	r3, [sp, #12]
+200010c8:	3301      	adds	r3, #1
+200010ca:	9303      	str	r3, [sp, #12]
+/home/steve/relocateBB/custom/main.c:391 (discriminator 1)
+200010cc:	9b03      	ldr	r3, [sp, #12]
+200010ce:	429f      	cmp	r7, r3
+200010d0:	dcf1      	bgt.n	200010b6 <main+0x2ae>
+200010d2:	e76b      	b.n	20000fac <main+0x1a4>
+/home/steve/relocateBB/custom/main.c:412
+  switch(checkswap(spritesort[temp2+1],spritesort[temp2]))
+200010d4:	7873      	ldrb	r3, [r6, #1]
+200010d6:	9303      	str	r3, [sp, #12]
+200010d8:	7833      	ldrb	r3, [r6, #0]
+200010da:	9803      	ldr	r0, [sp, #12]
+200010dc:	0019      	movs	r1, r3
+200010de:	9304      	str	r3, [sp, #16]
+200010e0:	f7ff fe20 	bl	20000d24 <checkswap>
+200010e4:	2801      	cmp	r0, #1
+200010e6:	d006      	beq.n	200010f6 <main+0x2ee>
+200010e8:	2802      	cmp	r0, #2
+200010ea:	d015      	beq.n	20001118 <main+0x310>
+200010ec:	2800      	cmp	r0, #0
+200010ee:	d1f1      	bne.n	200010d4 <main+0x2cc>
+200010f0:	3e01      	subs	r6, #1
+200010f2:	3d01      	subs	r5, #1
+200010f4:	e6be      	b.n	20000e74 <main+0x6c>
+/home/steve/relocateBB/custom/main.c:418
+	  while (temp4!=maxsprites-1)
+200010f6:	002a      	movs	r2, r5
+200010f8:	2100      	movs	r1, #0
+/home/steve/relocateBB/custom/main.c:415
+      temp3--;
+200010fa:	9b02      	ldr	r3, [sp, #8]
+200010fc:	3b01      	subs	r3, #1
+200010fe:	9302      	str	r3, [sp, #8]
+/home/steve/relocateBB/custom/main.c:417
+	  temp4 = temp2;
+20001100:	4b0f      	ldr	r3, [pc, #60]	; (20001140 <main+0x338>)
+20001102:	615d      	str	r5, [r3, #20]
+/home/steve/relocateBB/custom/main.c:418
+	  while (temp4!=maxsprites-1)
+20001104:	4b0f      	ldr	r3, [pc, #60]	; (20001144 <main+0x33c>)
+20001106:	195b      	adds	r3, r3, r5
+20001108:	4297      	cmp	r7, r2
+2000110a:	d10b      	bne.n	20001124 <main+0x31c>
+2000110c:	2900      	cmp	r1, #0
+2000110e:	d003      	beq.n	20001118 <main+0x310>
+20001110:	9a01      	ldr	r2, [sp, #4]
+20001112:	4b0b      	ldr	r3, [pc, #44]	; (20001140 <main+0x338>)
+20001114:	3a01      	subs	r2, #1
+20001116:	615a      	str	r2, [r3, #20]
+/home/steve/relocateBB/custom/main.c:433
+  spritesort[temp2+1]=spritesort[temp2];
+20001118:	9a04      	ldr	r2, [sp, #16]
+2000111a:	1963      	adds	r3, r4, r5
+2000111c:	705a      	strb	r2, [r3, #1]
+/home/steve/relocateBB/custom/main.c:434
+  spritesort[temp2]=i;
+2000111e:	9b03      	ldr	r3, [sp, #12]
+20001120:	7033      	strb	r3, [r6, #0]
+/home/steve/relocateBB/custom/main.c:435
+  temp2--;
+20001122:	e7e5      	b.n	200010f0 <main+0x2e8>
+/home/steve/relocateBB/custom/main.c:420
+		myGfxIndex[temp4]=myGfxIndex[temp4+1];
+20001124:	7859      	ldrb	r1, [r3, #1]
+20001126:	3201      	adds	r2, #1
+20001128:	7019      	strb	r1, [r3, #0]
+2000112a:	2101      	movs	r1, #1
+2000112c:	3301      	adds	r3, #1
+2000112e:	e7eb      	b.n	20001108 <main+0x300>
+/home/steve/relocateBB/custom/main.c:438 (discriminator 3)
+    RIOT[SpriteGfxIndex+i]=myGfxIndex[i];
+20001130:	5c19      	ldrb	r1, [r3, r0]
+20001132:	54d1      	strb	r1, [r2, r3]
+/home/steve/relocateBB/custom/main.c:437 (discriminator 3)
+  for (i=0;i<maxsprites;i++)
+20001134:	3301      	adds	r3, #1
+20001136:	e6a4      	b.n	20000e82 <main+0x7a>
+20001138:	200013ac 	.word	0x200013ac
+2000113c:	20011c00 	.word	0x20011c00
+20001140:	20011c2c 	.word	0x20011c2c
+20001144:	20011c14 	.word	0x20011c14
+20001148:	000001ff 	.word	0x000001ff
+2000114c:	00000e1e 	.word	0x00000e1e
+/home/steve/relocateBB/custom/main.c:464
+    Gfxindex=myGfxIndex[count];
+20001150:	698b      	ldr	r3, [r1, #24]
+20001152:	18eb      	adds	r3, r5, r3
+20001154:	7d1d      	ldrb	r5, [r3, #20]
+/home/steve/relocateBB/custom/main.c:471
+      mask = 0xFF;
+20001156:	23ff      	movs	r3, #255	; 0xff
+20001158:	600b      	str	r3, [r1, #0]
+/home/steve/relocateBB/custom/main.c:472
+      if (RIOT[_NUSIZ1+Gfxindex]>127)
+2000115a:	1963      	adds	r3, r4, r5
+2000115c:	0018      	movs	r0, r3
+2000115e:	302a      	adds	r0, #42	; 0x2a
+20001160:	7802      	ldrb	r2, [r0, #0]
+20001162:	7800      	ldrb	r0, [r0, #0]
+20001164:	b240      	sxtb	r0, r0
+20001166:	2800      	cmp	r0, #0
+20001168:	da0e      	bge.n	20001188 <main+0x380>
+/home/steve/relocateBB/custom/main.c:474
+        if (RIOT[player1x+Gfxindex]>=0x99)
+2000116a:	7ade      	ldrb	r6, [r3, #11]
+2000116c:	2e98      	cmp	r6, #152	; 0x98
+2000116e:	d90b      	bls.n	20001188 <main+0x380>
+/home/steve/relocateBB/custom/main.c:477
+           mask=maskdata[((RIOT[_NUSIZ1+Gfxindex]&64)>>3)^((RIOT[_NUSIZ1+Gfxindex]&8)<<1)|(RIOT[player1x+Gfxindex]-0x99)];
+20001170:	2708      	movs	r7, #8
+20001172:	10d3      	asrs	r3, r2, #3
+20001174:	403b      	ands	r3, r7
+20001176:	0052      	lsls	r2, r2, #1
+20001178:	19ff      	adds	r7, r7, r7
+2000117a:	403a      	ands	r2, r7
+2000117c:	485a      	ldr	r0, [pc, #360]	; (200012e8 <main+0x4e0>)
+2000117e:	4313      	orrs	r3, r2
+20001180:	3e99      	subs	r6, #153	; 0x99
+20001182:	4333      	orrs	r3, r6
+20001184:	5cc3      	ldrb	r3, [r0, r3]
+20001186:	600b      	str	r3, [r1, #0]
+/home/steve/relocateBB/custom/main.c:481
+      my_memcpy(queue+get32bitdf(3),
+20001188:	2003      	movs	r0, #3
+2000118a:	f7ff fdc1 	bl	20000d10 <get32bitdf>
+/home/steve/relocateBB/custom/main.c:482
+              flashdata+(RIOT[player1pointerhi+Gfxindex*2]<<8)+RIOT[player1pointerlo+Gfxindex*2],
+2000118e:	006b      	lsls	r3, r5, #1
+20001190:	9303      	str	r3, [sp, #12]
+/home/steve/relocateBB/custom/main.c:483
+              RIOT[player1y+Gfxindex],
+20001192:	002b      	movs	r3, r5
+20001194:	3315      	adds	r3, #21
+20001196:	9301      	str	r3, [sp, #4]
+/home/steve/relocateBB/custom/main.c:482
+              flashdata+(RIOT[player1pointerhi+Gfxindex*2]<<8)+RIOT[player1pointerlo+Gfxindex*2],
+20001198:	9903      	ldr	r1, [sp, #12]
+/home/steve/relocateBB/custom/main.c:481
+      my_memcpy(queue+get32bitdf(3),
+2000119a:	9a01      	ldr	r2, [sp, #4]
+/home/steve/relocateBB/custom/main.c:484
+              RIOT[player1height+Gfxindex]);
+2000119c:	3521      	adds	r5, #33	; 0x21
+/home/steve/relocateBB/custom/main.c:481
+      my_memcpy(queue+get32bitdf(3),
+2000119e:	5d63      	ldrb	r3, [r4, r5]
+200011a0:	5ca2      	ldrb	r2, [r4, r2]
+/home/steve/relocateBB/custom/main.c:482
+              flashdata+(RIOT[player1pointerhi+Gfxindex*2]<<8)+RIOT[player1pointerlo+Gfxindex*2],
+200011a2:	1864      	adds	r4, r4, r1
+200011a4:	0021      	movs	r1, r4
+200011a6:	313b      	adds	r1, #59	; 0x3b
+200011a8:	7809      	ldrb	r1, [r1, #0]
+200011aa:	343a      	adds	r4, #58	; 0x3a
+/home/steve/relocateBB/custom/main.c:481
+      my_memcpy(queue+get32bitdf(3),
+200011ac:	4f4f      	ldr	r7, [pc, #316]	; (200012ec <main+0x4e4>)
+/home/steve/relocateBB/custom/main.c:482
+              flashdata+(RIOT[player1pointerhi+Gfxindex*2]<<8)+RIOT[player1pointerlo+Gfxindex*2],
+200011ae:	7824      	ldrb	r4, [r4, #0]
+200011b0:	0209      	lsls	r1, r1, #8
+/home/steve/relocateBB/custom/main.c:481
+      my_memcpy(queue+get32bitdf(3),
+200011b2:	687e      	ldr	r6, [r7, #4]
+/home/steve/relocateBB/custom/main.c:482
+              flashdata+(RIOT[player1pointerhi+Gfxindex*2]<<8)+RIOT[player1pointerlo+Gfxindex*2],
+200011b4:	1909      	adds	r1, r1, r4
+200011b6:	68bc      	ldr	r4, [r7, #8]
+/home/steve/relocateBB/custom/main.c:481
+      my_memcpy(queue+get32bitdf(3),
+200011b8:	1830      	adds	r0, r6, r0
+/home/steve/relocateBB/custom/main.c:482
+              flashdata+(RIOT[player1pointerhi+Gfxindex*2]<<8)+RIOT[player1pointerlo+Gfxindex*2],
+200011ba:	1861      	adds	r1, r4, r1
+/home/steve/relocateBB/custom/main.c:481
+      my_memcpy(queue+get32bitdf(3),
+200011bc:	f7ff fd60 	bl	20000c80 <my_memcpy>
+/home/steve/relocateBB/custom/main.c:485
+      mask = 0xFF;
+200011c0:	23ff      	movs	r3, #255	; 0xff
+200011c2:	4c4b      	ldr	r4, [pc, #300]	; (200012f0 <main+0x4e8>)
+/home/steve/relocateBB/custom/main.c:487
+      my_memcpy(queue+get32bitdf(1),
+200011c4:	2001      	movs	r0, #1
+/home/steve/relocateBB/custom/main.c:485
+      mask = 0xFF;
+200011c6:	6023      	str	r3, [r4, #0]
+/home/steve/relocateBB/custom/main.c:487
+      my_memcpy(queue+get32bitdf(1),
+200011c8:	687b      	ldr	r3, [r7, #4]
+200011ca:	9304      	str	r3, [sp, #16]
+200011cc:	f7ff fda0 	bl	20000d10 <get32bitdf>
+/home/steve/relocateBB/custom/main.c:488
+              flashdata+(RIOT[player1color+Gfxindex*2+1]<<8)+RIOT[player1color+Gfxindex*2],
+200011d0:	683e      	ldr	r6, [r7, #0]
+200011d2:	9903      	ldr	r1, [sp, #12]
+/home/steve/relocateBB/custom/main.c:487
+      my_memcpy(queue+get32bitdf(1),
+200011d4:	9a01      	ldr	r2, [sp, #4]
+200011d6:	5d73      	ldrb	r3, [r6, r5]
+200011d8:	5cb2      	ldrb	r2, [r6, r2]
+/home/steve/relocateBB/custom/main.c:488
+              flashdata+(RIOT[player1color+Gfxindex*2+1]<<8)+RIOT[player1color+Gfxindex*2],
+200011da:	1876      	adds	r6, r6, r1
+200011dc:	0031      	movs	r1, r6
+200011de:	314d      	adds	r1, #77	; 0x4d
+200011e0:	7809      	ldrb	r1, [r1, #0]
+200011e2:	364c      	adds	r6, #76	; 0x4c
+200011e4:	7836      	ldrb	r6, [r6, #0]
+200011e6:	0209      	lsls	r1, r1, #8
+200011e8:	198e      	adds	r6, r1, r6
+200011ea:	68b9      	ldr	r1, [r7, #8]
+200011ec:	1989      	adds	r1, r1, r6
+/home/steve/relocateBB/custom/main.c:487
+      my_memcpy(queue+get32bitdf(1),
+200011ee:	9e04      	ldr	r6, [sp, #16]
+200011f0:	1830      	adds	r0, r6, r0
+200011f2:	f7ff fd45 	bl	20000c80 <my_memcpy>
+/home/steve/relocateBB/custom/main.c:492
+    temp5=temp4;
+200011f6:	6963      	ldr	r3, [r4, #20]
+/home/steve/relocateBB/custom/main.c:493
+    temp4=(RIOT[player1y+Gfxindex]+RIOT[player1height+Gfxindex])&255; // &255 to allow for wrapped sprites 
+200011f8:	9a01      	ldr	r2, [sp, #4]
+/home/steve/relocateBB/custom/main.c:492
+    temp5=temp4;
+200011fa:	60a3      	str	r3, [r4, #8]
+/home/steve/relocateBB/custom/main.c:493
+    temp4=(RIOT[player1y+Gfxindex]+RIOT[player1height+Gfxindex])&255; // &255 to allow for wrapped sprites 
+200011fc:	683b      	ldr	r3, [r7, #0]
+200011fe:	5d59      	ldrb	r1, [r3, r5]
+20001200:	5c9a      	ldrb	r2, [r3, r2]
+/home/steve/relocateBB/custom/main.c:494
+    Gfxindex=myGfxIndex[count+1];
+20001202:	69a5      	ldr	r5, [r4, #24]
+/home/steve/relocateBB/custom/main.c:493
+    temp4=(RIOT[player1y+Gfxindex]+RIOT[player1height+Gfxindex])&255; // &255 to allow for wrapped sprites 
+20001204:	1852      	adds	r2, r2, r1
+20001206:	b2d2      	uxtb	r2, r2
+20001208:	6162      	str	r2, [r4, #20]
+/home/steve/relocateBB/custom/main.c:494
+    Gfxindex=myGfxIndex[count+1];
+2000120a:	197a      	adds	r2, r7, r5
+2000120c:	7d56      	ldrb	r6, [r2, #21]
+/home/steve/relocateBB/custom/main.c:495
+    if ((count == temp3) || (RIOT[player1y+Gfxindex]>175) )
+2000120e:	9a02      	ldr	r2, [sp, #8]
+20001210:	42aa      	cmp	r2, r5
+20001212:	d003      	beq.n	2000121c <main+0x414>
+/home/steve/relocateBB/custom/main.c:495 (discriminator 1)
+20001214:	199b      	adds	r3, r3, r6
+20001216:	7d5b      	ldrb	r3, [r3, #21]
+20001218:	2baf      	cmp	r3, #175	; 0xaf
+2000121a:	d903      	bls.n	20001224 <main+0x41c>
+/home/steve/relocateBB/custom/main.c:497
+      temp4=511;
+2000121c:	4b35      	ldr	r3, [pc, #212]	; (200012f4 <main+0x4ec>)
+2000121e:	6163      	str	r3, [r4, #20]
+/home/steve/relocateBB/custom/main.c:498
+      temp5=0;
+20001220:	2300      	movs	r3, #0
+20001222:	60a3      	str	r3, [r4, #8]
+/home/steve/relocateBB/custom/main.c:504
+     queue[get32bitdf(4)+count]=(temp4-temp5-(count>>1))>>1;
+20001224:	687b      	ldr	r3, [r7, #4]
+20001226:	2004      	movs	r0, #4
+20001228:	9301      	str	r3, [sp, #4]
+2000122a:	f7ff fd71 	bl	20000d10 <get32bitdf>
+2000122e:	9b01      	ldr	r3, [sp, #4]
+20001230:	1828      	adds	r0, r5, r0
+20001232:	68a2      	ldr	r2, [r4, #8]
+20001234:	1818      	adds	r0, r3, r0
+20001236:	6963      	ldr	r3, [r4, #20]
+20001238:	106d      	asrs	r5, r5, #1
+2000123a:	1a9b      	subs	r3, r3, r2
+2000123c:	1b5b      	subs	r3, r3, r5
+2000123e:	105b      	asrs	r3, r3, #1
+20001240:	b2db      	uxtb	r3, r3
+20001242:	7003      	strb	r3, [r0, #0]
+/home/steve/relocateBB/custom/main.c:506
+    if (RIOT[player1x+Gfxindex]>159)
+20001244:	0033      	movs	r3, r6
+20001246:	330b      	adds	r3, #11
+20001248:	9301      	str	r3, [sp, #4]
+2000124a:	9a01      	ldr	r2, [sp, #4]
+2000124c:	683b      	ldr	r3, [r7, #0]
+2000124e:	1899      	adds	r1, r3, r2
+20001250:	5c9b      	ldrb	r3, [r3, r2]
+20001252:	2b9f      	cmp	r3, #159	; 0x9f
+20001254:	d905      	bls.n	20001262 <main+0x45a>
+/home/steve/relocateBB/custom/main.c:507
+      RIOT[player1x+Gfxindex]-=(RIOT[player1x+Gfxindex]>208)?96:160;
+20001256:	2260      	movs	r2, #96	; 0x60
+20001258:	2bd0      	cmp	r3, #208	; 0xd0
+2000125a:	d800      	bhi.n	2000125e <main+0x456>
+2000125c:	3240      	adds	r2, #64	; 0x40
+/home/steve/relocateBB/custom/main.c:507 (discriminator 4)
+2000125e:	1a9b      	subs	r3, r3, r2
+20001260:	700b      	strb	r3, [r1, #0]
+/home/steve/relocateBB/custom/main.c:508
+    queue[get32bitdff(5)+count]=RIOT[_NUSIZ1+Gfxindex];
+20001262:	683b      	ldr	r3, [r7, #0]
+20001264:	2005      	movs	r0, #5
+20001266:	362a      	adds	r6, #42	; 0x2a
+20001268:	199e      	adds	r6, r3, r6
+2000126a:	f7ff fd43 	bl	20000cf4 <get32bitdff>
+2000126e:	4c20      	ldr	r4, [pc, #128]	; (200012f0 <main+0x4e8>)
+20001270:	687d      	ldr	r5, [r7, #4]
+20001272:	69a3      	ldr	r3, [r4, #24]
+/home/steve/relocateBB/custom/main.c:509
+    queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+20001274:	9a01      	ldr	r2, [sp, #4]
+/home/steve/relocateBB/custom/main.c:508
+    queue[get32bitdff(5)+count]=RIOT[_NUSIZ1+Gfxindex];
+20001276:	18c0      	adds	r0, r0, r3
+20001278:	7833      	ldrb	r3, [r6, #0]
+2000127a:	182d      	adds	r5, r5, r0
+2000127c:	702b      	strb	r3, [r5, #0]
+/home/steve/relocateBB/custom/main.c:509
+    queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+2000127e:	683b      	ldr	r3, [r7, #0]
+20001280:	6866      	ldr	r6, [r4, #4]
+20001282:	5c9b      	ldrb	r3, [r3, r2]
+20001284:	2007      	movs	r0, #7
+20001286:	3342      	adds	r3, #66	; 0x42
+20001288:	18f6      	adds	r6, r6, r3
+2000128a:	f7ff fd33 	bl	20000cf4 <get32bitdff>
+2000128e:	69a3      	ldr	r3, [r4, #24]
+20001290:	687d      	ldr	r5, [r7, #4]
+20001292:	18c0      	adds	r0, r0, r3
+20001294:	7833      	ldrb	r3, [r6, #0]
+20001296:	182d      	adds	r5, r5, r0
+20001298:	702b      	strb	r3, [r5, #0]
+/home/steve/relocateBB/custom/main.c:511
+    queue[get32bitdf(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+2000129a:	683b      	ldr	r3, [r7, #0]
+2000129c:	9a01      	ldr	r2, [sp, #4]
+2000129e:	4d16      	ldr	r5, [pc, #88]	; (200012f8 <main+0x4f0>)
+200012a0:	5c9b      	ldrb	r3, [r3, r2]
+200012a2:	6862      	ldr	r2, [r4, #4]
+200012a4:	5d5b      	ldrb	r3, [r3, r5]
+200012a6:	2005      	movs	r0, #5
+200012a8:	18d3      	adds	r3, r2, r3
+200012aa:	9303      	str	r3, [sp, #12]
+200012ac:	f7ff fd30 	bl	20000d10 <get32bitdf>
+200012b0:	69a3      	ldr	r3, [r4, #24]
+200012b2:	687e      	ldr	r6, [r7, #4]
+200012b4:	18c0      	adds	r0, r0, r3
+200012b6:	9b03      	ldr	r3, [sp, #12]
+200012b8:	1836      	adds	r6, r6, r0
+200012ba:	781b      	ldrb	r3, [r3, #0]
+/home/steve/relocateBB/custom/main.c:513
+    queue[get32bitdf(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+200012bc:	9a01      	ldr	r2, [sp, #4]
+/home/steve/relocateBB/custom/main.c:511
+    queue[get32bitdf(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+200012be:	7033      	strb	r3, [r6, #0]
+/home/steve/relocateBB/custom/main.c:513
+    queue[get32bitdf(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+200012c0:	683b      	ldr	r3, [r7, #0]
+200012c2:	2006      	movs	r0, #6
+200012c4:	5c9b      	ldrb	r3, [r3, r2]
+200012c6:	687e      	ldr	r6, [r7, #4]
+200012c8:	5d5b      	ldrb	r3, [r3, r5]
+200012ca:	6865      	ldr	r5, [r4, #4]
+200012cc:	330b      	adds	r3, #11
+200012ce:	18ed      	adds	r5, r5, r3
+200012d0:	f7ff fd1e 	bl	20000d10 <get32bitdf>
+200012d4:	69a3      	ldr	r3, [r4, #24]
+200012d6:	18c0      	adds	r0, r0, r3
+200012d8:	782b      	ldrb	r3, [r5, #0]
+200012da:	1836      	adds	r6, r6, r0
+200012dc:	7033      	strb	r3, [r6, #0]
+/home/steve/relocateBB/custom/main.c:514
+    count++;
+200012de:	69a3      	ldr	r3, [r4, #24]
+200012e0:	3301      	adds	r3, #1
+200012e2:	61a3      	str	r3, [r4, #24]
+200012e4:	e61c      	b.n	20000f20 <main+0x118>
+200012e6:	46c0      	nop			; (mov r8, r8)
+200012e8:	2000138c 	.word	0x2000138c
+200012ec:	20011c00 	.word	0x20011c00
+200012f0:	20011c2c 	.word	0x20011c2c
+200012f4:	000001ff 	.word	0x000001ff
+200012f8:	20001c00 	.word	0x20001c00
+
+200012fc <memcpy>:
+memcpy():
+200012fc:	b5f0      	push	{r4, r5, r6, r7, lr}
+200012fe:	0005      	movs	r5, r0
+20001300:	2a0f      	cmp	r2, #15
+20001302:	d933      	bls.n	2000136c <memcpy+0x70>
+20001304:	2403      	movs	r4, #3
+20001306:	0003      	movs	r3, r0
+20001308:	0026      	movs	r6, r4
+2000130a:	430b      	orrs	r3, r1
+2000130c:	401e      	ands	r6, r3
+2000130e:	421c      	tst	r4, r3
+20001310:	d137      	bne.n	20001382 <memcpy+0x86>
+20001312:	0015      	movs	r5, r2
+20001314:	3d10      	subs	r5, #16
+20001316:	092d      	lsrs	r5, r5, #4
+20001318:	0003      	movs	r3, r0
+2000131a:	000c      	movs	r4, r1
+2000131c:	46ac      	mov	ip, r5
+2000131e:	012f      	lsls	r7, r5, #4
+20001320:	183f      	adds	r7, r7, r0
+20001322:	6865      	ldr	r5, [r4, #4]
+20001324:	605d      	str	r5, [r3, #4]
+20001326:	68a5      	ldr	r5, [r4, #8]
+20001328:	609d      	str	r5, [r3, #8]
+2000132a:	68e5      	ldr	r5, [r4, #12]
+2000132c:	60dd      	str	r5, [r3, #12]
+2000132e:	6825      	ldr	r5, [r4, #0]
+20001330:	3410      	adds	r4, #16
+20001332:	601d      	str	r5, [r3, #0]
+20001334:	001d      	movs	r5, r3
+20001336:	3310      	adds	r3, #16
+20001338:	42bd      	cmp	r5, r7
+2000133a:	d1f2      	bne.n	20001322 <memcpy+0x26>
+2000133c:	4665      	mov	r5, ip
+2000133e:	230f      	movs	r3, #15
+20001340:	240c      	movs	r4, #12
+20001342:	3501      	adds	r5, #1
+20001344:	012d      	lsls	r5, r5, #4
+20001346:	1949      	adds	r1, r1, r5
+20001348:	4013      	ands	r3, r2
+2000134a:	1945      	adds	r5, r0, r5
+2000134c:	4214      	tst	r4, r2
+2000134e:	d01a      	beq.n	20001386 <memcpy+0x8a>
+20001350:	598c      	ldr	r4, [r1, r6]
+20001352:	51ac      	str	r4, [r5, r6]
+20001354:	3604      	adds	r6, #4
+20001356:	1b9c      	subs	r4, r3, r6
+20001358:	2c03      	cmp	r4, #3
+2000135a:	d8f9      	bhi.n	20001350 <memcpy+0x54>
+2000135c:	3b04      	subs	r3, #4
+2000135e:	089b      	lsrs	r3, r3, #2
+20001360:	3301      	adds	r3, #1
+20001362:	009b      	lsls	r3, r3, #2
+20001364:	18ed      	adds	r5, r5, r3
+20001366:	18c9      	adds	r1, r1, r3
+20001368:	2303      	movs	r3, #3
+2000136a:	401a      	ands	r2, r3
+2000136c:	1e56      	subs	r6, r2, #1
+2000136e:	2a00      	cmp	r2, #0
+20001370:	d006      	beq.n	20001380 <memcpy+0x84>
+20001372:	2300      	movs	r3, #0
+20001374:	5ccc      	ldrb	r4, [r1, r3]
+20001376:	001a      	movs	r2, r3
+20001378:	54ec      	strb	r4, [r5, r3]
+2000137a:	3301      	adds	r3, #1
+2000137c:	4296      	cmp	r6, r2
+2000137e:	d1f9      	bne.n	20001374 <memcpy+0x78>
+20001380:	bdf0      	pop	{r4, r5, r6, r7, pc}
+20001382:	1e56      	subs	r6, r2, #1
+20001384:	e7f5      	b.n	20001372 <memcpy+0x76>
+20001386:	001a      	movs	r2, r3
+20001388:	e7f0      	b.n	2000136c <memcpy+0x70>
+2000138a:	46c0      	nop			; (mov r8, r8)
+
+2000138c <maskdata>:
+2000138c:	0100 0703 1f0f 7f3f fcfe f0f8 c0e0 0080     ......?.........
+2000139c:	8000 e0c0 f8f0 fefc 3f7f 0f1f 0307 0001     .........?......
+200013ac:	4080 1020 0408 0102 0201 0804 2010 8040     .@ .......... @.
+200013bc:	4080 1020 0408 0102 0201 0804 2010 8040     .@ .......... @.
+200013cc:	0000 0000                                   ....

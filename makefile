@@ -3,32 +3,31 @@ SHELL=/bin/sh
 CHMOD=chmod
 CP=cp
 RM=rm
-CFLAGS=-O2 -fcommon
-#CFLAGS=-O0 -g
-CC=cc
-LEX=lex
+CFLAGS=-O3
+CC=/opt/wasi-sdk/bin/clang
+LEX=flex
 LEXFLAGS=-t
 
-all: 2600basic preprocess postprocess optimize bbfilter 
+all: 2600basic.wasm preprocess.wasm postprocess.wasm optimize.wasm bbfilter.wasm 
 
-2600basic: 2600bas.c statements.c keywords.c statements.h keywords.h
-	${CC} ${CFLAGS} -o 2600basic 2600bas.c statements.c keywords.c
+2600basic.wasm: 2600bas.c statements.c keywords.c statements.h keywords.h
+	${CC} ${CFLAGS} -o 2600basic.wasm 2600bas.c statements.c keywords.c
 
-postprocess: postprocess.c
-	${CC} ${CFLAGS} -o postprocess postprocess.c
+postprocess.wasm: postprocess.c
+	${CC} ${CFLAGS} -o postprocess.wasm postprocess.c
 
-preprocess: preprocess.lex
-	${LEX} ${LEXFLAGS}<preprocess.lex>lex.yy.c
-	${CC} ${CFLAGS} -o preprocess lex.yy.c
+preprocess.wasm: preprocess.lex
+	${LEX} ${LEXFLAGS} < preprocess.lex > lex.yy.c
+	${CC} ${CFLAGS} -o preprocess.wasm lex.yy.c
 	${RM} -f lex.yy.c
 
-optimize: optimize.lex
-	${LEX} ${LEXFLAGS} -i<optimize.lex>lex.yy.c
-	${CC} ${CFLAGS} -o optimize lex.yy.c
+optimize.wasm: optimize.lex
+	${LEX} ${LEXFLAGS} -i < optimize.lex > lex.yy.c
+	${CC} ${CFLAGS} -o optimize.wasm lex.yy.c
 	${RM} -f lex.yy.c
 
-bbfilter: bbfilter.c
-	${CC} ${CFLAGS} -o bbfilter bbfilter.c
+bbfilter.wasm: bbfilter.c
+	${CC} ${CFLAGS} -o bbfilter.wasm bbfilter.c
 
 distclean:
 	make -f makefile.xcmp.wasm clean
@@ -42,7 +41,7 @@ dist:
 install: all
 
 clean:
-	${RM} -f a.out core 2600basic preprocess postprocess optimize bbfilter pxebin2ccelf
+	${RM} -f a.out core 2600basic.wasm preprocess.wasm postprocess.wasm optimize.wasm bbfilter.wasm lex.yy.c
 
 love:
 	@echo "not war"

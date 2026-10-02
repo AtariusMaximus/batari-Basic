@@ -45,6 +45,10 @@ int pfcolorindexsave = 0;
 int pfcolornumber = 0;
 int isPXE = 0;
 
+// SE
+char if_stack[100][200];
+int if_stack_ptr = 0;
+
 int pfdata[100][256];
 char sprite_data[5000][50];
 int playfield_index[50];
@@ -2001,6 +2005,12 @@ int findlabel(char **statement, int i)
 {
     char statementcache[100];
     // 0 if label, 1 if not
+
+    if (statement[i][0] == '\0' || statement[i][0] == '\n' || statement[i][0] == '\r')
+        return 1; 
+
+    if ((statement[i][0] > (unsigned char) 0x2F) && (statement[i][0] < (unsigned char) 0x3B))
+	return 0;
     if ((statement[i][0] > (unsigned char) 0x2F) && (statement[i][0] < (unsigned char) 0x3B))
 	return 0;
     if ((statement[i + 1][0] == ':') && (strncmp(statement[i + 2], "rem\0", 3)))
@@ -3766,8 +3776,14 @@ void doif(char **statement)
 		}
 	    }
 	    printf(".condpart%d\n", condpart++);
+	if (cstatement[1][0] == '\0' || cstatement[1][0] == '\n' || cstatement[1][0] == '\r') {
+	    // The line is empty after 'then'. This is a block IF. Push the label to the stack.
+	    strcpy(if_stack[if_stack_ptr++], statement[0]);
+	} else {
+	    // Standard single-line IF. Compile the action and print the label immediately.
 	    keywords(cstatement);
 	    printf(".skip%s\n", statement[0]);
+	}
 	    freemem(dealloccstatement);
 	    return;
 	}
@@ -3802,8 +3818,14 @@ void doif(char **statement)
 		}
 	    }
 	    printf(".condpart%d\n", condpart++);
+	if (cstatement[1][0] == '\0' || cstatement[1][0] == '\n' || cstatement[1][0] == '\r') {
+	    // The line is empty after 'then'. This is a block IF. Push the label to the stack.
+	    strcpy(if_stack[if_stack_ptr++], statement[0]);
+	} else {
+	    // Standard single-line IF. Compile the action and print the label immediately.
 	    keywords(cstatement);
 	    printf(".skip%s\n", statement[0]);
+	}
 	    freemem(dealloccstatement);
 	    return;
 	}
@@ -3905,8 +3927,14 @@ void doif(char **statement)
 		}
 	    }
 	    printf(".condpart%d\n", condpart++);
+	if (cstatement[1][0] == '\0' || cstatement[1][0] == '\n' || cstatement[1][0] == '\r') {
+	    // The line is empty after 'then'. This is a block IF. Push the label to the stack.
+	    strcpy(if_stack[if_stack_ptr++], statement[0]);
+	} else {
+	    // Standard single-line IF. Compile the action and print the label immediately.
 	    keywords(cstatement);
 	    printf(".skip%s\n", statement[0]);
+	}
 
 	    freemem(dealloccstatement);
 	    return;
@@ -3990,8 +4018,14 @@ void doif(char **statement)
 		    }
 		}
 		printf(".condpart%d\n", condpart++);
-		keywords(cstatement);
-		printf(".skip%s\n", statement[0]);
+	if (cstatement[1][0] == '\0' || cstatement[1][0] == '\n' || cstatement[1][0] == '\r') {
+	    // The line is empty after 'then'. This is a block IF. Push the label to the stack.
+	    strcpy(if_stack[if_stack_ptr++], statement[0]);
+	} else {
+	    // Standard single-line IF. Compile the action and print the label immediately.
+	    keywords(cstatement);
+	    printf(".skip%s\n", statement[0]);
+	}
 
 		freemem(dealloccstatement);
 		return;
@@ -4058,8 +4092,14 @@ void doif(char **statement)
 		    }
 		}
 		printf(".condpart%d\n", condpart++);
-		keywords(cstatement);
-		printf(".skip%s\n", statement[0]);
+	if (cstatement[1][0] == '\0' || cstatement[1][0] == '\n' || cstatement[1][0] == '\r') {
+	    // The line is empty after 'then'. This is a block IF. Push the label to the stack.
+	    strcpy(if_stack[if_stack_ptr++], statement[0]);
+	} else {
+	    // Standard single-line IF. Compile the action and print the label immediately.
+	    keywords(cstatement);
+	    printf(".skip%s\n", statement[0]);
+	}
 
 		freemem(dealloccstatement);
 		return;
@@ -4129,8 +4169,14 @@ void doif(char **statement)
 	    }
 	}
 	printf(".condpart%d\n", condpart++);
-	keywords(cstatement);
-	printf(".skip%s\n", statement[0]);
+	if (cstatement[1][0] == '\0' || cstatement[1][0] == '\n' || cstatement[1][0] == '\r') {
+	    // The line is empty after 'then'. This is a block IF. Push the label to the stack.
+	    strcpy(if_stack[if_stack_ptr++], statement[0]);
+	} else {
+	    // Standard single-line IF. Compile the action and print the label immediately.
+	    keywords(cstatement);
+	    printf(".skip%s\n", statement[0]);
+	}
 
 
 
@@ -4492,8 +4538,14 @@ void doif(char **statement)
 	    }
 	}
 	printf(".condpart%d\n", condpart++);
-	keywords(cstatement);
-	printf(".skip%s\n", statement[0]);
+	if (cstatement[1][0] == '\0' || cstatement[1][0] == '\n' || cstatement[1][0] == '\r') {
+	    // The line is empty after 'then'. This is a block IF. Push the label to the stack.
+	    strcpy(if_stack[if_stack_ptr++], statement[0]);
+	} else {
+	    // Standard single-line IF. Compile the action and print the label immediately.
+	    keywords(cstatement);
+	    printf(".skip%s\n", statement[0]);
+	}
 
 	freemem(dealloccstatement);
 	return;
@@ -6121,4 +6173,26 @@ void header_write(FILE * header, char *filename)
     }
     fclose(header);
 
+}
+void doendif()
+{
+    if (if_stack_ptr <= 0) {
+        prerror("endif without matching if");
+    }
+    printf(".skip%s\n", if_stack[--if_stack_ptr]);
+}
+void doelse()
+{
+    if (if_stack_ptr <= 0) {
+        prerror("else without matching if");
+    }
+    
+    // 1. Unconditionally jump over the upcoming "False" block
+    printf("	jmp .skipblockend%d\n", numelses);
+
+    // 2. Pop and print the original 'if' label so the False condition lands here
+    printf(".skip%s\n", if_stack[--if_stack_ptr]);
+
+    // 3. Push our new end label onto the stack so doendif() can close it
+    sprintf(if_stack[if_stack_ptr++], "blockend%d", numelses++);
 }

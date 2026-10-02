@@ -1,0 +1,2993 @@
+ARM GAS  main.s 			page 1
+
+
+   1              		.arch armv6-m
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 4
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"main.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.file 1 "main.c"
+  17              		.section	.text.my_memcpy,"ax",%progbits
+  18              		.align	1
+  19              		.global	my_memcpy
+  20              		.syntax unified
+  21              		.code	16
+  22              		.thumb_func
+  24              	my_memcpy:
+  25              	.LFB0:
+   1:main.c        **** // Provided under the GPL v2 license. See the included LICENSE.txt for details.
+   2:main.c        **** 
+   3:main.c        **** // src/custom.h defines the following:
+   4:main.c        **** //
+   5:main.c        **** // queue[]     - points to the 4K Display Data Bank
+   6:main.c        **** //             - treat as RAM
+   7:main.c        **** //             - Any data passed to/from the ARM and 6507 must be done via queue[]
+   8:main.c        **** //
+   9:main.c        **** // flashdata[] - points to the 24K that comprises the six 4K banks.
+  10:main.c        **** //             - treat as ROM
+  11:main.c        **** #include "src/custom.h"
+  12:main.c        **** 
+  13:main.c        **** 
+  14:main.c        **** // types of variables, storage used and range
+  15:main.c        **** // const              = constant, which is compiled into the ROM section and cannot be changed duri
+  16:main.c        **** // char               =  8 bit, 1 byte  per value.  Range is           -128 to           127
+  17:main.c        **** // unsigned char      =  8 bit, 1 byte  per value.  Range is              0 to           255
+  18:main.c        **** // short int          = 16 bit, 2 bytes per value.  Range is        -32,768 to        32,767
+  19:main.c        **** // unsigned short int = 16 bit, 2 bytes per value.  Range is              0 to        65,535
+  20:main.c        **** // int                = 32 bit, 4 bytes per value.  Range is -2,147,483,648 to 2,147,483,647
+  21:main.c        **** // unsigned int       = 32 bit, 4 bytes per value.  Range is              0 to 4,294,967,295
+  22:main.c        **** // long int           = same as int
+  23:main.c        **** // float              = 32 bit, 4 bytes.  Not Supported#
+  24:main.c        **** // double             = 64 bit, 8 bytes.  Not Supported#
+  25:main.c        **** // *                  = 32 bit, 4 bytes, pointer (ie: char*, int*)
+  26:main.c        **** //
+  27:main.c        **** // # - at least not supported with the compiler under OS X.  It might be supported by the Linux/Win
+  28:main.c        **** //     compiler - but support would be implemented via software as the ARM in the Harmony Cartridge
+  29:main.c        **** //     have an FPU (floating point unit).  As such, performance will most likely be as good as usin
+  30:main.c        **** //     integer math based routines.
+  31:main.c        **** //
+  32:main.c        **** // NOTE : Only 448 bytes are allocated for use by variables (the rest of the 512 byte section is us
+  33:main.c        **** //        as the stack).  If you use too many variables, you'll get a compile time error:  "region 
+ARM GAS  main.s 			page 2
+
+
+  34:main.c        **** //        You can use RAM in the Display Data to store values, see defines.h for queue[xxx] defines
+  35:main.c        **** //
+  36:main.c        **** // NOTE : Compiled code can be significantly smaller if you use INTs for your variables instead of
+  37:main.c        **** //        SHORTs or CHARs.
+  38:main.c        **** 
+  39:main.c        **** volatile unsigned char *queue=(unsigned char *)0x20010C00;
+  40:main.c        **** volatile unsigned char *flashdata=(unsigned char *)0x20000C00;
+  41:main.c        **** volatile int *queue_int=(int *)0x20010C00;
+  42:main.c        **** enum {
+  43:main.c        **** SpriteGfxIndex,
+  44:main.c        **** junk1,
+  45:main.c        **** junk2,
+  46:main.c        **** junk3,
+  47:main.c        **** junk4, // placeholders
+  48:main.c        **** junk5a, // placeholders
+  49:main.c        **** junk6a, // placeholders
+  50:main.c        **** junk78, // placeholders
+  51:main.c        **** junk8a, // placeholders
+  52:main.c        **** spritedisplay,
+  53:main.c        **** player0x,
+  54:main.c        **** player1x,
+  55:main.c        **** player2x,
+  56:main.c        **** player3x,
+  57:main.c        **** player4x,
+  58:main.c        **** player5x,
+  59:main.c        **** player6x,
+  60:main.c        **** player7x,
+  61:main.c        **** player8x,
+  62:main.c        **** player9x,
+  63:main.c        **** player0y,
+  64:main.c        **** player1y,
+  65:main.c        **** player2y,
+  66:main.c        **** player3y,
+  67:main.c        **** player4y,
+  68:main.c        **** player5y,
+  69:main.c        **** player6y,
+  70:main.c        **** player7y,
+  71:main.c        **** player8y,
+  72:main.c        **** player9y,
+  73:main.c        **** player0color, junk5,
+  74:main.c        **** player0height,
+  75:main.c        **** player1height,
+  76:main.c        **** player2height,
+  77:main.c        **** player3height,
+  78:main.c        **** player4height,
+  79:main.c        **** player5height,
+  80:main.c        **** player6height,
+  81:main.c        **** player7height,
+  82:main.c        **** player8height,
+  83:main.c        **** player9height,
+  84:main.c        **** _NUSIZ1,
+  85:main.c        **** NUSIZ2,
+  86:main.c        **** NUSIZ3,
+  87:main.c        **** NUSIZ4,
+  88:main.c        **** NUSIZ5,
+  89:main.c        **** NUSIZ6,
+  90:main.c        **** NUSIZ7,
+ARM GAS  main.s 			page 3
+
+
+  91:main.c        **** NUSIZ8,
+  92:main.c        **** NUSIZ9,
+  93:main.c        **** score,score2,score3,
+  94:main.c        **** COLUM0,
+  95:main.c        **** COLUM1,
+  96:main.c        **** player0pointerlo,
+  97:main.c        **** player0pointerhi,
+  98:main.c        **** // end of RAM, start of playerpointers
+  99:main.c        **** player1pointerlo,
+ 100:main.c        **** player1pointerhi,
+ 101:main.c        **** player2pointerlo,
+ 102:main.c        **** player2pointerhi,
+ 103:main.c        **** player3pointerlo,
+ 104:main.c        **** player3pointerhi,
+ 105:main.c        **** player4pointerlo,
+ 106:main.c        **** player4pointerhi,
+ 107:main.c        **** player5pointerlo,
+ 108:main.c        **** player5pointerhi,
+ 109:main.c        **** player6pointerlo,
+ 110:main.c        **** player6pointerhi,
+ 111:main.c        **** player7pointerlo,
+ 112:main.c        **** player7pointerhi,
+ 113:main.c        **** player8pointerlo,
+ 114:main.c        **** player8pointerhi,
+ 115:main.c        **** player9pointerlo,
+ 116:main.c        **** player9pointerhi,
+ 117:main.c        **** player1color, junk6,
+ 118:main.c        **** player2color, junk7,
+ 119:main.c        **** player3color, junk8,
+ 120:main.c        **** player4color, junk9,
+ 121:main.c        **** player5color, junk10,
+ 122:main.c        **** player6color, junk11,
+ 123:main.c        **** player7color, junk12,
+ 124:main.c        **** player8color, junk13,
+ 125:main.c        **** player9color, junk14
+ 126:main.c        **** };
+ 127:main.c        **** 
+ 128:main.c        ****  enum {SKIP,OVERLAP,NOOVERLAP};
+ 129:main.c        **** 
+ 130:main.c        **** // global variables are those found outside of any function.  They can be used by any function.
+ 131:main.c        **** // The Harmony Cartridge preserves these values for you between ARM code calls.
+ 132:main.c        **** 
+ 133:main.c        **** unsigned char *C_function=(unsigned int *)(0x20010C00 + 0x1A4);
+ 134:main.c        **** unsigned short *fetcher_address_table=(unsigned short *)(0x20000C00 + 0x61A0);
+ 135:main.c        **** unsigned char *RIOT=(unsigned char *)(0x20010C00 + 0x1A8);
+ 136:main.c        **** //unsigned char *HMdiv=(unsigned char *)(0x20000c00+0x1000);
+ 137:main.c        **** unsigned char *fetcheraddr;
+ 138:main.c        **** unsigned char *pfpixel;
+ 139:main.c        **** int count;
+ 140:main.c        **** //int Gfxindex;
+ 141:main.c        **** //signed int temp1;
+ 142:main.c        **** //int temp2; 
+ 143:main.c        **** //int temp3;
+ 144:main.c        **** int temp4;
+ 145:main.c        **** int temp5;
+ 146:main.c        **** unsigned int mask;
+ 147:main.c        **** 
+ARM GAS  main.s 			page 4
+
+
+ 148:main.c        ****  // masking: NUSIZ bit 7=off/on, NUSIZ 6=L/R
+ 149:main.c        ****  // no-mask entries replaced by later if...then which is a bit smaller.
+ 150:main.c        ****  // in their place is masking for reflected sprites.
+ 151:main.c        **** const unsigned char maskdata[32]=
+ 152:main.c        **** 	{
+ 153:main.c        **** 	 0,0x01,0x03,0x07,0x0F,0x1F,0x3F,0x7F,
+ 154:main.c        **** 	 0xFE,0xFC,0xF8,0xF0,0xE0,0xC0,0x80,0,
+ 155:main.c        ****          0,0x80,0xC0,0xE0,0xF0,0xF8,0xFC,0xFE,
+ 156:main.c        ****          0x7F,0x3F,0x1F,0x0F,0x07,0x03,0x01,0
+ 157:main.c        ****           };
+ 158:main.c        **** 
+ 159:main.c        **** char spritesort[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 0};
+ 160:main.c        **** char myGfxIndex[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 0};
+ 161:main.c        **** 
+ 162:main.c        **** // changed maxsprites to a variable value, so unused sprite memory can be claimed
+ 163:main.c        **** char maxsprites;
+ 164:main.c        **** 
+ 165:main.c        **** #define    kernello(a) fetcheraddr[(a)]
+ 166:main.c        **** #define    kernelhi(a) fetcheraddr[(a)+11]
+ 167:main.c        **** #define    dflow(a) fetcheraddr[(a)+22]
+ 168:main.c        **** #define    dfhigh(a)  fetcheraddr[(a)+30]
+ 169:main.c        **** #define    dffraclo(a)  fetcheraddr[(a)+38]
+ 170:main.c        **** #define    dffrachi(a)  fetcheraddr[(a)+46]
+ 171:main.c        **** #define    scoregraphics(a)  fetcheraddr[(a)+54]
+ 172:main.c        **** #define    scorepointer(a)  fetcheraddr[(a)+56]
+ 173:main.c        **** #define    Hmval(a)  fetcheraddr[(a)+58]
+ 174:main.c        **** #define    Hmval74(a)  fetcheraddr[(a)+66]
+ 175:main.c        **** 
+ 176:main.c        **** void my_memcpy(unsigned char* destination, unsigned char* source, int offset, int count)
+ 177:main.c        **** { 
+  26              		.loc 1 177 1
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 8
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              	.LVL0:
+ 178:main.c        ****         int i; //saves a few bytes
+  31              		.loc 1 178 9
+ 179:main.c        ****         for(i=0;i<count;i++)
+  32              		.loc 1 179 9
+ 177:main.c        ****         int i; //saves a few bytes
+  33              		.loc 1 177 1 is_stmt 0
+  34 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+  35              		.cfi_def_cfa_offset 32
+  36              		.cfi_offset 0, -32
+  37              		.cfi_offset 1, -28
+  38              		.cfi_offset 2, -24
+  39              		.cfi_offset 4, -20
+  40              		.cfi_offset 5, -16
+  41              		.cfi_offset 6, -12
+  42              		.cfi_offset 7, -8
+  43              		.cfi_offset 14, -4
+ 177:main.c        ****         int i; //saves a few bytes
+  44              		.loc 1 177 1
+  45 0002 0193     		str	r3, [sp, #4]
+  46              		.loc 1 179 14
+  47 0004 0023     		movs	r3, #0
+  48              	.LVL1:
+ARM GAS  main.s 			page 5
+
+
+ 180:main.c        ****                 destination[(i+offset)&255] = source[i]&mask;
+  49              		.loc 1 180 56
+  50 0006 074F     		ldr	r7, .L4
+  51              	.LVL2:
+  52              	.L2:
+ 179:main.c        ****         for(i=0;i<count;i++)
+  53              		.loc 1 179 18 is_stmt 1 discriminator 1
+  54 0008 019C     		ldr	r4, [sp, #4]
+  55 000a A342     		cmp	r3, r4
+  56 000c 00DB     		blt	.L3
+ 181:main.c        **** } 
+  57              		.loc 1 181 1 is_stmt 0
+  58              		@ sp needed
+  59 000e F7BD     		pop	{r0, r1, r2, r4, r5, r6, r7, pc}
+  60              	.L3:
+ 180:main.c        ****                 destination[(i+offset)&255] = source[i]&mask;
+  61              		.loc 1 180 17 is_stmt 1 discriminator 3
+ 180:main.c        ****                 destination[(i+offset)&255] = source[i]&mask;
+  62              		.loc 1 180 28 is_stmt 0 discriminator 3
+  63 0010 FF25     		movs	r5, #255
+  64 0012 D418     		adds	r4, r2, r3
+ 180:main.c        ****                 destination[(i+offset)&255] = source[i]&mask;
+  65              		.loc 1 180 56 discriminator 3
+  66 0014 CE5C     		ldrb	r6, [r1, r3]
+ 180:main.c        ****                 destination[(i+offset)&255] = source[i]&mask;
+  67              		.loc 1 180 28 discriminator 3
+  68 0016 2C40     		ands	r4, r5
+ 180:main.c        ****                 destination[(i+offset)&255] = source[i]&mask;
+  69              		.loc 1 180 56 discriminator 3
+  70 0018 3D68     		ldr	r5, [r7]
+ 179:main.c        ****                 destination[(i+offset)&255] = source[i]&mask;
+  71              		.loc 1 179 26 discriminator 3
+  72 001a 0133     		adds	r3, r3, #1
+  73              	.LVL3:
+ 180:main.c        ****                 destination[(i+offset)&255] = source[i]&mask;
+  74              		.loc 1 180 56 discriminator 3
+  75 001c 3540     		ands	r5, r6
+ 180:main.c        ****                 destination[(i+offset)&255] = source[i]&mask;
+  76              		.loc 1 180 45 discriminator 3
+  77 001e 0555     		strb	r5, [r0, r4]
+ 179:main.c        ****                 destination[(i+offset)&255] = source[i]&mask;
+  78              		.loc 1 179 26 is_stmt 1 discriminator 3
+  79              	.LVL4:
+  80 0020 F2E7     		b	.L2
+  81              	.L5:
+  82 0022 C046     		.align	2
+  83              	.L4:
+  84 0024 00000000 		.word	.LANCHOR0
+  85              		.cfi_endproc
+  86              	.LFE0:
+  88              		.section	.text.my_memset,"ax",%progbits
+  89              		.align	1
+  90              		.global	my_memset
+  91              		.syntax unified
+  92              		.code	16
+  93              		.thumb_func
+  95              	my_memset:
+ARM GAS  main.s 			page 6
+
+
+  96              	.LFB1:
+ 182:main.c        **** 
+ 183:main.c        **** void my_memset(unsigned char* destination, int fill_value, int count)
+ 184:main.c        **** {
+  97              		.loc 1 184 1
+  98              		.cfi_startproc
+  99              		@ args = 0, pretend = 0, frame = 0
+ 100              		@ frame_needed = 0, uses_anonymous_args = 0
+ 101              		@ link register save eliminated.
+ 102              	.LVL5:
+ 185:main.c        ****         int i; //saves a few bytes
+ 103              		.loc 1 185 9
+ 186:main.c        ****         for (i=0;i<count;i++)
+ 104              		.loc 1 186 9
+ 105              		.loc 1 186 15 is_stmt 0
+ 106 0000 0023     		movs	r3, #0
+ 107              	.LVL6:
+ 108              	.L7:
+ 109              		.loc 1 186 19 is_stmt 1 discriminator 1
+ 110 0002 9342     		cmp	r3, r2
+ 111 0004 00DB     		blt	.L8
+ 187:main.c        ****                 destination[i]=fill_value;
+ 188:main.c        **** }
+ 112              		.loc 1 188 1 is_stmt 0
+ 113              		@ sp needed
+ 114 0006 7047     		bx	lr
+ 115              	.L8:
+ 187:main.c        ****                 destination[i]=fill_value;
+ 116              		.loc 1 187 17 is_stmt 1 discriminator 3
+ 187:main.c        ****                 destination[i]=fill_value;
+ 117              		.loc 1 187 31 is_stmt 0 discriminator 3
+ 118 0008 C154     		strb	r1, [r0, r3]
+ 186:main.c        ****         for (i=0;i<count;i++)
+ 119              		.loc 1 186 27 is_stmt 1 discriminator 3
+ 120 000a 0133     		adds	r3, r3, #1
+ 121              	.LVL7:
+ 122 000c F9E7     		b	.L7
+ 123              		.cfi_endproc
+ 124              	.LFE1:
+ 126              		.section	.text.reverse,"ax",%progbits
+ 127              		.align	1
+ 128              		.global	reverse
+ 129              		.syntax unified
+ 130              		.code	16
+ 131              		.thumb_func
+ 133              	reverse:
+ 134              	.LFB2:
+ 189:main.c        **** 
+ 190:main.c        **** void reverse(int i, int j, unsigned char* x)
+ 191:main.c        **** { 
+ 135              		.loc 1 191 1
+ 136              		.cfi_startproc
+ 137              		@ args = 0, pretend = 0, frame = 0
+ 138              		@ frame_needed = 0, uses_anonymous_args = 0
+ 139              	.LVL8:
+ 140 0000 10B5     		push	{r4, lr}
+ 141              		.cfi_def_cfa_offset 8
+ARM GAS  main.s 			page 7
+
+
+ 142              		.cfi_offset 4, -8
+ 143              		.cfi_offset 14, -4
+ 192:main.c        ****         int t;
+ 144              		.loc 1 192 9
+ 193:main.c        ****         while (i < j) 
+ 145              		.loc 1 193 9
+ 146              	.L10:
+ 147              		.loc 1 193 18
+ 148 0002 8842     		cmp	r0, r1
+ 149 0004 00DB     		blt	.L11
+ 194:main.c        ****         {
+ 195:main.c        ****               t = x[i]; x[i] = x[j]; x[j] = t;
+ 196:main.c        ****               i++;
+ 197:main.c        ****               j--;
+ 198:main.c        ****         }
+ 199:main.c        **** }
+ 150              		.loc 1 199 1 is_stmt 0
+ 151              		@ sp needed
+ 152 0006 10BD     		pop	{r4, pc}
+ 153              	.L11:
+ 195:main.c        ****               i++;
+ 154              		.loc 1 195 15 is_stmt 1
+ 195:main.c        ****               i++;
+ 155              		.loc 1 195 20 is_stmt 0
+ 156 0008 135C     		ldrb	r3, [r2, r0]
+ 157              	.LVL9:
+ 195:main.c        ****               i++;
+ 158              		.loc 1 195 25 is_stmt 1
+ 195:main.c        ****               i++;
+ 159              		.loc 1 195 33 is_stmt 0
+ 160 000a 545C     		ldrb	r4, [r2, r1]
+ 195:main.c        ****               i++;
+ 161              		.loc 1 195 30
+ 162 000c 1454     		strb	r4, [r2, r0]
+ 195:main.c        ****               i++;
+ 163              		.loc 1 195 38 is_stmt 1
+ 195:main.c        ****               i++;
+ 164              		.loc 1 195 43 is_stmt 0
+ 165 000e 5354     		strb	r3, [r2, r1]
+ 196:main.c        ****               j--;
+ 166              		.loc 1 196 15 is_stmt 1
+ 196:main.c        ****               j--;
+ 167              		.loc 1 196 16 is_stmt 0
+ 168 0010 0130     		adds	r0, r0, #1
+ 169              	.LVL10:
+ 197:main.c        ****         }
+ 170              		.loc 1 197 15 is_stmt 1
+ 197:main.c        ****         }
+ 171              		.loc 1 197 16 is_stmt 0
+ 172 0012 0139     		subs	r1, r1, #1
+ 173              	.LVL11:
+ 174 0014 F5E7     		b	.L10
+ 175              		.cfi_endproc
+ 176              	.LFE2:
+ 178              		.section	.text.memscroll,"ax",%progbits
+ 179              		.align	1
+ 180              		.global	memscroll
+ARM GAS  main.s 			page 8
+
+
+ 181              		.syntax unified
+ 182              		.code	16
+ 183              		.thumb_func
+ 185              	memscroll:
+ 186              	.LFB3:
+ 200:main.c        **** 
+ 201:main.c        **** void memscroll(unsigned char* qmemory, unsigned char offset)
+ 202:main.c        **** {
+ 187              		.loc 1 202 1 is_stmt 1
+ 188              		.cfi_startproc
+ 189              		@ args = 0, pretend = 0, frame = 0
+ 190              		@ frame_needed = 0, uses_anonymous_args = 0
+ 191              	.LVL12:
+ 203:main.c        ****         // the classic "shift N elements through reversal" algorithm
+ 204:main.c        ****         reverse(0,offset-1,qmemory);
+ 192              		.loc 1 204 9
+ 202:main.c        ****         // the classic "shift N elements through reversal" algorithm
+ 193              		.loc 1 202 1 is_stmt 0
+ 194 0000 70B5     		push	{r4, r5, r6, lr}
+ 195              		.cfi_def_cfa_offset 16
+ 196              		.cfi_offset 4, -16
+ 197              		.cfi_offset 5, -12
+ 198              		.cfi_offset 6, -8
+ 199              		.cfi_offset 14, -4
+ 202:main.c        ****         // the classic "shift N elements through reversal" algorithm
+ 200              		.loc 1 202 1
+ 201 0002 0400     		movs	r4, r0
+ 205:main.c        ****         reverse(offset,255,qmemory);
+ 206:main.c        ****         reverse(0,255,qmemory);
+ 207:main.c        **** }
+ 202              		.loc 1 207 1
+ 203              		@ sp needed
+ 202:main.c        ****         // the classic "shift N elements through reversal" algorithm
+ 204              		.loc 1 202 1
+ 205 0004 0D00     		movs	r5, r1
+ 204:main.c        ****         reverse(offset,255,qmemory);
+ 206              		.loc 1 204 9
+ 207 0006 0200     		movs	r2, r0
+ 208 0008 0139     		subs	r1, r1, #1
+ 209              	.LVL13:
+ 210 000a 0020     		movs	r0, #0
+ 211              	.LVL14:
+ 212 000c FFF7FEFF 		bl	reverse
+ 213              	.LVL15:
+ 205:main.c        ****         reverse(offset,255,qmemory);
+ 214              		.loc 1 205 9 is_stmt 1
+ 215 0010 2800     		movs	r0, r5
+ 216 0012 2200     		movs	r2, r4
+ 217 0014 FF21     		movs	r1, #255
+ 218 0016 FFF7FEFF 		bl	reverse
+ 219              	.LVL16:
+ 206:main.c        **** }
+ 220              		.loc 1 206 9
+ 221 001a 2200     		movs	r2, r4
+ 222 001c FF21     		movs	r1, #255
+ 223 001e 0020     		movs	r0, #0
+ 224 0020 FFF7FEFF 		bl	reverse
+ARM GAS  main.s 			page 9
+
+
+ 225              	.LVL17:
+ 226              	.LVL18:
+ 227              		.loc 1 207 1 is_stmt 0
+ 228 0024 70BD     		pop	{r4, r5, r6, pc}
+ 229              		.cfi_endproc
+ 230              	.LFE3:
+ 232              		.section	.text.get32bitdff,"ax",%progbits
+ 233              		.align	1
+ 234              		.global	get32bitdff
+ 235              		.syntax unified
+ 236              		.code	16
+ 237              		.thumb_func
+ 239              	get32bitdff:
+ 240              	.LFB4:
+ 208:main.c        **** 
+ 209:main.c        **** unsigned int get32bitdff(int offset)
+ 210:main.c        **** {
+ 241              		.loc 1 210 1 is_stmt 1
+ 242              		.cfi_startproc
+ 243              		@ args = 0, pretend = 0, frame = 0
+ 244              		@ frame_needed = 0, uses_anonymous_args = 0
+ 245              		@ link register save eliminated.
+ 246              	.LVL19:
+ 211:main.c        ****   return((dffrachi(offset)<<8)+dffraclo(offset));
+ 247              		.loc 1 211 3
+ 248              		.loc 1 211 22 is_stmt 0
+ 249 0000 054B     		ldr	r3, .L14
+ 212:main.c        **** }
+ 250              		.loc 1 212 1
+ 251              		@ sp needed
+ 211:main.c        ****   return((dffrachi(offset)<<8)+dffraclo(offset));
+ 252              		.loc 1 211 22
+ 253 0002 5B68     		ldr	r3, [r3, #4]
+ 254 0004 1B18     		adds	r3, r3, r0
+ 255 0006 1A00     		movs	r2, r3
+ 256 0008 2E32     		adds	r2, r2, #46
+ 257 000a 1078     		ldrb	r0, [r2]
+ 258              	.LVL20:
+ 211:main.c        ****   return((dffrachi(offset)<<8)+dffraclo(offset));
+ 259              		.loc 1 211 51
+ 260 000c 0733     		adds	r3, r3, #7
+ 261 000e DB7F     		ldrb	r3, [r3, #31]
+ 211:main.c        ****   return((dffrachi(offset)<<8)+dffraclo(offset));
+ 262              		.loc 1 211 35
+ 263 0010 0002     		lsls	r0, r0, #8
+ 211:main.c        ****   return((dffrachi(offset)<<8)+dffraclo(offset));
+ 264              		.loc 1 211 39
+ 265 0012 C018     		adds	r0, r0, r3
+ 266              		.loc 1 212 1
+ 267 0014 7047     		bx	lr
+ 268              	.L15:
+ 269 0016 C046     		.align	2
+ 270              	.L14:
+ 271 0018 00000000 		.word	.LANCHOR0
+ 272              		.cfi_endproc
+ 273              	.LFE4:
+ 275              		.section	.text.get32bitdf,"ax",%progbits
+ARM GAS  main.s 			page 10
+
+
+ 276              		.align	1
+ 277              		.global	get32bitdf
+ 278              		.syntax unified
+ 279              		.code	16
+ 280              		.thumb_func
+ 282              	get32bitdf:
+ 283              	.LFB5:
+ 213:main.c        **** 
+ 214:main.c        **** unsigned int get32bitdf(int offset)
+ 215:main.c        **** {
+ 284              		.loc 1 215 1 is_stmt 1
+ 285              		.cfi_startproc
+ 286              		@ args = 0, pretend = 0, frame = 0
+ 287              		@ frame_needed = 0, uses_anonymous_args = 0
+ 288              		@ link register save eliminated.
+ 289              	.LVL21:
+ 216:main.c        ****   return((dfhigh(offset)<<8)+dflow(offset));
+ 290              		.loc 1 216 3
+ 291              		.loc 1 216 22 is_stmt 0
+ 292 0000 034B     		ldr	r3, .L17
+ 217:main.c        **** }
+ 293              		.loc 1 217 1
+ 294              		@ sp needed
+ 216:main.c        ****   return((dfhigh(offset)<<8)+dflow(offset));
+ 295              		.loc 1 216 22
+ 296 0002 5B68     		ldr	r3, [r3, #4]
+ 297 0004 1B18     		adds	r3, r3, r0
+ 298 0006 987F     		ldrb	r0, [r3, #30]
+ 299              	.LVL22:
+ 216:main.c        ****   return((dfhigh(offset)<<8)+dflow(offset));
+ 300              		.loc 1 216 51
+ 301 0008 9B7D     		ldrb	r3, [r3, #22]
+ 216:main.c        ****   return((dfhigh(offset)<<8)+dflow(offset));
+ 302              		.loc 1 216 35
+ 303 000a 0002     		lsls	r0, r0, #8
+ 216:main.c        ****   return((dfhigh(offset)<<8)+dflow(offset));
+ 304              		.loc 1 216 39
+ 305 000c C018     		adds	r0, r0, r3
+ 306              		.loc 1 217 1
+ 307 000e 7047     		bx	lr
+ 308              	.L18:
+ 309              		.align	2
+ 310              	.L17:
+ 311 0010 00000000 		.word	.LANCHOR0
+ 312              		.cfi_endproc
+ 313              	.LFE5:
+ 315              		.section	.text.checkwrap,"ax",%progbits
+ 316              		.align	1
+ 317              		.global	checkwrap
+ 318              		.syntax unified
+ 319              		.code	16
+ 320              		.thumb_func
+ 322              	checkwrap:
+ 323              	.LFB6:
+ 218:main.c        **** 
+ 219:main.c        **** /* void shiftnumbers(int xreg) */
+ 220:main.c        **** /* { */
+ARM GAS  main.s 			page 11
+
+
+ 221:main.c        **** /*   while (xreg!=maxsprites-1) */
+ 222:main.c        **** /*   { */
+ 223:main.c        **** /*     myGfxIndex[xreg]=myGfxIndex[xreg+1]; */
+ 224:main.c        **** /*     xreg++; */
+ 225:main.c        **** /*   } */
+ 226:main.c        **** /* } */
+ 227:main.c        **** 
+ 228:main.c        **** char checkwrap(char a, char b)
+ 229:main.c        **** {
+ 324              		.loc 1 229 1 is_stmt 1
+ 325              		.cfi_startproc
+ 326              		@ args = 0, pretend = 0, frame = 0
+ 327              		@ frame_needed = 0, uses_anonymous_args = 0
+ 328              		@ link register save eliminated.
+ 329              	.LVL23:
+ 230:main.c        ****   if (((a+b)&255)<b) return 0;
+ 330              		.loc 1 230 3
+ 331              		.loc 1 230 13 is_stmt 0
+ 332 0000 4318     		adds	r3, r0, r1
+ 333              		.loc 1 230 6
+ 334 0002 DBB2     		uxtb	r3, r3
+ 335 0004 8B42     		cmp	r3, r1
+ 336 0006 00D2     		bcs	.L20
+ 337              		.loc 1 230 29
+ 338 0008 0020     		movs	r0, #0
+ 339              	.LVL24:
+ 340              	.L20:
+ 231:main.c        ****   return a;
+ 232:main.c        **** }
+ 341              		.loc 1 232 1
+ 342              		@ sp needed
+ 343 000a 7047     		bx	lr
+ 344              		.cfi_endproc
+ 345              	.LFE6:
+ 347              		.section	.text.checkswap,"ax",%progbits
+ 348              		.align	1
+ 349              		.global	checkswap
+ 350              		.syntax unified
+ 351              		.code	16
+ 352              		.thumb_func
+ 354              	checkswap:
+ 355              	.LFB7:
+ 233:main.c        **** 
+ 234:main.c        **** int checkswap(int a, int b)
+ 235:main.c        **** {
+ 356              		.loc 1 235 1 is_stmt 1
+ 357              		.cfi_startproc
+ 358              		@ args = 0, pretend = 0, frame = 0
+ 359              		@ frame_needed = 0, uses_anonymous_args = 0
+ 360              	.LVL25:
+ 236:main.c        ****   signed int temp1;
+ 361              		.loc 1 236 3
+ 237:main.c        ****   char s1,s2;
+ 362              		.loc 1 237 3
+ 238:main.c        **** 
+ 239:main.c        ****   s1=checkwrap(RIOT[player1y+a],RIOT[player1height+a]);
+ 363              		.loc 1 239 3
+ARM GAS  main.s 			page 12
+
+
+ 235:main.c        ****   signed int temp1;
+ 364              		.loc 1 235 1 is_stmt 0
+ 365 0000 10B5     		push	{r4, lr}
+ 366              		.cfi_def_cfa_offset 8
+ 367              		.cfi_offset 4, -8
+ 368              		.cfi_offset 14, -4
+ 369              		.loc 1 239 20
+ 370 0002 104B     		ldr	r3, .L29
+ 371 0004 1A68     		ldr	r2, [r3]
+ 372              		.loc 1 239 6
+ 373 0006 1018     		adds	r0, r2, r0
+ 374              	.LVL26:
+ 375 0008 437D     		ldrb	r3, [r0, #21]
+ 376 000a 0230     		adds	r0, r0, #2
+ 377 000c C47F     		ldrb	r4, [r0, #31]
+ 378              	.LVL27:
+ 379              	.LBB6:
+ 380              	.LBB7:
+ 230:main.c        ****   return a;
+ 381              		.loc 1 230 3 is_stmt 1
+ 230:main.c        ****   return a;
+ 382              		.loc 1 230 13 is_stmt 0
+ 383 000e 1819     		adds	r0, r3, r4
+ 230:main.c        ****   return a;
+ 384              		.loc 1 230 6
+ 385 0010 C0B2     		uxtb	r0, r0
+ 386 0012 8442     		cmp	r4, r0
+ 387 0014 00D9     		bls	.L23
+ 230:main.c        ****   return a;
+ 388              		.loc 1 230 29
+ 389 0016 0023     		movs	r3, #0
+ 390              	.LVL28:
+ 391              	.L23:
+ 392              	.LBE7:
+ 393              	.LBE6:
+ 240:main.c        ****   s2=checkwrap(RIOT[player1y+b],RIOT[player1height+b]);
+ 394              		.loc 1 240 3 is_stmt 1
+ 395              		.loc 1 240 6 is_stmt 0
+ 396 0018 5218     		adds	r2, r2, r1
+ 397 001a 517D     		ldrb	r1, [r2, #21]
+ 398              	.LVL29:
+ 399 001c 0232     		adds	r2, r2, #2
+ 400 001e D27F     		ldrb	r2, [r2, #31]
+ 401              	.LVL30:
+ 402              	.LBB8:
+ 403              	.LBB9:
+ 230:main.c        ****   return a;
+ 404              		.loc 1 230 3 is_stmt 1
+ 230:main.c        ****   return a;
+ 405              		.loc 1 230 13 is_stmt 0
+ 406 0020 8818     		adds	r0, r1, r2
+ 230:main.c        ****   return a;
+ 407              		.loc 1 230 6
+ 408 0022 C0B2     		uxtb	r0, r0
+ 409 0024 8242     		cmp	r2, r0
+ 410 0026 00D9     		bls	.L24
+ 230:main.c        ****   return a;
+ARM GAS  main.s 			page 13
+
+
+ 411              		.loc 1 230 29
+ 412 0028 0021     		movs	r1, #0
+ 413              	.LVL31:
+ 414              	.L24:
+ 415              	.LBE9:
+ 416              	.LBE8:
+ 241:main.c        **** 
+ 242:main.c        ****   temp1=s1-s2;
+ 417              		.loc 1 242 3 is_stmt 1
+ 243:main.c        ****   if (temp1>0)
+ 244:main.c        ****   { // larger is higher
+ 245:main.c        ****     if ((temp1-=5)>0)
+ 246:main.c        ****     {// not overlapping
+ 247:main.c        ****       if (temp1>RIOT[player1height+b])
+ 248:main.c        **** 	return SKIP;
+ 249:main.c        ****       else return OVERLAP;
+ 418              		.loc 1 249 19 is_stmt 0
+ 419 002a 0120     		movs	r0, #1
+ 242:main.c        ****   if (temp1>0)
+ 420              		.loc 1 242 8
+ 421 002c 5B1A     		subs	r3, r3, r1
+ 422              	.LVL32:
+ 243:main.c        ****   if (temp1>0)
+ 423              		.loc 1 243 3 is_stmt 1
+ 243:main.c        ****   if (temp1>0)
+ 424              		.loc 1 243 6 is_stmt 0
+ 425 002e 002B     		cmp	r3, #0
+ 426 0030 06DD     		ble	.L22
+ 245:main.c        ****     {// not overlapping
+ 427              		.loc 1 245 5 is_stmt 1
+ 245:main.c        ****     {// not overlapping
+ 428              		.loc 1 245 15 is_stmt 0
+ 429 0032 053B     		subs	r3, r3, #5
+ 430              	.LVL33:
+ 245:main.c        ****     {// not overlapping
+ 431              		.loc 1 245 8
+ 432 0034 002B     		cmp	r3, #0
+ 433 0036 03DD     		ble	.L22
+ 247:main.c        **** 	return SKIP;
+ 434              		.loc 1 247 7 is_stmt 1
+ 247:main.c        **** 	return SKIP;
+ 435              		.loc 1 247 10 is_stmt 0
+ 436 0038 D017     		asrs	r0, r2, #31
+ 437 003a D90F     		lsrs	r1, r3, #31
+ 438              	.LVL34:
+ 439 003c 9A42     		cmp	r2, r3
+ 440 003e 4841     		adcs	r0, r0, r1
+ 441              	.L22:
+ 250:main.c        ****     }
+ 251:main.c        ****     else
+ 252:main.c        ****       return OVERLAP;
+ 253:main.c        ****   }
+ 254:main.c        ****   else // largerXislower
+ 255:main.c        ****   {
+ 256:main.c        ****     if ((temp1=(temp1^0xFF)-5)>0)
+ 257:main.c        ****       return OVERLAP;
+ 258:main.c        ****     else
+ARM GAS  main.s 			page 14
+
+
+ 259:main.c        ****     {//notoverlapping
+ 260:main.c        ****       if (temp1>RIOT[player1height+b])
+ 261:main.c        ****         return NOOVERLAP;
+ 262:main.c        ****       else return OVERLAP;
+ 263:main.c        ****     }
+ 264:main.c        ****   }
+ 265:main.c        **** }
+ 442              		.loc 1 265 1
+ 443              		@ sp needed
+ 444 0040 10BD     		pop	{r4, pc}
+ 445              	.L30:
+ 446 0042 C046     		.align	2
+ 447              	.L29:
+ 448 0044 00000000 		.word	.LANCHOR1
+ 449              		.cfi_endproc
+ 450              	.LFE7:
+ 452              		.section	.text.copynybble,"ax",%progbits
+ 453              		.align	1
+ 454              		.global	copynybble
+ 455              		.syntax unified
+ 456              		.code	16
+ 457              		.thumb_func
+ 459              	copynybble:
+ 460              	.LFB8:
+ 266:main.c        **** 
+ 267:main.c        **** void copynybble(unsigned char num)
+ 268:main.c        **** {
+ 461              		.loc 1 268 1 is_stmt 1
+ 462              		.cfi_startproc
+ 463              		@ args = 0, pretend = 0, frame = 8
+ 464              		@ frame_needed = 0, uses_anonymous_args = 0
+ 465              	.LVL35:
+ 269:main.c        ****     int i;
+ 466              		.loc 1 269 5
+ 270:main.c        ****     unsigned char *destination;
+ 467              		.loc 1 270 5
+ 271:main.c        ****     unsigned char *source;
+ 468              		.loc 1 271 5
+ 272:main.c        ****     destination=queue+(scorepointer(1)<<8)+scorepointer(0)+((temp5++)<<3);
+ 469              		.loc 1 272 5
+ 268:main.c        ****     int i;
+ 470              		.loc 1 268 1 is_stmt 0
+ 471 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 472              		.cfi_def_cfa_offset 32
+ 473              		.cfi_offset 0, -32
+ 474              		.cfi_offset 1, -28
+ 475              		.cfi_offset 2, -24
+ 476              		.cfi_offset 4, -20
+ 477              		.cfi_offset 5, -16
+ 478              		.cfi_offset 6, -12
+ 479              		.cfi_offset 7, -8
+ 480              		.cfi_offset 14, -4
+ 481              		.loc 1 272 35
+ 482 0002 144A     		ldr	r2, .L34
+ 483              		.loc 1 272 67
+ 484 0004 144F     		ldr	r7, .L34+4
+ 485              		.loc 1 272 35
+ARM GAS  main.s 			page 15
+
+
+ 486 0006 5168     		ldr	r1, [r2, #4]
+ 268:main.c        ****     int i;
+ 487              		.loc 1 268 1
+ 488 0008 0190     		str	r0, [sp, #4]
+ 489              		.loc 1 272 35
+ 490 000a 0B00     		movs	r3, r1
+ 491 000c 3933     		adds	r3, r3, #57
+ 492              		.loc 1 272 43
+ 493 000e 1D78     		ldrb	r5, [r3]
+ 494              		.loc 1 272 59
+ 495 0010 013B     		subs	r3, r3, #1
+ 496 0012 1E78     		ldrb	r6, [r3]
+ 497              		.loc 1 272 75
+ 498 0014 9368     		ldr	r3, [r2, #8]
+ 499              		.loc 1 272 67
+ 500 0016 7C68     		ldr	r4, [r7, #4]
+ 501              		.loc 1 272 75
+ 502 0018 581C     		adds	r0, r3, #1
+ 503              	.LVL36:
+ 504 001a 9060     		str	r0, [r2, #8]
+ 273:main.c        ****     source=flashdata+(scoregraphics(1)<<8)+scoregraphics(0)+((num&0x0F)<<3);
+ 505              		.loc 1 273 66
+ 506 001c BA68     		ldr	r2, [r7, #8]
+ 507              		.loc 1 273 78
+ 508 001e 7827     		movs	r7, #120
+ 509 0020 0198     		ldr	r0, [sp, #4]
+ 272:main.c        ****     destination=queue+(scorepointer(1)<<8)+scorepointer(0)+((temp5++)<<3);
+ 510              		.loc 1 272 78
+ 511 0022 DB00     		lsls	r3, r3, #3
+ 512              		.loc 1 273 78
+ 513 0024 C000     		lsls	r0, r0, #3
+ 514 0026 3840     		ands	r0, r7
+ 515              		.loc 1 273 46
+ 516 0028 0F00     		movs	r7, r1
+ 517 002a 3731     		adds	r1, r1, #55
+ 518 002c 0978     		ldrb	r1, [r1]
+ 519 002e 3637     		adds	r7, r7, #54
+ 520 0030 3F78     		ldrb	r7, [r7]
+ 521 0032 0902     		lsls	r1, r1, #8
+ 522 0034 3943     		orrs	r1, r7
+ 523              		.loc 1 273 66
+ 524 0036 4018     		adds	r0, r0, r1
+ 272:main.c        ****     destination=queue+(scorepointer(1)<<8)+scorepointer(0)+((temp5++)<<3);
+ 525              		.loc 1 272 43
+ 526 0038 2D02     		lsls	r5, r5, #8
+ 527              		.loc 1 273 5 is_stmt 1
+ 528              	.LVL37:
+ 274:main.c        ****     for(i=0;i<8;i++)
+ 529              		.loc 1 274 5
+ 530              		.loc 1 274 14
+ 272:main.c        ****     source=flashdata+(scoregraphics(1)<<8)+scoregraphics(0)+((num&0x0F)<<3);
+ 531              		.loc 1 272 67 is_stmt 0
+ 532 003a 9B19     		adds	r3, r3, r6
+ 533 003c 1118     		adds	r1, r2, r0
+ 534              	.LVL38:
+ 535 003e 5B19     		adds	r3, r3, r5
+ 536 0040 083A     		subs	r2, r2, #8
+ARM GAS  main.s 			page 16
+
+
+ 537 0042 E418     		adds	r4, r4, r3
+ 538 0044 1218     		adds	r2, r2, r0
+ 539              	.LVL39:
+ 540              	.L32:
+ 275:main.c        ****       destination[i] = source[7-i];
+ 541              		.loc 1 275 7 is_stmt 1 discriminator 3
+ 542              		.loc 1 275 30 is_stmt 0 discriminator 3
+ 543 0046 CB79     		ldrb	r3, [r1, #7]
+ 274:main.c        ****     for(i=0;i<8;i++)
+ 544              		.loc 1 274 14 discriminator 3
+ 545 0048 0139     		subs	r1, r1, #1
+ 546              		.loc 1 275 22 discriminator 3
+ 547 004a 2370     		strb	r3, [r4]
+ 274:main.c        ****     for(i=0;i<8;i++)
+ 548              		.loc 1 274 18 is_stmt 1 discriminator 3
+ 274:main.c        ****     for(i=0;i<8;i++)
+ 549              		.loc 1 274 14 discriminator 3
+ 550 004c 0134     		adds	r4, r4, #1
+ 551 004e 9142     		cmp	r1, r2
+ 552 0050 F9D1     		bne	.L32
+ 276:main.c        **** }
+ 553              		.loc 1 276 1 is_stmt 0
+ 554              		@ sp needed
+ 555 0052 F7BD     		pop	{r0, r1, r2, r4, r5, r6, r7, pc}
+ 556              	.L35:
+ 557              		.align	2
+ 558              	.L34:
+ 559 0054 00000000 		.word	.LANCHOR0
+ 560 0058 00000000 		.word	.LANCHOR1
+ 561              		.cfi_endproc
+ 562              	.LFE8:
+ 564              		.section	.text.on_off_flip,"ax",%progbits
+ 565              		.align	1
+ 566              		.global	on_off_flip
+ 567              		.syntax unified
+ 568              		.code	16
+ 569              		.thumb_func
+ 571              	on_off_flip:
+ 572              	.LFB9:
+ 277:main.c        **** 
+ 278:main.c        **** void on_off_flip(unsigned int loc, unsigned int fnmask)
+ 279:main.c        **** {
+ 573              		.loc 1 279 1 is_stmt 1
+ 574              		.cfi_startproc
+ 575              		@ args = 0, pretend = 0, frame = 0
+ 576              		@ frame_needed = 0, uses_anonymous_args = 0
+ 577              		@ link register save eliminated.
+ 578              	.LVL40:
+ 280:main.c        ****   switch(C_function[0]&3)
+ 579              		.loc 1 280 3
+ 580 0000 0322     		movs	r2, #3
+ 581              		.loc 1 280 20 is_stmt 0
+ 582 0002 0D4B     		ldr	r3, .L41
+ 583 0004 DB68     		ldr	r3, [r3, #12]
+ 584 0006 1B78     		ldrb	r3, [r3]
+ 585 0008 1340     		ands	r3, r2
+ 586              		.loc 1 280 3
+ARM GAS  main.s 			page 17
+
+
+ 587 000a 012B     		cmp	r3, #1
+ 588 000c 09D0     		beq	.L37
+ 589 000e 022B     		cmp	r3, #2
+ 590 0010 0CD0     		beq	.L38
+ 591 0012 002B     		cmp	r3, #0
+ 592 0014 04D1     		bne	.L36
+ 281:main.c        ****   {
+ 282:main.c        ****     case 0://on
+ 283:main.c        ****       pfpixel[loc]|=fnmask;
+ 593              		.loc 1 283 7 is_stmt 1
+ 594              		.loc 1 283 14 is_stmt 0
+ 595 0016 094B     		ldr	r3, .L41+4
+ 596 0018 DA68     		ldr	r2, [r3, #12]
+ 597              		.loc 1 283 19
+ 598 001a 135C     		ldrb	r3, [r2, r0]
+ 599 001c 0B43     		orrs	r3, r1
+ 600              	.L40:
+ 284:main.c        ****       return;
+ 285:main.c        ****     case 1://off
+ 286:main.c        ****       pfpixel[loc]&=~fnmask;
+ 287:main.c        ****       return;
+ 288:main.c        ****     case 2://flip
+ 289:main.c        ****       pfpixel[loc]^=fnmask;
+ 601              		.loc 1 289 19
+ 602 001e 1354     		strb	r3, [r2, r0]
+ 290:main.c        ****       return;
+ 603              		.loc 1 290 7 is_stmt 1
+ 604              	.L36:
+ 291:main.c        ****     default://reserved (for what?)
+ 292:main.c        ****       break;
+ 293:main.c        ****   }
+ 294:main.c        **** }
+ 605              		.loc 1 294 1 is_stmt 0
+ 606              		@ sp needed
+ 607 0020 7047     		bx	lr
+ 608              	.L37:
+ 286:main.c        ****       return;
+ 609              		.loc 1 286 7 is_stmt 1
+ 286:main.c        ****       return;
+ 610              		.loc 1 286 14 is_stmt 0
+ 611 0022 064B     		ldr	r3, .L41+4
+ 612 0024 DA68     		ldr	r2, [r3, #12]
+ 286:main.c        ****       return;
+ 613              		.loc 1 286 19
+ 614 0026 135C     		ldrb	r3, [r2, r0]
+ 615 0028 8B43     		bics	r3, r1
+ 616 002a F8E7     		b	.L40
+ 617              	.L38:
+ 289:main.c        ****       return;
+ 618              		.loc 1 289 7 is_stmt 1
+ 289:main.c        ****       return;
+ 619              		.loc 1 289 14 is_stmt 0
+ 620 002c 034B     		ldr	r3, .L41+4
+ 621 002e DA68     		ldr	r2, [r3, #12]
+ 289:main.c        ****       return;
+ 622              		.loc 1 289 19
+ 623 0030 135C     		ldrb	r3, [r2, r0]
+ARM GAS  main.s 			page 18
+
+
+ 624 0032 4B40     		eors	r3, r1
+ 625 0034 F3E7     		b	.L40
+ 626              	.L42:
+ 627 0036 C046     		.align	2
+ 628              	.L41:
+ 629 0038 00000000 		.word	.LANCHOR1
+ 630 003c 00000000 		.word	.LANCHOR0
+ 631              		.cfi_endproc
+ 632              	.LFE9:
+ 634              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 635              	.LC11:
+ 636 0000 80402010 		.ascii	"\200@ \020\010\004\002\001\001\002\004\010\020 @\200"
+ 636      08040201 
+ 636      01020408 
+ 636      10204080 
+ 637 0010 80402010 		.ascii	"\200@ \020\010\004\002\001\001\002\004\010\020 @\200"
+ 637      08040201 
+ 637      01020408 
+ 637      10204080 
+ 638 0020 00       		.ascii	"\000"
+ 639              		.section	.text.startup.main,"ax",%progbits
+ 640              		.align	1
+ 641              		.global	main
+ 642              		.syntax unified
+ 643              		.code	16
+ 644              		.thumb_func
+ 646              	main:
+ 647              	.LFB10:
+ 295:main.c        **** 
+ 296:main.c        **** // main() is what gets called when you store 0xFF into DPC+ register CALLFUNCTION in your 6507 code
+ 297:main.c        **** int main()
+ 298:main.c        **** {
+ 648              		.loc 1 298 1 is_stmt 1
+ 649              		.cfi_startproc
+ 650              		@ args = 0, pretend = 0, frame = 64
+ 651              		@ frame_needed = 0, uses_anonymous_args = 0
+ 299:main.c        **** 
+ 300:main.c        ****   int i;
+ 652              		.loc 1 300 3
+ 301:main.c        **** 
+ 302:main.c        ****   // moving the the scope of these variables saved a *lot* of space. 
+ 303:main.c        ****   int temp2;
+ 653              		.loc 1 303 3
+ 304:main.c        ****   int temp3;
+ 654              		.loc 1 304 3
+ 305:main.c        ****   int Gfxindex;
+ 655              		.loc 1 305 3
+ 306:main.c        ****   unsigned char *HMdiv=(unsigned char *)(0x20000c00+0x1000);
+ 656              		.loc 1 306 3
+ 657              	.LVL41:
+ 307:main.c        ****   const unsigned char setbyte[32]=
+ 658              		.loc 1 307 3
+ 298:main.c        **** 
+ 659              		.loc 1 298 1 is_stmt 0
+ 660 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 661              		.cfi_def_cfa_offset 20
+ 662              		.cfi_offset 4, -20
+ARM GAS  main.s 			page 19
+
+
+ 663              		.cfi_offset 5, -16
+ 664              		.cfi_offset 6, -12
+ 665              		.cfi_offset 7, -8
+ 666              		.cfi_offset 14, -4
+ 667 0002 91B0     		sub	sp, sp, #68
+ 668              		.cfi_def_cfa_offset 88
+ 669              		.loc 1 307 23
+ 670 0004 2022     		movs	r2, #32
+ 671 0006 CA49     		ldr	r1, .L104
+ 672 0008 08A8     		add	r0, sp, #32
+ 673 000a FFF7FEFF 		bl	memcpy
+ 674              	.LVL42:
+ 308:main.c        **** 	{0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01,
+ 309:main.c        **** 	 0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80,
+ 310:main.c        **** 	 0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01,
+ 311:main.c        **** 	 0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
+ 312:main.c        **** 
+ 313:main.c        ****   fetcheraddr=flashdata+fetcher_address_table[0];
+ 675              		.loc 1 313 3 is_stmt 1
+ 676              		.loc 1 313 24 is_stmt 0
+ 677 000e C94C     		ldr	r4, .L104+4
+ 678              		.loc 1 313 14
+ 679 0010 C94E     		ldr	r6, .L104+8
+ 680              		.loc 1 313 46
+ 681 0012 2369     		ldr	r3, [r4, #16]
+ 682 0014 1A88     		ldrh	r2, [r3]
+ 683              		.loc 1 313 24
+ 684 0016 A368     		ldr	r3, [r4, #8]
+ 685 0018 9B18     		adds	r3, r3, r2
+ 686 001a 0322     		movs	r2, #3
+ 687              		.loc 1 313 14
+ 688 001c 7360     		str	r3, [r6, #4]
+ 314:main.c        **** 
+ 315:main.c        ****   // preindex these to save some space...
+ 316:main.c        ****   unsigned char C_function1=C_function[1];
+ 689              		.loc 1 316 3 is_stmt 1
+ 690              		.loc 1 316 17 is_stmt 0
+ 691 001e E368     		ldr	r3, [r4, #12]
+ 692 0020 0293     		str	r3, [sp, #8]
+ 693 0022 5B78     		ldrb	r3, [r3, #1]
+ 694 0024 0193     		str	r3, [sp, #4]
+ 695              	.LVL43:
+ 317:main.c        ****   unsigned char C_function2=C_function[2];
+ 696              		.loc 1 317 3 is_stmt 1
+ 697              		.loc 1 317 17 is_stmt 0
+ 698 0026 029B     		ldr	r3, [sp, #8]
+ 699 0028 9D78     		ldrb	r5, [r3, #2]
+ 700              	.LVL44:
+ 318:main.c        ****   unsigned char C_function3=C_function[3];
+ 701              		.loc 1 318 3 is_stmt 1
+ 702              		.loc 1 318 17 is_stmt 0
+ 703 002a DF78     		ldrb	r7, [r3, #3]
+ 704              	.LVL45:
+ 319:main.c        **** 
+ 320:main.c        ****   switch (C_function[0]&0xFC)
+ 705              		.loc 1 320 3 is_stmt 1
+ 706 002c 1B78     		ldrb	r3, [r3]
+ARM GAS  main.s 			page 20
+
+
+ 707 002e 9343     		bics	r3, r2
+ 708 0030 142B     		cmp	r3, #20
+ 709 0032 00D1     		bne	.LCB587
+ 710 0034 DDE0     		b	.L44	@long jump
+ 711              	.LCB587:
+ 712 0036 00D9     		bls	.LCB589
+ 713 0038 90E0     		b	.L45	@long jump
+ 714              	.LCB589:
+ 715 003a 0C2B     		cmp	r3, #12
+ 716 003c 00D1     		bne	.LCB591
+ 717 003e CCE0     		b	.L46	@long jump
+ 718              	.LCB591:
+ 719 0040 00D9     		bls	.LCB593
+ 720 0042 82E0     		b	.L47	@long jump
+ 721              	.LCB593:
+ 722 0044 042B     		cmp	r3, #4
+ 723 0046 00D1     		bne	.LCB595
+ 724 0048 A3E0     		b	.L48	@long jump
+ 725              	.LCB595:
+ 726 004a 082B     		cmp	r3, #8
+ 727 004c 00D1     		bne	.LCB597
+ 728 004e C0E0     		b	.L58	@long jump
+ 729              	.LCB597:
+ 730              	.L50:
+ 321:main.c        ****   {
+ 322:main.c        ****     case 4: // pfvline xpos ypos endypos function
+ 323:main.c        ****     {
+ 324:main.c        ****       pfpixel=queue+get32bitdff(C_function3>>3); // physical addy of xpos (pf)
+ 325:main.c        ****       for (i=C_function2;i<=C_function1;++i)
+ 326:main.c        ****       {
+ 327:main.c        ****         on_off_flip(i,setbyte[C_function3]);
+ 328:main.c        ****       }
+ 329:main.c        ****       return;
+ 330:main.c        ****     }
+ 331:main.c        ****     case 8: // pfhline
+ 332:main.c        ****     {
+ 333:main.c        ****       for (i=C_function3;i<=C_function1;++i)
+ 334:main.c        ****       {
+ 335:main.c        ****         pfpixel=queue+get32bitdff(i>>3); // physical addy of xpos (pf)
+ 336:main.c        ****         on_off_flip(C_function2,setbyte[i]);
+ 337:main.c        ****       }
+ 338:main.c        ****       return;
+ 339:main.c        ****     }
+ 340:main.c        ****     case 12: // pfpixel
+ 341:main.c        ****     {
+ 342:main.c        ****       pfpixel=queue+get32bitdff(C_function3>>3); // physical addy of xpos (pf)
+ 343:main.c        ****       on_off_flip(C_function2,setbyte[C_function3]);
+ 344:main.c        ****       return;
+ 345:main.c        ****     }
+ 346:main.c        ****     case 16: // zero-fill
+ 347:main.c        ****     {
+ 348:main.c        ****       my_memset(RIOT+player1pointerlo,0,4096-0x1a8-player1pointerlo);
+ 349:main.c        ****       return;
+ 350:main.c        ****     }
+ 351:main.c        ****     case 20: // collision check
+ 352:main.c        ****     {
+ 353:main.c        ****       // takes virtual sprite, returns coll
+ARM GAS  main.s 			page 21
+
+
+ 354:main.c        ****       // syntax: sprite[1], sprite[2] (missiles, ball not yet, pf done another way)
+ 355:main.c        ****       // draw sprites in virtual area
+ 356:main.c        ****       C_function[3]=0;
+ 357:main.c        ****       temp2=0;
+ 358:main.c        ****       for (i=RIOT[player0y+C_function2];i<RIOT[player0y+C_function2]+RIOT[player0height+C_function2
+ 359:main.c        ****       {
+ 360:main.c        ****         if ((i>=RIOT[player0y+C_function1]) && (i<RIOT[player0y+C_function1]+RIOT[player0height+C_f
+ 361:main.c        **** 	{
+ 362:main.c        **** 
+ 363:main.c        ****           temp3=RIOT[player0x+C_function2]-RIOT[player0x+C_function1]+7; //-7 to +7 -> 0 to 14
+ 364:main.c        ****           if (temp3<15)
+ 365:main.c        **** 	  {
+ 366:main.c        ****             temp2=((flashdata[(RIOT[player0pointerhi+C_function2*2]<<8)+RIOT[player0pointerlo+C_fun
+ 367:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 368:main.c        **** 	  }
+ 369:main.c        **** 	  if (temp2) 
+ 370:main.c        **** 	  {
+ 371:main.c        **** 	    C_function[3]=255;
+ 372:main.c        **** 	    return;
+ 373:main.c        **** 	  }
+ 374:main.c        **** 	}
+ 375:main.c        ****       }
+ 376:main.c        ****       return;
+ 377:main.c        ****     }
+ 378:main.c        ****     case 24: // pfread 
+ 379:main.c        ****     {
+ 380:main.c        ****       pfpixel=queue+get32bitdff(C_function1>>3); // physical addy of xpos (pf)
+ 381:main.c        ****       C_function[3]=(!(pfpixel[C_function2]&setbyte[C_function1]));
+ 382:main.c        ****       return;
+ 383:main.c        ****     }
+ 384:main.c        ****     case 28: // pfclear
+ 385:main.c        ****     {
+ 386:main.c        ****       my_memset(queue+get32bitdff(0),C_function1,1024);
+ 387:main.c        ****       return;
+ 388:main.c        ****     }
+ 389:main.c        ****     case 32: // pfscroll
+ 390:main.c        ****     {
+ 391:main.c        ****       for(temp3=C_function2;temp3<C_function3;temp3++)
+ 392:main.c        ****         memscroll(queue+get32bitdff(temp3),C_function1);
+ 393:main.c        ****       return;
+ 394:main.c        ****     }
+ 395:main.c        **** 
+ 396:main.c        ****   default: // everything else
+ 397:main.c        ****    break;
+ 731              		.loc 1 397 4
+ 398:main.c        ****   }
+ 399:main.c        **** 
+ 400:main.c        ****   //passed the sprite max as a parameter instead
+ 401:main.c        ****   maxsprites=C_function1;
+ 732              		.loc 1 401 3
+ 402:main.c        **** 
+ 403:main.c        ****   for (i=0;i<maxsprites;i++)
+ 404:main.c        ****   {
+ 405:main.c        ****     myGfxIndex[i]=spritesort[i];
+ 733              		.loc 1 405 18 is_stmt 0
+ 734 0050 2000     		movs	r0, r4
+ 401:main.c        **** 
+ARM GAS  main.s 			page 22
+
+
+ 735              		.loc 1 401 13
+ 736 0052 019B     		ldr	r3, [sp, #4]
+ 737              		.loc 1 405 18
+ 738 0054 1E34     		adds	r4, r4, #30
+ 739 0056 1A00     		movs	r2, r3
+ 740 0058 2100     		movs	r1, r4
+ 741 005a 1430     		adds	r0, r0, #20
+ 401:main.c        **** 
+ 742              		.loc 1 401 13
+ 743 005c 3374     		strb	r3, [r6, #16]
+ 403:main.c        ****   {
+ 744              		.loc 1 403 3 is_stmt 1
+ 745              	.LVL46:
+ 746              		.loc 1 405 18 is_stmt 0
+ 747 005e FFF7FEFF 		bl	memcpy
+ 748              	.LVL47:
+ 406:main.c        ****   }
+ 407:main.c        **** //loop
+ 408:main.c        ****   temp3=maxsprites-1;
+ 749              		.loc 1 408 3 is_stmt 1
+ 750              		.loc 1 408 8 is_stmt 0
+ 751 0062 019B     		ldr	r3, [sp, #4]
+ 752 0064 5F1E     		subs	r7, r3, #1
+ 753              	.LVL48:
+ 409:main.c        ****   temp2=maxsprites-2;
+ 754              		.loc 1 409 3 is_stmt 1
+ 410:main.c        ****  while (temp2>=0)
+ 755              		.loc 1 410 2
+ 756 0066 9D1E     		subs	r5, r3, #2
+ 757              	.LVL49:
+ 758 0068 6619     		adds	r6, r4, r5
+ 408:main.c        ****   temp2=maxsprites-2;
+ 759              		.loc 1 408 8 is_stmt 0
+ 760 006a 0297     		str	r7, [sp, #8]
+ 761              	.LVL50:
+ 762              	.L66:
+ 763              		.loc 1 410 14 is_stmt 1
+ 764 006c 002D     		cmp	r5, #0
+ 765 006e 00DB     		blt	.LCB634
+ 766 0070 2CE1     		b	.L70	@long jump
+ 767              	.LCB634:
+ 411:main.c        ****  {
+ 412:main.c        ****   switch(checkswap(spritesort[temp2+1],spritesort[temp2]))
+ 413:main.c        ****   {
+ 414:main.c        ****     case OVERLAP:
+ 415:main.c        ****       temp3--;
+ 416:main.c        ****       /* shiftnumbers(temp2); */
+ 417:main.c        **** 	  temp4 = temp2;
+ 418:main.c        **** 	  while (temp4!=maxsprites-1)
+ 419:main.c        **** 	  {
+ 420:main.c        **** 		myGfxIndex[temp4]=myGfxIndex[temp4+1];
+ 421:main.c        **** 		temp4++;
+ 422:main.c        **** 	  }
+ 423:main.c        ****       break;
+ 424:main.c        ****     case NOOVERLAP:
+ 425:main.c        ****       break;
+ 426:main.c        ****     case SKIP:
+ARM GAS  main.s 			page 23
+
+
+ 427:main.c        ****       temp2--;
+ 428:main.c        ****     default:
+ 429:main.c        ****       continue;
+ 430:main.c        ****   }
+ 431:main.c        ****   // skipswapgfxtable
+ 432:main.c        ****   i=spritesort[temp2+1];
+ 433:main.c        ****   spritesort[temp2+1]=spritesort[temp2];
+ 434:main.c        ****   spritesort[temp2]=i;
+ 435:main.c        ****   temp2--;
+ 436:main.c        ****  }
+ 437:main.c        ****   for (i=0;i<maxsprites;i++)
+ 768              		.loc 1 437 9 is_stmt 0
+ 769 0072 0023     		movs	r3, #0
+ 438:main.c        ****     RIOT[SpriteGfxIndex+i]=myGfxIndex[i];
+ 770              		.loc 1 438 9
+ 771 0074 AF4C     		ldr	r4, .L104+4
+ 437:main.c        ****     RIOT[SpriteGfxIndex+i]=myGfxIndex[i];
+ 772              		.loc 1 437 13
+ 773 0076 B04D     		ldr	r5, .L104+8
+ 774              	.LVL51:
+ 775              		.loc 1 438 38
+ 776 0078 B048     		ldr	r0, .L104+12
+ 777              	.L74:
+ 778              	.LVL52:
+ 437:main.c        ****     RIOT[SpriteGfxIndex+i]=myGfxIndex[i];
+ 779              		.loc 1 437 13 is_stmt 1 discriminator 1
+ 780 007a 297C     		ldrb	r1, [r5, #16]
+ 781              		.loc 1 438 9 is_stmt 0 discriminator 1
+ 782 007c 2268     		ldr	r2, [r4]
+ 437:main.c        ****     RIOT[SpriteGfxIndex+i]=myGfxIndex[i];
+ 783              		.loc 1 437 13 discriminator 1
+ 784 007e 9942     		cmp	r1, r3
+ 785 0080 00DD     		ble	.LCB647
+ 786 0082 51E1     		b	.L75	@long jump
+ 787              	.LCB647:
+ 439:main.c        ****   RIOT[spritedisplay]=temp3;
+ 788              		.loc 1 439 3 is_stmt 1
+ 789              		.loc 1 439 22 is_stmt 0
+ 790 0084 029B     		ldr	r3, [sp, #8]
+ 791              	.LVL53:
+ 440:main.c        ****   // fetcher setup
+ 441:main.c        ****   //my_memset(queue+(dfhigh(3)<<8)+dflow(3),0,192);
+ 442:main.c        ****   my_memset(queue+get32bitdf(3),0,192);
+ 792              		.loc 1 442 19
+ 793 0086 0320     		movs	r0, #3
+ 439:main.c        ****   RIOT[spritedisplay]=temp3;
+ 794              		.loc 1 439 22
+ 795 0088 5372     		strb	r3, [r2, #9]
+ 796              		.loc 1 442 3 is_stmt 1
+ 797              		.loc 1 442 19 is_stmt 0
+ 798 008a FFF7FEFF 		bl	get32bitdf
+ 799              	.LVL54:
+ 800              		.loc 1 442 3
+ 801 008e 6668     		ldr	r6, [r4, #4]
+ 802 0090 C022     		movs	r2, #192
+ 803 0092 0021     		movs	r1, #0
+ 804              		.loc 1 442 18
+ARM GAS  main.s 			page 24
+
+
+ 805 0094 3018     		adds	r0, r6, r0
+ 806              		.loc 1 442 3
+ 807 0096 FFF7FEFF 		bl	my_memset
+ 808              	.LVL55:
+ 443:main.c        **** 
+ 444:main.c        ****   //my_memset(queue+(dfhigh(1)<<8)+dflow(1),RIOT[COLUM1],192); // clear multiplexed sprites and fil
+ 445:main.c        ****   my_memset(queue+get32bitdf(1),RIOT[COLUM1],192); // clear multiplexed sprites and fill colors
+ 809              		.loc 1 445 3 is_stmt 1
+ 810              		.loc 1 445 19 is_stmt 0
+ 811 009a 0120     		movs	r0, #1
+ 812 009c FFF7FEFF 		bl	get32bitdf
+ 813              	.LVL56:
+ 814              		.loc 1 445 37
+ 815 00a0 2368     		ldr	r3, [r4]
+ 816              		.loc 1 445 3
+ 817 00a2 6668     		ldr	r6, [r4, #4]
+ 818              		.loc 1 445 37
+ 819 00a4 3733     		adds	r3, r3, #55
+ 820              		.loc 1 445 3
+ 821 00a6 1978     		ldrb	r1, [r3]
+ 822 00a8 C022     		movs	r2, #192
+ 823              		.loc 1 445 18
+ 824 00aa 3018     		adds	r0, r6, r0
+ 825              		.loc 1 445 3
+ 826 00ac FFF7FEFF 		bl	my_memset
+ 827              	.LVL57:
+ 446:main.c        ****   //my_memset(queue+(dfhigh(0)<<8)+dflow(0)-1,RIOT[COLUM0],193); // fill COLUM0 colors
+ 447:main.c        ****   my_memset(queue+get32bitdf(0)-1,RIOT[COLUM0],193); // fill COLUM0 colors
+ 828              		.loc 1 447 3 is_stmt 1
+ 829              		.loc 1 447 19 is_stmt 0
+ 830 00b0 0020     		movs	r0, #0
+ 831 00b2 FFF7FEFF 		bl	get32bitdf
+ 832              	.LVL58:
+ 833              		.loc 1 447 39
+ 834 00b6 2368     		ldr	r3, [r4]
+ 835              		.loc 1 447 3
+ 836 00b8 6668     		ldr	r6, [r4, #4]
+ 837              		.loc 1 447 39
+ 838 00ba 3633     		adds	r3, r3, #54
+ 839              		.loc 1 447 32
+ 840 00bc 0138     		subs	r0, r0, #1
+ 841              		.loc 1 447 3
+ 842 00be 1978     		ldrb	r1, [r3]
+ 843 00c0 C122     		movs	r2, #193
+ 844              		.loc 1 447 32
+ 845 00c2 3018     		adds	r0, r6, r0
+ 846              		.loc 1 447 3
+ 847 00c4 FFF7FEFF 		bl	my_memset
+ 848              	.LVL59:
+ 448:main.c        **** 
+ 449:main.c        ****   // fill color from player0, wrapping if necessary...
+ 450:main.c        ****   //my_memcpy(queue+(dfhigh(0)<<8)+dflow(0),
+ 451:main.c        ****   my_memcpy(queue+get32bitdf(0),
+ 849              		.loc 1 451 3 is_stmt 1
+ 850              		.loc 1 451 19 is_stmt 0
+ 851 00c8 0020     		movs	r0, #0
+ 852 00ca FFF7FEFF 		bl	get32bitdf
+ARM GAS  main.s 			page 25
+
+
+ 853              	.LVL60:
+ 452:main.c        ****             flashdata+(RIOT[player0color+1]<<8)+RIOT[player0color], RIOT[player0y],
+ 854              		.loc 1 452 28
+ 855 00ce 2168     		ldr	r1, [r4]
+ 451:main.c        ****             flashdata+(RIOT[player0color+1]<<8)+RIOT[player0color], RIOT[player0y],
+ 856              		.loc 1 451 3
+ 857 00d0 6668     		ldr	r6, [r4, #4]
+ 858 00d2 0A7D     		ldrb	r2, [r1, #20]
+ 859              		.loc 1 452 48
+ 860 00d4 8F7F     		ldrb	r7, [r1, #30]
+ 453:main.c        ****             RIOT[player0height]);
+ 861              		.loc 1 453 17
+ 862 00d6 4B1C     		adds	r3, r1, #1
+ 452:main.c        ****             flashdata+(RIOT[player0color+1]<<8)+RIOT[player0color], RIOT[player0y],
+ 863              		.loc 1 452 48
+ 864 00d8 C97F     		ldrb	r1, [r1, #31]
+ 451:main.c        ****             flashdata+(RIOT[player0color+1]<<8)+RIOT[player0color], RIOT[player0y],
+ 865              		.loc 1 451 3
+ 866 00da DB7F     		ldrb	r3, [r3, #31]
+ 452:main.c        ****             flashdata+(RIOT[player0color+1]<<8)+RIOT[player0color], RIOT[player0y],
+ 867              		.loc 1 452 48
+ 868 00dc 0902     		lsls	r1, r1, #8
+ 869 00de 3943     		orrs	r1, r7
+ 870 00e0 A768     		ldr	r7, [r4, #8]
+ 451:main.c        ****             flashdata+(RIOT[player0color+1]<<8)+RIOT[player0color], RIOT[player0y],
+ 871              		.loc 1 451 18
+ 872 00e2 3018     		adds	r0, r6, r0
+ 452:main.c        ****             flashdata+(RIOT[player0color+1]<<8)+RIOT[player0color], RIOT[player0y],
+ 873              		.loc 1 452 48
+ 874 00e4 7918     		adds	r1, r7, r1
+ 451:main.c        ****             flashdata+(RIOT[player0color+1]<<8)+RIOT[player0color], RIOT[player0y],
+ 875              		.loc 1 451 3
+ 876 00e6 FFF7FEFF 		bl	my_memcpy
+ 877              	.LVL61:
+ 454:main.c        **** 
+ 455:main.c        ****   //my_memcpy(queue+(dfhigh(2)<<8)+dflow(2),
+ 456:main.c        ****   my_memcpy(queue+get32bitdf(2),
+ 878              		.loc 1 456 3 is_stmt 1
+ 879              		.loc 1 456 19 is_stmt 0
+ 880 00ea 0220     		movs	r0, #2
+ 881 00ec FFF7FEFF 		bl	get32bitdf
+ 882              	.LVL62:
+ 457:main.c        ****             flashdata+(RIOT[player0pointerhi]<<8)+RIOT[player0pointerlo], 0,
+ 883              		.loc 1 457 28
+ 884 00f0 2268     		ldr	r2, [r4]
+ 456:main.c        ****             flashdata+(RIOT[player0pointerhi]<<8)+RIOT[player0pointerlo], 0,
+ 885              		.loc 1 456 3
+ 886 00f2 6668     		ldr	r6, [r4, #4]
+ 887              		.loc 1 457 50
+ 888 00f4 1100     		movs	r1, r2
+ 458:main.c        ****             RIOT[player0height]);
+ 889              		.loc 1 458 17
+ 890 00f6 531C     		adds	r3, r2, #1
+ 457:main.c        ****             flashdata+(RIOT[player0pointerhi]<<8)+RIOT[player0pointerlo], 0,
+ 891              		.loc 1 457 50
+ 892 00f8 3932     		adds	r2, r2, #57
+ 893 00fa 1278     		ldrb	r2, [r2]
+ARM GAS  main.s 			page 26
+
+
+ 894 00fc 3831     		adds	r1, r1, #56
+ 895 00fe 0978     		ldrb	r1, [r1]
+ 896 0100 1202     		lsls	r2, r2, #8
+ 897 0102 0A43     		orrs	r2, r1
+ 898 0104 A168     		ldr	r1, [r4, #8]
+ 456:main.c        ****             flashdata+(RIOT[player0pointerhi]<<8)+RIOT[player0pointerlo], 0,
+ 899              		.loc 1 456 3
+ 900 0106 DB7F     		ldrb	r3, [r3, #31]
+ 457:main.c        ****             flashdata+(RIOT[player0pointerhi]<<8)+RIOT[player0pointerlo], 0,
+ 901              		.loc 1 457 50
+ 902 0108 8918     		adds	r1, r1, r2
+ 456:main.c        ****             flashdata+(RIOT[player0pointerhi]<<8)+RIOT[player0pointerlo], 0,
+ 903              		.loc 1 456 18
+ 904 010a 3018     		adds	r0, r6, r0
+ 456:main.c        ****             flashdata+(RIOT[player0pointerhi]<<8)+RIOT[player0pointerlo], 0,
+ 905              		.loc 1 456 3
+ 906 010c 0022     		movs	r2, #0
+ 907 010e FFF7FEFF 		bl	my_memcpy
+ 908              	.LVL63:
+ 459:main.c        **** 
+ 460:main.c        ****   count=0;
+ 909              		.loc 1 460 3 is_stmt 1
+ 910              		.loc 1 460 8 is_stmt 0
+ 911 0112 0023     		movs	r3, #0
+ 912 0114 AB61     		str	r3, [r5, #24]
+ 461:main.c        ****   temp4=0;
+ 913              		.loc 1 461 3 is_stmt 1
+ 914              		.loc 1 461 8 is_stmt 0
+ 915 0116 6B61     		str	r3, [r5, #20]
+ 462:main.c        ****   while (temp4 != 511)
+ 916              		.loc 1 462 3 is_stmt 1
+ 917              	.LVL64:
+ 918              	.L76:
+ 919              		.loc 1 462 16
+ 920 0118 8749     		ldr	r1, .L104+8
+ 463:main.c        ****   {
+ 464:main.c        ****     Gfxindex=myGfxIndex[count];
+ 465:main.c        **** //check if on screen, copy only if it is
+ 466:main.c        **** //    if (RIOT[player1y+Gfxindex]<175)
+ 467:main.c        ****   //  {
+ 468:main.c        **** 
+ 469:main.c        ****  // masking: NUSIZ bit 7=on/off, NUSIZ 6=L/R
+ 470:main.c        ****  // appears to happen @ 0x99-0x9F
+ 471:main.c        ****       mask = 0xFF;
+ 472:main.c        ****       if (RIOT[_NUSIZ1+Gfxindex]>127)
+ 921              		.loc 1 472 15 is_stmt 0
+ 922 011a 864D     		ldr	r5, .L104+4
+ 462:main.c        ****   while (temp4 != 511)
+ 923              		.loc 1 462 16
+ 924 011c 4B69     		ldr	r3, [r1, #20]
+ 925 011e 884A     		ldr	r2, .L104+16
+ 926              		.loc 1 472 15
+ 927 0120 2C68     		ldr	r4, [r5]
+ 462:main.c        ****   while (temp4 != 511)
+ 928              		.loc 1 462 16
+ 929 0122 9342     		cmp	r3, r2
+ 930 0124 00D0     		beq	.LCB741
+ARM GAS  main.s 			page 27
+
+
+ 931 0126 0FE1     		b	.L82	@long jump
+ 932              	.LCB741:
+ 473:main.c        ****       {
+ 474:main.c        ****         if (RIOT[player1x+Gfxindex]>=0x99)
+ 475:main.c        ****         {
+ 476:main.c        ****            // modified to work with reflected sprites
+ 477:main.c        ****            mask=maskdata[((RIOT[_NUSIZ1+Gfxindex]&64)>>3)^((RIOT[_NUSIZ1+Gfxindex]&8)<<1)|(RIOT[pla
+ 478:main.c        ****         }
+ 479:main.c        ****       }
+ 480:main.c        ****       //my_memcpy(queue+(dfhigh(3)<<8)+dflow(3),
+ 481:main.c        ****       my_memcpy(queue+get32bitdf(3),
+ 482:main.c        ****               flashdata+(RIOT[player1pointerhi+Gfxindex*2]<<8)+RIOT[player1pointerlo+Gfxindex*2],
+ 483:main.c        ****               RIOT[player1y+Gfxindex],
+ 484:main.c        ****               RIOT[player1height+Gfxindex]);
+ 485:main.c        ****       mask = 0xFF;
+ 486:main.c        ****       //my_memcpy(queue+(dfhigh(1)<<8)+dflow(1),
+ 487:main.c        ****       my_memcpy(queue+get32bitdf(1),
+ 488:main.c        ****               flashdata+(RIOT[player1color+Gfxindex*2+1]<<8)+RIOT[player1color+Gfxindex*2],
+ 489:main.c        **** 	      RIOT[player1y+Gfxindex],
+ 490:main.c        ****               RIOT[player1height+Gfxindex]);
+ 491:main.c        ****     //}
+ 492:main.c        ****     temp5=temp4;
+ 493:main.c        ****     temp4=(RIOT[player1y+Gfxindex]+RIOT[player1height+Gfxindex])&255; // &255 to allow for wrapped 
+ 494:main.c        ****     Gfxindex=myGfxIndex[count+1];
+ 495:main.c        ****     if ((count == temp3) || (RIOT[player1y+Gfxindex]>175) )
+ 496:main.c        ****     {
+ 497:main.c        ****       temp4=511;
+ 498:main.c        ****       temp5=0;
+ 499:main.c        ****     }
+ 500:main.c        **** 
+ 501:main.c        ****     // it looks like if vertical positioning is tight, cumulative round-off 
+ 502:main.c        ****     // can occur and eventually coarse positioning will happen during sprite display...
+ 503:main.c        ****      //queue[(dfhigh(4)<<8)+dflow(4)+count]=(temp4-temp5-(count>>1))>>1;
+ 504:main.c        ****      queue[get32bitdf(4)+count]=(temp4-temp5-(count>>1))>>1;
+ 505:main.c        **** 
+ 506:main.c        ****     if (RIOT[player1x+Gfxindex]>159)
+ 507:main.c        ****       RIOT[player1x+Gfxindex]-=(RIOT[player1x+Gfxindex]>208)?96:160;
+ 508:main.c        ****     queue[get32bitdff(5)+count]=RIOT[_NUSIZ1+Gfxindex];
+ 509:main.c        ****     queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+ 510:main.c        ****     //queue[(dfhigh(5)<<8)+dflow(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 511:main.c        ****     queue[get32bitdf(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 512:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 513:main.c        ****     queue[get32bitdf(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 514:main.c        ****     count++;
+ 515:main.c        ****   }
+ 516:main.c        ****   temp5=1;
+ 933              		.loc 1 516 3 is_stmt 1
+ 934              		.loc 1 516 8 is_stmt 0
+ 935 0128 0123     		movs	r3, #1
+ 517:main.c        **** 
+ 518:main.c        ****   for (i = score; i <= score3; i++) {
+ 936              		.loc 1 518 10
+ 937 012a 3324     		movs	r4, #51
+ 516:main.c        **** 
+ 938              		.loc 1 516 8
+ 939 012c 8B60     		str	r3, [r1, #8]
+ 940              		.loc 1 518 3 is_stmt 1
+ARM GAS  main.s 			page 28
+
+
+ 941              	.LVL65:
+ 942              		.loc 1 518 21
+ 943              	.L83:
+ 519:main.c        ****     copynybble(RIOT[i]);
+ 944              		.loc 1 519 5 discriminator 3
+ 945 012e 2B68     		ldr	r3, [r5]
+ 946 0130 185D     		ldrb	r0, [r3, r4]
+ 947 0132 FFF7FEFF 		bl	copynybble
+ 948              	.LVL66:
+ 520:main.c        ****     copynybble(RIOT[i] >> 4);
+ 949              		.loc 1 520 5 discriminator 3
+ 950              		.loc 1 520 20 is_stmt 0 discriminator 3
+ 951 0136 2B68     		ldr	r3, [r5]
+ 952              		.loc 1 520 5 discriminator 3
+ 953 0138 185D     		ldrb	r0, [r3, r4]
+ 518:main.c        ****     copynybble(RIOT[i]);
+ 954              		.loc 1 518 33 discriminator 3
+ 955 013a 0134     		adds	r4, r4, #1
+ 956              	.LVL67:
+ 957              		.loc 1 520 5 discriminator 3
+ 958 013c 0009     		lsrs	r0, r0, #4
+ 959 013e FFF7FEFF 		bl	copynybble
+ 960              	.LVL68:
+ 518:main.c        ****     copynybble(RIOT[i]);
+ 961              		.loc 1 518 33 is_stmt 1 discriminator 3
+ 518:main.c        ****     copynybble(RIOT[i]);
+ 962              		.loc 1 518 21 discriminator 3
+ 963 0142 362C     		cmp	r4, #54
+ 964 0144 F3D1     		bne	.L83
+ 521:main.c        ****   }
+ 522:main.c        **** 
+ 523:main.c        ****   return 0;
+ 965              		.loc 1 523 3
+ 524:main.c        **** }
+ 966              		.loc 1 524 1 is_stmt 0
+ 967 0146 0020     		movs	r0, #0
+ 968 0148 2CE0     		b	.L43
+ 969              	.LVL69:
+ 970              	.L47:
+ 320:main.c        ****   {
+ 971              		.loc 1 320 3
+ 972 014a 102B     		cmp	r3, #16
+ 973 014c 80D1     		bne	.L50
+ 348:main.c        ****       return;
+ 974              		.loc 1 348 7 is_stmt 1
+ 975 014e 0021     		movs	r1, #0
+ 976 0150 2068     		ldr	r0, [r4]
+ 977 0152 7C4A     		ldr	r2, .L104+20
+ 978 0154 3A30     		adds	r0, r0, #58
+ 979              	.L103:
+ 386:main.c        ****       return;
+ 980              		.loc 1 386 7 is_stmt 0
+ 981 0156 FFF7FEFF 		bl	my_memset
+ 982              	.LVL70:
+ 387:main.c        ****     }
+ 983              		.loc 1 387 7 is_stmt 1
+ 984 015a 23E0     		b	.L43
+ARM GAS  main.s 			page 29
+
+
+ 985              	.L45:
+ 320:main.c        ****   {
+ 986              		.loc 1 320 3 is_stmt 0
+ 987 015c 1C2B     		cmp	r3, #28
+ 988 015e 00D1     		bne	.LCB798
+ 989 0160 9CE0     		b	.L52	@long jump
+ 990              	.LCB798:
+ 391:main.c        ****         memscroll(queue+get32bitdff(temp3),C_function1);
+ 991              		.loc 1 391 16
+ 992 0162 0395     		str	r5, [sp, #12]
+ 320:main.c        ****   {
+ 993              		.loc 1 320 3
+ 994 0164 202B     		cmp	r3, #32
+ 995 0166 00D1     		bne	.LCB801
+ 996 0168 ACE0     		b	.L64	@long jump
+ 997              	.LCB801:
+ 998 016a 182B     		cmp	r3, #24
+ 999 016c 00D0     		beq	.LCB804
+ 1000 016e 6FE7     		b	.L50	@long jump
+ 1001              	.LCB804:
+ 380:main.c        ****       C_function[3]=(!(pfpixel[C_function2]&setbyte[C_function1]));
+ 1002              		.loc 1 380 7 is_stmt 1
+ 380:main.c        ****       C_function[3]=(!(pfpixel[C_function2]&setbyte[C_function1]));
+ 1003              		.loc 1 380 21 is_stmt 0
+ 1004 0170 019B     		ldr	r3, [sp, #4]
+ 380:main.c        ****       C_function[3]=(!(pfpixel[C_function2]&setbyte[C_function1]));
+ 1005              		.loc 1 380 20
+ 1006 0172 6468     		ldr	r4, [r4, #4]
+ 380:main.c        ****       C_function[3]=(!(pfpixel[C_function2]&setbyte[C_function1]));
+ 1007              		.loc 1 380 21
+ 1008 0174 D808     		lsrs	r0, r3, #3
+ 1009 0176 FFF7FEFF 		bl	get32bitdff
+ 1010              	.LVL71:
+ 381:main.c        ****       return;
+ 1011              		.loc 1 381 22
+ 1012 017a 0199     		ldr	r1, [sp, #4]
+ 380:main.c        ****       C_function[3]=(!(pfpixel[C_function2]&setbyte[C_function1]));
+ 1013              		.loc 1 380 20
+ 1014 017c 2418     		adds	r4, r4, r0
+ 380:main.c        ****       C_function[3]=(!(pfpixel[C_function2]&setbyte[C_function1]));
+ 1015              		.loc 1 380 14
+ 1016 017e F460     		str	r4, [r6, #12]
+ 381:main.c        ****       return;
+ 1017              		.loc 1 381 7 is_stmt 1
+ 381:main.c        ****       return;
+ 1018              		.loc 1 381 22 is_stmt 0
+ 1019 0180 08AB     		add	r3, sp, #32
+ 1020 0182 625D     		ldrb	r2, [r4, r5]
+ 1021 0184 5B5C     		ldrb	r3, [r3, r1]
+ 1022 0186 1340     		ands	r3, r2
+ 1023 0188 5A42     		rsbs	r2, r3, #0
+ 1024 018a 5341     		adcs	r3, r3, r2
+ 1025 018c 029A     		ldr	r2, [sp, #8]
+ 1026 018e D370     		strb	r3, [r2, #3]
+ 382:main.c        ****     }
+ 1027              		.loc 1 382 7 is_stmt 1
+ 1028 0190 08E0     		b	.L43
+ARM GAS  main.s 			page 30
+
+
+ 1029              	.L48:
+ 324:main.c        ****       for (i=C_function2;i<=C_function1;++i)
+ 1030              		.loc 1 324 7
+ 324:main.c        ****       for (i=C_function2;i<=C_function1;++i)
+ 1031              		.loc 1 324 21 is_stmt 0
+ 1032 0192 F808     		lsrs	r0, r7, #3
+ 1033 0194 FFF7FEFF 		bl	get32bitdff
+ 1034              	.LVL72:
+ 324:main.c        ****       for (i=C_function2;i<=C_function1;++i)
+ 1035              		.loc 1 324 20
+ 1036 0198 6468     		ldr	r4, [r4, #4]
+ 1037 019a 2418     		adds	r4, r4, r0
+ 324:main.c        ****       for (i=C_function2;i<=C_function1;++i)
+ 1038              		.loc 1 324 14
+ 1039 019c F460     		str	r4, [r6, #12]
+ 325:main.c        ****       {
+ 1040              		.loc 1 325 7 is_stmt 1
+ 1041              	.LVL73:
+ 1042              	.L55:
+ 325:main.c        ****       {
+ 1043              		.loc 1 325 27 discriminator 1
+ 1044 019e 019B     		ldr	r3, [sp, #4]
+ 1045 01a0 AB42     		cmp	r3, r5
+ 1046 01a2 01DA     		bge	.L56
+ 1047              	.LVL74:
+ 1048              	.L43:
+ 1049              		.loc 1 524 1 is_stmt 0
+ 1050 01a4 11B0     		add	sp, sp, #68
+ 1051              		@ sp needed
+ 1052 01a6 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1053              	.LVL75:
+ 1054              	.L56:
+ 327:main.c        ****       }
+ 1055              		.loc 1 327 9 is_stmt 1 discriminator 3
+ 1056 01a8 08AB     		add	r3, sp, #32
+ 1057 01aa 2800     		movs	r0, r5
+ 1058 01ac D95D     		ldrb	r1, [r3, r7]
+ 1059 01ae FFF7FEFF 		bl	on_off_flip
+ 1060              	.LVL76:
+ 325:main.c        ****       {
+ 1061              		.loc 1 325 41 discriminator 3
+ 1062 01b2 0135     		adds	r5, r5, #1
+ 1063              	.LVL77:
+ 1064 01b4 F3E7     		b	.L55
+ 1065              	.LVL78:
+ 1066              	.L59:
+ 335:main.c        ****         on_off_flip(C_function2,setbyte[i]);
+ 1067              		.loc 1 335 9 discriminator 3
+ 335:main.c        ****         on_off_flip(C_function2,setbyte[i]);
+ 1068              		.loc 1 335 22 is_stmt 0 discriminator 3
+ 1069 01b6 6368     		ldr	r3, [r4, #4]
+ 335:main.c        ****         on_off_flip(C_function2,setbyte[i]);
+ 1070              		.loc 1 335 23 discriminator 3
+ 1071 01b8 F810     		asrs	r0, r7, #3
+ 335:main.c        ****         on_off_flip(C_function2,setbyte[i]);
+ 1072              		.loc 1 335 22 discriminator 3
+ 1073 01ba 0293     		str	r3, [sp, #8]
+ARM GAS  main.s 			page 31
+
+
+ 335:main.c        ****         on_off_flip(C_function2,setbyte[i]);
+ 1074              		.loc 1 335 23 discriminator 3
+ 1075 01bc FFF7FEFF 		bl	get32bitdff
+ 1076              	.LVL79:
+ 335:main.c        ****         on_off_flip(C_function2,setbyte[i]);
+ 1077              		.loc 1 335 22 discriminator 3
+ 1078 01c0 029B     		ldr	r3, [sp, #8]
+ 1079 01c2 1818     		adds	r0, r3, r0
+ 336:main.c        ****       }
+ 1080              		.loc 1 336 9 discriminator 3
+ 1081 01c4 08AB     		add	r3, sp, #32
+ 1082 01c6 D95D     		ldrb	r1, [r3, r7]
+ 335:main.c        ****         on_off_flip(C_function2,setbyte[i]);
+ 1083              		.loc 1 335 16 discriminator 3
+ 1084 01c8 F060     		str	r0, [r6, #12]
+ 336:main.c        ****       }
+ 1085              		.loc 1 336 9 is_stmt 1 discriminator 3
+ 1086 01ca 2800     		movs	r0, r5
+ 1087 01cc FFF7FEFF 		bl	on_off_flip
+ 1088              	.LVL80:
+ 333:main.c        ****       {
+ 1089              		.loc 1 333 41 discriminator 3
+ 1090 01d0 0137     		adds	r7, r7, #1
+ 1091              	.LVL81:
+ 1092              	.L58:
+ 333:main.c        ****       {
+ 1093              		.loc 1 333 27 discriminator 1
+ 1094 01d2 019B     		ldr	r3, [sp, #4]
+ 1095 01d4 BB42     		cmp	r3, r7
+ 1096 01d6 EEDA     		bge	.L59
+ 1097 01d8 E4E7     		b	.L43
+ 1098              	.LVL82:
+ 1099              	.L46:
+ 342:main.c        ****       on_off_flip(C_function2,setbyte[C_function3]);
+ 1100              		.loc 1 342 7
+ 342:main.c        ****       on_off_flip(C_function2,setbyte[C_function3]);
+ 1101              		.loc 1 342 21 is_stmt 0
+ 1102 01da F808     		lsrs	r0, r7, #3
+ 1103 01dc FFF7FEFF 		bl	get32bitdff
+ 1104              	.LVL83:
+ 342:main.c        ****       on_off_flip(C_function2,setbyte[C_function3]);
+ 1105              		.loc 1 342 20
+ 1106 01e0 6468     		ldr	r4, [r4, #4]
+ 343:main.c        ****       return;
+ 1107              		.loc 1 343 7
+ 1108 01e2 08AB     		add	r3, sp, #32
+ 342:main.c        ****       on_off_flip(C_function2,setbyte[C_function3]);
+ 1109              		.loc 1 342 20
+ 1110 01e4 2418     		adds	r4, r4, r0
+ 343:main.c        ****       return;
+ 1111              		.loc 1 343 7
+ 1112 01e6 D95D     		ldrb	r1, [r3, r7]
+ 1113 01e8 2800     		movs	r0, r5
+ 342:main.c        ****       on_off_flip(C_function2,setbyte[C_function3]);
+ 1114              		.loc 1 342 14
+ 1115 01ea F460     		str	r4, [r6, #12]
+ 343:main.c        ****       return;
+ARM GAS  main.s 			page 32
+
+
+ 1116              		.loc 1 343 7 is_stmt 1
+ 1117 01ec FFF7FEFF 		bl	on_off_flip
+ 1118              	.LVL84:
+ 344:main.c        ****     }
+ 1119              		.loc 1 344 7
+ 1120 01f0 D8E7     		b	.L43
+ 1121              	.L44:
+ 356:main.c        ****       temp2=0;
+ 1122              		.loc 1 356 7
+ 356:main.c        ****       temp2=0;
+ 1123              		.loc 1 356 20 is_stmt 0
+ 1124 01f2 0023     		movs	r3, #0
+ 1125 01f4 029A     		ldr	r2, [sp, #8]
+ 1126 01f6 D370     		strb	r3, [r2, #3]
+ 357:main.c        ****       for (i=RIOT[player0y+C_function2];i<RIOT[player0y+C_function2]+RIOT[player0height+C_function2
+ 1127              		.loc 1 357 7 is_stmt 1
+ 1128              	.LVL85:
+ 358:main.c        ****       {
+ 1129              		.loc 1 358 7
+ 358:main.c        ****       {
+ 1130              		.loc 1 358 18 is_stmt 0
+ 1131 01f8 2268     		ldr	r2, [r4]
+ 1132 01fa 5719     		adds	r7, r2, r5
+ 1133              	.LVL86:
+ 358:main.c        ****       {
+ 1134              		.loc 1 358 74
+ 1135 01fc 7B1C     		adds	r3, r7, #1
+ 358:main.c        ****       {
+ 1136              		.loc 1 358 13
+ 1137 01fe 3E7D     		ldrb	r6, [r7, #20]
+ 1138              	.LVL87:
+ 358:main.c        ****       {
+ 1139              		.loc 1 358 74
+ 1140 0200 DB7F     		ldrb	r3, [r3, #31]
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1141              		.loc 1 366 65
+ 1142 0202 6D00     		lsls	r5, r5, #1
+ 1143              	.LVL88:
+ 358:main.c        ****       {
+ 1144              		.loc 1 358 69
+ 1145 0204 9B19     		adds	r3, r3, r6
+ 1146 0206 0693     		str	r3, [sp, #24]
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1147              		.loc 1 366 30
+ 1148 0208 A368     		ldr	r3, [r4, #8]
+ 1149 020a 9C46     		mov	ip, r3
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1150              		.loc 1 366 53
+ 1151 020c 2B00     		movs	r3, r5
+ 1152 020e 3933     		adds	r3, r3, #57
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1153              		.loc 1 366 36
+ 1154 0210 D318     		adds	r3, r2, r3
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1155              		.loc 1 366 94
+ 1156 0212 3835     		adds	r5, r5, #56
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ARM GAS  main.s 			page 33
+
+
+ 1157              		.loc 1 366 36
+ 1158 0214 0293     		str	r3, [sp, #8]
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1159              		.loc 1 366 77
+ 1160 0216 5319     		adds	r3, r2, r5
+ 1161 0218 0393     		str	r3, [sp, #12]
+ 367:main.c        **** 	  }
+ 1162              		.loc 1 367 65
+ 1163 021a 019B     		ldr	r3, [sp, #4]
+ 1164 021c 5B00     		lsls	r3, r3, #1
+ 367:main.c        **** 	  }
+ 1165              		.loc 1 367 53
+ 1166 021e 1900     		movs	r1, r3
+ 1167 0220 3931     		adds	r1, r1, #57
+ 367:main.c        **** 	  }
+ 1168              		.loc 1 367 36
+ 1169 0222 5118     		adds	r1, r2, r1
+ 1170 0224 0491     		str	r1, [sp, #16]
+ 358:main.c        ****       {
+ 1171              		.loc 1 358 13
+ 1172 0226 3100     		movs	r1, r6
+ 367:main.c        **** 	  }
+ 1173              		.loc 1 367 94
+ 1174 0228 3833     		adds	r3, r3, #56
+ 367:main.c        **** 	  }
+ 1175              		.loc 1 367 77
+ 1176 022a D318     		adds	r3, r2, r3
+ 1177 022c 0593     		str	r3, [sp, #20]
+ 360:main.c        **** 	{
+ 1178              		.loc 1 360 21
+ 1179 022e 019B     		ldr	r3, [sp, #4]
+ 1180 0230 D218     		adds	r2, r2, r3
+ 360:main.c        **** 	{
+ 1181              		.loc 1 360 82
+ 1182 0232 531C     		adds	r3, r2, #1
+ 1183 0234 0793     		str	r3, [sp, #28]
+ 1184              	.LVL89:
+ 1185              	.L61:
+ 358:main.c        ****       {
+ 1186              		.loc 1 358 42 is_stmt 1 discriminator 1
+ 1187 0236 069B     		ldr	r3, [sp, #24]
+ 1188 0238 8B42     		cmp	r3, r1
+ 1189 023a B3DD     		ble	.L43
+ 360:main.c        **** 	{
+ 1190              		.loc 1 360 9
+ 360:main.c        **** 	{
+ 1191              		.loc 1 360 21 is_stmt 0
+ 1192 023c 157D     		ldrb	r5, [r2, #20]
+ 360:main.c        **** 	{
+ 1193              		.loc 1 360 12
+ 1194 023e 8D42     		cmp	r5, r1
+ 1195 0240 2ADC     		bgt	.L62
+ 360:main.c        **** 	{
+ 1196              		.loc 1 360 82 discriminator 1
+ 1197 0242 079B     		ldr	r3, [sp, #28]
+ 1198 0244 DB7F     		ldrb	r3, [r3, #31]
+ 360:main.c        **** 	{
+ARM GAS  main.s 			page 34
+
+
+ 1199              		.loc 1 360 77 discriminator 1
+ 1200 0246 5B19     		adds	r3, r3, r5
+ 360:main.c        **** 	{
+ 1201              		.loc 1 360 45 discriminator 1
+ 1202 0248 8B42     		cmp	r3, r1
+ 1203 024a 25DD     		ble	.L62
+ 363:main.c        ****           if (temp3<15)
+ 1204              		.loc 1 363 11 is_stmt 1
+ 363:main.c        ****           if (temp3<15)
+ 1205              		.loc 1 363 21 is_stmt 0
+ 1206 024c B87A     		ldrb	r0, [r7, #10]
+ 363:main.c        ****           if (temp3<15)
+ 1207              		.loc 1 363 48
+ 1208 024e 937A     		ldrb	r3, [r2, #10]
+ 363:main.c        ****           if (temp3<15)
+ 1209              		.loc 1 363 43
+ 1210 0250 C01A     		subs	r0, r0, r3
+ 363:main.c        ****           if (temp3<15)
+ 1211              		.loc 1 363 16
+ 1212 0252 0730     		adds	r0, r0, #7
+ 1213              	.LVL90:
+ 364:main.c        **** 	  {
+ 1214              		.loc 1 364 11 is_stmt 1
+ 364:main.c        **** 	  {
+ 1215              		.loc 1 364 14 is_stmt 0
+ 1216 0254 0E28     		cmp	r0, #14
+ 1217 0256 1FDC     		bgt	.L62
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1218              		.loc 1 366 13 is_stmt 1
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1219              		.loc 1 366 36 is_stmt 0
+ 1220 0258 029B     		ldr	r3, [sp, #8]
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1221              		.loc 1 366 77
+ 1222 025a 039C     		ldr	r4, [sp, #12]
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1223              		.loc 1 366 36
+ 1224 025c 1B78     		ldrb	r3, [r3]
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1225              		.loc 1 366 77
+ 1226 025e 2478     		ldrb	r4, [r4]
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1227              		.loc 1 366 68
+ 1228 0260 1B02     		lsls	r3, r3, #8
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1229              		.loc 1 366 72
+ 1230 0262 1B19     		adds	r3, r3, r4
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1231              		.loc 1 366 109
+ 1232 0264 5B18     		adds	r3, r3, r1
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1233              		.loc 1 366 111
+ 1234 0266 9B1B     		subs	r3, r3, r6
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1235              		.loc 1 366 30
+ 1236 0268 6344     		add	r3, r3, ip
+ 1237 026a 1B78     		ldrb	r3, [r3]
+ARM GAS  main.s 			page 35
+
+
+ 1238 026c 0193     		str	r3, [sp, #4]
+ 367:main.c        **** 	  }
+ 1239              		.loc 1 367 36
+ 1240 026e 049B     		ldr	r3, [sp, #16]
+ 1241 0270 1B78     		ldrb	r3, [r3]
+ 367:main.c        **** 	  }
+ 1242              		.loc 1 367 68
+ 1243 0272 1B02     		lsls	r3, r3, #8
+ 1244 0274 1C00     		movs	r4, r3
+ 367:main.c        **** 	  }
+ 1245              		.loc 1 367 77
+ 1246 0276 059B     		ldr	r3, [sp, #20]
+ 1247 0278 1B78     		ldrb	r3, [r3]
+ 367:main.c        **** 	  }
+ 1248              		.loc 1 367 72
+ 1249 027a E318     		adds	r3, r4, r3
+ 367:main.c        **** 	  }
+ 1250              		.loc 1 367 109
+ 1251 027c 5B18     		adds	r3, r3, r1
+ 367:main.c        **** 	  }
+ 1252              		.loc 1 367 111
+ 1253 027e 5B1B     		subs	r3, r3, r5
+ 367:main.c        **** 	  }
+ 1254              		.loc 1 367 30
+ 1255 0280 6344     		add	r3, r3, ip
+ 1256 0282 1B78     		ldrb	r3, [r3]
+ 1257              	.LVL91:
+ 369:main.c        **** 	  {
+ 1258              		.loc 1 369 4 is_stmt 1
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1259              		.loc 1 366 140 is_stmt 0
+ 1260 0284 019C     		ldr	r4, [sp, #4]
+ 367:main.c        **** 	  }
+ 1261              		.loc 1 367 140
+ 1262 0286 8340     		lsls	r3, r3, r0
+ 1263              	.LVL92:
+ 366:main.c        ****                 & ((flashdata[(RIOT[player0pointerhi+C_function1*2]<<8)+RIOT[player0pointerlo+C_fun
+ 1264              		.loc 1 366 140
+ 1265 0288 E401     		lsls	r4, r4, #7
+ 369:main.c        **** 	  {
+ 1266              		.loc 1 369 7
+ 1267 028a 2342     		tst	r3, r4
+ 1268 028c 04D0     		beq	.L62
+ 371:main.c        **** 	    return;
+ 1269              		.loc 1 371 6 is_stmt 1
+ 371:main.c        **** 	    return;
+ 1270              		.loc 1 371 19 is_stmt 0
+ 1271 028e FF22     		movs	r2, #255
+ 371:main.c        **** 	    return;
+ 1272              		.loc 1 371 16
+ 1273 0290 284B     		ldr	r3, .L104+4
+ 1274 0292 DB68     		ldr	r3, [r3, #12]
+ 371:main.c        **** 	    return;
+ 1275              		.loc 1 371 19
+ 1276 0294 DA70     		strb	r2, [r3, #3]
+ 372:main.c        **** 	  }
+ 1277              		.loc 1 372 6 is_stmt 1
+ARM GAS  main.s 			page 36
+
+
+ 1278 0296 85E7     		b	.L43
+ 1279              	.LVL93:
+ 1280              	.L62:
+ 358:main.c        ****       {
+ 1281              		.loc 1 358 102 discriminator 2
+ 1282 0298 0131     		adds	r1, r1, #1
+ 1283              	.LVL94:
+ 1284 029a CCE7     		b	.L61
+ 1285              	.LVL95:
+ 1286              	.L52:
+ 386:main.c        ****       return;
+ 1287              		.loc 1 386 7
+ 386:main.c        ****       return;
+ 1288              		.loc 1 386 23 is_stmt 0
+ 1289 029c 0020     		movs	r0, #0
+ 1290 029e FFF7FEFF 		bl	get32bitdff
+ 1291              	.LVL96:
+ 386:main.c        ****       return;
+ 1292              		.loc 1 386 7
+ 1293 02a2 8022     		movs	r2, #128
+ 1294 02a4 6468     		ldr	r4, [r4, #4]
+ 1295 02a6 0199     		ldr	r1, [sp, #4]
+ 386:main.c        ****       return;
+ 1296              		.loc 1 386 22
+ 1297 02a8 2018     		adds	r0, r4, r0
+ 386:main.c        ****       return;
+ 1298              		.loc 1 386 7
+ 1299 02aa D200     		lsls	r2, r2, #3
+ 1300 02ac 53E7     		b	.L103
+ 1301              	.LVL97:
+ 1302              	.L65:
+ 392:main.c        ****       return;
+ 1303              		.loc 1 392 9 is_stmt 1 discriminator 3
+ 392:main.c        ****       return;
+ 1304              		.loc 1 392 25 is_stmt 0 discriminator 3
+ 1305 02ae 0398     		ldr	r0, [sp, #12]
+ 1306 02b0 FFF7FEFF 		bl	get32bitdff
+ 1307              	.LVL98:
+ 392:main.c        ****       return;
+ 1308              		.loc 1 392 9 discriminator 3
+ 1309 02b4 6568     		ldr	r5, [r4, #4]
+ 1310 02b6 0199     		ldr	r1, [sp, #4]
+ 392:main.c        ****       return;
+ 1311              		.loc 1 392 24 discriminator 3
+ 1312 02b8 2818     		adds	r0, r5, r0
+ 392:main.c        ****       return;
+ 1313              		.loc 1 392 9 discriminator 3
+ 1314 02ba FFF7FEFF 		bl	memscroll
+ 1315              	.LVL99:
+ 391:main.c        ****         memscroll(queue+get32bitdff(temp3),C_function1);
+ 1316              		.loc 1 391 52 is_stmt 1 discriminator 3
+ 1317 02be 039B     		ldr	r3, [sp, #12]
+ 1318 02c0 0133     		adds	r3, r3, #1
+ 1319 02c2 0393     		str	r3, [sp, #12]
+ 1320              	.LVL100:
+ 1321              	.L64:
+ 391:main.c        ****         memscroll(queue+get32bitdff(temp3),C_function1);
+ARM GAS  main.s 			page 37
+
+
+ 1322              		.loc 1 391 34 discriminator 1
+ 1323 02c4 039B     		ldr	r3, [sp, #12]
+ 1324 02c6 9F42     		cmp	r7, r3
+ 1325 02c8 F1DC     		bgt	.L65
+ 1326 02ca 6BE7     		b	.L43
+ 1327              	.LVL101:
+ 1328              	.L70:
+ 412:main.c        ****   {
+ 1329              		.loc 1 412 3
+ 412:main.c        ****   {
+ 1330              		.loc 1 412 30 is_stmt 0
+ 1331 02cc 7378     		ldrb	r3, [r6, #1]
+ 1332 02ce 0393     		str	r3, [sp, #12]
+ 412:main.c        ****   {
+ 1333              		.loc 1 412 50
+ 1334 02d0 3378     		ldrb	r3, [r6]
+ 412:main.c        ****   {
+ 1335              		.loc 1 412 10
+ 1336 02d2 0398     		ldr	r0, [sp, #12]
+ 1337 02d4 1900     		movs	r1, r3
+ 412:main.c        ****   {
+ 1338              		.loc 1 412 50
+ 1339 02d6 0493     		str	r3, [sp, #16]
+ 412:main.c        ****   {
+ 1340              		.loc 1 412 10
+ 1341 02d8 FFF7FEFF 		bl	checkswap
+ 1342              	.LVL102:
+ 412:main.c        ****   {
+ 1343              		.loc 1 412 3
+ 1344 02dc 0128     		cmp	r0, #1
+ 1345 02de 06D0     		beq	.L67
+ 1346 02e0 0228     		cmp	r0, #2
+ 1347 02e2 15D0     		beq	.L68
+ 1348 02e4 0028     		cmp	r0, #0
+ 1349 02e6 F1D1     		bne	.L70
+ 1350              	.L69:
+ 1351 02e8 013E     		subs	r6, r6, #1
+ 1352 02ea 013D     		subs	r5, r5, #1
+ 1353 02ec BEE6     		b	.L66
+ 1354              	.L67:
+ 415:main.c        ****       /* shiftnumbers(temp2); */
+ 1355              		.loc 1 415 7 is_stmt 1
+ 418:main.c        **** 	  {
+ 1356              		.loc 1 418 10 is_stmt 0
+ 1357 02ee 2A00     		movs	r2, r5
+ 1358 02f0 0021     		movs	r1, #0
+ 415:main.c        ****       /* shiftnumbers(temp2); */
+ 1359              		.loc 1 415 12
+ 1360 02f2 029B     		ldr	r3, [sp, #8]
+ 1361 02f4 013B     		subs	r3, r3, #1
+ 1362 02f6 0293     		str	r3, [sp, #8]
+ 1363              	.LVL103:
+ 417:main.c        **** 	  while (temp4!=maxsprites-1)
+ 1364              		.loc 1 417 4 is_stmt 1
+ 417:main.c        **** 	  while (temp4!=maxsprites-1)
+ 1365              		.loc 1 417 10 is_stmt 0
+ 1366 02f8 0F4B     		ldr	r3, .L104+8
+ARM GAS  main.s 			page 38
+
+
+ 1367              	.LVL104:
+ 1368 02fa 5D61     		str	r5, [r3, #20]
+ 418:main.c        **** 	  {
+ 1369              		.loc 1 418 4 is_stmt 1
+ 1370 02fc 0F4B     		ldr	r3, .L104+12
+ 1371 02fe 5B19     		adds	r3, r3, r5
+ 1372              	.L71:
+ 418:main.c        **** 	  {
+ 1373              		.loc 1 418 16
+ 1374 0300 9742     		cmp	r7, r2
+ 1375 0302 0BD1     		bne	.L72
+ 1376 0304 0029     		cmp	r1, #0
+ 1377 0306 03D0     		beq	.L68
+ 1378 0308 019A     		ldr	r2, [sp, #4]
+ 1379 030a 0B4B     		ldr	r3, .L104+8
+ 1380 030c 013A     		subs	r2, r2, #1
+ 1381 030e 5A61     		str	r2, [r3, #20]
+ 1382              	.LVL105:
+ 1383              	.L68:
+ 432:main.c        ****   spritesort[temp2+1]=spritesort[temp2];
+ 1384              		.loc 1 432 3
+ 433:main.c        ****   spritesort[temp2]=i;
+ 1385              		.loc 1 433 3
+ 433:main.c        ****   spritesort[temp2]=i;
+ 1386              		.loc 1 433 22 is_stmt 0
+ 1387 0310 049A     		ldr	r2, [sp, #16]
+ 1388 0312 6319     		adds	r3, r4, r5
+ 1389 0314 5A70     		strb	r2, [r3, #1]
+ 434:main.c        ****   temp2--;
+ 1390              		.loc 1 434 3 is_stmt 1
+ 434:main.c        ****   temp2--;
+ 1391              		.loc 1 434 20 is_stmt 0
+ 1392 0316 039B     		ldr	r3, [sp, #12]
+ 1393 0318 3370     		strb	r3, [r6]
+ 435:main.c        ****  }
+ 1394              		.loc 1 435 3 is_stmt 1
+ 1395 031a E5E7     		b	.L69
+ 1396              	.LVL106:
+ 1397              	.L72:
+ 420:main.c        **** 		temp4++;
+ 1398              		.loc 1 420 3
+ 420:main.c        **** 		temp4++;
+ 1399              		.loc 1 420 20 is_stmt 0
+ 1400 031c 5978     		ldrb	r1, [r3, #1]
+ 1401 031e 0132     		adds	r2, r2, #1
+ 1402 0320 1970     		strb	r1, [r3]
+ 421:main.c        **** 	  }
+ 1403              		.loc 1 421 3 is_stmt 1
+ 420:main.c        **** 		temp4++;
+ 1404              		.loc 1 420 20 is_stmt 0
+ 1405 0322 0121     		movs	r1, #1
+ 1406 0324 0133     		adds	r3, r3, #1
+ 1407 0326 EBE7     		b	.L71
+ 1408              	.LVL107:
+ 1409              	.L75:
+ 438:main.c        ****   RIOT[spritedisplay]=temp3;
+ 1410              		.loc 1 438 5 is_stmt 1 discriminator 3
+ARM GAS  main.s 			page 39
+
+
+ 438:main.c        ****   RIOT[spritedisplay]=temp3;
+ 1411              		.loc 1 438 38 is_stmt 0 discriminator 3
+ 1412 0328 195C     		ldrb	r1, [r3, r0]
+ 438:main.c        ****   RIOT[spritedisplay]=temp3;
+ 1413              		.loc 1 438 27 discriminator 3
+ 1414 032a D154     		strb	r1, [r2, r3]
+ 437:main.c        ****     RIOT[SpriteGfxIndex+i]=myGfxIndex[i];
+ 1415              		.loc 1 437 26 is_stmt 1 discriminator 3
+ 1416 032c 0133     		adds	r3, r3, #1
+ 1417              	.LVL108:
+ 1418 032e A4E6     		b	.L74
+ 1419              	.L105:
+ 1420              		.align	2
+ 1421              	.L104:
+ 1422 0330 00000000 		.word	.LC11
+ 1423 0334 00000000 		.word	.LANCHOR1
+ 1424 0338 00000000 		.word	.LANCHOR0
+ 1425 033c 14000000 		.word	.LANCHOR1+20
+ 1426 0340 FF010000 		.word	511
+ 1427 0344 1E0E0000 		.word	3614
+ 1428              	.LVL109:
+ 1429              	.L82:
+ 464:main.c        **** //check if on screen, copy only if it is
+ 1430              		.loc 1 464 5
+ 464:main.c        **** //check if on screen, copy only if it is
+ 1431              		.loc 1 464 24 is_stmt 0
+ 1432 0348 8B69     		ldr	r3, [r1, #24]
+ 1433 034a EB18     		adds	r3, r5, r3
+ 464:main.c        **** //check if on screen, copy only if it is
+ 1434              		.loc 1 464 13
+ 1435 034c 1D7D     		ldrb	r5, [r3, #20]
+ 1436              	.LVL110:
+ 471:main.c        ****       if (RIOT[_NUSIZ1+Gfxindex]>127)
+ 1437              		.loc 1 471 7 is_stmt 1
+ 471:main.c        ****       if (RIOT[_NUSIZ1+Gfxindex]>127)
+ 1438              		.loc 1 471 12 is_stmt 0
+ 1439 034e FF23     		movs	r3, #255
+ 1440 0350 0B60     		str	r3, [r1]
+ 472:main.c        ****       {
+ 1441              		.loc 1 472 7 is_stmt 1
+ 472:main.c        ****       {
+ 1442              		.loc 1 472 15 is_stmt 0
+ 1443 0352 6319     		adds	r3, r4, r5
+ 1444 0354 1800     		movs	r0, r3
+ 1445 0356 2A30     		adds	r0, r0, #42
+ 1446 0358 0278     		ldrb	r2, [r0]
+ 472:main.c        ****       {
+ 1447              		.loc 1 472 10
+ 1448 035a 0078     		ldrb	r0, [r0]
+ 1449 035c 40B2     		sxtb	r0, r0
+ 1450 035e 0028     		cmp	r0, #0
+ 1451 0360 0EDA     		bge	.L77
+ 474:main.c        ****         {
+ 1452              		.loc 1 474 9 is_stmt 1
+ 474:main.c        ****         {
+ 1453              		.loc 1 474 17 is_stmt 0
+ 1454 0362 DE7A     		ldrb	r6, [r3, #11]
+ARM GAS  main.s 			page 40
+
+
+ 474:main.c        ****         {
+ 1455              		.loc 1 474 12
+ 1456 0364 982E     		cmp	r6, #152
+ 1457 0366 0BD9     		bls	.L77
+ 477:main.c        ****         }
+ 1458              		.loc 1 477 12 is_stmt 1
+ 477:main.c        ****         }
+ 1459              		.loc 1 477 54 is_stmt 0
+ 1460 0368 0827     		movs	r7, #8
+ 1461 036a D310     		asrs	r3, r2, #3
+ 1462 036c 3B40     		ands	r3, r7
+ 477:main.c        ****         }
+ 1463              		.loc 1 477 86
+ 1464 036e 5200     		lsls	r2, r2, #1
+ 1465 0370 FF19     		adds	r7, r7, r7
+ 1466 0372 3A40     		ands	r2, r7
+ 477:main.c        ****         }
+ 1467              		.loc 1 477 25
+ 1468 0374 5A48     		ldr	r0, .L106
+ 477:main.c        ****         }
+ 1469              		.loc 1 477 58
+ 1470 0376 1343     		orrs	r3, r2
+ 477:main.c        ****         }
+ 1471              		.loc 1 477 115
+ 1472 0378 993E     		subs	r6, r6, #153
+ 477:main.c        ****         }
+ 1473              		.loc 1 477 90
+ 1474 037a 3343     		orrs	r3, r6
+ 477:main.c        ****         }
+ 1475              		.loc 1 477 25
+ 1476 037c C35C     		ldrb	r3, [r0, r3]
+ 1477 037e 0B60     		str	r3, [r1]
+ 1478              	.L77:
+ 481:main.c        ****               flashdata+(RIOT[player1pointerhi+Gfxindex*2]<<8)+RIOT[player1pointerlo+Gfxindex*2],
+ 1479              		.loc 1 481 7 is_stmt 1
+ 481:main.c        ****               flashdata+(RIOT[player1pointerhi+Gfxindex*2]<<8)+RIOT[player1pointerlo+Gfxindex*2],
+ 1480              		.loc 1 481 23 is_stmt 0
+ 1481 0380 0320     		movs	r0, #3
+ 1482 0382 FFF7FEFF 		bl	get32bitdf
+ 1483              	.LVL111:
+ 482:main.c        ****               RIOT[player1y+Gfxindex],
+ 1484              		.loc 1 482 56
+ 1485 0386 6B00     		lsls	r3, r5, #1
+ 1486 0388 0393     		str	r3, [sp, #12]
+ 483:main.c        ****               RIOT[player1height+Gfxindex]);
+ 1487              		.loc 1 483 28
+ 1488 038a 2B00     		movs	r3, r5
+ 1489 038c 1533     		adds	r3, r3, #21
+ 1490 038e 0193     		str	r3, [sp, #4]
+ 482:main.c        ****               RIOT[player1y+Gfxindex],
+ 1491              		.loc 1 482 30
+ 1492 0390 0399     		ldr	r1, [sp, #12]
+ 481:main.c        ****               flashdata+(RIOT[player1pointerhi+Gfxindex*2]<<8)+RIOT[player1pointerlo+Gfxindex*2],
+ 1493              		.loc 1 481 7
+ 1494 0392 019A     		ldr	r2, [sp, #4]
+ 484:main.c        ****       mask = 0xFF;
+ 1495              		.loc 1 484 33
+ARM GAS  main.s 			page 41
+
+
+ 1496 0394 2135     		adds	r5, r5, #33
+ 1497              	.LVL112:
+ 481:main.c        ****               flashdata+(RIOT[player1pointerhi+Gfxindex*2]<<8)+RIOT[player1pointerlo+Gfxindex*2],
+ 1498              		.loc 1 481 7
+ 1499 0396 635D     		ldrb	r3, [r4, r5]
+ 1500 0398 A25C     		ldrb	r2, [r4, r2]
+ 482:main.c        ****               RIOT[player1y+Gfxindex],
+ 1501              		.loc 1 482 30
+ 1502 039a 6418     		adds	r4, r4, r1
+ 1503 039c 2100     		movs	r1, r4
+ 1504 039e 3B31     		adds	r1, r1, #59
+ 482:main.c        ****               RIOT[player1y+Gfxindex],
+ 1505              		.loc 1 482 59
+ 1506 03a0 0978     		ldrb	r1, [r1]
+ 482:main.c        ****               RIOT[player1y+Gfxindex],
+ 1507              		.loc 1 482 68
+ 1508 03a2 3A34     		adds	r4, r4, #58
+ 481:main.c        ****               flashdata+(RIOT[player1pointerhi+Gfxindex*2]<<8)+RIOT[player1pointerlo+Gfxindex*2],
+ 1509              		.loc 1 481 7
+ 1510 03a4 4F4F     		ldr	r7, .L106+4
+ 482:main.c        ****               RIOT[player1y+Gfxindex],
+ 1511              		.loc 1 482 68
+ 1512 03a6 2478     		ldrb	r4, [r4]
+ 482:main.c        ****               RIOT[player1y+Gfxindex],
+ 1513              		.loc 1 482 59
+ 1514 03a8 0902     		lsls	r1, r1, #8
+ 481:main.c        ****               flashdata+(RIOT[player1pointerhi+Gfxindex*2]<<8)+RIOT[player1pointerlo+Gfxindex*2],
+ 1515              		.loc 1 481 7
+ 1516 03aa 7E68     		ldr	r6, [r7, #4]
+ 482:main.c        ****               RIOT[player1y+Gfxindex],
+ 1517              		.loc 1 482 63
+ 1518 03ac 0919     		adds	r1, r1, r4
+ 1519 03ae BC68     		ldr	r4, [r7, #8]
+ 481:main.c        ****               flashdata+(RIOT[player1pointerhi+Gfxindex*2]<<8)+RIOT[player1pointerlo+Gfxindex*2],
+ 1520              		.loc 1 481 22
+ 1521 03b0 3018     		adds	r0, r6, r0
+ 482:main.c        ****               RIOT[player1y+Gfxindex],
+ 1522              		.loc 1 482 63
+ 1523 03b2 6118     		adds	r1, r4, r1
+ 481:main.c        ****               flashdata+(RIOT[player1pointerhi+Gfxindex*2]<<8)+RIOT[player1pointerlo+Gfxindex*2],
+ 1524              		.loc 1 481 7
+ 1525 03b4 FFF7FEFF 		bl	my_memcpy
+ 1526              	.LVL113:
+ 485:main.c        ****       //my_memcpy(queue+(dfhigh(1)<<8)+dflow(1),
+ 1527              		.loc 1 485 7 is_stmt 1
+ 485:main.c        ****       //my_memcpy(queue+(dfhigh(1)<<8)+dflow(1),
+ 1528              		.loc 1 485 12 is_stmt 0
+ 1529 03b8 FF23     		movs	r3, #255
+ 1530 03ba 4B4C     		ldr	r4, .L106+8
+ 487:main.c        ****               flashdata+(RIOT[player1color+Gfxindex*2+1]<<8)+RIOT[player1color+Gfxindex*2],
+ 1531              		.loc 1 487 23
+ 1532 03bc 0120     		movs	r0, #1
+ 485:main.c        ****       //my_memcpy(queue+(dfhigh(1)<<8)+dflow(1),
+ 1533              		.loc 1 485 12
+ 1534 03be 2360     		str	r3, [r4]
+ 487:main.c        ****               flashdata+(RIOT[player1color+Gfxindex*2+1]<<8)+RIOT[player1color+Gfxindex*2],
+ 1535              		.loc 1 487 7 is_stmt 1
+ARM GAS  main.s 			page 42
+
+
+ 1536 03c0 7B68     		ldr	r3, [r7, #4]
+ 1537 03c2 0493     		str	r3, [sp, #16]
+ 487:main.c        ****               flashdata+(RIOT[player1color+Gfxindex*2+1]<<8)+RIOT[player1color+Gfxindex*2],
+ 1538              		.loc 1 487 23 is_stmt 0
+ 1539 03c4 FFF7FEFF 		bl	get32bitdf
+ 1540              	.LVL114:
+ 488:main.c        **** 	      RIOT[player1y+Gfxindex],
+ 1541              		.loc 1 488 30
+ 1542 03c8 3E68     		ldr	r6, [r7]
+ 1543 03ca 0399     		ldr	r1, [sp, #12]
+ 487:main.c        ****               flashdata+(RIOT[player1color+Gfxindex*2+1]<<8)+RIOT[player1color+Gfxindex*2],
+ 1544              		.loc 1 487 7
+ 1545 03cc 019A     		ldr	r2, [sp, #4]
+ 1546 03ce 735D     		ldrb	r3, [r6, r5]
+ 1547 03d0 B25C     		ldrb	r2, [r6, r2]
+ 488:main.c        **** 	      RIOT[player1y+Gfxindex],
+ 1548              		.loc 1 488 30
+ 1549 03d2 7618     		adds	r6, r6, r1
+ 1550 03d4 3100     		movs	r1, r6
+ 1551 03d6 4D31     		adds	r1, r1, #77
+ 488:main.c        **** 	      RIOT[player1y+Gfxindex],
+ 1552              		.loc 1 488 57
+ 1553 03d8 0978     		ldrb	r1, [r1]
+ 488:main.c        **** 	      RIOT[player1y+Gfxindex],
+ 1554              		.loc 1 488 66
+ 1555 03da 4C36     		adds	r6, r6, #76
+ 1556 03dc 3678     		ldrb	r6, [r6]
+ 488:main.c        **** 	      RIOT[player1y+Gfxindex],
+ 1557              		.loc 1 488 57
+ 1558 03de 0902     		lsls	r1, r1, #8
+ 488:main.c        **** 	      RIOT[player1y+Gfxindex],
+ 1559              		.loc 1 488 61
+ 1560 03e0 8E19     		adds	r6, r1, r6
+ 1561 03e2 B968     		ldr	r1, [r7, #8]
+ 1562 03e4 8919     		adds	r1, r1, r6
+ 487:main.c        ****               flashdata+(RIOT[player1color+Gfxindex*2+1]<<8)+RIOT[player1color+Gfxindex*2],
+ 1563              		.loc 1 487 22
+ 1564 03e6 049E     		ldr	r6, [sp, #16]
+ 1565 03e8 3018     		adds	r0, r6, r0
+ 487:main.c        ****               flashdata+(RIOT[player1color+Gfxindex*2+1]<<8)+RIOT[player1color+Gfxindex*2],
+ 1566              		.loc 1 487 7
+ 1567 03ea FFF7FEFF 		bl	my_memcpy
+ 1568              	.LVL115:
+ 492:main.c        ****     temp4=(RIOT[player1y+Gfxindex]+RIOT[player1height+Gfxindex])&255; // &255 to allow for wrapped 
+ 1569              		.loc 1 492 5 is_stmt 1
+ 492:main.c        ****     temp4=(RIOT[player1y+Gfxindex]+RIOT[player1height+Gfxindex])&255; // &255 to allow for wrapped 
+ 1570              		.loc 1 492 10 is_stmt 0
+ 1571 03ee 6369     		ldr	r3, [r4, #20]
+ 493:main.c        ****     Gfxindex=myGfxIndex[count+1];
+ 1572              		.loc 1 493 65
+ 1573 03f0 019A     		ldr	r2, [sp, #4]
+ 492:main.c        ****     temp4=(RIOT[player1y+Gfxindex]+RIOT[player1height+Gfxindex])&255; // &255 to allow for wrapped 
+ 1574              		.loc 1 492 10
+ 1575 03f2 A360     		str	r3, [r4, #8]
+ 493:main.c        ****     Gfxindex=myGfxIndex[count+1];
+ 1576              		.loc 1 493 5 is_stmt 1
+ 493:main.c        ****     Gfxindex=myGfxIndex[count+1];
+ARM GAS  main.s 			page 43
+
+
+ 1577              		.loc 1 493 16 is_stmt 0
+ 1578 03f4 3B68     		ldr	r3, [r7]
+ 493:main.c        ****     Gfxindex=myGfxIndex[count+1];
+ 1579              		.loc 1 493 65
+ 1580 03f6 595D     		ldrb	r1, [r3, r5]
+ 1581 03f8 9A5C     		ldrb	r2, [r3, r2]
+ 494:main.c        ****     if ((count == temp3) || (RIOT[player1y+Gfxindex]>175) )
+ 1582              		.loc 1 494 30
+ 1583 03fa A569     		ldr	r5, [r4, #24]
+ 1584              	.LVL116:
+ 493:main.c        ****     Gfxindex=myGfxIndex[count+1];
+ 1585              		.loc 1 493 65
+ 1586 03fc 5218     		adds	r2, r2, r1
+ 1587 03fe D2B2     		uxtb	r2, r2
+ 1588 0400 6261     		str	r2, [r4, #20]
+ 494:main.c        ****     if ((count == temp3) || (RIOT[player1y+Gfxindex]>175) )
+ 1589              		.loc 1 494 5 is_stmt 1
+ 494:main.c        ****     if ((count == temp3) || (RIOT[player1y+Gfxindex]>175) )
+ 1590              		.loc 1 494 24 is_stmt 0
+ 1591 0402 7A19     		adds	r2, r7, r5
+ 494:main.c        ****     if ((count == temp3) || (RIOT[player1y+Gfxindex]>175) )
+ 1592              		.loc 1 494 13
+ 1593 0404 567D     		ldrb	r6, [r2, #21]
+ 1594              	.LVL117:
+ 495:main.c        ****     {
+ 1595              		.loc 1 495 5 is_stmt 1
+ 495:main.c        ****     {
+ 1596              		.loc 1 495 8 is_stmt 0
+ 1597 0406 029A     		ldr	r2, [sp, #8]
+ 1598 0408 AA42     		cmp	r2, r5
+ 1599 040a 03D0     		beq	.L78
+ 495:main.c        ****     {
+ 1600              		.loc 1 495 34 discriminator 1
+ 1601 040c 9B19     		adds	r3, r3, r6
+ 495:main.c        ****     {
+ 1602              		.loc 1 495 26 discriminator 1
+ 1603 040e 5B7D     		ldrb	r3, [r3, #21]
+ 1604 0410 AF2B     		cmp	r3, #175
+ 1605 0412 03D9     		bls	.L79
+ 1606              	.L78:
+ 497:main.c        ****       temp5=0;
+ 1607              		.loc 1 497 7 is_stmt 1
+ 497:main.c        ****       temp5=0;
+ 1608              		.loc 1 497 12 is_stmt 0
+ 1609 0414 354B     		ldr	r3, .L106+12
+ 1610 0416 6361     		str	r3, [r4, #20]
+ 498:main.c        ****     }
+ 1611              		.loc 1 498 7 is_stmt 1
+ 498:main.c        ****     }
+ 1612              		.loc 1 498 12 is_stmt 0
+ 1613 0418 0023     		movs	r3, #0
+ 1614 041a A360     		str	r3, [r4, #8]
+ 1615              	.L79:
+ 504:main.c        **** 
+ 1616              		.loc 1 504 6 is_stmt 1
+ 504:main.c        **** 
+ 1617              		.loc 1 504 11 is_stmt 0
+ARM GAS  main.s 			page 44
+
+
+ 1618 041c 7B68     		ldr	r3, [r7, #4]
+ 504:main.c        **** 
+ 1619              		.loc 1 504 12
+ 1620 041e 0420     		movs	r0, #4
+ 504:main.c        **** 
+ 1621              		.loc 1 504 11
+ 1622 0420 0193     		str	r3, [sp, #4]
+ 504:main.c        **** 
+ 1623              		.loc 1 504 12
+ 1624 0422 FFF7FEFF 		bl	get32bitdf
+ 1625              	.LVL118:
+ 504:main.c        **** 
+ 1626              		.loc 1 504 11
+ 1627 0426 019B     		ldr	r3, [sp, #4]
+ 504:main.c        **** 
+ 1628              		.loc 1 504 25
+ 1629 0428 2818     		adds	r0, r5, r0
+ 504:main.c        **** 
+ 1630              		.loc 1 504 39
+ 1631 042a A268     		ldr	r2, [r4, #8]
+ 504:main.c        **** 
+ 1632              		.loc 1 504 11
+ 1633 042c 1818     		adds	r0, r3, r0
+ 504:main.c        **** 
+ 1634              		.loc 1 504 39
+ 1635 042e 6369     		ldr	r3, [r4, #20]
+ 504:main.c        **** 
+ 1636              		.loc 1 504 52
+ 1637 0430 6D10     		asrs	r5, r5, #1
+ 504:main.c        **** 
+ 1638              		.loc 1 504 39
+ 1639 0432 9B1A     		subs	r3, r3, r2
+ 504:main.c        **** 
+ 1640              		.loc 1 504 45
+ 1641 0434 5B1B     		subs	r3, r3, r5
+ 504:main.c        **** 
+ 1642              		.loc 1 504 57
+ 1643 0436 5B10     		asrs	r3, r3, #1
+ 504:main.c        **** 
+ 1644              		.loc 1 504 32
+ 1645 0438 DBB2     		uxtb	r3, r3
+ 1646 043a 0370     		strb	r3, [r0]
+ 506:main.c        ****       RIOT[player1x+Gfxindex]-=(RIOT[player1x+Gfxindex]>208)?96:160;
+ 1647              		.loc 1 506 5 is_stmt 1
+ 506:main.c        ****       RIOT[player1x+Gfxindex]-=(RIOT[player1x+Gfxindex]>208)?96:160;
+ 1648              		.loc 1 506 22 is_stmt 0
+ 1649 043c 3300     		movs	r3, r6
+ 1650 043e 0B33     		adds	r3, r3, #11
+ 1651 0440 0193     		str	r3, [sp, #4]
+ 506:main.c        ****       RIOT[player1x+Gfxindex]-=(RIOT[player1x+Gfxindex]>208)?96:160;
+ 1652              		.loc 1 506 13
+ 1653 0442 019A     		ldr	r2, [sp, #4]
+ 1654 0444 3B68     		ldr	r3, [r7]
+ 1655 0446 9918     		adds	r1, r3, r2
+ 1656 0448 9B5C     		ldrb	r3, [r3, r2]
+ 506:main.c        ****       RIOT[player1x+Gfxindex]-=(RIOT[player1x+Gfxindex]>208)?96:160;
+ 1657              		.loc 1 506 8
+ARM GAS  main.s 			page 45
+
+
+ 1658 044a 9F2B     		cmp	r3, #159
+ 1659 044c 05D9     		bls	.L80
+ 507:main.c        ****     queue[get32bitdff(5)+count]=RIOT[_NUSIZ1+Gfxindex];
+ 1660              		.loc 1 507 7 is_stmt 1
+ 507:main.c        ****     queue[get32bitdff(5)+count]=RIOT[_NUSIZ1+Gfxindex];
+ 1661              		.loc 1 507 30 is_stmt 0
+ 1662 044e 6022     		movs	r2, #96
+ 1663 0450 D02B     		cmp	r3, #208
+ 1664 0452 00D8     		bhi	.L81
+ 1665 0454 4032     		adds	r2, r2, #64
+ 1666              	.L81:
+ 507:main.c        ****     queue[get32bitdff(5)+count]=RIOT[_NUSIZ1+Gfxindex];
+ 1667              		.loc 1 507 30 discriminator 4
+ 1668 0456 9B1A     		subs	r3, r3, r2
+ 1669 0458 0B70     		strb	r3, [r1]
+ 1670              	.L80:
+ 508:main.c        ****     queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+ 1671              		.loc 1 508 5 is_stmt 1
+ 508:main.c        ****     queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+ 1672              		.loc 1 508 37 is_stmt 0
+ 1673 045a 3B68     		ldr	r3, [r7]
+ 508:main.c        ****     queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+ 1674              		.loc 1 508 11
+ 1675 045c 0520     		movs	r0, #5
+ 508:main.c        ****     queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+ 1676              		.loc 1 508 45
+ 1677 045e 2A36     		adds	r6, r6, #42
+ 1678              	.LVL119:
+ 508:main.c        ****     queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+ 1679              		.loc 1 508 37
+ 1680 0460 9E19     		adds	r6, r3, r6
+ 508:main.c        ****     queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+ 1681              		.loc 1 508 11
+ 1682 0462 FFF7FEFF 		bl	get32bitdff
+ 1683              	.LVL120:
+ 508:main.c        ****     queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+ 1684              		.loc 1 508 25
+ 1685 0466 204C     		ldr	r4, .L106+8
+ 508:main.c        ****     queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+ 1686              		.loc 1 508 10
+ 1687 0468 7D68     		ldr	r5, [r7, #4]
+ 508:main.c        ****     queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+ 1688              		.loc 1 508 25
+ 1689 046a A369     		ldr	r3, [r4, #24]
+ 509:main.c        ****     //queue[(dfhigh(5)<<8)+dflow(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1690              		.loc 1 509 50
+ 1691 046c 019A     		ldr	r2, [sp, #4]
+ 508:main.c        ****     queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+ 1692              		.loc 1 508 25
+ 1693 046e C018     		adds	r0, r0, r3
+ 508:main.c        ****     queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+ 1694              		.loc 1 508 37
+ 1695 0470 3378     		ldrb	r3, [r6]
+ 508:main.c        ****     queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+ 1696              		.loc 1 508 10
+ 1697 0472 2D18     		adds	r5, r5, r0
+ 508:main.c        ****     queue[get32bitdff(7)+count]=Hmval74(RIOT[player1x+Gfxindex]);
+ARM GAS  main.s 			page 46
+
+
+ 1698              		.loc 1 508 32
+ 1699 0474 2B70     		strb	r3, [r5]
+ 509:main.c        ****     //queue[(dfhigh(5)<<8)+dflow(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1700              		.loc 1 509 5 is_stmt 1
+ 509:main.c        ****     //queue[(dfhigh(5)<<8)+dflow(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1701              		.loc 1 509 50 is_stmt 0
+ 1702 0476 3B68     		ldr	r3, [r7]
+ 509:main.c        ****     //queue[(dfhigh(5)<<8)+dflow(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1703              		.loc 1 509 44
+ 1704 0478 6668     		ldr	r6, [r4, #4]
+ 509:main.c        ****     //queue[(dfhigh(5)<<8)+dflow(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1705              		.loc 1 509 50
+ 1706 047a 9B5C     		ldrb	r3, [r3, r2]
+ 509:main.c        ****     //queue[(dfhigh(5)<<8)+dflow(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1707              		.loc 1 509 11
+ 1708 047c 0720     		movs	r0, #7
+ 509:main.c        ****     //queue[(dfhigh(5)<<8)+dflow(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1709              		.loc 1 509 44
+ 1710 047e 4233     		adds	r3, r3, #66
+ 1711 0480 F618     		adds	r6, r6, r3
+ 509:main.c        ****     //queue[(dfhigh(5)<<8)+dflow(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1712              		.loc 1 509 11
+ 1713 0482 FFF7FEFF 		bl	get32bitdff
+ 1714              	.LVL121:
+ 509:main.c        ****     //queue[(dfhigh(5)<<8)+dflow(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1715              		.loc 1 509 25
+ 1716 0486 A369     		ldr	r3, [r4, #24]
+ 509:main.c        ****     //queue[(dfhigh(5)<<8)+dflow(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1717              		.loc 1 509 10
+ 1718 0488 7D68     		ldr	r5, [r7, #4]
+ 509:main.c        ****     //queue[(dfhigh(5)<<8)+dflow(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1719              		.loc 1 509 25
+ 1720 048a C018     		adds	r0, r0, r3
+ 509:main.c        ****     //queue[(dfhigh(5)<<8)+dflow(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1721              		.loc 1 509 44
+ 1722 048c 3378     		ldrb	r3, [r6]
+ 509:main.c        ****     //queue[(dfhigh(5)<<8)+dflow(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1723              		.loc 1 509 10
+ 1724 048e 2D18     		adds	r5, r5, r0
+ 509:main.c        ****     //queue[(dfhigh(5)<<8)+dflow(5)+count]=kernello(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1725              		.loc 1 509 32
+ 1726 0490 2B70     		strb	r3, [r5]
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1727              		.loc 1 511 5 is_stmt 1
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1728              		.loc 1 511 55 is_stmt 0
+ 1729 0492 3B68     		ldr	r3, [r7]
+ 1730 0494 019A     		ldr	r2, [sp, #4]
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1731              		.loc 1 511 50
+ 1732 0496 164D     		ldr	r5, .L106+16
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1733              		.loc 1 511 55
+ 1734 0498 9B5C     		ldrb	r3, [r3, r2]
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1735              		.loc 1 511 43
+ 1736 049a 6268     		ldr	r2, [r4, #4]
+ARM GAS  main.s 			page 47
+
+
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1737              		.loc 1 511 50
+ 1738 049c 5B5D     		ldrb	r3, [r3, r5]
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1739              		.loc 1 511 11
+ 1740 049e 0520     		movs	r0, #5
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1741              		.loc 1 511 43
+ 1742 04a0 D318     		adds	r3, r2, r3
+ 1743 04a2 0393     		str	r3, [sp, #12]
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1744              		.loc 1 511 11
+ 1745 04a4 FFF7FEFF 		bl	get32bitdf
+ 1746              	.LVL122:
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1747              		.loc 1 511 24
+ 1748 04a8 A369     		ldr	r3, [r4, #24]
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1749              		.loc 1 511 10
+ 1750 04aa 7E68     		ldr	r6, [r7, #4]
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1751              		.loc 1 511 24
+ 1752 04ac C018     		adds	r0, r0, r3
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1753              		.loc 1 511 43
+ 1754 04ae 039B     		ldr	r3, [sp, #12]
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1755              		.loc 1 511 10
+ 1756 04b0 3618     		adds	r6, r6, r0
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1757              		.loc 1 511 43
+ 1758 04b2 1B78     		ldrb	r3, [r3]
+ 513:main.c        ****     count++;
+ 1759              		.loc 1 513 55
+ 1760 04b4 019A     		ldr	r2, [sp, #4]
+ 511:main.c        ****     //queue[(dfhigh(6)<<8)+dflow(6)+count]=kernelhi(HMdiv[RIOT[player1x+Gfxindex]]);
+ 1761              		.loc 1 511 31
+ 1762 04b6 3370     		strb	r3, [r6]
+ 513:main.c        ****     count++;
+ 1763              		.loc 1 513 5 is_stmt 1
+ 513:main.c        ****     count++;
+ 1764              		.loc 1 513 55 is_stmt 0
+ 1765 04b8 3B68     		ldr	r3, [r7]
+ 513:main.c        ****     count++;
+ 1766              		.loc 1 513 11
+ 1767 04ba 0620     		movs	r0, #6
+ 513:main.c        ****     count++;
+ 1768              		.loc 1 513 55
+ 1769 04bc 9B5C     		ldrb	r3, [r3, r2]
+ 513:main.c        ****     count++;
+ 1770              		.loc 1 513 10
+ 1771 04be 7E68     		ldr	r6, [r7, #4]
+ 513:main.c        ****     count++;
+ 1772              		.loc 1 513 50
+ 1773 04c0 5B5D     		ldrb	r3, [r3, r5]
+ 513:main.c        ****     count++;
+ 1774              		.loc 1 513 43
+ARM GAS  main.s 			page 48
+
+
+ 1775 04c2 6568     		ldr	r5, [r4, #4]
+ 1776 04c4 0B33     		adds	r3, r3, #11
+ 1777 04c6 ED18     		adds	r5, r5, r3
+ 513:main.c        ****     count++;
+ 1778              		.loc 1 513 11
+ 1779 04c8 FFF7FEFF 		bl	get32bitdf
+ 1780              	.LVL123:
+ 513:main.c        ****     count++;
+ 1781              		.loc 1 513 24
+ 1782 04cc A369     		ldr	r3, [r4, #24]
+ 1783 04ce C018     		adds	r0, r0, r3
+ 513:main.c        ****     count++;
+ 1784              		.loc 1 513 43
+ 1785 04d0 2B78     		ldrb	r3, [r5]
+ 513:main.c        ****     count++;
+ 1786              		.loc 1 513 10
+ 1787 04d2 3618     		adds	r6, r6, r0
+ 513:main.c        ****     count++;
+ 1788              		.loc 1 513 31
+ 1789 04d4 3370     		strb	r3, [r6]
+ 514:main.c        ****   }
+ 1790              		.loc 1 514 5 is_stmt 1
+ 514:main.c        ****   }
+ 1791              		.loc 1 514 10 is_stmt 0
+ 1792 04d6 A369     		ldr	r3, [r4, #24]
+ 1793 04d8 0133     		adds	r3, r3, #1
+ 1794 04da A361     		str	r3, [r4, #24]
+ 1795 04dc 1CE6     		b	.L76
+ 1796              	.L107:
+ 1797 04de C046     		.align	2
+ 1798              	.L106:
+ 1799 04e0 00000000 		.word	.LANCHOR2
+ 1800 04e4 00000000 		.word	.LANCHOR1
+ 1801 04e8 00000000 		.word	.LANCHOR0
+ 1802 04ec FF010000 		.word	511
+ 1803 04f0 001C0020 		.word	536878080
+ 1804              		.cfi_endproc
+ 1805              	.LFE10:
+ 1807              		.global	maxsprites
+ 1808              		.global	myGfxIndex
+ 1809              		.global	spritesort
+ 1810              		.global	maskdata
+ 1811              		.global	mask
+ 1812              		.global	temp5
+ 1813              		.global	temp4
+ 1814              		.global	count
+ 1815              		.global	pfpixel
+ 1816              		.global	fetcheraddr
+ 1817              		.global	RIOT
+ 1818              		.global	fetcher_address_table
+ 1819              		.global	C_function
+ 1820              		.global	queue_int
+ 1821              		.global	flashdata
+ 1822              		.global	queue
+ 1823              		.section	.rodata
+ 1824              		.set	.LANCHOR2,. + 0
+ 1827              	maskdata:
+ARM GAS  main.s 			page 49
+
+
+ 1828 0000 00010307 		.ascii	"\000\001\003\007\017\037?\177\376\374\370\360\340\300"
+ 1828      0F1F3F7F 
+ 1828      FEFCF8F0 
+ 1828      E0C0
+ 1829 000e 80000080 		.ascii	"\200\000\000\200\300\340\360\370\374\376\177?\037\017"
+ 1829      C0E0F0F8 
+ 1829      FCFE7F3F 
+ 1829      1F0F
+ 1830 001c 07030100 		.ascii	"\007\003\001\000"
+ 1831              		.data
+ 1832              		.align	2
+ 1833              		.set	.LANCHOR1,. + 0
+ 1836              	RIOT:
+ 1837 0000 A80D0120 		.word	536939944
+ 1840              	queue:
+ 1841 0004 000C0120 		.word	536939520
+ 1844              	flashdata:
+ 1845 0008 000C0020 		.word	536873984
+ 1848              	C_function:
+ 1849 000c A40D0120 		.word	536939940
+ 1852              	fetcher_address_table:
+ 1853 0010 A06D0020 		.word	536898976
+ 1856              	myGfxIndex:
+ 1857 0014 00010203 		.ascii	"\000\001\002\003\004\005\006\007\010\000"
+ 1857      04050607 
+ 1857      0800
+ 1860              	spritesort:
+ 1861 001e 00010203 		.ascii	"\000\001\002\003\004\005\006\007\010\000"
+ 1861      04050607 
+ 1861      0800
+ 1864              	queue_int:
+ 1865 0028 000C0120 		.word	536939520
+ 1866              		.bss
+ 1867              		.align	2
+ 1868              		.set	.LANCHOR0,. + 0
+ 1871              	mask:
+ 1872 0000 00000000 		.space	4
+ 1875              	fetcheraddr:
+ 1876 0004 00000000 		.space	4
+ 1879              	temp5:
+ 1880 0008 00000000 		.space	4
+ 1883              	pfpixel:
+ 1884 000c 00000000 		.space	4
+ 1887              	maxsprites:
+ 1888 0010 00       		.space	1
+ 1889 0011 000000   		.space	3
+ 1892              	temp4:
+ 1893 0014 00000000 		.space	4
+ 1896              	count:
+ 1897 0018 00000000 		.space	4
+ 1898              		.text
+ 1899              	.Letext0:
+ 1900              		.file 2 "src/custom.h"
+ARM GAS  main.s 			page 50
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+              main.s:18     .text.my_memcpy:0000000000000000 $t
+              main.s:24     .text.my_memcpy:0000000000000000 my_memcpy
+              main.s:84     .text.my_memcpy:0000000000000024 $d
+              main.s:89     .text.my_memset:0000000000000000 $t
+              main.s:95     .text.my_memset:0000000000000000 my_memset
+              main.s:127    .text.reverse:0000000000000000 $t
+              main.s:133    .text.reverse:0000000000000000 reverse
+              main.s:179    .text.memscroll:0000000000000000 $t
+              main.s:185    .text.memscroll:0000000000000000 memscroll
+              main.s:233    .text.get32bitdff:0000000000000000 $t
+              main.s:239    .text.get32bitdff:0000000000000000 get32bitdff
+              main.s:271    .text.get32bitdff:0000000000000018 $d
+              main.s:276    .text.get32bitdf:0000000000000000 $t
+              main.s:282    .text.get32bitdf:0000000000000000 get32bitdf
+              main.s:311    .text.get32bitdf:0000000000000010 $d
+              main.s:316    .text.checkwrap:0000000000000000 $t
+              main.s:322    .text.checkwrap:0000000000000000 checkwrap
+              main.s:348    .text.checkswap:0000000000000000 $t
+              main.s:354    .text.checkswap:0000000000000000 checkswap
+              main.s:448    .text.checkswap:0000000000000044 $d
+              main.s:453    .text.copynybble:0000000000000000 $t
+              main.s:459    .text.copynybble:0000000000000000 copynybble
+              main.s:559    .text.copynybble:0000000000000054 $d
+              main.s:565    .text.on_off_flip:0000000000000000 $t
+              main.s:571    .text.on_off_flip:0000000000000000 on_off_flip
+              main.s:629    .text.on_off_flip:0000000000000038 $d
+              main.s:640    .text.startup.main:0000000000000000 $t
+              main.s:646    .text.startup.main:0000000000000000 main
+              main.s:1422   .text.startup.main:0000000000000330 $d
+              main.s:1432   .text.startup.main:0000000000000348 $t
+              main.s:1799   .text.startup.main:00000000000004e0 $d
+              main.s:1887   .bss:0000000000000010 maxsprites
+              main.s:1856   .data:0000000000000014 myGfxIndex
+              main.s:1860   .data:000000000000001e spritesort
+              main.s:1827   .rodata:0000000000000000 maskdata
+              main.s:1871   .bss:0000000000000000 mask
+              main.s:1879   .bss:0000000000000008 temp5
+              main.s:1892   .bss:0000000000000014 temp4
+              main.s:1896   .bss:0000000000000018 count
+              main.s:1883   .bss:000000000000000c pfpixel
+              main.s:1875   .bss:0000000000000004 fetcheraddr
+              main.s:1836   .data:0000000000000000 RIOT
+              main.s:1852   .data:0000000000000010 fetcher_address_table
+              main.s:1848   .data:000000000000000c C_function
+              main.s:1864   .data:0000000000000028 queue_int
+              main.s:1844   .data:0000000000000008 flashdata
+              main.s:1840   .data:0000000000000004 queue
+              main.s:1832   .data:0000000000000000 $d
+              main.s:1867   .bss:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+memcpy

@@ -34,6 +34,7 @@
  dim timer1=p
  dim timer2=q
  dim level=q
+ dim testvar=u
  rem level bits
  rem bit 0: zombie speed (slow/fast)
  rem bit 1: zombie movement (random/run away)
@@ -99,7 +100,13 @@ end
  if switchrightb then PF0=0 else PF0=63 
  COLUPF=(level * 4 * 4)^244
  if gamebits{7} then gamerunning
- if !joy0fire then timer1=timer1+1
+ 
+ if !joy0fire then 
+    timer1=timer1+1
+ else 
+    COLUBK=$44
+ endif
+ 
  if timer1=0 then nostartgame
  if joy0fire then score=0:timer1=0:timer2=0:gamebits{7}=1:pfclear
 nostartgame
