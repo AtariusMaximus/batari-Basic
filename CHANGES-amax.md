@@ -3,7 +3,7 @@
 This fork is intended to introduce some enhancements. Currently there is only one.  
 Note that this build is purely experimental and may break something, I'm just testing changes at this point.
 
-## 1. Multi-line Block `if...then...endif` Support
+## amax.1. Multi-line Block `if...then...endif` Support
 
 The compiler now natively supports multi-line conditional blocks with if/then/endif.
 
@@ -15,16 +15,31 @@ The compiler now natively supports multi-line conditional blocks with if/then/en
  endif
 ```
 
-Compiler Modifications:
+## amax.2. `if...then...endif` with else support
 
-statements.c
+### Syntax Example:
+```basic
+ if powerup=1 then
+    extralives=extralives+1
+    score=score+100
+ else
+    goto no_powerup
+ endif
+```
 
-State Management: Added if_stack array and if_stack_ptr global variables to track open branch labels, enabling support for nested if evaluations.  
-Label Parsing: Updated the findlabel function to explicitly identify newline characters following then as block statements rather than unindented line labels.  
-Execution Routing: Modified the seven condition execution paths inside the doif function. If the line ends after then, the compiler now pushes the auto-generated branch label to the stack instead of printing it immediately.  
-Block Closure: Added the doendif function to pop the matched label from the stack and emit the branch closure to the assembly output.  
+## amax.3. Native Bitwise Macros (`setbit`, `clearbit`, `togglebit`)
 
-keywords.c
+The compiler now includes native commands to manipulate individual bits within a variable directly. This eliminates the need to use raw binary math (like `var = var | %00000100`or the `{}` syntax)
 
-Registered extern void doendif();.  
-Added the endif keyword routing to the main keywords lookup sequence to trigger the block closure.  
+### Syntax Example:
+```basic
+ rem Turn ON bit 0 (adds 1)
+ setbit playerflags 0
+
+ rem Turn OFF bit 4 (subtracts 16)
+ clearbit playerflags 4
+
+ rem Flip bit 1 to the opposite state (+2 / -2)
+ togglebit playerflags 1
+```
+
