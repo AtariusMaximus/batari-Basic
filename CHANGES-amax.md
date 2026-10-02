@@ -31,6 +31,8 @@ The compiler now natively supports multi-line conditional blocks with if/then/en
 
 The compiler now includes native commands to manipulate individual bits within a variable directly. This eliminates the need to use raw binary math (like `var = var | %00000100`or the `{}` syntax)
 
+See "test_bits.bas" in the samples subdirectory for a usage example.
+
 ### Syntax Example:
 ```basic
  rem Turn ON bit 0
@@ -48,6 +50,8 @@ The compiler now includes native commands to manipulate individual bits within a
 The compiler now supports structural state machine blocks using `switch`, `case`, and `default`. 
 
 The `case` evaluation natively supports standard decimal integers, hex (`$0A`), binary (`%00001010`), or even comparisons against other variables. The block should be closed with `endswitch`.
+
+See "test_switch.bas" in the samples subdirectory for a usage example.
 
 ### Syntax Example:
 ```basic
