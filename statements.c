@@ -6243,3 +6243,98 @@ void dotogglebit(char **statement)
     printf("	EOR #%d\n", 1 << bit);
     printf("	STA %s\n", statement[2]);
 }
+// --- Switch Statement Globals ---
+char switch_var_stack[20][50];
+int switch_id_stack[20];
+int switch_case_label_stack[20];
+int switch_has_case_stack[20];
+int switch_stack_ptr = 0;
+int numswitches = 0;
+int numcases = 0;
+// --------------------------------
+
+void doswitch(char **statement)
+{
+    assertminimumargs(statement, "switch", 1);
+    removeCR(statement[2]);
+    
+    if (switch_stack_ptr >= 20) 
+        prerror("switch nesting too deep");
+        
+    strcpy(switch_var_stack[switch_stack_ptr], statement[2]);
+    switch_id_stack[switch_stack_ptr] = numswitches++;
+    switch_has_case_stack[switch_stack_ptr] = 0;
+    switch_stack_ptr++;
+}
+
+void docase(char **statement)
+{
+    int sw_idx;
+    char skip_label[50];
+    
+    assertminimumargs(statement, "case", 1);
+    removeCR(statement[2]);
+    
+    if (switch_stack_ptr <= 0) 
+        prerror("case without matching switch");
+        
+    sw_idx = switch_stack_ptr - 1;
+    
+    // If we are already in a previous case, cap it off with a jump to the end
+    // and emit the skip-label for the false condition of that previous case
+    if (switch_has_case_stack[sw_idx]) {
+        printf("	jmp .endswitch%d\n", switch_id_stack[sw_idx]);
+        printf(".skipcase%d\n", switch_case_label_stack[sw_idx]);
+    }
+    
+    invalidate_Areg();
+    printf("	LDA %s\n", switch_var_stack[sw_idx]);
+    printf("	CMP ");
+    printimmed(statement[2]);
+    printf("%s\n", statement[2]);
+    
+    switch_case_label_stack[sw_idx] = numcases++;
+    sprintf(skip_label, "skipcase%d", switch_case_label_stack[sw_idx]);
+    
+    // Use the native long-branch aware bne function
+    bne(skip_label);
+    
+    switch_has_case_stack[sw_idx] = 1;
+}
+
+void dodefault(char **statement)
+{
+    int sw_idx;
+    
+    if (switch_stack_ptr <= 0) 
+        prerror("default without matching switch");
+        
+    sw_idx = switch_stack_ptr - 1;
+    
+    // Cap off the previous case
+    if (switch_has_case_stack[sw_idx]) {
+        printf("	jmp .endswitch%d\n", switch_id_stack[sw_idx]);
+        printf(".skipcase%d\n", switch_case_label_stack[sw_idx]);
+    }
+    
+    // Prevent end switch from emitting an orphaned skipcase label
+    switch_has_case_stack[sw_idx] = 0; 
+}
+
+void doendswitch(char **statement)
+{
+    int sw_idx;
+    
+    if (switch_stack_ptr <= 0) 
+        prerror("end switch without matching switch");
+        
+    sw_idx = --switch_stack_ptr;
+    
+    // If the block didn't end with a default, we still need to land the final false condition
+    if (switch_has_case_stack[sw_idx]) {
+        printf(".skipcase%d\n", switch_case_label_stack[sw_idx]);
+    }
+    
+    // Cap off the entire switch block
+    printf(".endswitch%d\n", switch_id_stack[sw_idx]);
+}

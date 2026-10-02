@@ -1,23 +1,23 @@
 game
-.L00 ;;line 1;;  rem --- Bitwise Macro Test ---
+.L00 ;;line 1;;  rem --- Switch/Case Statement Demo ---
 
-.L01 ;;line 2;;  dim playerflags = a
+.
+ ;;line 2;; 
 
-.L02 ;;line 3;;  dim debouncestate = b
+.L01 ;;line 3;;  dim player_state = a
 
 .
  ;;line 4;; 
 
-.L03 ;;line 5;;  dim scoreHI = score
+.L02 ;;line 5;;  player0x = 75
 
-.L04 ;;line 6;;  dim scoreMED = score + 1
+	LDA #75
+	STA player0x
+.L03 ;;line 6;;  player0y = 45
 
-.L05 ;;line 7;;  dim scoreLO = score + 2
-
-.
- ;;line 8;; 
-
-.L06 ;;line 9;;  score = 0
+	LDA #45
+	STA player0y
+.L04 ;;line 7;;  score = 0
 
 	LDA #$00
 	STA score+2
@@ -25,145 +25,244 @@ game
 	STA score+1
 	LDA #$00
 	STA score
-.L07 ;;line 10;;  playerflags = 0
-
-	LDA #0
-	STA playerflags
-.L08 ;;line 11;;  debouncestate = 0
-
-	LDA #0
-	STA debouncestate
 .
- ;;line 12;; 
+ ;;line 8;; 
+
+.L05 ;;line 9;;  player0:
+
+	LDX #<playerL05_0
+	STX player0pointerlo
+	LDA #>playerL05_0
+	STA player0pointerhi
+	LDA #7
+	STA player0height
+.
+ ;;line 19;; 
 
 .main
- ;;line 13;; main
+ ;;line 20;; main
 
-.L09 ;;line 14;;  COLUBK = $00
+.L06 ;;line 21;;  COLUP0 = $1C
 
-	LDA #$00
-	STA COLUBK
-.L010 ;;line 15;;  COLUP0 = $18
-
-	LDA #$18
+	LDA #$1C
 	STA COLUP0
-.L011 ;;line 16;;  COLUP1 = $18
-
-	LDA #$18
-	STA COLUP1
-.L012 ;;line 17;;  COLUPF = $88
-
-	LDA #$88
-	STA COLUPF
-.L013 ;;line 18;;  scorecolor = $0E
+.L07 ;;line 22;;  scorecolor = $0E
 
 	LDA #$0E
 	STA scorecolor
 .
- ;;line 19;; 
+ ;;line 23;; 
 
-.L014 ;;line 20;;  rem Put playerflags into the bottom byte of the score
+.L08 ;;line 24;;  rem Define state based on joystick input
 
-.L015 ;;line 21;;  scoreLO = playerflags
+.L09 ;;line 25;;  player_state = 0
 
-	LDA playerflags
-	STA scoreLO
-.
- ;;line 22;; 
-
-.L016 ;;line 23;;  rem Push UP to turn bit 0 ON (+1)
-
-.L017 ;;line 24;;  if joy0up then setbit playerflags 0
+	LDA #0
+	STA player_state
+.L010 ;;line 26;;  if joy0up then player_state = 1
 
  lda #$10
  bit SWCHA
-	BNE .skipL017
+	BNE .skipL010
 .condpart0
-	LDA playerflags
-	ORA #1
-	STA playerflags
-.skipL017
-.
- ;;line 25;; 
-
-.L018 ;;line 26;;  rem Push DOWN to turn bit 0 OFF (-1)
-
-.L019 ;;line 27;;  if joy0down then clearbit playerflags 0
+	LDA #1
+	STA player_state
+.skipL010
+.L011 ;;line 27;;  if joy0down then player_state = 2
 
  lda #$20
  bit SWCHA
-	BNE .skipL019
+	BNE .skipL011
 .condpart1
-	LDA playerflags
-	AND #254
-	STA playerflags
-.skipL019
-.
- ;;line 28;; 
-
-.L020 ;;line 29;;  rem Push LEFT to turn bit 4 ON (+16 in hex = $10)
-
-.L021 ;;line 30;;  if joy0left then setbit playerflags 4
+	LDA #2
+	STA player_state
+.skipL011
+.L012 ;;line 28;;  if joy0left then player_state = 3
 
  bit SWCHA
-	BVS .skipL021
+	BVS .skipL012
 .condpart2
-	LDA playerflags
-	ORA #16
-	STA playerflags
-.skipL021
+	LDA #3
+	STA player_state
+.skipL012
+.L013 ;;line 29;;  if joy0right then player_state = 4
+
+ bit SWCHA
+	BMI .skipL013
+.condpart3
+	LDA #4
+	STA player_state
+.skipL013
+.L014 ;;line 30;;  if joy0fire then player_state = 5
+
+ bit INPT4
+	BMI .skipL014
+.condpart4
+	LDA #5
+	STA player_state
+.skipL014
 .
  ;;line 31;; 
 
-.L022 ;;line 32;;  rem Push RIGHT to turn bit 4 OFF
+.L015 ;;line 32;;  rem Route the logic using the new switch block
 
-.L023 ;;line 33;;  if joy0right then clearbit playerflags 4
+.L016 ;;line 33;;  switch player_state
 
- bit SWCHA
-	BMI .skipL023
-.condpart3
-	LDA playerflags
-	AND #239
-	STA playerflags
-.skipL023
+.L017 ;;line 34;;  case 1
+
+	LDA player_state
+	CMP #1
+	bne .skipcase0
+.L018 ;;line 35;;  player0y = player0y  -  1
+
+	DEC player0y
+.L019 ;;line 36;;  score = score  +  1
+
+	SED
+	CLC
+	LDA score+2
+	ADC #$01
+	STA score+2
+	LDA score+1
+	ADC #$00
+	STA score+1
+	LDA score
+	ADC #$00
+	STA score
+	CLD
+.L020 ;;line 37;;  case 2
+
+	jmp .endswitch0
+.skipcase0
+	LDA player_state
+	CMP #2
+	bne .skipcase1
+.L021 ;;line 38;;  player0y = player0y  +  1
+
+	INC player0y
+.L022 ;;line 39;;  score = score  +  2
+
+	SED
+	CLC
+	LDA score+2
+	ADC #$02
+	STA score+2
+	LDA score+1
+	ADC #$00
+	STA score+1
+	LDA score
+	ADC #$00
+	STA score
+	CLD
+.L023 ;;line 40;;  case 3
+
+	jmp .endswitch0
+.skipcase1
+	LDA player_state
+	CMP #3
+	bne .skipcase2
+.L024 ;;line 41;;  player0x = player0x  -  1
+
+	DEC player0x
+.L025 ;;line 42;;  score = score  +  3
+
+	SED
+	CLC
+	LDA score+2
+	ADC #$03
+	STA score+2
+	LDA score+1
+	ADC #$00
+	STA score+1
+	LDA score
+	ADC #$00
+	STA score
+	CLD
+.L026 ;;line 43;;  case 4
+
+	jmp .endswitch0
+.skipcase2
+	LDA player_state
+	CMP #4
+	bne .skipcase3
+.L027 ;;line 44;;  player0x = player0x  +  1
+
+	INC player0x
+.L028 ;;line 45;;  score = score  +  4
+
+	SED
+	CLC
+	LDA score+2
+	ADC #$04
+	STA score+2
+	LDA score+1
+	ADC #$00
+	STA score+1
+	LDA score
+	ADC #$00
+	STA score
+	CLD
+.L029 ;;line 46;;  case 5
+
+	jmp .endswitch0
+.skipcase3
+	LDA player_state
+	CMP #5
+	bne .skipcase4
+.L030 ;;line 47;;  COLUBK = $44
+
+	LDA #$44
+	STA COLUBK
+.L031 ;;line 48;;  score = score  +  10
+
+	SED
+	CLC
+	LDA score+2
+	ADC #$10
+	STA score+2
+	LDA score+1
+	ADC #$00
+	STA score+1
+	LDA score
+	ADC #$00
+	STA score
+	CLD
+.L032 ;;line 49;;  default
+
+	jmp .endswitch0
+.skipcase4
+.L033 ;;line 50;;  rem Idle state fallback
+
+.L034 ;;line 51;;  COLUBK = $00
+
+	LDA #$00
+	STA COLUBK
+.L035 ;;line 52;;  endswitch
+
+.endswitch0
 .
- ;;line 34;; 
+ ;;line 53;; 
 
-.L024 ;;line 35;;  rem Tap FIRE to toggle bit 1 (+2 / -2) with simple button debounce
-
-.L025 ;;line 36;;  if joy0fire  &&  debouncestate = 0 then togglebit playerflags 1  :  debouncestate = 1
-
- bit INPT4
-	BMI .skipL025
-.condpart4
-	LDA debouncestate
-	CMP #0
-     BNE .skip4then
-.condpart5
-	LDA playerflags
-	EOR #2
-	STA playerflags
-	LDA #1
-	STA debouncestate
-.skip4then
-.skipL025
-.L026 ;;line 37;;  if !joy0fire then debouncestate = 0
-
- bit INPT4
-	BPL .skipL026
-.condpart6
-	LDA #0
-	STA debouncestate
-.skipL026
-.
- ;;line 38;; 
-
-.L027 ;;line 39;;  drawscreen
+.L036 ;;line 54;;  drawscreen
 
  jsr drawscreen
-.L028 ;;line 40;;  goto main
+.L037 ;;line 55;;  goto main
 
  jmp .main
+ if (<*) > (<(*+7))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL05_0
+	.byte   %00111100
+	.byte   %01111110
+	.byte   %11011011
+	.byte   %11111111
+	.byte   %11111111
+	.byte   %01111110
+	.byte   %00111100
+	.byte   %00011000
  if ECHOFIRST
        echo "    ",[(scoretable - *)]d , "bytes of ROM space left")
  endif 
