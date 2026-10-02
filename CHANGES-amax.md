@@ -7,6 +7,8 @@ Note that this build is purely experimental and may break something, I'm just te
 
 The compiler now natively supports multi-line conditional blocks with if/then/endif.
 
+I updated "zombie_chase.bas" in the samples subdirectory with an if/then/else/endif block as a usage example.
+
 ### Syntax Example:
 ```basic
  if powerup=1 then
