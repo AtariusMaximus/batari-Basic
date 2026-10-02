@@ -45,7 +45,7 @@ The compiler now includes native commands to manipulate individual bits within a
 
 ## amax.4. Native `switch...case` Block Support
 
-The compiler now supports structural state machine blocks using `switch`, `case`, and `default`. Unlike `on...goto` jump tables, this generates optimized local branch sequences (`CMP` and `BNE`). This allows your cases to jump to routines in other banks.
+The compiler now supports structural state machine blocks using `switch`, `case`, and `default`. 
 
 The `case` evaluation natively supports standard decimal integers, hex (`$0A`), binary (`%00001010`), or even comparisons against other variables. The block should be closed with `endswitch`.
 
