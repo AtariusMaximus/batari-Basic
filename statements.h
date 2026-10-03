@@ -112,3 +112,4 @@ void header_open(FILE *);
 void header_write(FILE *, char *);
 void doswap(char **statement);
 void doclamp(char **statement);
+void do_zero(char **statement);

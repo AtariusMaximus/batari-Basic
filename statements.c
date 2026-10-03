@@ -6580,3 +6580,51 @@ void doclamp(char **statement)
 
     numclamps++;
 }
+void do_zero(char **statement)
+{
+    int i;
+    char arg_string[500] = "";
+    char *token;
+
+    // Combine everything to safely handle spaces, commas, or both
+    for (i = 2; statement[i] != NULL && statement[i][0] != '\0' && statement[i][0] != ':'; ++i) {
+        strcat(arg_string, statement[i]);
+        strcat(arg_string, " "); // Add space separator for tokens
+    }
+
+    // Parse by commas and/or spaces
+    token = strtok(arg_string, ", ");
+    if (!token) {
+        prerror("zero/clear requires at least one variable\n");
+    }
+
+    invalidate_Areg();
+    printf("\tLDA #0\n");
+
+    while (token != NULL) {
+        char varname[100];
+        char getindex0[200];
+        int index = 0;
+        
+        strcpy(varname, token);
+        removeCR(varname);
+        
+        // Native array support (e.g., clear var[1])
+        index = getindex(varname, &getindex0[0]);
+        
+        if (index) {
+            loadindex(&getindex0[0]);   // Safely puts index into X, preserving A
+            printf("\tSTA ");
+            printindex(varname, index); // STA var,x
+        } else if (!strcmp(varname, "score")) {
+            // Score requires clearing all 3 memory locations
+            printf("\tSTA score\n");
+            printf("\tSTA score+1\n");
+            printf("\tSTA score+2\n");
+        } else {
+            printf("\tSTA %s\n", varname);
+        }
+        
+        token = strtok(NULL, ", ");
+    }
+}

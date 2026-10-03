@@ -342,7 +342,9 @@ void keywords(char **cstatement)
 	else if (!strncmp(statement[1], "clearbit", 8))
 	    doclearbit(statement);
 	else if (!strncmp(statement[1], "togglebit", 9))
-	    dotogglebit(statement);
+		dotogglebit(statement);
+	else if (!strncmp(statement[1], "zero", 4) || !strncmp(statement[1], "clear", 5))
+		do_zero(statement);
 	else if (!strncmp(statement[1], "switch", 6))
 	    doswitch(statement);
 	else if (!strncmp(statement[1], "case", 4))
