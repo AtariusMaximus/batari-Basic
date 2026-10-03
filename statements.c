@@ -45,6 +45,16 @@ int pfcolorindexsave = 0;
 int pfcolornumber = 0;
 int isPXE = 0;
 
+// --- Debounce Tracking Globals ---
+int debounce_swcha = 0;
+int debounce_swchb = 0;
+int debounce_inpt4 = 0;
+int debounce_inpt5 = 0;
+int debounce_inpt6 = 0;
+int debounce_inpt7 = 0;
+char joy_reg[20];
+// ---------------------------------
+
 // SE
 char if_stack[100][200];
 int if_stack_ptr = 0;
@@ -951,13 +961,22 @@ void jsr(char *location)
 
 int switchjoy(char *input_source)
 {
-// place joystick/console switch reading code inline instead of as a subroutine
-// standard routines needed for pretty much all games
-// read switches, joysticks now compiler generated (more efficient)
+    // Capture the hardware register being tested for debounce tracking
+    if (strstr(input_source, "joy0fire")) strcpy(joy_reg, "INPT4");
+    else if (strstr(input_source, "joy1fire")) strcpy(joy_reg, "INPT5");
+    else if (strstr(input_source, "joy2fire")) strcpy(joy_reg, "INPT6");
+    else if (strstr(input_source, "joy3fire")) strcpy(joy_reg, "INPT7");
+    else if (strstr(input_source, "switch") && !strstr(input_source, "joy")) strcpy(joy_reg, "SWCHB");
+    else if (strstr(input_source, "joy2") || strstr(input_source, "joy3")) strcpy(joy_reg, "SWCHA2");
+    else strcpy(joy_reg, "SWCHA");
+
+	// place joystick/console switch reading code inline instead of as a subroutine
+	// standard routines needed for pretty much all games
+	// read switches, joysticks now compiler generated (more efficient)
 
     // returns 0 if we need beq/bne, 1 if bvc/bvs, and 2 if bpl/bmi
 
-//  invalidate_Areg()  // do we need this?
+	//  invalidate_Areg()  // do we need this?
 
     if (!strncmp(input_source, "switchreset\0", 11))
     {
@@ -3254,7 +3273,7 @@ void player(char **statement)
 	
 	printf("	sta DF0HI\n");
     }
-    printf("	LDX #<%s\n", label);
+    printf("\tLDX\x20#<%s\n", label);
     if ((multisprite == 2) && (pl != 0))
 	printf("	STX DF0WRITE\n");
     else
@@ -3266,12 +3285,12 @@ void player(char **statement)
     }
     if (multisprite == 2)
 	if(isPXE) {
-		printf("	LDA #>%s\n", label);	// PXE
+		printf("\tLDA\x20#>%s\n", label);	// PXE
 	} else {
-		printf("	LDA #((>%s) & $0f) | (((>%s) / 2) & $70)\n", label, label);	// DPC+
+		printf("\tLDA\x20#((>%s) & $0f) | (((>%s) / 2) & $70)\n", label, label);	// DPC+
 	}
     else
-	printf("	LDA #>%s\n", label);
+	printf("\tLDA\x20#>%s\n", label);
     if ((multisprite == 2) && (pl != 0))
 	printf("	STA DF0WRITE\n");
     else
@@ -3712,11 +3731,57 @@ void doif(char **statement)
 	}
     }
 
+int edge_detect = 0;
+    if ((!strncmp(statement[2], "joy", 3)) || (!strncmp(statement[2], "switch", 6))) {
+        if (statement[3] != NULL && !strncmp(statement[3], "pressed\0", 8)) {
+            edge_detect = 1;
+            compressdata(statement, 3, 1);
+        } else if (statement[3] != NULL && !strncmp(statement[3], "released\0", 9)) {
+            edge_detect = 2;
+            compressdata(statement, 3, 1);
+        } else if (statement[3] != NULL && !strncmp(statement[3], "held\0", 5)) {
+            compressdata(statement, 3, 1);
+        }
+    }
+
     if ((!strncmp(statement[2], "joy0\0", 4)) || (!strncmp (statement[2], "joy1\0", 4)) || (isPXE && ((!strncmp(statement[2], "joy2\0", 4)) || (!strncmp (statement[2], "joy3\0", 4)))) || (!strncmp(statement[2], "switch\0", 6)))
     {
 	i = switchjoy(statement[2]);
+
+        if (edge_detect) {
+            if (!strcmp(joy_reg, "SWCHA") || !strcmp(joy_reg, "SWCHA2")) debounce_swcha = 1;
+            else if (!strcmp(joy_reg, "SWCHB")) debounce_swchb = 1;
+            else if (!strcmp(joy_reg, "INPT4")) debounce_inpt4 = 1;
+            else if (!strcmp(joy_reg, "INPT5")) debounce_inpt5 = 1;
+            else if (!strcmp(joy_reg, "INPT6")) debounce_inpt6 = 1;
+            else if (!strcmp(joy_reg, "INPT7")) debounce_inpt7 = 1;
+        }
+
 	if (!islabel(statement))
 	{
+            if (edge_detect) {
+                if (edge_detect == 1) { // PRESSED
+                    if (!i) {
+                        printf("\tBNE .skip%s\n\tBIT _last_%s\n\tBEQ .skip%s\n", statement[0], joy_reg, statement[0]);
+                    } else if (i == 1) {
+                        printf("\tBVS .skip%s\n\tBIT _last_%s\n\tBVC .skip%s\n", statement[0], joy_reg, statement[0]);
+                    } else if (i == 2) {
+                        printf("\tBMI .skip%s\n\tBIT _last_%s\n\tBPL .skip%s\n", statement[0], joy_reg, statement[0]);
+                    }
+                } else if (edge_detect == 2) { // RELEASED
+                    if (!i) {
+                        printf("\tBEQ .skip%s\n\tBIT _last_%s\n\tBNE .skip%s\n", statement[0], joy_reg, statement[0]);
+                    } else if (i == 1) {
+                        printf("\tBVC .skip%s\n\tBIT _last_%s\n\tBVS .skip%s\n", statement[0], joy_reg, statement[0]);
+                    } else if (i == 2) {
+                        printf("\tBPL .skip%s\n\tBIT _last_%s\n\tBMI .skip%s\n", statement[0], joy_reg, statement[0]);
+                    }
+                }
+                printf("\tJMP .%s\n.skip%s\n", statement[4], statement[0]);
+                freemem(dealloccstatement);
+                return;
+            }
+
 	    if (!i)
 	    {
 		if (not)
@@ -3744,29 +3809,49 @@ void doif(char **statement)
 	}
 	else			// then statement
 	{
-	    if (!i)
-	    {
-		if (not)
-		    printf("	BEQ ");
-		else
-		    printf("	BNE ");
-	    }
-	    if (i == 1)
-	    {
-		if (not)
-		    printf("	BVC ");
-		else
-		    printf("	BVS ");
-	    }
-	    if (i == 2)
-	    {
-		if (not)
-		    printf("	BPL ");
-		else
-		    printf("	BMI ");
-	    }
+            if (edge_detect) {
+                if (edge_detect == 1) { // PRESSED
+                    if (!i) {
+                        printf("	BNE .skip%s\n	BIT _last_%s\n	BEQ .skip%s\n", statement[0], joy_reg, statement[0]);
+                    } else if (i == 1) {
+                        printf("	BVS .skip%s\n	BIT _last_%s\n	BVC .skip%s\n", statement[0], joy_reg, statement[0]);
+                    } else if (i == 2) {
+                        printf("	BMI .skip%s\n	BIT _last_%s\n	BPL .skip%s\n", statement[0], joy_reg, statement[0]);
+                    }
+                } else if (edge_detect == 2) { // RELEASED
+                    if (!i) {
+                        printf("	BEQ .skip%s\n	BIT _last_%s\n	BNE .skip%s\n", statement[0], joy_reg, statement[0]);
+                    } else if (i == 1) {
+                        printf("	BVC .skip%s\n	BIT _last_%s\n	BVS .skip%s\n", statement[0], joy_reg, statement[0]);
+                    } else if (i == 2) {
+                        printf("	BPL .skip%s\n	BIT _last_%s\n	BMI .skip%s\n", statement[0], joy_reg, statement[0]);
+                    }
+                }
+            } else {
+	        if (!i)
+	        {
+		    if (not)
+		        printf("	BEQ ");
+		    else
+		        printf("	BNE ");
+	        }
+	        if (i == 1)
+	        {
+		    if (not)
+		        printf("	BVC ");
+		    else
+		        printf("	BVS ");
+	        }
+	        if (i == 2)
+	        {
+		    if (not)
+		        printf("	BMI ");
+		    else
+		        printf("	BPL ");
+	        }
 
-	    printf(".skip%s\n", statement[0]);
+	        printf(".skip%s\n", statement[0]);
+            }
 	    // separate statement
 	    for (i = 3; i < 200; ++i)
 	    {
@@ -6048,7 +6133,33 @@ void bvs(char *linenumber)
 
 void drawscreen()
 {
+    static int debounce_allocated = 0;
     invalidate_Areg();
+
+    // Map debounce tracking safely to the bottom of zero-page RAM
+    if (!debounce_allocated && (debounce_swcha || debounce_swchb || debounce_inpt4 || debounce_inpt5 || debounce_inpt6 || debounce_inpt7)) {
+        if (debounce_swcha) {
+            printf("_last_SWCHA = $F0\n");
+            if (isPXE) printf("_last_SWCHA2 = $F6\n"); 
+        }
+        if (debounce_swchb) printf("_last_SWCHB = $F1\n");
+        if (debounce_inpt4) printf("_last_INPT4 = $F2\n");
+        if (debounce_inpt5) printf("_last_INPT5 = $F3\n");
+        if (debounce_inpt6) printf("_last_INPT6 = $F4\n");
+        if (debounce_inpt7) printf("_last_INPT7 = $F5\n");
+        debounce_allocated = 1;
+    }
+
+    if (debounce_swcha) {
+        printf("\tLDA SWCHA\n\tSTA _last_SWCHA\n");
+        if (isPXE) printf("\tLDA SWCHA2\n\tSTA _last_SWCHA2\n");
+    }
+    if (debounce_swchb) printf("\tLDA SWCHB\n\tSTA _last_SWCHB\n");
+    if (debounce_inpt4) printf("\tLDA INPT4\n\tSTA _last_INPT4\n");
+    if (debounce_inpt5) printf("\tLDA INPT5\n\tSTA _last_INPT5\n");
+    if (debounce_inpt6) printf("\tLDA INPT6\n\tSTA _last_INPT6\n");
+    if (debounce_inpt7) printf("\tLDA INPT7\n\tSTA _last_INPT7\n");
+
     if (multisprite == 2)
 	jsrbank1("drawscreen");
     else
