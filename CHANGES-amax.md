@@ -76,8 +76,6 @@ See "test_switch.bas" in the samples subdirectory for a usage example.
 
 The compiler now natively supports edge detection for all joystick and console switches using the `pressed` and `released` modifiers. This eliminates the need to write manual debounce logic or waste RAM on state-tracking variables. 
 
-The compiler intelligently analyzes your code; if it detects these modifiers, it dynamically allocates a single tracking byte per hardware register and snapshots the state natively during the `drawscreen` routine. If you don't use the modifiers, zero extra RAM or CPU cycles are consumed.
-
 ### Syntax Example:
 ```basic
  rem Fires exactly once per button press, preventing "machine-gun" firing
