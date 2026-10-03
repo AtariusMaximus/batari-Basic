@@ -22,6 +22,7 @@ extern void doswitch(char **);
 extern void docase(char **);
 extern void dodefault(char **);
 extern void doendswitch(char **);
+extern void doswap(char **);
 
 int swaptest(char *value)	// check for then, && or ||
 {
@@ -336,11 +337,6 @@ void keywords(char **cstatement)
 	    doelse();
 	    break;
 	}
-	else if (!strncmp(statement[1], "else", 4))
-	{
-	    doelse();
-	    break;
-	}
     else if (!strncmp(statement[1], "setbit", 6))
 	    dosetbit(statement);
 	else if (!strncmp(statement[1], "clearbit", 8))
@@ -353,11 +349,13 @@ void keywords(char **cstatement)
 	    docase(statement);
 	else if (!strncmp(statement[1], "default", 7))
 	    dodefault(statement);
-	else if (!strncmp(statement[1], "endswitch", 9))
-	    doendswitch(statement);
-	else if (!strncmp(statement[1], "goto", 5))
-	    dogoto(statement);
-	else if (!strncmp(statement[1], "bank", 5))
+    else if (!strncmp(statement[1], "endswitch", 9))
+        doendswitch(statement);
+    else if (!strncmp(statement[1], "swap", 4))
+        doswap(statement);
+    else if (!strncmp(statement[1], "goto", 5))
+        dogoto(statement);
+    else if (!strncmp(statement[1], "bank", 5))
 	    newbank(atoi(statement[2]));
 	else if (!strncmp(statement[1], "sdata", 6))
 	    sdata(statement);

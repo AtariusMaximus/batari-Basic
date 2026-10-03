@@ -110,3 +110,4 @@ int isimmed(char *);
 int number(unsigned char);
 void header_open(FILE *);
 void header_write(FILE *, char *);
+void doswap(char **statement);

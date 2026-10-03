@@ -3316,7 +3316,7 @@
    1991  f509				   .L060		;;line 100;;  if switchrightb then PF0 = 0 else PF0 = 63
    1992  f509
    1993  f509		       2c 82 02 	      bit	SWCHB
-   1994  f50c		       30 07		      BMI	.skipL060
+   1994  f50c		       10 07		      BPL	.skipL060
    1995  f50e				   .condpart3
    1996  f50e		       a9 00		      LDA	#0
    1997  f510		       85 0d		      STA	PF0
@@ -3351,7 +3351,7 @@
    2026  f527				   .L063		;;line 104;;  if !joy0fire then
    2027  f527
    2028  f527		       24 0c		      bit	INPT4
-   2029  f529		       10 05		      BPL	.skipL063
+   2029  f529		       30 05		      BMI	.skipL063
    2030  f52b				   .condpart4
    2031  f52b				   .L064		;;line 105;;  timer1 = timer1 + 1
    2032  f52b
@@ -3384,7 +3384,7 @@
    2059  f53a				   .L069		;;line 111;;  if joy0fire then score = 0 : timer1 = 0 : timer2 = 0 : gamebits{7} = 1 : pfclear
    2060  f53a
    2061  f53a		       24 0c		      bit	INPT4
-   2062  f53c		       30 1d		      BMI	.skipL069
+   2062  f53c		       10 1d		      BPL	.skipL069
    2063  f53e				   .condpart5
    2064  f53e		       a9 00		      LDA	#$00
    2065  f540		       85 95		      STA	score+2
@@ -3612,7 +3612,7 @@
    2287  f62e				   .L089		;;line 137;;  if joy0fire then velocity = velocity + 0.0625 : goto nomove1
    2288  f62e
    2289  f62e		       24 0c		      bit	INPT4
-   2290  f630		       30 0a		      BMI	.skipL089
+   2290  f630		       10 0a		      BPL	.skipL089
    2291  f632				   .condpart12
    2292  f632		       18		      CLC
    2293  f633		       a5 d9		      LDA	velocity
@@ -4866,7 +4866,7 @@
    3541  fb00				   .L0222		;;line 334;;  if joy0right then carpos = carpos + 1 : gamebits{0} = 1
    3542  fb00
    3543  fb00		       2c 80 02 	      bit	SWCHA
-   3544  fb03		       30 08		      BMI	.skipL0222
+   3544  fb03		       10 08		      BPL	.skipL0222
    3545  fb05				   .condpart49
    3546  fb05		       e6 d4		      INC	carpos
    3547  fb07		       a5 d8		      LDA	gamebits

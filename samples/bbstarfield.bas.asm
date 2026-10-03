@@ -1646,171 +1646,499 @@ scorepointerset
      tax
      rts
 game
-.L00 ;;line 1;;  rem --- Bitwise Macro Test ---
+.
+ ;;line 1;; 
 
-.L01 ;;line 2;;  dim playerflags = a
-
-.L02 ;;line 3;;  dim debouncestate = b
+.L00 ;;line 2;;  rem ** Demo of the Cosmic Ark starfield direction in bB
 
 .
- ;;line 4;; 
+ ;;line 3;; 
 
-.L03 ;;line 5;;  dim scoreHI = score
+.L01 ;;line 4;;  rem ** no_blank_lines takes away missile0, so we'll create our starfield
 
-.L04 ;;line 6;;  dim scoreMED = score + 1
+.L02 ;;line 5;;  rem ** using it.
 
-.L05 ;;line 7;;  dim scoreLO = score + 2
+.L03 ;;line 6;;  set kernel_options no_blank_lines
 
 .
- ;;line 8;; 
+ ;;line 7;; 
 
-.L06 ;;line 9;;  score = 0
+.L04 ;;line 8;;  scorecolor = $0f
 
-	LDA #$00
+	LDA #$0f
+	STA scorecolor
+.
+ ;;line 9;; 
+
+.L05 ;;line 10;;  dim frame = a
+
+.L06 ;;line 11;;  dim direction = b
+
+.
+ ;;line 12;; 
+
+.L07 ;;line 13;;  CTRLPF = 5
+
+	LDA #5
+	STA CTRLPF
+.L08 ;;line 14;;  playfield:
+
+  ifconst pfres
+	  ldx #(11>pfres)*(pfres*pfwidth-1)+(11<=pfres)*43
+  else
+	  ldx #((11*pfwidth-1)*((11*pfwidth-1)<47))+(47*((11*pfwidth-1)>=47))
+  endif
+	jmp pflabel0
+PF_data0
+	.byte %00000000, %00000000
+	if (pfwidth>2)
+	.byte %00000000, %00000000
+ endif
+	.byte %00000000, %00000000
+	if (pfwidth>2)
+	.byte %00000000, %00000000
+ endif
+	.byte %00000000, %00000000
+	if (pfwidth>2)
+	.byte %00000000, %00000000
+ endif
+	.byte %00000000, %00000000
+	if (pfwidth>2)
+	.byte %00000000, %00000000
+ endif
+	.byte %00000000, %00000000
+	if (pfwidth>2)
+	.byte %00000000, %00000000
+ endif
+	.byte %00000000, %00000000
+	if (pfwidth>2)
+	.byte %00000000, %00000000
+ endif
+	.byte %00000000, %00000000
+	if (pfwidth>2)
+	.byte %00000000, %00000000
+ endif
+	.byte %00000000, %00000000
+	if (pfwidth>2)
+	.byte %00000000, %00000000
+ endif
+	.byte %00000011, %11111111
+	if (pfwidth>2)
+	.byte %11111111, %00000011
+ endif
+	.byte %00011111, %11111111
+	if (pfwidth>2)
+	.byte %11111111, %00011111
+ endif
+	.byte %11111111, %11111111
+	if (pfwidth>2)
+	.byte %11111111, %11111111
+ endif
+pflabel0
+	lda PF_data0,x
+	sta playfield,x
+	dex
+	bpl pflabel0
+.
+ ;;line 27;; 
+
+.L09 ;;line 28;;  player0:
+
+	LDX #<playerL09_0
+	STX player0pointerlo
+	LDA #>playerL09_0
+	STA player0pointerhi
+	LDA #4
+	STA player0height
+.
+ ;;line 35;; 
+
+.L010 ;;line 36;;  player1:
+
+	LDX #<playerL010_1
+	STX player1pointerlo
+	LDA #>playerL010_1
+	STA player1pointerhi
+	LDA #4
+	STA player1height
+.
+ ;;line 43;; 
+
+.
+ ;;line 44;; 
+
+.L011 ;;line 45;;  rem ** position the other objects, to prove we still can
+
+.L012 ;;line 46;;  player0x = 50 : player0y = 40
+
+	LDA #50
+	STA player0x
+	LDA #40
+	STA player0y
+.L013 ;;line 47;;  player1x = 120 : player1y = 40
+
+	LDA #120
+	STA player1x
+	LDA #40
+	STA player1y
+.L014 ;;line 48;;  ballx = 70 : bally = 40 : ballheight = 6
+
+	LDA #70
+	STA ballx
+	LDA #40
+	STA bally
+	LDA #6
+	STA ballheight
+.L015 ;;line 49;;  missile1x = 100 : missile1y = 40 : missile1height = 6
+
+	LDA #100
+	STA missile1x
+	LDA #40
+	STA missile1y
+	LDA #6
+	STA missile1height
+.
+ ;;line 50;; 
+
+.L016 ;;line 51;;  direction = 2
+
+	LDA #2
+	STA direction
+.
+ ;;line 52;; 
+
+.mainloop
+ ;;line 53;; mainloop
+
+.L017 ;;line 54;;  COLUP0 = $0A
+
+	LDA #$0A
+	STA COLUP0
+.L018 ;;line 55;;  COLUP1 = $44
+
+	LDA #$44
+	STA COLUP1
+.L019 ;;line 56;;  COLUBK = $80
+
+	LDA #$80
+	STA COLUBK
+.L020 ;;line 57;;  COLUPF = $B4
+
+	LDA #$B4
+	STA COLUPF
+.
+ ;;line 58;; 
+
+.L021 ;;line 59;;  frame = frame + 1
+
+	INC frame
+.L022 ;;line 60;;  if frame = 0 then direction = direction + 1
+
+	LDA frame
+	CMP #0
+     BNE .skipL022
+.condpart0
+	INC direction
+.skipL022
+.L023 ;;line 61;;  if direction > 7 then direction = 0
+
+	LDA #7
+	CMP direction
+     BCS .skipL023
+.condpart1
+	LDA #0
+	STA direction
+.skipL023
+.
+ ;;line 62;; 
+
+.L024 ;;line 63;;  ENAM0 = 2  :  rem ** set ENAM0=0 when you want the stars to be gone
+
+	LDA #2
+	STA ENAM0
+.
+ ;;line 64;; 
+
+.L025 ;;line 65;;  temp2 = frame & 1
+
+	LDA frame
+	AND #1
+	STA temp2
+.L026 ;;line 66;;  rem ** Adjusting missile0x moves the stars
+
+.L027 ;;line 67;;  if direction = 0 then missile0x = missile0x + 1 : score = 1
+
+	LDA direction
+	CMP #0
+     BNE .skipL027
+.condpart2
+	INC missile0x
+	LDA #$01
 	STA score+2
 	LDA #$00
 	STA score+1
 	LDA #$00
 	STA score
-.L07 ;;line 10;;  playerflags = 0
+.skipL027
+.L028 ;;line 68;;  if direction = 1 then missile0x = missile0x + 18 : score = 18
 
-	LDA #0
-	STA playerflags
-.L08 ;;line 11;;  debouncestate = 0
-
-	LDA #0
-	STA debouncestate
-.
- ;;line 12;; 
-
-.main
- ;;line 13;; main
-
-.L09 ;;line 14;;  COLUBK = $00
-
-	LDA #$00
-	STA COLUBK
-.L010 ;;line 15;;  COLUP0 = $18
-
-	LDA #$18
-	STA COLUP0
-.L011 ;;line 16;;  COLUP1 = $18
-
-	LDA #$18
-	STA COLUP1
-.L012 ;;line 17;;  COLUPF = $88
-
-	LDA #$88
-	STA COLUPF
-.L013 ;;line 18;;  scorecolor = $0E
-
-	LDA #$0E
-	STA scorecolor
-.
- ;;line 19;; 
-
-.L014 ;;line 20;;  rem Put playerflags into the bottom byte of the score
-
-.L015 ;;line 21;;  scoreLO = playerflags
-
-	LDA playerflags
-	STA scoreLO
-.
- ;;line 22;; 
-
-.L016 ;;line 23;;  rem Push UP to turn bit 0 ON (+1)
-
-.L017 ;;line 24;;  if joy0up then setbit playerflags 0
-
- lda #$10
- bit SWCHA
-	BNE .skipL017
-.condpart0
-	LDA playerflags
-	ORA #1
-	STA playerflags
-.skipL017
-.
- ;;line 25;; 
-
-.L018 ;;line 26;;  rem Push DOWN to turn bit 0 OFF (-1)
-
-.L019 ;;line 27;;  if joy0down then clearbit playerflags 0
-
- lda #$20
- bit SWCHA
-	BNE .skipL019
-.condpart1
-	LDA playerflags
-	AND #254
-	STA playerflags
-.skipL019
-.
- ;;line 28;; 
-
-.L020 ;;line 29;;  rem Push LEFT to turn bit 4 ON (+16 in hex = $10)
-
-.L021 ;;line 30;;  if joy0left then setbit playerflags 4
-
- bit SWCHA
-	BVS .skipL021
-.condpart2
-	LDA playerflags
-	ORA #16
-	STA playerflags
-.skipL021
-.
- ;;line 31;; 
-
-.L022 ;;line 32;;  rem Push RIGHT to turn bit 4 OFF
-
-.L023 ;;line 33;;  if joy0right then clearbit playerflags 4
-
- bit SWCHA
-	BMI .skipL023
+	LDA direction
+	CMP #1
+     BNE .skipL028
 .condpart3
-	LDA playerflags
-	AND #239
-	STA playerflags
-.skipL023
-.
- ;;line 34;; 
+	LDA missile0x
+	CLC
+	ADC #18
+	STA missile0x
+	LDA #$18
+	STA score+2
+	LDA #$00
+	STA score+1
+	LDA #$00
+	STA score
+.skipL028
+.L029 ;;line 69;;  if direction = 2  &&  temp2 = 1 then missile0x = missile0x + 18 : score = 18
 
-.L024 ;;line 35;;  rem Tap FIRE to toggle bit 1 (+2 / -2) with simple button debounce
-
-.L025 ;;line 36;;  if joy0fire  &&  debouncestate = 0 then togglebit playerflags 1  :  debouncestate = 1
-
- bit INPT4
-	BMI .skipL025
+	LDA direction
+	CMP #2
+     BNE .skipL029
 .condpart4
-	LDA debouncestate
-	CMP #0
+	LDA temp2
+	CMP #1
      BNE .skip4then
 .condpart5
-	LDA playerflags
-	EOR #2
-	STA playerflags
-	LDA #1
-	STA debouncestate
+	LDA missile0x
+	CLC
+	ADC #18
+	STA missile0x
+	LDA #$18
+	STA score+2
+	LDA #$00
+	STA score+1
+	LDA #$00
+	STA score
 .skip4then
-.skipL025
-.L026 ;;line 37;;  if !joy0fire then debouncestate = 0
+.skipL029
+.L030 ;;line 70;;  if direction = 2  &&  temp2 = 0 then missile0x = missile0x + 16 : score = 16
 
- bit INPT4
-	BPL .skipL026
+	LDA direction
+	CMP #2
+     BNE .skipL030
 .condpart6
-	LDA #0
-	STA debouncestate
-.skipL026
-.
- ;;line 38;; 
+	LDA temp2
+	CMP #0
+     BNE .skip6then
+.condpart7
+	LDA missile0x
+	CLC
+	ADC #16
+	STA missile0x
+	LDA #$16
+	STA score+2
+	LDA #$00
+	STA score+1
+	LDA #$00
+	STA score
+.skip6then
+.skipL030
+.L031 ;;line 71;;  if direction = 3 then missile0x = missile0x + 16 : score = 16
 
-.L027 ;;line 39;;  drawscreen
+	LDA direction
+	CMP #3
+     BNE .skipL031
+.condpart8
+	LDA missile0x
+	CLC
+	ADC #16
+	STA missile0x
+	LDA #$16
+	STA score+2
+	LDA #$00
+	STA score+1
+	LDA #$00
+	STA score
+.skipL031
+.L032 ;;line 72;;  if direction = 4 then missile0x = missile0x - 1 : score = 1
+
+	LDA direction
+	CMP #4
+     BNE .skipL032
+.condpart9
+	DEC missile0x
+	LDA #$01
+	STA score+2
+	LDA #$00
+	STA score+1
+	LDA #$00
+	STA score
+.skipL032
+.L033 ;;line 73;;  if direction = 5 then missile0x = missile0x - 18 : score = 18
+
+	LDA direction
+	CMP #5
+     BNE .skipL033
+.condpart10
+	LDA missile0x
+	SEC
+	SBC #18
+	STA missile0x
+	LDA #$18
+	STA score+2
+	LDA #$00
+	STA score+1
+	LDA #$00
+	STA score
+.skipL033
+.L034 ;;line 74;;  if direction = 6  &&  temp2 = 1 then missile0x = missile0x - 18 : score = 18
+
+	LDA direction
+	CMP #6
+     BNE .skipL034
+.condpart11
+	LDA temp2
+	CMP #1
+     BNE .skip11then
+.condpart12
+	LDA missile0x
+	SEC
+	SBC #18
+	STA missile0x
+	LDA #$18
+	STA score+2
+	LDA #$00
+	STA score+1
+	LDA #$00
+	STA score
+.skip11then
+.skipL034
+.L035 ;;line 75;;  if direction = 6  &&  temp2 = 0 then missile0x = missile0x - 16 : score = 16
+
+	LDA direction
+	CMP #6
+     BNE .skipL035
+.condpart13
+	LDA temp2
+	CMP #0
+     BNE .skip13then
+.condpart14
+	LDA missile0x
+	SEC
+	SBC #16
+	STA missile0x
+	LDA #$16
+	STA score+2
+	LDA #$00
+	STA score+1
+	LDA #$00
+	STA score
+.skip13then
+.skipL035
+.L036 ;;line 76;;  if direction = 7 then missile0x = missile0x - 16 : score = 16
+
+	LDA direction
+	CMP #7
+     BNE .skipL036
+.condpart15
+	LDA missile0x
+	SEC
+	SBC #16
+	STA missile0x
+	LDA #$16
+	STA score+2
+	LDA #$00
+	STA score+1
+	LDA #$00
+	STA score
+.skipL036
+.
+ ;;line 77;; 
+
+.L037 ;;line 78;;  rem ** You need to ensure the missile0x position ranges from 0-159. 
+
+.L038 ;;line 79;;  rem ** If missile0x is 0 and decreases, then set it to 159. 
+
+.L039 ;;line 80;;  rem ** If missile0x is 159 and increases, set it to 0.
+
+.L040 ;;line 81;;  if missile0x > 200 then missile0x = missile0x + 160
+
+	LDA #200
+	CMP missile0x
+     BCS .skipL040
+.condpart16
+	LDA missile0x
+	CLC
+	ADC #160
+	STA missile0x
+.skipL040
+.L041 ;;line 82;;  if missile0x > 159 then missile0x = missile0x - 160
+
+	LDA #159
+	CMP missile0x
+     BCS .skipL041
+.condpart17
+	LDA missile0x
+	SEC
+	SBC #160
+	STA missile0x
+.skipL041
+.
+ ;;line 83;; 
+
+.L042 ;;line 84;;  drawscreen
 
  jsr drawscreen
-.L028 ;;line 40;;  goto main
+.L043 ;;line 85;;  goto mainloop
 
- jmp .main
+ jmp .mainloop
+.
+ ;;line 86;; 
+
+.L044 ;;line 87;;  vblank
+
+vblank_bB_code
+.L045 ;;line 88;;  rem ** Enable the TIA bug that causes missile0 to be repeated
+
+.L046 ;;line 89;;  asm
+
+ lda #$ff
+
+ sta HMM0
+
+ lda #$c0
+
+ sta WSYNC
+
+ sta HMOVE
+
+ sleep 5
+
+ sta HMM0
+
+.L047 ;;line 98;;  return
+
+	RTS
+ if (<*) > (<(*+4))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL09_0
+	.byte  %10000001
+	.byte  %11000011
+	.byte  %11111111
+	.byte  %01011010
+	.byte  %00111100
+ if (<*) > (<(*+4))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL010_1
+	.byte  %00111100
+	.byte  %01011010
+	.byte  %11111111
+	.byte  %11000011
+	.byte  %10000001
  if ECHOFIRST
        echo "    ",[(scoretable - *)]d , "bytes of ROM space left")
  endif 

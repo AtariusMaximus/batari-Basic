@@ -31,67 +31,1015 @@
    .byte 0 ; stop unexpected bankswitches
  endif
  endif
-; Provided under the CC0 license. See the included LICENSE.txt for details.
+game
+.L00 ;;line 1;;  rem ** The 64k branching bug trigger
 
-start
- sei
- cld
- ldy #0
- lda $D0
- cmp #$2C               ;check RAM location #1
- bne MachineIs2600
- lda $D1
- cmp #$A9               ;check RAM location #2
- bne MachineIs2600
- dey
-MachineIs2600
- ldx #0
- txa
-clearmem
- inx
- txs
+.L01 ;;line 2;;  rem **
+
+.L02 ;;line 3;;  rem ** compiling this program should warn about a reverse branch that will
+
+.L03 ;;line 4;;  rem ** accidentally trigger a bankswitch.
+
+.L04 ;;line 5;;  rem ** 
+
+.L05 ;;line 6;;  rem ** this program will "crash" if run.
+
+.
+ ;;line 7;; 
+
+.L06 ;;line 8;;  set romsize 64k
+
+.
+ ;;line 9;; 
+
+.L07 ;;line 10;;  dim sc0 = score
+
+.
+ ;;line 11;; 
+
+.
+ ;;line 12;; 
+
+.L08 ;;line 13;;  goto main
+
+ jmp .main
+.
+ ;;line 14;; 
+
+.L09 ;;line 15;;  rem ** waste some space, because the bug is triggered by a reverse branch
+
+.L010 ;;line 16;;  rem ** from the last page of rom to certain bytes in the second last page 
+
+.L011 ;;line 17;;  rem ** of ROM
+
+.L012 ;;line 18;;  asm
+
+  
+
+  REPEAT 3798 
+
+  
+
+  nop
+
+  REPEND
+
+.
+ ;;line 25;; 
+
+.main
+ ;;line 26;; main
+
+.L013 ;;line 27;;  scorecolor = $0f
+
+	LDA #$0f
+	STA scorecolor
+.L014 ;;line 28;;  for q = 0 to 9
+
+	LDA #0
+	STA q
+.L014forq
+.L015 ;;line 29;;  asm
+
+    REPEAT 32 
+
+    nop
+
+    REPEND
+
+.L016 ;;line 34;;  next
+
+	LDA q
+	CMP #9
+	INC q
+	bcc .L014forq
+ if ( (((((#>*)&$1f)*256)|(#<.L014forq))>=bankswitch_hotspot) && (((((#>*)&$1f)*256)|(#<.L014forq))<=(bankswitch_hotspot+bs_mask)) )
+   echo "WARNING: branch near the end of bank 1 may accidentally trigger a bankswitch. Reposition code there if bad things happen."
+ endif
+.L017 ;;line 35;;  drawscreen
+
+ sta temp7
+ lda #(((>(ret_point1-1)) & $0F) | $00) 
  pha
- bne clearmem
- sty temp1
- ifnconst multisprite
- ifconst pfrowheight
- lda #pfrowheight
- else
- ifconst pfres
- lda #(96/pfres)
- else
- lda #8
- endif
- endif
- sta playfieldpos
- endif
- ldx #5
-initscore
- lda #<scoretable
- sta scorepointers,x 
- dex
- bpl initscore
- lda #1
- sta CTRLPF
- ora INTIM
- sta rand
+ lda #<(ret_point1-1)
+ pha
+ lda #>(drawscreen-1)
+ pha
+ lda #<(drawscreen-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #16
+ jmp BS_jsr
+ret_point1
+.L018 ;;line 36;;  goto main
 
- ifconst multisprite
-   jsr multisprite_setup
- endif
+ jmp .main
+.
+ ;;line 37;; 
 
- ifnconst bankswitch
-   jmp game
- else
-   lda #>(game-1)
-   pha
-   lda #<(game-1)
-   pha
-   pha
-   pha
-   ldx #1
-   jmp BS_jsr
+ if ECHO1
+ echo "    ",[(start_bank1 - *)]d , "bytes of ROM space left in bank 1")
  endif
+ECHO1 = 1
+ ORG $1FE0-bscode_length
+ RORG $1FE0-bscode_length
+start_bank1 ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+ pha
+ txa
+ pha
+ tsx
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
+ endif
+ ORG $1FFC
+ RORG $1FFC
+ .word (start_bank1 & $ffff)
+ .word (start_bank1 & $ffff)
+ ORG $2000
+ RORG $3000
+ if ECHO2
+ echo "    ",[(start_bank2 - *)]d , "bytes of ROM space left in bank 2")
+ endif
+ECHO2 = 1
+ ORG $2FE0-bscode_length
+ RORG $3FE0-bscode_length
+start_bank2 ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+ pha
+ txa
+ pha
+ tsx
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
+ endif
+ ORG $2FFC
+ RORG $3FFC
+ .word (start_bank2 & $ffff)
+ .word (start_bank2 & $ffff)
+ ORG $3000
+ RORG $5000
+ if ECHO3
+ echo "    ",[(start_bank3 - *)]d , "bytes of ROM space left in bank 3")
+ endif
+ECHO3 = 1
+ ORG $3FE0-bscode_length
+ RORG $5FE0-bscode_length
+start_bank3 ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+ pha
+ txa
+ pha
+ tsx
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
+ endif
+ ORG $3FFC
+ RORG $5FFC
+ .word (start_bank3 & $ffff)
+ .word (start_bank3 & $ffff)
+ ORG $4000
+ RORG $7000
+ if ECHO4
+ echo "    ",[(start_bank4 - *)]d , "bytes of ROM space left in bank 4")
+ endif
+ECHO4 = 1
+ ORG $4FE0-bscode_length
+ RORG $7FE0-bscode_length
+start_bank4 ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+ pha
+ txa
+ pha
+ tsx
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
+ endif
+ ORG $4FFC
+ RORG $7FFC
+ .word (start_bank4 & $ffff)
+ .word (start_bank4 & $ffff)
+ ORG $5000
+ RORG $9000
+ if ECHO5
+ echo "    ",[(start_bank5 - *)]d , "bytes of ROM space left in bank 5")
+ endif
+ECHO5 = 1
+ ORG $5FE0-bscode_length
+ RORG $9FE0-bscode_length
+start_bank5 ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+ pha
+ txa
+ pha
+ tsx
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
+ endif
+ ORG $5FFC
+ RORG $9FFC
+ .word (start_bank5 & $ffff)
+ .word (start_bank5 & $ffff)
+ ORG $6000
+ RORG $B000
+ if ECHO6
+ echo "    ",[(start_bank6 - *)]d , "bytes of ROM space left in bank 6")
+ endif
+ECHO6 = 1
+ ORG $6FE0-bscode_length
+ RORG $BFE0-bscode_length
+start_bank6 ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+ pha
+ txa
+ pha
+ tsx
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
+ endif
+ ORG $6FFC
+ RORG $BFFC
+ .word (start_bank6 & $ffff)
+ .word (start_bank6 & $ffff)
+ ORG $7000
+ RORG $D000
+ if ECHO7
+ echo "    ",[(start_bank7 - *)]d , "bytes of ROM space left in bank 7")
+ endif
+ECHO7 = 1
+ ORG $7FE0-bscode_length
+ RORG $DFE0-bscode_length
+start_bank7 ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+ pha
+ txa
+ pha
+ tsx
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
+ endif
+ ORG $7FFC
+ RORG $DFFC
+ .word (start_bank7 & $ffff)
+ .word (start_bank7 & $ffff)
+ ORG $8000
+ RORG $F000
+ if ECHO8
+ echo "    ",[(start_bank8 - *)]d , "bytes of ROM space left in bank 8")
+ endif
+ECHO8 = 1
+ ORG $8FE0-bscode_length
+ RORG $FFE0-bscode_length
+start_bank8 ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+ pha
+ txa
+ pha
+ tsx
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
+ endif
+ ORG $8FFC
+ RORG $FFFC
+ .word (start_bank8 & $ffff)
+ .word (start_bank8 & $ffff)
+ ORG $9000
+ RORG $11000
+ if ECHO9
+ echo "    ",[(start_bank9 - *)]d , "bytes of ROM space left in bank 9")
+ endif
+ECHO9 = 1
+ ORG $9FE0-bscode_length
+ RORG $11FE0-bscode_length
+start_bank9 ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+ pha
+ txa
+ pha
+ tsx
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
+ endif
+ ORG $9FFC
+ RORG $11FFC
+ .word (start_bank9 & $ffff)
+ .word (start_bank9 & $ffff)
+ ORG $A000
+ RORG $13000
+ if ECHO10
+ echo "    ",[(start_bank10 - *)]d , "bytes of ROM space left in bank 10")
+ endif
+ECHO10 = 1
+ ORG $AFE0-bscode_length
+ RORG $13FE0-bscode_length
+start_bank10 ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+ pha
+ txa
+ pha
+ tsx
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
+ endif
+ ORG $AFFC
+ RORG $13FFC
+ .word (start_bank10 & $ffff)
+ .word (start_bank10 & $ffff)
+ ORG $B000
+ RORG $15000
+ if ECHO11
+ echo "    ",[(start_bank11 - *)]d , "bytes of ROM space left in bank 11")
+ endif
+ECHO11 = 1
+ ORG $BFE0-bscode_length
+ RORG $15FE0-bscode_length
+start_bank11 ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+ pha
+ txa
+ pha
+ tsx
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
+ endif
+ ORG $BFFC
+ RORG $15FFC
+ .word (start_bank11 & $ffff)
+ .word (start_bank11 & $ffff)
+ ORG $C000
+ RORG $17000
+ if ECHO12
+ echo "    ",[(start_bank12 - *)]d , "bytes of ROM space left in bank 12")
+ endif
+ECHO12 = 1
+ ORG $CFE0-bscode_length
+ RORG $17FE0-bscode_length
+start_bank12 ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+ pha
+ txa
+ pha
+ tsx
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
+ endif
+ ORG $CFFC
+ RORG $17FFC
+ .word (start_bank12 & $ffff)
+ .word (start_bank12 & $ffff)
+ ORG $D000
+ RORG $19000
+ if ECHO13
+ echo "    ",[(start_bank13 - *)]d , "bytes of ROM space left in bank 13")
+ endif
+ECHO13 = 1
+ ORG $DFE0-bscode_length
+ RORG $19FE0-bscode_length
+start_bank13 ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+ pha
+ txa
+ pha
+ tsx
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
+ endif
+ ORG $DFFC
+ RORG $19FFC
+ .word (start_bank13 & $ffff)
+ .word (start_bank13 & $ffff)
+ ORG $E000
+ RORG $1B000
+ if ECHO14
+ echo "    ",[(start_bank14 - *)]d , "bytes of ROM space left in bank 14")
+ endif
+ECHO14 = 1
+ ORG $EFE0-bscode_length
+ RORG $1BFE0-bscode_length
+start_bank14 ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+ pha
+ txa
+ pha
+ tsx
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
+ endif
+ ORG $EFFC
+ RORG $1BFFC
+ .word (start_bank14 & $ffff)
+ .word (start_bank14 & $ffff)
+ ORG $F000
+ RORG $1D000
+ if ECHO15
+ echo "    ",[(start_bank15 - *)]d , "bytes of ROM space left in bank 15")
+ endif
+ECHO15 = 1
+ ORG $FFE0-bscode_length
+ RORG $1DFE0-bscode_length
+start_bank15 ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+ pha
+ txa
+ pha
+ tsx
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
+ endif
+ ORG $FFFC
+ RORG $1DFFC
+ .word (start_bank15 & $ffff)
+ .word (start_bank15 & $ffff)
+ ORG $10000
+ RORG $1F000
 ; Provided under the CC0 license. See the included LICENSE.txt for details.
 
      ; This is a 2-line kernel!
@@ -907,6 +1855,67 @@ noshakescreen
 
 ; Provided under the CC0 license. See the included LICENSE.txt for details.
 
+start
+ sei
+ cld
+ ldy #0
+ lda $D0
+ cmp #$2C               ;check RAM location #1
+ bne MachineIs2600
+ lda $D1
+ cmp #$A9               ;check RAM location #2
+ bne MachineIs2600
+ dey
+MachineIs2600
+ ldx #0
+ txa
+clearmem
+ inx
+ txs
+ pha
+ bne clearmem
+ sty temp1
+ ifnconst multisprite
+ ifconst pfrowheight
+ lda #pfrowheight
+ else
+ ifconst pfres
+ lda #(96/pfres)
+ else
+ lda #8
+ endif
+ endif
+ sta playfieldpos
+ endif
+ ldx #5
+initscore
+ lda #<scoretable
+ sta scorepointers,x 
+ dex
+ bpl initscore
+ lda #1
+ sta CTRLPF
+ ora INTIM
+ sta rand
+
+ ifconst multisprite
+   jsr multisprite_setup
+ endif
+
+ ifnconst bankswitch
+   jmp game
+ else
+   lda #>(game-1)
+   pha
+   lda #<(game-1)
+   pha
+   pha
+   pha
+   ldx #1
+   jmp BS_jsr
+ endif
+; Provided under the CC0 license. See the included LICENSE.txt for details.
+
 ; playfield drawing routines
 ; you get a 32x12 bitmapped display in a single color :)
 ; 0-31 and 0-11
@@ -1645,170 +2654,12 @@ scorepointerset
      adc #<scoretable
      tax
      rts
-game
-.L00 ;;line 1;;  rem --- Debounce Demo ---
-
-.
- ;;line 2;; 
-
-.L01 ;;line 3;;  score = 0
-
-	LDA #$00
-	STA score+2
-	LDA #$00
-	STA score+1
-	LDA #$00
-	STA score
-.L02 ;;line 4;;  player0x = 75
-
-	LDA #75
-	STA player0x
-.L03 ;;line 5;;  player0y = 45
-
-	LDA #45
-	STA player0y
-.L04 ;;line 6;;  COLUP0 = $1C
-
-	LDA #$1C
-	STA COLUP0
-.L05 ;;line 7;;  COLUBK = $00
-
-	LDA #$00
-	STA COLUBK
-.
- ;;line 8;; 
-
-.L06 ;;line 9;;  player0:
-
-	LDX #<playerL06_0
-	STX player0pointerlo
-	LDA #>playerL06_0
-	STA player0pointerhi
-	LDA #7
-	STA player0height
-.
- ;;line 19;; 
-
-.main
- ;;line 20;; main
-
-.
- ;;line 21;; 
-
-.L07 ;;line 22;;  rem Tap fire to increment score by exactly 1 (no machine-gunning)
-
-.L08 ;;line 23;;  if joy0fire pressed then score = score  +  1
-
- bit INPT4
-	BMI .skipL08
-	BIT _last_INPT4
-	BPL .skipL08
-.condpart0
-	SED
-	CLC
-	LDA score+2
-	ADC #$01
-	STA score+2
-	LDA score+1
-	ADC #$00
-	STA score+1
-	LDA score
-	ADC #$00
-	STA score
-	CLD
-.skipL08
-.
- ;;line 24;; 
-
-.L09 ;;line 25;;  rem Release fire to flash the background red
-
-.L010 ;;line 26;;  if joy0fire released then COLUBK = $44
-
- bit INPT4
-	BPL .skipL010
-	BIT _last_INPT4
-	BMI .skipL010
-.condpart1
-	LDA #$44
-	STA COLUBK
-.skipL010
-.
- ;;line 27;; 
-
-.L011 ;;line 28;;  rem Background decays back to black normally every frame
-
-.L012 ;;line 29;;  if COLUBK  >  0 then COLUBK = COLUBK  -  2
-
-	LDA #0
-	CMP COLUBK
-     BCS .skipL012
-.condpart2
-	LDA COLUBK
-	SEC
-	SBC #2
-	STA COLUBK
-.skipL012
-.
- ;;line 30;; 
-
-.L013 ;;line 31;;  rem Tap right to warp 8 pixels (won't slide continuously if held)
-
-.L014 ;;line 32;;  if joy0right pressed then player0x = player0x  +  8
-
- bit SWCHA
-	BMI .skipL014
-	BIT _last_SWCHA
-	BPL .skipL014
-.condpart3
-	LDA player0x
-	CLC
-	ADC #8
-	STA player0x
-.skipL014
-.
- ;;line 33;; 
-
-.L015 ;;line 34;;  rem Standard movement on the left D-pad (slides continuously while held)
-
-.L016 ;;line 35;;  if joy0left then player0x = player0x  -  1
-
- bit SWCHA
-	BVS .skipL016
-.condpart4
-	DEC player0x
-.skipL016
-.
- ;;line 36;; 
-
-.L017 ;;line 37;;  drawscreen
-
-	LDA SWCHA
-	STA _last_SWCHA
-	LDA INPT4
-	STA _last_INPT4
- jsr drawscreen
-.L018 ;;line 38;;  goto main
-
- jmp .main
- if (<*) > (<(*+7))
-	repeat ($100-<*)
-	.byte 0
-	repend
-	endif
-playerL06_0
-	.byte   %00111100
-	.byte   %01111110
-	.byte   %11011011
-	.byte   %11111111
-	.byte   %11111111
-	.byte   %01111110
-	.byte   %00111100
-	.byte   %00011000
+;bB.asm
+; bB.asm file is split here
  if ECHOFIRST
-       echo "    ",[(scoretable - *)]d , "bytes of ROM space left")
+       echo "    ",[(scoretable - *)]d , "bytes of ROM space left in bank 16")
  endif 
 ECHOFIRST = 1
- 
  
  
 ; Provided under the CC0 license. See the included LICENSE.txt for details.
@@ -2017,6 +2868,71 @@ scoretable
      ORG $FFFC
    endif
  endif
+ endif
+; Provided under the CC0 license. See the included LICENSE.txt for details.
+
+; every bank has this stuff at the same place
+; this code can switch to/from any bank at any entry point
+; and can preserve register values
+; note: lines not starting with a space are not placed in all banks
+;
+; line below tells the compiler how long this is - do not remove
+;size=32
+
+begin_bscode
+ ldx #$ff
+ ifconst FASTFETCH ; using DPC+
+ stx FASTFETCH
+ endif 
+ txs
+ if bankswitch == 64
+   lda #(((>(start-1)) & $0F) | $F0)
+ else
+   lda #>(start-1)
+ endif
+ pha
+ lda #<(start-1)
+ pha
+
+BS_return
+ pha
+ txa
+ pha
+ tsx
+
+ if bankswitch != 64
+   lda 4,x ; get high byte of return address
+
+   rol
+   rol
+   rol
+   rol
+   and #bs_mask ;1 3 or 7 for F8/F6/F4
+   tax
+   inx
+ else
+   lda 4,x ; get high byte of return address
+   tay
+   ora #$10 ; change our bank nibble into a valid rom mirror
+   sta 4,x
+   tya
+   lsr 
+   lsr 
+   lsr 
+   lsr 
+   tax
+   inx
+ endif
+
+BS_jsr
+ lda bankswitch_hotspot-1,x
+ pla
+ tax
+ pla
+ rts
+ if ((* & $1FFF) > ((bankswitch_hotspot & $1FFF) - 1))
+   echo "WARNING: size parameter in banksw.asm too small - the program probably will not work."
+   echo "Change to",[(*-begin_bscode+1)&$FF]d,"and try again."
  endif
 ; Provided under the CC0 license. See the included LICENSE.txt for details.
 

@@ -3749,35 +3749,36 @@ int edge_detect = 0;
     {
 	i = switchjoy(statement[2]);
 
-        if (edge_detect) {
-            if (!strcmp(joy_reg, "SWCHA") || !strcmp(joy_reg, "SWCHA2")) debounce_swcha = 1;
-            else if (!strcmp(joy_reg, "SWCHB")) debounce_swchb = 1;
-            else if (!strcmp(joy_reg, "INPT4")) debounce_inpt4 = 1;
-            else if (!strcmp(joy_reg, "INPT5")) debounce_inpt5 = 1;
-            else if (!strcmp(joy_reg, "INPT6")) debounce_inpt6 = 1;
-            else if (!strcmp(joy_reg, "INPT7")) debounce_inpt7 = 1;
-        }
+		if (edge_detect) {
+    		if (!strcmp(joy_reg, "SWCHA") && !debounce_swcha) { debounce_swcha = 1; sprintf(redefined_variables[numredefvars++], "_last_SWCHA = $F0"); }
+    		else if (!strcmp(joy_reg, "SWCHA2") && !debounce_swcha) { debounce_swcha = 1; sprintf(redefined_variables[numredefvars++], "_last_SWCHA2 = $F6"); }
+    		else if (!strcmp(joy_reg, "SWCHB") && !debounce_swchb) { debounce_swchb = 1; sprintf(redefined_variables[numredefvars++], "_last_SWCHB = $F1"); }
+    		else if (!strcmp(joy_reg, "INPT4") && !debounce_inpt4) { debounce_inpt4 = 1; sprintf(redefined_variables[numredefvars++], "_last_INPT4 = $F2"); }
+    		else if (!strcmp(joy_reg, "INPT5") && !debounce_inpt5) { debounce_inpt5 = 1; sprintf(redefined_variables[numredefvars++], "_last_INPT5 = $F3"); }
+    		else if (!strcmp(joy_reg, "INPT6") && !debounce_inpt6) { debounce_inpt6 = 1; sprintf(redefined_variables[numredefvars++], "_last_INPT6 = $F4"); }
+    		else if (!strcmp(joy_reg, "INPT7") && !debounce_inpt7) { debounce_inpt7 = 1; sprintf(redefined_variables[numredefvars++], "_last_INPT7 = $F5"); }
+		}
 
 	if (!islabel(statement))
 	{
             if (edge_detect) {
                 if (edge_detect == 1) { // PRESSED
-                    if (!i) {
-                        printf("\tBNE .skip%s\n\tBIT _last_%s\n\tBEQ .skip%s\n", statement[0], joy_reg, statement[0]);
-                    } else if (i == 1) {
-                        printf("\tBVS .skip%s\n\tBIT _last_%s\n\tBVC .skip%s\n", statement[0], joy_reg, statement[0]);
-                    } else if (i == 2) {
-                        printf("\tBMI .skip%s\n\tBIT _last_%s\n\tBPL .skip%s\n", statement[0], joy_reg, statement[0]);
-                    }
-                } else if (edge_detect == 2) { // RELEASED
-                    if (!i) {
-                        printf("\tBEQ .skip%s\n\tBIT _last_%s\n\tBNE .skip%s\n", statement[0], joy_reg, statement[0]);
-                    } else if (i == 1) {
-                        printf("\tBVC .skip%s\n\tBIT _last_%s\n\tBVS .skip%s\n", statement[0], joy_reg, statement[0]);
-                    } else if (i == 2) {
-                        printf("\tBPL .skip%s\n\tBIT _last_%s\n\tBMI .skip%s\n", statement[0], joy_reg, statement[0]);
-                    }
-                }
+				if (!i) {
+					printf("\tBNE .skip%s\n\tBIT\x20_last_%s\n\tBEQ .skip%s\n", statement[0], joy_reg, statement[0]);
+				} else if (i == 1) {
+					printf("\tBVS .skip%s\n\tBIT\x20_last_%s\n\tBVC .skip%s\n", statement[0], joy_reg, statement[0]);
+				} else if (i == 2) {
+					printf("\tBMI .skip%s\n\tBIT\x20_last_%s\n\tBPL .skip%s\n", statement[0], joy_reg, statement[0]);
+				}
+			} else if (edge_detect == 2) { // RELEASED
+				if (!i) {
+					printf("\tBEQ .skip%s\n\tBIT\x20_last_%s\n\tBNE .skip%s\n", statement[0], joy_reg, statement[0]);
+				} else if (i == 1) {
+					printf("\tBVC .skip%s\n\tBIT\x20_last_%s\n\tBVS .skip%s\n", statement[0], joy_reg, statement[0]);
+				} else if (i == 2) {
+					printf("\tBPL .skip%s\n\tBIT\x20_last_%s\n\tBMI .skip%s\n", statement[0], joy_reg, statement[0]);
+				}
+			}
                 printf("\tJMP .%s\n.skip%s\n", statement[4], statement[0]);
                 freemem(dealloccstatement);
                 return;
@@ -6137,20 +6138,6 @@ void drawscreen()
     static int debounce_allocated = 0;
     invalidate_Areg();
 
-    // Map debounce tracking safely to the bottom of zero-page RAM
-    if (!debounce_allocated && (debounce_swcha || debounce_swchb || debounce_inpt4 || debounce_inpt5 || debounce_inpt6 || debounce_inpt7)) {
-        if (debounce_swcha) {
-            printf("_last_SWCHA = $F0\n");
-            if (isPXE) printf("_last_SWCHA2 = $F6\n"); 
-        }
-        if (debounce_swchb) printf("_last_SWCHB = $F1\n");
-        if (debounce_inpt4) printf("_last_INPT4 = $F2\n");
-        if (debounce_inpt5) printf("_last_INPT5 = $F3\n");
-        if (debounce_inpt6) printf("_last_INPT6 = $F4\n");
-        if (debounce_inpt7) printf("_last_INPT7 = $F5\n");
-        debounce_allocated = 1;
-    }
-
     if (debounce_swcha) {
         printf("\tLDA SWCHA\n\tSTA _last_SWCHA\n");
         if (isPXE) printf("\tLDA SWCHA2\n\tSTA _last_SWCHA2\n");
@@ -6449,4 +6436,69 @@ void doendswitch(char **statement)
     
     // Cap off the entire switch block
     printf(".endswitch%d\n", switch_id_stack[sw_idx]);
+}
+void doswap(char **statement)
+{
+    char getindex0[200];
+    char getindex1[200];
+    int index = 0;
+    char var1[200];
+    char var2[200];
+    
+    // Parse var1 and handle attached or trailing commas
+    strcpy(var1, statement[2]);
+    char *comma = strchr(var1, ',');
+    
+    if (comma) {
+        *comma = '\0'; // Split var1 at the comma
+        if (strlen(comma + 1) > 0) {
+            strcpy(var2, comma + 1); // Handles "swap a,b"
+        } else if (statement[3] != NULL && statement[3][0] != '\0') {
+            strcpy(var2, statement[3]); // Handles "swap a, b"
+        }
+    } else {
+        // No attached comma. Handle "swap a b" or "swap a , b"
+        if (statement[3][0] == ',') {
+            strcpy(var2, statement[4]);
+        } else {
+            strcpy(var2, statement[3]);
+        }
+    }
+    
+    removeCR(var1);
+    removeCR(var2);
+    invalidate_Areg();
+
+    // Check if either variable uses an array index (e.g., a[1])
+    index |= getindex(var1, &getindex0[0]);
+    index |= getindex(var2, &getindex1[0]) << 1;
+
+    if (index == 0) {
+        // Highly optimized zero-RAM swap for standard zero-page variables
+        printf("\tLDA %s\n", var1);
+        printf("\tLDX %s\n", var2);
+        printf("\tSTA %s\n", var2);
+        printf("\tSTX %s\n", var1);
+    } else {
+        // Stack-based swap to safely preserve the X register for array indexing
+        if (index & 1) loadindex(&getindex0[0]);
+        printf("\tLDA ");
+        printindex(var1, index & 1);
+        printf("\tPHA\n");
+
+        if (index & 2) loadindex(&getindex1[0]);
+        printf("\tLDA ");
+        printindex(var2, index & 2);
+        printf("\tPHA\n");
+
+        if (index & 1) loadindex(&getindex0[0]);
+        printf("\tPLA\n");
+        printf("\tSTA ");
+        printindex(var1, index & 1);
+
+        if (index & 2) loadindex(&getindex1[0]);
+        printf("\tPLA\n");
+        printf("\tSTA ");
+        printindex(var2, index & 2);
+    }
 }

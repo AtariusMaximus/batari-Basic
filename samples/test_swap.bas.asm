@@ -1646,164 +1646,144 @@ scorepointerset
      tax
      rts
 game
-.L00 ;;line 1;;  rem --- Debounce Demo ---
+.L00 ;;line 1;;  rem --- Swap & Debounce Demo ---
 
 .
  ;;line 2;; 
 
-.L01 ;;line 3;;  score = 0
+.L01 ;;line 3;;  rem Set initial starting positions
 
-	LDA #$00
-	STA score+2
-	LDA #$00
-	STA score+1
-	LDA #$00
-	STA score
-.L02 ;;line 4;;  player0x = 75
+.
+ ;;line 4;; 
 
-	LDA #75
-	STA player0x
-.L03 ;;line 5;;  player0y = 45
+.L02 ;;line 5;;  a = 40 : b = 50 : c = 100 : d = 50
 
-	LDA #45
-	STA player0y
-.L04 ;;line 6;;  COLUP0 = $1C
+	LDA #40
+	STA a
+	LDA #50
+	STA b
+	LDA #100
+	STA c
+	LDA #50
+	STA d
+.
+ ;;line 6;; 
 
-	LDA #$1C
-	STA COLUP0
-.L05 ;;line 7;;  COLUBK = $00
+.main
+ ;;line 7;; main
 
-	LDA #$00
-	STA COLUBK
 .
  ;;line 8;; 
 
-.L06 ;;line 9;;  player0:
+.L03 ;;line 9;;  player0x = a
 
-	LDX #<playerL06_0
+	LDA a
+	STA player0x
+.L04 ;;line 10;;  player0y = b
+
+	LDA b
+	STA player0y
+.L05 ;;line 11;;  player1x = c
+
+	LDA c
+	STA player1x
+.L06 ;;line 12;;  player1y = d
+
+	LDA d
+	STA player1y
+.
+ ;;line 13;; 
+
+.L07 ;;line 14;;  rem Colors and graphics defined in the main loop
+
+.L08 ;;line 15;;  COLUP0 = $1C
+
+	LDA #$1C
+	STA COLUP0
+.L09 ;;line 16;;  COLUP1 = $84
+
+	LDA #$84
+	STA COLUP1
+.
+ ;;line 17;; 
+
+.L010 ;;line 18;;  player0:
+
+	LDX #<playerL010_0
 	STX player0pointerlo
-	LDA #>playerL06_0
+	LDA #>playerL010_0
 	STA player0pointerhi
-	LDA #7
+	LDA #3
 	STA player0height
-.
- ;;line 19;; 
-
-.main
- ;;line 20;; main
-
-.
- ;;line 21;; 
-
-.L07 ;;line 22;;  rem Tap fire to increment score by exactly 1 (no machine-gunning)
-
-.L08 ;;line 23;;  if joy0fire pressed then score = score  +  1
-
- bit INPT4
-	BMI .skipL08
-	BIT _last_INPT4
-	BPL .skipL08
-.condpart0
-	SED
-	CLC
-	LDA score+2
-	ADC #$01
-	STA score+2
-	LDA score+1
-	ADC #$00
-	STA score+1
-	LDA score
-	ADC #$00
-	STA score
-	CLD
-.skipL08
 .
  ;;line 24;; 
 
-.L09 ;;line 25;;  rem Release fire to flash the background red
+.L011 ;;line 25;;  player1:
 
-.L010 ;;line 26;;  if joy0fire released then COLUBK = $44
+	LDX #<playerL011_1
+	STX player1pointerlo
+	LDA #>playerL011_1
+	STA player1pointerhi
+	LDA #3
+	STA player1height
+.
+ ;;line 31;; 
+
+.
+ ;;line 32;; 
+
+.L012 ;;line 33;;  rem Tap the fire button to instantly exchange sprite coordinates!
+
+.L013 ;;line 34;;  if joy0fire pressed then swap a , c : swap b , d
 
  bit INPT4
-	BPL .skipL010
+	BMI .skipL013
 	BIT _last_INPT4
-	BMI .skipL010
-.condpart1
-	LDA #$44
-	STA COLUBK
-.skipL010
+	BPL .skipL013
+.condpart0
+	LDA a
+	LDX c
+	STA c
+	STX a
+	LDA b
+	LDX d
+	STA d
+	STX b
+.skipL013
 .
- ;;line 27;; 
+ ;;line 35;; 
 
-.L011 ;;line 28;;  rem Background decays back to black normally every frame
+.L014 ;;line 36;;  drawscreen
 
-.L012 ;;line 29;;  if COLUBK  >  0 then COLUBK = COLUBK  -  2
-
-	LDA #0
-	CMP COLUBK
-     BCS .skipL012
-.condpart2
-	LDA COLUBK
-	SEC
-	SBC #2
-	STA COLUBK
-.skipL012
-.
- ;;line 30;; 
-
-.L013 ;;line 31;;  rem Tap right to warp 8 pixels (won't slide continuously if held)
-
-.L014 ;;line 32;;  if joy0right pressed then player0x = player0x  +  8
-
- bit SWCHA
-	BMI .skipL014
-	BIT _last_SWCHA
-	BPL .skipL014
-.condpart3
-	LDA player0x
-	CLC
-	ADC #8
-	STA player0x
-.skipL014
-.
- ;;line 33;; 
-
-.L015 ;;line 34;;  rem Standard movement on the left D-pad (slides continuously while held)
-
-.L016 ;;line 35;;  if joy0left then player0x = player0x  -  1
-
- bit SWCHA
-	BVS .skipL016
-.condpart4
-	DEC player0x
-.skipL016
-.
- ;;line 36;; 
-
-.L017 ;;line 37;;  drawscreen
-
-	LDA SWCHA
-	STA _last_SWCHA
 	LDA INPT4
 	STA _last_INPT4
  jsr drawscreen
-.L018 ;;line 38;;  goto main
+.
+ ;;line 37;; 
+
+.L015 ;;line 38;;  goto main
 
  jmp .main
- if (<*) > (<(*+7))
+ if (<*) > (<(*+3))
 	repeat ($100-<*)
 	.byte 0
 	repend
 	endif
-playerL06_0
-	.byte   %00111100
-	.byte   %01111110
-	.byte   %11011011
-	.byte   %11111111
-	.byte   %11111111
-	.byte   %01111110
-	.byte   %00111100
-	.byte   %00011000
+playerL010_0
+	.byte  %11111111
+	.byte  %11111111
+	.byte  %11111111
+	.byte  %11111111
+ if (<*) > (<(*+3))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL011_1
+	.byte  %10000001
+	.byte  %11000011
+	.byte  %11100111
+	.byte  %11111111
  if ECHOFIRST
        echo "    ",[(scoretable - *)]d , "bytes of ROM space left")
  endif 

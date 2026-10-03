@@ -1991,7 +1991,7 @@ game
 .L060 ;;line 100;;  if switchrightb then PF0 = 0 else PF0 = 63
 
  bit SWCHB
-	BMI .skipL060
+	BPL .skipL060
 .condpart3
 	LDA #0
 	STA PF0
@@ -2026,7 +2026,7 @@ game
 .L063 ;;line 104;;  if !joy0fire then
 
  bit INPT4
-	BPL .skipL063
+	BMI .skipL063
 .condpart4
 .L064 ;;line 105;;  timer1 = timer1 + 1
 
@@ -2059,7 +2059,7 @@ game
 .L069 ;;line 111;;  if joy0fire then score = 0 : timer1 = 0 : timer2 = 0 : gamebits{7} = 1 : pfclear
 
  bit INPT4
-	BMI .skipL069
+	BPL .skipL069
 .condpart5
 	LDA #$00
 	STA score+2
@@ -2287,7 +2287,7 @@ game
 .L089 ;;line 137;;  if joy0fire then velocity = velocity + 0.0625 : goto nomove1
 
  bit INPT4
-	BMI .skipL089
+	BPL .skipL089
 .condpart12
 	CLC
 	LDA velocity
@@ -3541,7 +3541,7 @@ game
 .L0222 ;;line 334;;  if joy0right then carpos = carpos + 1 : gamebits{0} = 1
 
  bit SWCHA
-	BMI .skipL0222
+	BPL .skipL0222
 .condpart49
 	INC carpos
 	LDA gamebits

@@ -76,6 +76,10 @@ See "test_switch.bas" in the samples subdirectory for a usage example.
 
 The compiler now natively supports edge detection for all joystick and console switches using the `pressed` and `released` modifiers. This eliminates the need to write manual debounce logic or waste RAM on state-tracking variables. 
 
+All pressed or released logic checks must be placed before your drawscreen command in the main loop.
+
+See "test_debounce.bas" in the samples subdirectory for a usage example.
+
 ### Syntax Example:
 ```basic
  rem Fires exactly once per button press, preventing "machine-gun" firing
@@ -88,3 +92,16 @@ The compiler now natively supports edge detection for all joystick and console s
  if joy0right then player0x = player0x + 1
 ```
 
+## amax.6. Native Variable Exchange (`swap`)
+
+The compiler now natively supports exchanging the contents of two variables.
+
+For standard variables, the compiler executes the exchange natively using the CPU's `A` and `X` registers in 12 cycles. 
+
+See "test_swap.bas" in the samples subdirectory for a usage example.
+
+### Syntax Example:
+```basic
+ rem Swap variables
+ swap a, b : swap c, d
+```
