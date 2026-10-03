@@ -105,3 +105,19 @@ See "test_swap.bas" in the samples subdirectory for a usage example.
  rem Swap variables
  swap a, b : swap c, d
 ```
+
+## amax.7. Native Value Clamping (`clamp`)
+
+The compiler now natively supports restricting a variable or value within a specified minimum and maximum range using the `clamp(val, min, max)` function. This eliminates the need for multiple manual `if...then` evaluations to keep sprites on-screen or cap player stats.
+
+The function can be used dynamically with constants or other variables.
+
+See "test_clamp.bas" in the samples subdirectory for a usage example.
+
+### Syntax Example:
+```basic
+ rem Restrict player X coordinate to remain within screen bounds
+ player0x = clamp(player0x, 16, 140)
+
+ rem Clamp dynamic variables
+ health = clamp(health, 0, max_health)

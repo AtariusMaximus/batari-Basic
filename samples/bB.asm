@@ -1,120 +1,95 @@
 game
-.L00 ;;line 1;;  rem --- Swap & Debounce Demo ---
+.L00 ;;line 1;;  rem --- Clamp Demo ---
 
 .
  ;;line 2;; 
 
-.L01 ;;line 3;;  rem Set initial starting positions
+.L01 ;;line 3;;  player0x = 80
 
-.
- ;;line 4;; 
+	LDA #80
+	STA player0x
+.L02 ;;line 4;;  player0y = 50
 
-.L02 ;;line 5;;  a = 40 : b = 50 : c = 100 : d = 50
-
-	LDA #40
-	STA a
 	LDA #50
-	STA b
-	LDA #100
-	STA c
-	LDA #50
-	STA d
+	STA player0y
 .
- ;;line 6;; 
+ ;;line 5;; 
 
 .main
- ;;line 7;; main
+ ;;line 6;; main
 
 .
- ;;line 8;; 
+ ;;line 7;; 
 
-.L03 ;;line 9;;  player0x = a
-
-	LDA a
-	STA player0x
-.L04 ;;line 10;;  player0y = b
-
-	LDA b
-	STA player0y
-.L05 ;;line 11;;  player1x = c
-
-	LDA c
-	STA player1x
-.L06 ;;line 12;;  player1y = d
-
-	LDA d
-	STA player1y
-.
- ;;line 13;; 
-
-.L07 ;;line 14;;  rem Colors and graphics defined in the main loop
-
-.L08 ;;line 15;;  COLUP0 = $1C
+.L03 ;;line 8;;  COLUP0 = $1C
 
 	LDA #$1C
 	STA COLUP0
-.L09 ;;line 16;;  COLUP1 = $84
-
-	LDA #$84
-	STA COLUP1
 .
- ;;line 17;; 
+ ;;line 9;; 
 
-.L010 ;;line 18;;  player0:
+.L04 ;;line 10;;  player0:
 
-	LDX #<playerL010_0
+	LDX #<playerL04_0
 	STX player0pointerlo
-	LDA #>playerL010_0
+	LDA #>playerL04_0
 	STA player0pointerhi
 	LDA #3
 	STA player0height
 .
- ;;line 24;; 
+ ;;line 16;; 
 
-.L011 ;;line 25;;  player1:
+.L05 ;;line 17;;  rem Joystick movement
 
-	LDX #<playerL011_1
-	STX player1pointerlo
-	LDA #>playerL011_1
-	STA player1pointerhi
-	LDA #3
-	STA player1height
-.
- ;;line 31;; 
+.L06 ;;line 18;;  if joy0left then player0x = player0x  -  2
 
-.
- ;;line 32;; 
-
-.L012 ;;line 33;;  rem Tap the fire button to instantly exchange sprite coordinates!
-
-.L013 ;;line 34;;  if joy0fire pressed then swap a , c : swap b , d
-
- bit INPT4
-	BMI .skipL013
-	BIT _last_INPT4
-	BPL .skipL013
+ bit SWCHA
+	BVS .skipL06
 .condpart0
-	LDA a
-	LDX c
-	STA c
-	STX a
-	LDA b
-	LDX d
-	STA d
-	STX b
-.skipL013
+	LDA player0x
+	SEC
+	SBC #2
+	STA player0x
+.skipL06
+.L07 ;;line 19;;  if joy0right then player0x = player0x  +  2
+
+ bit SWCHA
+	BMI .skipL07
+.condpart1
+	LDA player0x
+	CLC
+	ADC #2
+	STA player0x
+.skipL07
 .
- ;;line 35;; 
+ ;;line 20;; 
 
-.L014 ;;line 36;;  drawscreen
+.L08 ;;line 21;;  rem Clamp the X coordinate so the player cannot leave the screen
 
-	LDA INPT4
-	STA _last_INPT4
+.L09 ;;line 22;;  player0x = clamp ( player0x ,  16 ,  140 ) 
+
+	LDA player0x
+	CMP #16
+	BCS .clamp_max_0
+	LDA #16
+	JMP .clamp_done_0
+.clamp_max_0
+	CMP #140
+	BCC .clamp_done_0
+	BEQ .clamp_done_0
+	LDA #140
+.clamp_done_0
+	STA player0x
+.
+ ;;line 23;; 
+
+.L010 ;;line 24;;  drawscreen
+
  jsr drawscreen
 .
- ;;line 37;; 
+ ;;line 25;; 
 
-.L015 ;;line 38;;  goto main
+.L011 ;;line 26;;  goto main
 
  jmp .main
  if (<*) > (<(*+3))
@@ -122,20 +97,10 @@ game
 	.byte 0
 	repend
 	endif
-playerL010_0
+playerL04_0
 	.byte  %11111111
 	.byte  %11111111
 	.byte  %11111111
-	.byte  %11111111
- if (<*) > (<(*+3))
-	repeat ($100-<*)
-	.byte 0
-	repend
-	endif
-playerL011_1
-	.byte  %10000001
-	.byte  %11000011
-	.byte  %11100111
 	.byte  %11111111
  if ECHOFIRST
        echo "    ",[(scoretable - *)]d , "bytes of ROM space left")

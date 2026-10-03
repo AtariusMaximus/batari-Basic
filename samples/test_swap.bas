@@ -11,7 +11,6 @@ main
  player1x = c
  player1y = d
  
- rem Colors and graphics defined in the main loop
  COLUP0 = $1C
  COLUP1 = $84
  
@@ -28,8 +27,7 @@ end
  %11100111
  %11111111
 end
- 
- 
+  
  rem Tap the fire button to instantly exchange sprite coordinates!
  if joy0fire pressed then swap a,c:swap b,d
  

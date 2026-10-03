@@ -3847,9 +3847,9 @@ int edge_detect = 0;
 	        if (i == 2)
 	        {
 		    if (not)
-		        printf("	BMI ");
-		    else
 		        printf("	BPL ");
+		    else
+		        printf("	BMI ");
 	        }
 
 	        printf(".skip%s\n", statement[0]);
@@ -5521,6 +5521,8 @@ void dolet(char **cstatement)
 	    strcpy(Areg, "invalid");
 	    if (!strncmp(statement[4], "sread\0", 5))
 		sread(statement);
+	    else if (!strncmp(statement[4], "clamp", 5))
+		doclamp(statement);
 	    else
 		callfunction(statement);
 	}
@@ -6501,4 +6503,80 @@ void doswap(char **statement)
         printf("\tSTA ");
         printindex(var2, index & 2);
     }
+}
+void doclamp(char **statement)
+{
+    int i;
+    static int numclamps = 0;
+    char arg_string[200] = "";
+    char val[50] = "", min_val[50] = "", max_val[50] = "";
+    char *token;
+    char *paren;
+
+    // Combine everything after '(' until we find a ')' ANYWHERE in the token
+    for (i = 6; i < 195; ++i) {
+        if (statement[i] == NULL || statement[i][0] == '\0' || statement[i][0] == ':') {
+            break;
+        }
+        strcat(arg_string, statement[i]);
+        if (strchr(statement[i], ')')) {
+            break; // Stop parsing as soon as we hit the closing parenthesis
+        }
+    }
+
+    // Strip the ')' out of the combined string safely
+    paren = strchr(arg_string, ')');
+    if (paren) {
+        *paren = '\0';
+    } else {
+        prerror("missing \")\" at end of clamp call\n");
+    }
+
+    // Parse the clean, combined argument string by comma
+    token = strtok(arg_string, ", ");
+    if (token) strcpy(val, token);
+    
+    token = strtok(NULL, ", ");
+    if (token) strcpy(min_val, token);
+    
+    token = strtok(NULL, ", ");
+    if (token) strcpy(max_val, token);
+
+    if (val[0] == '\0' || min_val[0] == '\0' || max_val[0] == '\0') {
+        prerror("clamp requires exactly 3 arguments: clamp(value, min, max)\n");
+    }
+
+    // Assembly Generation
+    printf("\tLDA ");
+    printimmed(val);
+    printf("%s\n", val);
+    
+    printf("\tCMP ");
+    printimmed(min_val);
+    printf("%s\n", min_val);
+    
+    printf("\tBCS .clamp_max_%d\n", numclamps);
+    
+    printf("\tLDA ");
+    printimmed(min_val);
+    printf("%s\n", min_val);
+    
+    printf("\tJMP .clamp_done_%d\n", numclamps);
+    
+    printf(".clamp_max_%d\n", numclamps);
+    
+    printf("\tCMP ");
+    printimmed(max_val);
+    printf("%s\n", max_val);
+    
+    printf("\tBCC .clamp_done_%d\n", numclamps);
+    printf("\tBEQ .clamp_done_%d\n", numclamps);
+    
+    printf("\tLDA ");
+    printimmed(max_val);
+    printf("%s\n", max_val);
+    
+    printf(".clamp_done_%d\n", numclamps);
+
+    numclamps++;
 }
