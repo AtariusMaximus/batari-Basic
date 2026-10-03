@@ -71,3 +71,22 @@ See "test_switch.bas" in the samples subdirectory for a usage example.
       gosub ErrorState
  endswitch
 ```
+
+## amax.5. Native Joystick Debouncing (Edge Detection)
+
+The compiler now natively supports edge detection for all joystick and console switches using the `pressed` and `released` modifiers. This eliminates the need to write manual debounce logic or waste RAM on state-tracking variables. 
+
+The compiler intelligently analyzes your code; if it detects these modifiers, it dynamically allocates a single tracking byte per hardware register and snapshots the state natively during the `drawscreen` routine. If you don't use the modifiers, zero extra RAM or CPU cycles are consumed.
+
+### Syntax Example:
+```basic
+ rem Fires exactly once per button press, preventing "machine-gun" firing
+ if joy0fire pressed then score = score + 1
+ 
+ rem Triggers exactly once when the player lets go of the button
+ if joy0fire released then COLUBK = $00
+
+ rem Standard continuous evaluation still works normally
+ if joy0right then player0x = player0x + 1
+```
+
