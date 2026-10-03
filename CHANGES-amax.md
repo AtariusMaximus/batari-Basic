@@ -121,12 +121,17 @@ See "test_clamp.bas" in the samples subdirectory for a usage example.
 
  rem Clamp dynamic variables
  health = clamp(health, 0, max_health)
+```
 
 ## amax.8. Batch Variable Zeroing (`zero` / `clear`)
 
-The compiler now natively supports batch zeroing of multiple variables.  Instead of compiling redundant `LDA #0` instructions for every assignment (e.g., `a = 0 : b = 0 : c = 0`), the new `zero` (or `clear`) keyword emits a single `LDA #0` followed by back-to-back `STA` instructions. 
+The compiler now natively supports batch zeroing of multiple variables.  
+Instead of compiling redundant `LDA #0` instructions for every assignment (e.g., `a=0:b=0:c=0`), the new `zero` (or `clear`) 
+keyword emits a single `LDA #0` followed by back-to-back `STA` instructions. 
 
-The command safely supports mixed variable lists separated by spaces or commas, dynamically handles indexed arrays without losing the zeroed accumulator, and natively recognizes the 24-bit `score` variable to automatically clear all three of its memory registers (`score`, `score+1`, and `score+2`) at once.
+The command safely supports mixed variable lists separated by spaces or commas, dynamically handles indexed arrays without 
+losing the zeroed accumulator, and natively recognizes the 24-bit `score` variable to automatically clear all three of its 
+memory registers (`score`, `score+1`, and `score+2`) at once.
 
 See "test_zero.bas" in the samples subdirectory for a usage example.
 
