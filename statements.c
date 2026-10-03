@@ -45,7 +45,7 @@ int pfcolorindexsave = 0;
 int pfcolornumber = 0;
 int isPXE = 0;
 
-// --- Debounce Tracking Globals ---
+// --- Debounce Tracking ---
 int debounce_swcha = 0;
 int debounce_swchb = 0;
 int debounce_inpt4 = 0;
@@ -53,11 +53,12 @@ int debounce_inpt5 = 0;
 int debounce_inpt6 = 0;
 int debounce_inpt7 = 0;
 char joy_reg[20];
-// ---------------------------------
+// -------------------------
 
 // SE
 char if_stack[100][200];
 int if_stack_ptr = 0;
+// -------------------------
 
 int pfdata[100][256];
 char sprite_data[5000][50];
