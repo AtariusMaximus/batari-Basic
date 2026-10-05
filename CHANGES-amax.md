@@ -82,7 +82,7 @@ See "test_debounce.bas" in the samples subdirectory for a usage example.
 
 ### Syntax Example:
 ```basic
- rem Fires exactly once per button press, preventing "machine-gun" firing
+ rem Fires exactly once per button press
  if joy0fire pressed then score = score + 1
  
  rem Triggers exactly once when the player lets go of the button
@@ -164,6 +164,8 @@ With the introduction of updated structural code like the new multi-line `if/the
 
 Added native compiler support for nybble (4-bit) variables. You can now cleanly split any standard 8-bit variable into two independent halves (capable of storing 0-15) using the `{lo}` and `{hi}` suffixes combined with the `def` command. 
 
+See "test_nybble.bas" in the samples subdirectory for a usage example.
+
 ### Syntax Example:
 ```basic
  dim shared_byte = a
@@ -174,6 +176,4 @@ Added native compiler support for nybble (4-bit) variables. You can now cleanly 
  rem Use them exactly like standard variables
  p1_lives = 3
  p2_lives = p2_lives + 1
-
- if p1_lives > 10 then p1_lives = 10
 ```
