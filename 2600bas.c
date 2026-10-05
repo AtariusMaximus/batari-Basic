@@ -4,10 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <getopt.h>
 #include "statements.h"
 #include "keywords.h"
 #include <math.h>
-#define BB_VERSION_INFO "batari Basic v1.90amax.8 (c)2025\n"
+#define BB_VERSION_INFO "batari Basic v1.90amax.9 (c)2025\n"
 
 extern int bank;
 
@@ -44,11 +45,11 @@ int main(int argc, char *argv[])
 	switch (i)
 	{
 	case 'i':
-	    path = (char *) malloc(500);
+	    // path = (char *) malloc(500);
 	    path = optarg;
 	    break;
 	case 'r':
-	    filename = (char *) malloc(100);
+	    // filename = (char *) malloc(100);
 	    //strcpy(filename, optarg);
 	    filename = optarg;
 	    break;

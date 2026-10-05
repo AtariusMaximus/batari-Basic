@@ -10,6 +10,7 @@
 
 int includesfile_already_done = 0;
 int decimal = 0;
+int amax_syntax = 1;
 
 int condpart = 0;
 int last_bank = 0;              // last bank when bs is enabled (0 for 2k/4k)
@@ -2026,6 +2027,12 @@ int findlabel(char **statement, int i)
     char statementcache[100];
     // 0 if label, 1 if not
 
+	// Only use the empty-line safety check in modern syntax
+    if (amax_syntax) {
+        if (statement[i][0] == '\0' || statement[i][0] == '\n' || statement[i][0] == '\r')
+            return 1; 
+    }
+
     if (statement[i][0] == '\0' || statement[i][0] == '\n' || statement[i][0] == '\r')
         return 1; 
 
@@ -3647,7 +3654,7 @@ void scorecolors(char **statement)
     }
 }
 
-void doif(char **statement)
+void doif_amax(char **statement)
 {
     int index = 0;
     int situation = 0;
@@ -5274,12 +5281,14 @@ void dolet(char **cstatement)
 
 	// before emitting the initial LDA, we need to check if it's a multiply by
 	// constant with the constant in the inconvenient position, and swap if so.
-	if ((statement[5][0] == '*') && (isimmed(statement[4]) && !isimmed(statement[6]) && checkmul(atoi(statement[4])) ))
-	{
-		// swap operands to avoid mul routine
-		strcpy(operandcopy, statement[4]); // temp save
-		strcpy(statement[4], statement[6]);
-		strcpy(statement[6], operandcopy);
+	if (amax_syntax) {
+            if ((statement[5][0] == '*') && (isimmed(statement[4]) && !isimmed(statement[6]) && checkmul(atoi(statement[4])) ))
+            {
+                // swap operands to avoid mul routine
+                strcpy(operandcopy, statement[4]); // temp save
+                strcpy(statement[4], statement[6]);
+                strcpy(statement[6], operandcopy);
+            }
 	}
 
 	if (!Aregmatch)		// do we already have the correct value in A?
@@ -5958,13 +5967,16 @@ void set(char **statement)
     }
     else if (!strncmp(statement[2], "legacy\0", 6))
     {
-	sprintf(redefined_variables[numredefvars++], "legacy = %d", (int) (100 * (atof(statement[3]))));
+        float leg_ver = atof(statement[3]);
+        if (leg_ver <= 1.99f) {
+            amax_syntax = 0; // Revert to strict legacy parsing for 0.99 or 1.9
+        }
+        // ONLY pass the legacy variable to the assembler if it is 0.99
+        if (leg_ver < 1.0f) {
+            sprintf(redefined_variables[numredefvars++], "legacy = %d", (int) (100 * leg_ver));
+        }
     }
-    else
-	prerror("set: unknown parameter\n");
-
 }
-
 void rem(char **statement)
 {
     if (!strncmp(statement[2], "smartbranching\0", 14))
@@ -6626,5 +6638,893 @@ void do_zero(char **statement)
         }
         
         token = strtok(NULL, ", ");
+    }
+}
+void doif_legacy(char **statement)
+{
+    int index = 0;
+    int situation = 0;
+    char getindex0[200];
+    char getindex1[200];
+    int not = 0;
+    int complex_boolean = 0;
+    int i, j, k, h;
+    int push1 = 0;
+    int push2 = 0;
+    int bit = 0;
+    int Aregmatch = 0;
+    char Aregcopy[200];
+    char **cstatement;		//conditional statement
+    char **dealloccstatement;	//for deallocation  
+
+    strcpy(Aregcopy, "index-invalid");
+
+    cstatement = (char **) malloc(sizeof(char *) * 200);
+    for (k = 0; k < 200; ++k)
+	cstatement[k] = (char *) malloc(sizeof(char) * 200);
+    dealloccstatement = cstatement;
+    for (k = 0; k < 200; ++k)
+	for (j = 0; j < 200; ++j)
+	    cstatement[j][k] = '\0';
+    if ((statement[2][0] == '!') && (statement[2][1] != '\0'))
+    {
+	not = 1;
+	for (i = 0; i < 199; ++i)
+	{
+	    statement[2][i] = statement[2][i + 1];
+	}
+    }
+    else if (!strncmp(statement[2], "!\0", 2))
+    {
+	not = 1;
+	compressdata(statement, 2, 1);
+    }
+
+    if (statement[2][0] == '(')
+    {
+	j = 0;
+	k = 0;
+	for (i = 2; i < 199; ++i)
+	{
+	    if (statement[i][0] == '(')
+		j++;
+	    if (statement[i][0] == ')')
+		j--;
+	    if (statement[i][0] == '<')
+		break;
+	    if (statement[i][0] == '>')
+		break;
+	    if (statement[i][0] == '=')
+		break;
+	    if (statement[i][0] == '&' && statement[i][1] == '\0')
+		k = j;
+	    if (!strncmp(statement[i], "then\0", 4))
+	    {
+		complex_boolean = 1;
+		break;
+	    }			//prerror("Complex boolean not yet supported\n");exit(1);}
+	}
+	if (i == 199 && k)
+	    j = k;
+	if (j)
+	{
+	    compressdata(statement, 2, 1);	//remove first parenthesis
+	    for (i = 2; i < 199; ++i)
+		if ((!strncmp(statement[i], "then\0", 4)) ||
+		    (!strncmp(statement[i], "&&\0", 2)) || (!strncmp(statement[i], "||\0", 2)))
+		    break;
+	    if (i != 199)
+	    {
+		if (statement[i - 1][0] != ')')
+		{
+		    prerror("Unbalanced parentheses in if-then\n");
+		    exit(1);
+		}
+		compressdata(statement, i - 1, 1);
+	    }
+	}
+    }
+
+    if ((!strncmp(statement[2], "joy0\0", 4)) || (!strncmp (statement[2], "joy1\0", 4)) || (isPXE && ((!strncmp(statement[2], "joy2\0", 4)) || (!strncmp (statement[2], "joy3\0", 4)))) || (!strncmp(statement[2], "switch\0", 6)))
+    {
+	i = switchjoy(statement[2]);
+	if (!islabel(statement))
+	{
+	    if (!i)
+	    {
+		if (not)
+		    bne(statement[4]);
+		else
+		    beq(statement[4]);
+	    }
+	    else if (i == 1)	// bvc/bvs
+	    {
+		if (not)
+		    bvs(statement[4]);
+		else
+		    bvc(statement[4]);
+	    }
+	    else if (i == 2)	// bpl/bmi
+	    {
+		if (not)
+		    bmi(statement[4]);
+		else
+		    bpl(statement[4]);
+	    }
+
+	    freemem(dealloccstatement);
+	    return;
+	}
+	else			// then statement
+	{
+	    if (!i)
+	    {
+		if (not)
+		    printf("	BEQ ");
+		else
+		    printf("	BNE ");
+	    }
+	    if (i == 1)
+	    {
+		if (not)
+		    printf("	BVC ");
+		else
+		    printf("	BVS ");
+	    }
+	    if (i == 2)
+	    {
+		if (not)
+		    printf("	BPL ");
+		else
+		    printf("	BMI ");
+	    }
+
+	    printf(".skip%s\n", statement[0]);
+	    // separate statement
+	    for (i = 3; i < 200; ++i)
+	    {
+		for (k = 0; k < 200; ++k)
+		{
+		    cstatement[i - 3][k] = statement[i][k];
+		}
+	    }
+	    printf(".condpart%d\n", condpart++);
+	    keywords(cstatement);
+	    printf(".skip%s\n", statement[0]);
+	    freemem(dealloccstatement);
+	    return;
+	}
+    }
+
+    if (!strncmp(statement[2], "pfread\0", 6))
+    {
+	pfread(statement);
+	if (!islabel(statement))
+	{
+	    if (not)
+		bne(statement[9]);
+	    else
+		beq(statement[9]);
+	    freemem(dealloccstatement);
+	    return;
+	}
+	else			// then statement
+	{
+	    if (not)
+		printf("	BEQ ");
+	    else
+		printf("	BNE ");
+
+	    printf(".skip%s\n", statement[0]);
+	    // separate statement
+	    for (i = 8; i < 200; ++i)
+	    {
+		for (k = 0; k < 200; ++k)
+		{
+		    cstatement[i - 8][k] = statement[i][k];
+		}
+	    }
+	    printf(".condpart%d\n", condpart++);
+	    keywords(cstatement);
+	    printf(".skip%s\n", statement[0]);
+	    freemem(dealloccstatement);
+	    return;
+	}
+    }
+
+
+    if (!strncmp(statement[2], "collision(\0", 10))
+    {
+
+	if ((!strncmp(statement[2], "collision(player\0", 16))
+	    && ((!strncmp(statement[2] + 17, ",player\0", 7)) || (!strncmp(statement[2] + 17, ",_player\0", 7)))
+	    && (bs == 28))
+	{			// DPC+ custom collision
+	    if (statement[2][16] + statement[2][24] != '0' + '1')
+	    {
+		printf("	lda #<C_function\n");
+		printf("	sta DF0LOW\n");
+		if(isPXE) {
+			printf("	lda #(>C_function)\n");
+		} else {
+			printf("	lda #(>C_function) & $0F\n");
+		}		
+		printf("	sta DF0HI\n");
+		printf("  lda #20\n");
+		printf("  sta DF0WRITE\n");
+		printf("  lda #%c\n", statement[2][16]);
+		printf("  sta DF0WRITE\n");
+		if (statement[2][24] == 'r')
+		    printf("  lda #%c\n", statement[2][25]);
+		else
+		    printf("  lda #%c\n", statement[2][24]);
+		printf("  sta DF0WRITE\n");
+		printf("  lda #255\n");
+		printf("  sta CALLFUNCTION\n");
+		printf("  BIT DF0DATA\n");
+		bit = 7;
+	    }
+	}
+
+	if (!bit)
+	{
+	    printf("	bit ");
+	    bit = check_colls(statement[2]);
+	    printf("\n");
+	}
+	if (!bit)		//error
+	{
+	    fprintf(stderr, "(%d) Error: Unknown collision type: %s\n", line, statement[2] + 9);
+	    exit(1);
+	}
+
+
+	if (!islabel(statement))
+	{
+	    if (!not)
+	    {
+		if (bit == 7)
+		    bmi(statement[4]);
+		else
+		    bvs(statement[4]);
+	    }
+	    else
+	    {
+		if (bit == 7)
+		    bpl(statement[4]);
+		else
+		    bvc(statement[4]);
+	    }
+	    freemem(dealloccstatement);
+	    return;
+	}
+	else			// then statement
+	{
+	    if (not)
+	    {
+		if (bit == 7)
+		    printf("	BMI ");
+		else
+		    printf("	BVS ");
+	    }
+	    else
+	    {
+		if (bit == 7)
+		    printf("	BPL ");
+		else
+		    printf("	BVC ");
+	    }
+
+	    printf(".skip%s\n", statement[0]);
+	    // separate statement
+	    for (i = 3; i < 200; ++i)
+	    {
+		for (k = 0; k < 200; ++k)
+		{
+		    cstatement[i - 3][k] = statement[i][k];
+		}
+	    }
+	    printf(".condpart%d\n", condpart++);
+	    keywords(cstatement);
+	    printf(".skip%s\n", statement[0]);
+
+	    freemem(dealloccstatement);
+	    return;
+	}
+    }
+
+
+    // check for array, e.g. x{1} to get bit 1 of x
+    for (i = 3; i < 200; ++i)
+    {
+	if (statement[2][i] == '\0')
+	{
+	    i = 200;
+	    break;
+	}
+	if (statement[2][i] == '}')
+	    break;
+    }
+    if (i < 200)		// found array
+    {
+	// extract expression in parantheses - for now just whole numbers allowed
+	bit = (int) statement[2][i - 1] - '0';
+	if ((bit > 9) || (bit < 0))
+	{
+	    fprintf(stderr, "(%d) Error: variables in bit access not supported\n", line);
+	    exit(1);
+	}
+	if ((bit == 7) || (bit == 6))	// if bit 6 or 7, we can use BIT and save 2 bytes
+	{
+	    printf("	BIT ");
+	    for (i = 0; i < 200; ++i)
+	    {
+		if (statement[2][i] == '{')
+		    break;
+		printf("%c", statement[2][i]);
+	    }
+	    printf("\n");
+	    if (!islabel(statement))
+	    {
+		if (!not)
+		{
+		    if (bit == 7)
+			bmi(statement[4]);
+		    else
+			bvs(statement[4]);
+		}
+		else
+		{
+		    if (bit == 7)
+			bpl(statement[4]);
+		    else
+			bvc(statement[4]);
+		}
+		freemem(dealloccstatement);
+		return;
+	    }
+	    else		// then statement
+	    {
+		if (not)
+		{
+		    if (bit == 7)
+			printf("	BMI ");
+		    else
+			printf("	BVS ");
+		}
+		else
+		{
+		    if (bit == 7)
+			printf("	BPL ");
+		    else
+			printf("	BVC ");
+		}
+
+		printf(".skip%s\n", statement[0]);
+		// separate statement
+		for (i = 3; i < 200; ++i)
+		{
+		    for (k = 0; k < 200; ++k)
+		    {
+			cstatement[i - 3][k] = statement[i][k];
+		    }
+		}
+		printf(".condpart%d\n", condpart++);
+		keywords(cstatement);
+		printf(".skip%s\n", statement[0]);
+
+		freemem(dealloccstatement);
+		return;
+	    }
+	}
+	else
+	{
+	    Aregmatch = 0;
+	    printf("	LDA ");
+	    for (i = 0; i < 200; ++i)
+	    {
+		if (statement[2][i] == '{')
+		    break;
+		printf("%c", statement[2][i]);
+	    }
+	    printf("\n");
+	    if (!bit)		// if bit 0, we can use LSR and save a byte
+		printf("	LSR\n");
+	    else
+		printf("	AND #%d\n", 1 << bit);	//(int)pow(2,bit));
+	    if (!islabel(statement))
+	    {
+		if (not)
+		{
+		    if (!bit)
+			bcc(statement[4]);
+		    else
+			beq(statement[4]);
+		}
+		else
+		{
+		    if (!bit)
+			bcs(statement[4]);
+		    else
+			bne(statement[4]);
+		}
+		freemem(dealloccstatement);
+		return;
+	    }
+	    else		// then statement
+	    {
+		if (not)
+		{
+		    if (!bit)
+			printf("	BCS ");
+		    else
+			printf("	BNE ");
+		}
+		else
+		{
+		    if (!bit)
+			printf("	BCC ");
+		    else
+			printf("	BEQ ");
+		}
+
+		printf(".skip%s\n", statement[0]);
+		// separate statement
+		for (i = 3; i < 200; ++i)
+		{
+		    for (k = 0; k < 200; ++k)
+		    {
+			cstatement[i - 3][k] = statement[i][k];
+		    }
+		}
+		printf(".condpart%d\n", condpart++);
+		keywords(cstatement);
+		printf(".skip%s\n", statement[0]);
+
+		freemem(dealloccstatement);
+		return;
+	    }
+
+
+
+	}
+
+    }
+
+// generic if-then (no special considerations)
+    //check for [indexing]
+    strcpy(Aregcopy, statement[2]);
+    if (!strcmp(statement[2], Areg))
+	Aregmatch = 1;		// do we already have the correct value in A?
+
+    for (i = 3; i < 200; ++i)
+	if ((!strncmp(statement[i], "then\0", 4)) ||
+	    (!strncmp(statement[i], "&&\0", 2)) || (!strncmp(statement[i], "||\0", 2)))
+	    break;
+
+    j = 0;
+    for (k = 3; k < i; ++k)
+    {
+	if (statement[k][0] == '&' && statement[k][1] == '\0')
+	    j = k;
+	if ((statement[k][0] == '<') || (statement[k][0] == '>') || (statement[k][0] == '='))
+	    break;
+    }
+    if ((k == i) && j)
+	k = j;			// special case of & for efficient code
+
+    if ((complex_boolean) || (k == i && i > 4))
+    {
+	// complex boolean found
+	// assign value to contents, reissue statement as boolean
+	strcpy(cstatement[2], "Areg\0");
+	strcpy(cstatement[3], "=\0");
+	for (j = 2; j < i; ++j)
+	    strcpy(cstatement[j + 2], statement[j]);
+
+	dolet(cstatement);
+
+	if (!islabel(statement))	// then linenumber
+	{
+	    if (not)
+		beq(statement[i + 1]);
+	    else
+		bne(statement[i + 1]);
+	}
+	else			// then statement
+	{			// first, take negative of condition and branch around statement
+	    j = i;
+	    if (not)
+		printf("	BNE ");
+	    else
+		printf("	BEQ ");
+	}
+	printf(".skip%s\n", statement[0]);
+	// separate statement
+	for (i = j; i < 200; ++i)
+	{
+	    for (k = 0; k < 200; ++k)
+	    {
+		cstatement[i - j][k] = statement[i][k];
+	    }
+	}
+	printf(".condpart%d\n", condpart++);
+	keywords(cstatement);
+	printf(".skip%s\n", statement[0]);
+
+
+
+
+
+	Aregmatch = 0;
+	freemem(dealloccstatement);
+	return;
+    }
+    else if (((k < i) && (i - k != 2)) || ((k < i) && (k > 3)))
+    {
+	printf("; complex condition detected\n");
+	// complex statements will be changed to assignments and reissued as assignments followed by a simple compare
+	// i=location of then
+	// k=location of conditional operator
+	// if is at 2
+	if (not)
+	{			// handles =, <, <=, >, >=, <>
+	    // & handled later
+	    if (!strncmp(statement[k], "=\0", 2))
+	    {
+		statement[3][0] = '<';	// force beq/bne below
+		statement[3][1] = '>';
+		statement[3][2] = '\0';
+	    }
+	    else if (!strncmp(statement[k], "<>", 2))
+	    {
+		statement[3][0] = '=';	// force beq/bne below
+		statement[3][1] = '\0';
+	    }
+	    else if (!strncmp(statement[k], "<=", 2))
+	    {
+		statement[3][0] = '>';	// force beq/bne below
+		statement[3][1] = '\0';
+	    }
+	    else if (!strncmp(statement[k], ">=", 2))
+	    {
+		statement[3][0] = '<';	// force beq/bne below
+		statement[3][1] = '\0';
+	    }
+	    else if (!strncmp(statement[k], "<\0", 2))
+	    {
+		statement[3][0] = '>';	// force beq/bne below
+		statement[3][1] = '=';
+		statement[3][2] = '\0';
+	    }
+	    else if (!strncmp(statement[k], "<\0", 2))
+	    {
+		statement[3][0] = '>';	// force beq/bne below
+		statement[3][1] = '=';
+		statement[3][2] = '\0';
+	    }
+	}
+	if (k > 4)
+	    push1 = 1;		// first statement is complex
+	if (i - k != 2)
+	    push2 = 1;		// second statement is complex
+
+	// <, >=, &, = do not swap
+	// > or <= swap
+
+	if (push1 == 1 && push2 == 1 && (strncmp(statement[k], ">\0", 2)) && (strncmp(statement[k], "<=\0", 2)))
+	{
+	    // Assign to Areg and push
+	    strcpy(cstatement[2], "Areg\0");
+	    strcpy(cstatement[3], "=\0");
+	    for (j = 2; j < k; ++j)
+	    {
+		for (h = 0; h < 200; ++h)
+		{
+		    cstatement[j + 2][h] = statement[j][h];
+		}
+	    }
+	    dolet(cstatement);
+	    printf("  PHA\n");
+	    // second statement:
+	    strcpy(cstatement[2], "Areg\0");
+	    strcpy(cstatement[3], "=\0");
+	    for (j = k + 1; j < i; ++j)
+	    {
+		for (h = 0; h < 200; ++h)
+		{
+		    cstatement[j - k + 3][h] = statement[j][h];
+		}
+	    }
+	    dolet(cstatement);
+	    printf("  PHA\n");
+	    situation = 1;
+	}
+	else if (push1 == 1 && push2 == 1)	// two pushes plus swaps
+	{
+	    // second statement first:
+	    strcpy(cstatement[2], "Areg\0");
+	    strcpy(cstatement[3], "=\0");
+	    for (j = k + 1; j < i; ++j)
+	    {
+		for (h = 0; h < 200; ++h)
+		{
+		    cstatement[j - k + 3][h] = statement[j][h];
+		}
+	    }
+	    dolet(cstatement);
+	    printf("  PHA\n");
+
+	    // first statement second
+	    strcpy(cstatement[2], "Areg\0");
+	    strcpy(cstatement[3], "=\0");
+	    for (j = 2; j < k; ++j)
+	    {
+		for (h = 0; h < 200; ++h)
+		{
+		    cstatement[j + 2][h] = statement[j][h];
+		}
+	    }
+	    dolet(cstatement);
+	    printf("  PHA\n");
+
+	    // now change operator
+	    // > or <= swap
+	    if (!strncmp(statement[k], ">\0", 2))
+		strcpy(statement[k], "<\0");
+	    if (!strncmp(statement[k], "<=\0", 2))
+		strcpy(statement[k], ">=\0");
+	    situation = 2;
+	}
+	else if (push1 == 1 && (strncmp(statement[k], ">\0", 2)) && (strncmp(statement[k], "<=\0", 2)))
+	{
+	    // first statement only, no swap
+	    strcpy(cstatement[2], "Areg\0");
+	    strcpy(cstatement[3], "=\0");
+	    for (j = 2; j < k; ++j)
+	    {
+		for (h = 0; h < 200; ++h)
+		{
+		    cstatement[j + 2][h] = statement[j][h];
+		}
+	    }
+	    dolet(cstatement);
+	    //printf("  PHA\n");
+	    situation = 3;
+
+	}
+	else if (push1 == 1)
+	{
+	    // first statement only, swap
+	    strcpy(cstatement[2], "Areg\0");
+	    strcpy(cstatement[3], "=\0");
+	    for (j = 2; j < k; ++j)
+	    {
+		for (h = 0; h < 200; ++h)
+		{
+		    cstatement[j + 2][h] = statement[j][h];
+		}
+	    }
+	    dolet(cstatement);
+	    printf("  PHA\n");
+
+	    // now change operator
+	    // > or <= swap
+	    if (!strncmp(statement[k], ">\0", 2))
+		strcpy(statement[k], "<\0");
+	    if (!strncmp(statement[k], "<=\0", 2))
+		strcpy(statement[k], ">=\0");
+
+	    // swap pushes and vars:
+	    push1 = 0;
+	    push2 = 1;
+	    strcpy(statement[2], statement[k + 1]);
+	    situation = 4;
+
+	}
+	else if (push2 == 1 && (strncmp(statement[k], ">\0", 2)) && (strncmp(statement[k], "<=\0", 2)))
+	{
+	    // second statement only, no swap:
+	    strcpy(cstatement[2], "Areg\0");
+	    strcpy(cstatement[3], "=\0");
+	    for (j = k + 1; j < i; ++j)
+	    {
+		for (h = 0; h < 200; ++h)
+		{
+		    cstatement[j - k + 3][h] = statement[j][h];
+		}
+	    }
+	    dolet(cstatement);
+	    printf("  PHA\n");
+	    situation = 5;
+	}
+	else if (push2 == 1)
+	{
+	    // second statement only, swap:
+	    strcpy(cstatement[2], "Areg\0");
+	    strcpy(cstatement[3], "=\0");
+	    for (j = k + 1; j < i; ++j)
+	    {
+		for (h = 0; h < 200; ++h)
+		{
+		    cstatement[j - k + 3][h] = statement[j][h];
+		}
+	    }
+	    dolet(cstatement);
+	    //printf("  PHA\n");
+	    // now change operator
+	    // > or <= swap
+	    if (!strncmp(statement[k], ">\0", 2))
+		strcpy(statement[k], "<\0");
+	    if (!strncmp(statement[k], "<=\0", 2))
+		strcpy(statement[k], ">=\0");
+
+	    // swap pushes and vars:
+	    push1 = 1;
+	    push2 = 0;
+	    strcpy(statement[k + 1], statement[2]);
+	    situation = 6;
+	}
+	else			// should never get here
+	{
+	    prerror("Parse error in complex if-then statement\n");
+	    exit(1);
+	}
+	if (situation != 6 && situation != 3)
+	{
+	    printf("  TSX\n");	//index to stack
+	    if (push1)
+		printf("  PLA\n");
+	    if (push2)
+		printf("  PLA\n");
+	}
+	if (push1 && push2)
+	    strcpy(cstatement[2], " 2[TSX]\0");
+	else if (push1)
+	    strcpy(cstatement[2], " 1[TSX]\0");
+	else
+	    strcpy(cstatement[2], statement[2]);
+	strcpy(cstatement[3], statement[k]);
+	if (push2)
+	    strcpy(cstatement[4], " 1[TSX]\0");
+	else
+	    strcpy(cstatement[4], statement[k + 1]);
+	for (j = 5; j < 40; ++j)
+	    strcpy(cstatement[j], statement[j - 5 + i]);
+	strcpy(cstatement[0], statement[0]);	// copy label
+	if (situation != 4 && situation != 5)
+	    strcpy(Areg, cstatement[2]);	// attempt to suppress superfluous LDA
+
+	if (not && statement[k][0] == '&')
+	{
+	    shiftdata(cstatement, 5);
+	    cstatement[5][0] = ')';
+	    cstatement[5][1] = '\0';
+	    shiftdata(cstatement, 2);
+	    shiftdata(cstatement, 2);
+	    cstatement[2][0] = '!';
+	    cstatement[2][1] = '\0';
+	    cstatement[3][0] = '(';
+	    cstatement[3][1] = '\0';
+	}
+	strcpy(cstatement[1], "if\0");
+	if (statement[i][0] == 't')
+	    doif(cstatement);	// okay to recurse
+	else if (statement[i][0] == '&')
+	{
+	    if (situation != 4 && situation != 5)
+		printf("; todo: this LDA is spurious and should be prevented ->");
+	    keywords(cstatement);	// statement still has booleans - attempt to reanalyze
+	}
+	else
+	{
+	    prerror("if-then too complex for logical OR\n");
+	    exit(1);
+	}
+	Aregmatch = 0;
+	freemem(dealloccstatement);
+	return;
+    }
+    index |= getindex(statement[2], &getindex0[0]);
+    if (strncmp(statement[3], "then\0", 4))
+	index |= getindex(statement[4], &getindex1[0]) << 1;
+
+    if (!Aregmatch)		// do we already have the correct value in A?
+    {
+	if (index & 1)
+	    loadindex(&getindex0[0]);
+	printf("	LDA ");
+	printindex(statement[2], index & 1);
+	strcpy(Areg, Aregcopy);
+    }
+    if (index & 2)
+	loadindex(&getindex1[0]);
+//todo:check for cmp #0--useless except for <, > to clear carry
+    if (strncmp(statement[3], "then\0", 4))
+    {
+	if (statement[3][0] == '&')
+	{
+	    printf("	AND ");
+	    if (not)
+	    {
+		statement[3][0] = '=';	// force beq/bne below
+		statement[3][1] = '\0';
+	    }
+	    else
+	    {
+		statement[3][0] = '<';	// force beq/bne below
+		statement[3][1] = '>';
+		statement[3][2] = '\0';
+	    }
+	}
+	else
+	    printf("	CMP ");
+	printindex(statement[4], index & 2);
+    }
+
+    if (!islabel(statement))
+    {				// then linenumber
+	if (statement[3][0] == '=')
+	    beq(statement[6]);
+	if (!strncmp(statement[3], "<>\0", 2))
+	    bne(statement[6]);
+	else if (statement[3][0] == '<')
+	    bcc(statement[6]);
+	if (statement[3][0] == '>')
+	    bcs(statement[6]);
+	if (!strncmp(statement[3], "then\0", 4))
+        {
+	    if (not)
+		beq(statement[4]);
+	    else
+		bne(statement[4]);
+        }
+    }
+    else			// then statement
+    {				// first, take negative of condition and branch around statement
+	if (statement[3][0] == '=')
+	    printf("     BNE ");
+	if (!strcmp(statement[3], "<>"))
+	    printf("     BEQ ");
+	else if (statement[3][0] == '<')
+	    printf("     BCS ");
+	if (statement[3][0] == '>')
+	    printf("     BCC ");
+	j = 5;
+
+	if (!strncmp(statement[3], "then\0", 4))
+	{
+	    j = 3;
+	    if (not)
+		printf("	BNE ");
+	    else
+		printf("	BEQ ");
+	}
+	printf(".skip%s\n", statement[0]);
+	// separate statement
+
+	// separate statement
+	for (i = j; i < 200; ++i)
+	{
+	    for (k = 0; k < 200; ++k)
+	    {
+		cstatement[i - j][k] = statement[i][k];
+	    }
+	}
+	printf(".condpart%d\n", condpart++);
+	keywords(cstatement);
+	printf(".skip%s\n", statement[0]);
+
+	freemem(dealloccstatement);
+	return;
+    }
+    freemem(dealloccstatement);
+}
+void doif(char **statement)
+{
+    if (amax_syntax) {
+        doif_amax(statement);
+    } else {
+        doif_legacy(statement);
     }
 }

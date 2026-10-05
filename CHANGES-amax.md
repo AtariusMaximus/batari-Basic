@@ -146,3 +146,16 @@ See "test_zero.bas" in the samples subdirectory for a usage example.
  rem Wipe all 6 digits of the score at once
  zero score, a, b
  ```
+
+## amax.9. Legacy Versioning Support (`set legacy`)
+
+Added backward-compatibility support for the `set legacy` command (e.g., `set legacy 1.9` or `set legacy 0.99`). 
+
+### Why it's there & What it does:
+With the introduction of updated structural code like the new multi-line `if/then/else/endif` block, some older games written for official batari Basic v1.9 could potentially run into syntax issues. Placing `set legacy 1.9` at the top forces the compiler to completely bypass the updated code and use the legacy code.
+
+### Syntax Example:
+```basic
+ rem Force the compiler to use v1.9 legacy mode
+ set legacy 1.9
+```
