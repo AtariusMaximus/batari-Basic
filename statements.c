@@ -59,6 +59,8 @@ char joy_reg[20];
 // SE
 char if_stack[100][200];
 int if_stack_ptr = 0;
+
+int extract_nybble(char *varname);
 // -------------------------
 
 int pfdata[100][256];
@@ -4049,6 +4051,14 @@ int edge_detect = 0;
     }
     if (i < 200)		// found array
     {
+	// --- ESCAPE NYBBLES FROM OLD BIT LOGIC ---
+	char inner[10] = {0};
+	int lbrace = 0;
+	for (int k=0; k < i; k++) if(statement[2][k] == '{') lbrace = k;
+	strncpy(inner, &statement[2][lbrace+1], i - lbrace - 1);
+	if (!strcmp(inner, "lo") || !strcmp(inner, "hi")) goto skip_bit_logic2;
+	// -----------------------------------------
+
 	// extract expression in parantheses - for now just whole numbers allowed
 	bit = (int) statement[2][i - 1] - '0';
 	if ((bit > 9) || (bit < 0))
@@ -4204,8 +4214,32 @@ int edge_detect = 0;
 	}
 
     }
-
+skip_bit_logic2: ;
 // generic if-then (no special considerations)
+
+    // --- NYBBLE CONDITIONAL PRE-PROCESSING ---
+    if (statement[2] != NULL) {
+        int n2 = extract_nybble(statement[2]);
+        if (n2) {
+            printf("\tLDA %s\n", statement[2]);
+            if (n2 == 1) printf("\tAND #$0F\n");
+            if (n2 == 2) printf("\tLSR\n\tLSR\n\tLSR\n\tLSR\n");
+            printf("\tSTA temp5\n");
+            strcpy(statement[2], "temp5");
+        }
+    }
+    if (statement[4] != NULL) {
+        int n4 = extract_nybble(statement[4]);
+        if (n4) {
+            printf("\tLDA %s\n", statement[4]);
+            if (n4 == 1) printf("\tAND #$0F\n");
+            if (n4 == 2) printf("\tLSR\n\tLSR\n\tLSR\n\tLSR\n");
+            printf("\tSTA temp6\n");
+            strcpy(statement[4], "temp6");
+        }
+    }
+    // -----------------------------------------
+
     //check for [indexing]
     strcpy(Aregcopy, statement[2]);
     if (!strcmp(statement[2], Areg))
@@ -4769,6 +4803,22 @@ void dec(char **cstatement)
 }
 
 
+// --- AMAX NYBBLE HELPER ---
+int extract_nybble(char *varname) {
+    if (!varname) return 0;
+    char *lo = strstr(varname, "{lo}");
+    if (lo) {
+        *lo = '\0'; // strip the suffix
+        return 1;
+    }
+    char *hi = strstr(varname, "{hi}");
+    if (hi) {
+        *hi = '\0';
+        return 2;
+    }
+    return 0;
+}
+// --------------------------
 
 void dolet(char **cstatement)
 {
@@ -4819,6 +4869,29 @@ void dolet(char **cstatement)
     fixpoint1 = isfixpoint(statement[2]);
     fixpoint2 = isfixpoint(statement[4]);
     removeCR(statement[4]);
+
+    // --- NYBBLE RHS PRE-PROCESSING ---
+    if (statement[4] != NULL) {
+        int n4 = extract_nybble(statement[4]);
+        if (n4) {
+            printf("\tLDA %s\n", statement[4]);
+            if (n4 == 1) printf("\tAND #$0F\n");
+            if (n4 == 2) printf("\tLSR\n\tLSR\n\tLSR\n\tLSR\n");
+            printf("\tSTA temp5\n");
+            strcpy(statement[4], "temp5");
+        }
+    }
+    if (statement[6] != NULL && statement[6][0] != '\0' && statement[6][0] != ':') {
+        int n6 = extract_nybble(statement[6]);
+        if (n6) {
+            printf("\tLDA %s\n", statement[6]);
+            if (n6 == 1) printf("\tAND #$0F\n");
+            if (n6 == 2) printf("\tLSR\n\tLSR\n\tLSR\n\tLSR\n");
+            printf("\tSTA temp6\n");
+            strcpy(statement[6], "temp6");
+        }
+    }
+    // ---------------------------------
 
     // check for complex statement
     if ((!((statement[4][0] == '-') && (statement[6][0] == ':'))) &&
@@ -4991,8 +5064,18 @@ void dolet(char **cstatement)
     if (i < 200)		// found bit
     {
 	strcpy(Areg, "invalid");
+	
+	// --- ESCAPE NYBBLES FROM OLD BIT LOGIC ---
+	char inner[10] = {0};
+	int lbrace = 0;
+	for (int k=0; k < i; k++) if(statement[2][k] == '{') lbrace = k;
+	strncpy(inner, &statement[2][lbrace+1], i - lbrace - 1);
+	if (!strcmp(inner, "lo") || !strcmp(inner, "hi")) goto skip_bit_logic0;
+	// -----------------------------------------
+
 	// extract expression in parantheses - for now just whole numbers allowed
 	bit = (int) statement[2][i - 1] - '0';
+	
 	if ((bit > 9) || (bit < 0))
 	{
 	    fprintf(stderr, "(%d) Error: variables in bit access not supported\n", line);
@@ -5070,7 +5153,7 @@ void dolet(char **cstatement)
 	free(deallocstatement);
 	return;
     }
-
+skip_bit_logic0: ;
     if (statement[4][0] == '-')	// assignment to negative
     {
 	strcpy(Areg, "invalid");
@@ -5623,8 +5706,29 @@ void dolet(char **cstatement)
 	loadindex(&getindex0[0]);
     if (strncmp(statement[2], "Areg\0", 4))
     {
-	printf("	STA ");
-	printindex(statement[2], index & 1);
+        // --- NYBBLE FINAL ASSIGNMENT INTERCEPT ---
+        int nyb_target = extract_nybble(statement[2]);
+        if (nyb_target) {
+            printf("\tSTA temp1\n"); // Save math result
+            
+            if (nyb_target == 2) { // {hi} requires shifting the math result UP
+                printf("\tLDA temp1\n\tASL\n\tASL\n\tASL\n\tASL\n\tSTA temp1\n");
+            } else {
+                // For {lo}, we must ensure math overflow doesn't bleed upward
+                printf("\tLDA temp1\n\tAND #$0F\n\tSTA temp1\n");
+            }
+            
+            printf("\tLDA %s\n", statement[2]);
+            if (nyb_target == 1) printf("\tAND #$F0\n"); // Protect high nybble
+            else printf("\tAND #$0F\n");                 // Protect low nybble
+            
+            printf("\tORA temp1\n");                     // Merge and save
+            printf("\tSTA %s\n", statement[2]);
+        } else {
+	        printf("\tSTA ");
+	        printindex(statement[2], index & 1);
+        }
+        // -----------------------------------------
     }
     free(deallocstatement);
 }
@@ -6947,6 +7051,14 @@ void doif_legacy(char **statement)
     }
     if (i < 200)		// found array
     {
+	// --- ESCAPE NYBBLES FROM OLD BIT LOGIC ---
+	char inner[10] = {0};
+	int lbrace = 0;
+	for (int k=0; k < i; k++) if(statement[2][k] == '{') lbrace = k;
+	strncpy(inner, &statement[2][lbrace+1], i - lbrace - 1);
+	if (!strcmp(inner, "lo") || !strcmp(inner, "hi")) goto skip_bit_logic1;
+	// -----------------------------------------
+
 	// extract expression in parantheses - for now just whole numbers allowed
 	bit = (int) statement[2][i - 1] - '0';
 	if ((bit > 9) || (bit < 0))
@@ -7090,8 +7202,32 @@ void doif_legacy(char **statement)
 	}
 
     }
-
+skip_bit_logic1: ;
 // generic if-then (no special considerations)
+
+    // --- NYBBLE CONDITIONAL PRE-PROCESSING ---
+    if (statement[2] != NULL) {
+        int n2 = extract_nybble(statement[2]);
+        if (n2) {
+            printf("\tLDA %s\n", statement[2]);
+            if (n2 == 1) printf("\tAND #$0F\n");
+            if (n2 == 2) printf("\tLSR\n\tLSR\n\tLSR\n\tLSR\n");
+            printf("\tSTA temp5\n");
+            strcpy(statement[2], "temp5");
+        }
+    }
+    if (statement[4] != NULL) {
+        int n4 = extract_nybble(statement[4]);
+        if (n4) {
+            printf("\tLDA %s\n", statement[4]);
+            if (n4 == 1) printf("\tAND #$0F\n");
+            if (n4 == 2) printf("\tLSR\n\tLSR\n\tLSR\n\tLSR\n");
+            printf("\tSTA temp6\n");
+            strcpy(statement[4], "temp6");
+        }
+    }
+    // -----------------------------------------
+
     //check for [indexing]
     strcpy(Aregcopy, statement[2]);
     if (!strcmp(statement[2], Areg))

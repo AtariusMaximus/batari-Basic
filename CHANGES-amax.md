@@ -159,3 +159,21 @@ With the introduction of updated structural code like the new multi-line `if/the
  rem Force the compiler to use v1.9 legacy mode
  set legacy 1.9
 ```
+
+## amax.10. Native Nybble Variables (`{lo}` / `{hi}`)
+
+Added native compiler support for nybble (4-bit) variables. You can now cleanly split any standard 8-bit variable into two independent halves (capable of storing 0-15) using the `{lo}` and `{hi}` suffixes combined with the `def` command. 
+
+### Syntax Example:
+```basic
+ dim shared_byte = a
+
+ def p1_lives = shared_byte{lo}
+ def p2_lives = shared_byte{hi}
+
+ rem Use them exactly like standard variables
+ p1_lives = 3
+ p2_lives = p2_lives + 1
+
+ if p1_lives > 10 then p1_lives = 10
+```
