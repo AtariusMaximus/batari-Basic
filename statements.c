@@ -1601,13 +1601,13 @@ void create_includes(char *includesfile)
 		if (user_includes[0] != '\0')
 		    fprintf(includeswrite, "%s", user_includes);
 		
-	    // --- swap the kernel file if 'set kernel split' is specified---
+	    // --- CUSTOM FORK: Dynamically swap the kernel file ---
 	    if (split_kernel && strstr(dline, "std_kernel.asm")) {
 	        fprintf(includeswrite, " include \"split_kernel.asm\"\n");
 	    } else {
 	        fprintf(includeswrite, "%s", dline);
 	    }
-	    // ---------------------------------------------------------------
+	    // -----------------------------------------------------
 	}
     }
     fclose(includesread);
