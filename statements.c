@@ -35,6 +35,7 @@ int branchtargetnumber = 0;
 int doingfunction = 0;
 int sprite_index = 0;
 int multisprite = 0;
+int split_kernel = 0;
 int lifekernel = 0;
 int playfield_number = 0;
 int extra = 0;
@@ -710,6 +711,21 @@ void playfield(char **statement)
 	line++;
 	if (!strncmp(data, "end\0", 3))
 	    break;
+    // --- CUSTOM FORK: Auto-reverse right half for CTRLPF=$21 ---
+	// Check if the line has 32 characters of valid playfield data
+	if (split_kernel && strlen(data) >= 32 && (data[31] == zero || data[31] == one)) {
+	    int left = 16;
+	    int right = 31;
+	    while (left < right) {
+	        char temp = data[left];
+	        data[left] = data[right];
+	        data[right] = temp;
+	        left++;
+	        right--;
+	    }
+	}
+	// ------------------------------------------------------------
+
 	if (ROMpf)		// if playfield is in ROM:
 	{
 	    pfdata[playfield_number][playfield_index[playfield_number]] = 0;
@@ -1584,7 +1600,14 @@ void create_includes(char *includesfile)
 	    if (!strncasecmp(dline, "bb.asm", 6))
 		if (user_includes[0] != '\0')
 		    fprintf(includeswrite, "%s", user_includes);
-	    fprintf(includeswrite, "%s", dline);
+		
+	    // --- swap the kernel file if 'set kernel split' is specified---
+	    if (split_kernel && strstr(dline, "std_kernel.asm")) {
+	        fprintf(includeswrite, " include \"split_kernel.asm\"\n");
+	    } else {
+	        fprintf(includeswrite, "%s", dline);
+	    }
+	    // ---------------------------------------------------------------
 	}
     }
     fclose(includesread);
@@ -6053,6 +6076,13 @@ void set(char **statement)
 	    strcpy(redefined_variables[numredefvars++], "multisprite = 1");
 	    ROMpf = 1;
 	}
+	// --- CUSTOM FORK: split kernel flag ---
+	else if (!strncmp(statement[3], "split\0", 6))
+	{
+	    split_kernel = 1;
+	    strcpy(redefined_variables[numredefvars++], "split_kernel = 1");
+	}
+	// --------------------------------------
 	else
 	    prerror("set kernel: kernel name unknown or unspecified\n");
     }
