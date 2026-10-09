@@ -5,6 +5,26 @@
 
      ifnconst vertical_reflect
 kernel
+; --- DUAL SCREEN AUTO-CONFIGURATION ---
+ ifconst pfres
+     if pfres == 32
+split_ram_offset = 64
+split_pos_auto   = 68
+     endif
+     if pfres == 24
+split_ram_offset = 48
+split_pos_auto   = 84
+     endif
+     if pfres == 12
+split_ram_offset = 24
+split_pos_auto   = 108
+     endif
+ else
+     ; Default to 12 lines TOTAL (6 per half) if pfres is omitted
+split_ram_offset = 24
+split_pos_auto   = 108
+ endif
+ ; --------------------------------------
      endif
      sta WSYNC
      lda #255
@@ -107,16 +127,16 @@ continuekernel2
          ldy playfield+pfres*pfwidth-129-pfadjust,x
          sty PF2
      else
-         ldy playfield-48+pfwidth*12+44-128,x
-         sty PF1L ;3
-         ldy playfield-48+pfwidth*12+45-128-pfadjust,x ;4
-         sty PF2L ;3
-         ;sleep 14 
-         ldy playfield+pfres*pfwidth-130,x
-         sty PF1 
-         ldy playfield+pfres*pfwidth-129-pfadjust,x
-         sty PF2
-     endif
+             ldy playfield-48+pfwidth*12+44-128,x
+             sty PF1L ;3
+             ldy playfield-48+pfwidth*12+45-128-pfadjust,x ;4
+             sty PF2L ;3
+             
+             ldy playfield-48+pfwidth*12+46-128,x
+             sty PF1 
+             ldy playfield-48+pfwidth*12+47-128-pfadjust,x
+             sty PF2
+         endif
 
      dcp bally
      rol
@@ -161,16 +181,16 @@ goback
          ldy playfield+pfres*pfwidth-129-pfadjust,x
          sty PF2
      else
-         lda playfield-48+pfwidth*12+44-128,x ;4
-         sta PF1L ;3
-         lda playfield-48+pfwidth*12+45-128-pfadjust,x ;4
-         sta PF2L ;3
-         ;sleep 14 
-         ldy playfield+pfres*pfwidth-130,x
-         sty PF1 
-         ldy playfield+pfres*pfwidth-129-pfadjust,x
-         sty PF2
-     endif 
+             lda playfield-48+pfwidth*12+44-128,x ;4
+             sta PF1L ;3
+             lda playfield-48+pfwidth*12+45-128-pfadjust,x ;4
+             sta PF2L ;3
+             
+             ldy playfield-48+pfwidth*12+46-128,x
+             sty PF1 
+             ldy playfield-48+pfwidth*12+47-128-pfadjust,x
+             sty PF2
+         endif 
 
      lda player0height
      dcp player0y
@@ -320,13 +340,9 @@ altkernel
              ifnconst PFheights
                  ifnconst no_blank_lines
                      ; --- DUAL SCREEN INJECTION POINT ---
-                     ifconst split_position
-                         cpx #split_position   ; 2 cycles (User-defined split)
-                     else
-                         cpx #68               ; 2 cycles (Default fallback)
-                     endif
-                     bne SplitNoDivider    ; 3 cycles if branch taken (not row 16)
-                     jmp SplitDoDivider    ; 3 cycles (Absolute jump to bypass 127-byte limit)
+                     cpx #split_pos_auto   ; Uses the auto-calculated split line
+                     bne SplitNoDivider    ; 3 cycles if branch taken 
+                     jmp SplitDoDivider    ; 3 cycles
 SplitNoDivider
                      sleep 5               ; 5 cycles (Total: 2+3+5 = 10 cycles for non-split rows)
 SplitReturnFromDivider
@@ -411,16 +427,16 @@ lastkernelline
          ldy playfield+pfres*pfwidth-129-pfadjust,x
          sty PF2
      else
-         ldy.w playfield-48+pfwidth*12+44
-         sty PF1L ;3
-         ldy.w playfield-48+pfwidth*12+45-pfadjust
-         sty PF2L ;3
-         ;sleep 14 
-         ldy playfield+pfres*pfwidth-130,x
-         sty PF1 
-         ldy playfield+pfres*pfwidth-129-pfadjust,x
-         sty PF2
-     endif
+             ldy.w playfield-48+pfwidth*12+44
+             sty PF1L ;3
+             ldy.w playfield-48+pfwidth*12+45-pfadjust
+             sty PF2L ;3
+             
+             ldy playfield-48+pfwidth*12+46-128,x
+             sty PF1 
+             ldy playfield-48+pfwidth*12+47-128-pfadjust,x
+             sty PF2
+         endif
 
 enterlastkernel
      lda ballheight
@@ -463,16 +479,16 @@ enterlastkernel
          sty PF2
 
      else
-         ldy.w playfield-48+pfwidth*12+44
-         sty PF1L ;3
-         ldy.w playfield-48+pfwidth*12+45-pfadjust
-         sty PF2L ;3
-         ;sleep 14 
-         ldy playfield+pfres*pfwidth-130,x
-         sty PF1 
-         ldy playfield+pfres*pfwidth-129-pfadjust,x
-         sty PF2
-     endif
+             ldy.w playfield-48+pfwidth*12+44
+             sty PF1L ;3
+             ldy.w playfield-48+pfwidth*12+45-pfadjust
+             sty PF2L ;3
+             
+             ldy playfield-48+pfwidth*12+46-128,x
+             sty PF1 
+             ldy playfield-48+pfwidth*12+47-128-pfadjust,x
+             sty PF2
+         endif
 
      ifnconst player1colors
          rol;2
@@ -744,34 +760,39 @@ SplitDoDivider
      txa               ; Push playfield offset X to stack
      pha               
      
-     ; Scanline 1: Swap Variables (Y, Color, and Pointers)
+     ; Scanline 1: Swap Y, Colors, and P0 Pointers
      sta WSYNC
      lda p2_player0y
      sta player0y
+     lda p2_player1y         
+     sta player1y
      lda p2_colupf
      sta COLUPF
+     
+     lda p2_colup0
+     sta COLUP0
+     lda p2_colup1
+     sta COLUP1
 
-     ; --- NEW: Swap the Sprite Graphic Pointers! ---
      lda p2_player0pointerlo
      sta player0pointerlo
      lda p2_player0pointerhi
      sta player0pointerhi
-     ; ----------------------------------------------
 
-     ; Clamp Player 1 X (p2_player1x) for visual positioning only
+     ; Clamp Player 1 X for visual positioning only
      lda p2_player1x
-     cmp #160          ; Is it safely on screen (0-159)?
+     cmp #160          
      bcc .d_safe
-     cmp #240          ; Did it wrap past 0 to the left (240-255)?
+     cmp #240          
      bcs .d_left
-     lda #159          ; Off right edge: clamp drawing to 159
-     bne .d_safe       ; (Unconditional branch, 159 != 0)
+     lda #159          
+     bne .d_safe       
 .d_left  
-     lda #0            ; Off left edge: clamp drawing to 0
+     lda #0            
 .d_safe  
      tax               ; Stash safe P1 X in X register
          
-     ; Clamp Player 0 X (p2_player0x) for visual positioning only
+     ; Clamp Player 0 X for visual positioning only
      lda p2_player0x
      cmp #160
      bcc .c_safe
@@ -784,31 +805,35 @@ SplitDoDivider
 .c_safe  
      tay               ; Stash safe P0 X in Y register
          
-     ; Scanline 2: Coarse position Player 0
+     ; Scanline 2: Coarse position P0 + Cycle-pack P1 Pointer Lo
      sta WSYNC
-     sleep 8           ; Pad to escape HBLANK
-     tya               ; Retrieve safe Player 0 X
+     lda p2_player1pointerlo
+     sta player1pointerlo
+     sleep 4           ; Replaces 'sleep 10' to perfectly maintain 10-cycle timing!
+     tya               
      sec
 SplitPosP0
      sbc #15
      bcs SplitPosP0
      sta RESP0         
-     sta temp5         
+     tay               ; 2-cycle save 
      
-     ; Scanline 3: Coarse position Player 1
+     ; Scanline 3: Coarse position P1 + Cycle-pack P1 Pointer Hi
      sta WSYNC
-     sleep 8           ; Pad to escape HBLANK
-     txa               ; Retrieve safe Player 1 X
+     lda p2_player1pointerhi
+     sta player1pointerhi
+     sleep 4           ; Replaces 'sleep 10'
+     txa               
      sec
 SplitPosP1
      sbc #15
      bcs SplitPosP1
      sta RESP1         
-     sta temp6         
+     tax               ; 2-cycle save 
 
      ; Scanline 4: Fine Positioning Math
      sta WSYNC
-     lda temp5
+     tya               
      eor #7
      asl
      asl
@@ -816,7 +841,7 @@ SplitPosP1
      asl
      sta HMP0
 
-     lda temp6
+     txa               
      eor #7
      asl
      asl

@@ -1,17 +1,21 @@
 ; This file contains variable mapping and other information for the current project.
 
 bscode_length = 32
-room_color_length = .skipL074-room_color 
+room_color_length = .skipL082-room_color 
  
-move_west_length = .skipL073-move_west 
+move_west_length = .skipL081-move_west 
  
-move_south_length = .skipL072-move_south 
+move_south_length = .skipL080-move_south 
  
-move_east_length = .skipL071-move_east 
+move_east_length = .skipL079-move_east 
  
-move_north_length = .skipL070-move_north 
+move_north_length = .skipL078-move_north 
  
-room_shape_length = .skipL069-room_shape 
+room_shape_length = .skipL077-room_shape 
+ 
+p2_colup1 = q
+ 
+p2_colup0 = p
  
 p2_player1pointerhi = o
  
@@ -42,8 +46,6 @@ p2_colupf = c
 p2_player0x = b
  
 p2_player0y = a
- 
-split_position = 68
  
 pfres = 32
  

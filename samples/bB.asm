@@ -3,258 +3,358 @@ game
 
 .L01 ;;line 2;;  set romsize 16kSC
 
-.L02 ;;line 3;;  const pfres = 32
+.
+ ;;line 3;; 
 
-.L03 ;;line 4;;  const split_position = 68
+.
+ ;;line 4;; 
 
 .
  ;;line 5;; 
 
-.L04 ;;line 6;;  dim p2_player0y = a
-
-.L05 ;;line 7;;  dim p2_player0x = b
-
-.L06 ;;line 8;;  dim p2_colupf = c
+.
+ ;;line 6;; 
 
 .
- ;;line 9;; 
-
-.L07 ;;line 10;;  dim p0_room = d
-
-.L08 ;;line 11;;  dim p1_room = e
+ ;;line 7;; 
 
 .
- ;;line 12;; 
+ ;;line 8;; 
 
-.L09 ;;line 13;;  dim p0_oldx = f
-
-.L010 ;;line 14;;  dim p0_oldy = g
+.L02 ;;line 9;;  const pfres = 32
 
 .
- ;;line 15;; 
+ ;;line 10;; 
 
-.L011 ;;line 16;;  dim p1_oldx = h
+.L03 ;;line 11;;  dim p2_player0y = a
 
-.L012 ;;line 17;;  dim p1_oldy = i
+.L04 ;;line 12;;  dim p2_player0x = b
 
-.
- ;;line 18;; 
-
-.L013 ;;line 19;;  dim p2_player1y = j
-
-.L014 ;;line 20;;  dim p2_player1x = k
+.L05 ;;line 13;;  dim p2_colupf = c
 
 .
- ;;line 21;; 
+ ;;line 14;; 
 
-.L015 ;;line 22;;  dim p2_player0pointerlo = l
+.L06 ;;line 15;;  dim p0_room = d
 
-.L016 ;;line 23;;  dim p2_player0pointerhi = m
-
-.
- ;;line 24;; 
-
-.L017 ;;line 25;;  dim p2_player1pointerlo = n
-
-.L018 ;;line 26;;  dim p2_player1pointerhi = o
+.L07 ;;line 16;;  dim p1_room = e
 
 .
- ;;line 27;; 
+ ;;line 17;; 
+
+.L08 ;;line 18;;  dim p0_oldx = f
+
+.L09 ;;line 19;;  dim p0_oldy = g
 
 .
- ;;line 28;; 
+ ;;line 20;; 
 
-.L019 ;;line 29;;  player0x = 92  :  player0y = 25
+.L010 ;;line 21;;  dim p1_oldx = h
+
+.L011 ;;line 22;;  dim p1_oldy = i
+
+.
+ ;;line 23;; 
+
+.L012 ;;line 24;;  dim p2_player1y = j
+
+.L013 ;;line 25;;  dim p2_player1x = k
+
+.
+ ;;line 26;; 
+
+.L014 ;;line 27;;  dim p2_player0pointerlo = l
+
+.L015 ;;line 28;;  dim p2_player0pointerhi = m
+
+.
+ ;;line 29;; 
+
+.L016 ;;line 30;;  dim p2_player1pointerlo = n
+
+.L017 ;;line 31;;  dim p2_player1pointerhi = o
+
+.
+ ;;line 32;; 
+
+.L018 ;;line 33;;  dim p2_colup0 = p
+
+.L019 ;;line 34;;  dim p2_colup1 = q
+
+.
+ ;;line 35;; 
+
+.
+ ;;line 36;; 
+
+.L020 ;;line 37;;  player0x = 92  :  player0y = 25
 
 	LDA #92
 	STA player0x
 	LDA #25
 	STA player0y
-.L020 ;;line 30;;  p2_player0x = 92  :  p2_player0y = 25
+.L021 ;;line 38;;  p2_player0x = 92  :  p2_player0y = 25
 
 	LDA #92
 	STA p2_player0x
 	LDA #25
 	STA p2_player0y
-.L021 ;;line 31;;  p0_room = 19  :  p1_room = 18
+.L022 ;;line 39;;  player1x = 70  :  player1y = 25
+
+	LDA #70
+	STA player1x
+	LDA #25
+	STA player1y
+.L023 ;;line 40;;  p2_player1x = 70  :  p2_player1y = 25
+
+	LDA #70
+	STA p2_player1x
+	LDA #25
+	STA p2_player1y
+.L024 ;;line 41;;  p0_room = 19  :  p1_room = 18
 
 	LDA #19
 	STA p0_room
 	LDA #18
 	STA p1_room
 .
- ;;line 32;; 
+ ;;line 42;; 
 
 .
- ;;line 33;; 
+ ;;line 43;; 
 
-.L022 ;;line 34;;  gosub load_p0_room
+.L025 ;;line 44;;  gosub load_p0_room
 
  jsr .load_p0_room
-.L023 ;;line 35;;  gosub load_p1_room
+.L026 ;;line 45;;  gosub load_p1_room
 
  jsr .load_p1_room
 .
- ;;line 36;; 
-
-.main_loop
- ;;line 37;; main_loop
+ ;;line 46;; 
 
 .
- ;;line 38;; 
+ ;;line 47;; 
 
-.L024 ;;line 39;;  player0:
-
-	LDX #<playerL024_0
-	STX player0pointerlo
-	LDA #>playerL024_0
-	STA player0pointerhi
-	LDA #6
-	STA player0height
 .
  ;;line 48;; 
 
-.
- ;;line 49;; 
+.L027 ;;line 49;;  player0:
 
-.L025 ;;line 50;;  p2_player0pointerlo = player0pointerlo
+	LDX #<playerL027_0
+	STX player0pointerlo
+	LDA #>playerL027_0
+	STA player0pointerhi
+	LDA #5
+	STA player0height
+.
+ ;;line 57;; 
+
+.
+ ;;line 58;; 
+
+.L028 ;;line 59;;  p2_player0pointerlo = player0pointerlo
 
 	LDA player0pointerlo
 	STA p2_player0pointerlo
-.L026 ;;line 51;;  p2_player0pointerhi = player0pointerhi
+.L029 ;;line 60;;  p2_player0pointerhi = player0pointerhi
 
 	LDA player0pointerhi
 	STA p2_player0pointerhi
-.L027 ;;line 52;;  p2_player1pointerlo = player1pointerlo
+.
+ ;;line 61;; 
+
+.L030 ;;line 62;;  player1:
+
+	LDX #<playerL030_1
+	STX player1pointerlo
+	LDA #>playerL030_1
+	STA player1pointerhi
+	LDA #5
+	STA player1height
+.
+ ;;line 70;; 
+
+.
+ ;;line 71;; 
+
+.L031 ;;line 72;;  p2_player1pointerlo = player1pointerlo
 
 	LDA player1pointerlo
 	STA p2_player1pointerlo
-.L028 ;;line 53;;  p2_player1pointerhi = player1pointerhi
+.L032 ;;line 73;;  p2_player1pointerhi = player1pointerhi
 
 	LDA player1pointerhi
 	STA p2_player1pointerhi
 .
- ;;line 54;; 
+ ;;line 74;; 
 
-.L029 ;;line 55;;  COLUBK = $00
+.
+ ;;line 75;; 
+
+.main_loop
+ ;;line 76;; main_loop
+
+.
+ ;;line 77;; 
+
+.
+ ;;line 78;; 
+
+.
+ ;;line 79;; 
+
+.L033 ;;line 80;;  player0:
+
+	LDX #<playerL033_0
+	STX player0pointerlo
+	LDA #>playerL033_0
+	STA player0pointerhi
+	LDA #5
+	STA player0height
+.
+ ;;line 88;; 
+
+.L034 ;;line 89;;  player1:
+
+	LDX #<playerL034_1
+	STX player1pointerlo
+	LDA #>playerL034_1
+	STA player1pointerhi
+	LDA #5
+	STA player1height
+.
+ ;;line 97;; 
+
+.L035 ;;line 98;;  COLUBK = $00
 
 	LDA #$00
 	STA COLUBK
-.L030 ;;line 56;;  CTRLPF = $21
+.L036 ;;line 99;;  CTRLPF = $21
 
 	LDA #$21
 	STA CTRLPF
-.L031 ;;line 57;;  COLUP0 = $1E
+.
+ ;;line 100;; 
+
+.L037 ;;line 101;;  COLUP0 = $1E
 
 	LDA #$1E
 	STA COLUP0
-.L032 ;;line 58;;  COLUP1 = $2F
+.L038 ;;line 102;;  p2_colup0 = $44
+
+	LDA #$44
+	STA p2_colup0
+.L039 ;;line 103;;  COLUP1 = $2F
 
 	LDA #$2F
 	STA COLUP1
+.L040 ;;line 104;;  p2_colup1 = $84
+
+	LDA #$84
+	STA p2_colup1
 .
- ;;line 59;; 
+ ;;line 105;; 
 
 .
- ;;line 60;; 
+ ;;line 106;; 
 
-.L033 ;;line 61;;  p0_oldx = player0x  :  p0_oldy = player0y
+.L041 ;;line 107;;  p0_oldx = player0x  :  p0_oldy = player0y
 
 	LDA player0x
 	STA p0_oldx
 	LDA player0y
 	STA p0_oldy
-.L034 ;;line 62;;  p1_oldx = p2_player0x  :  p1_oldy = p2_player0y
+.L042 ;;line 108;;  p1_oldx = p2_player0x  :  p1_oldy = p2_player0y
 
 	LDA p2_player0x
 	STA p1_oldx
 	LDA p2_player0y
 	STA p1_oldy
 .
- ;;line 63;; 
+ ;;line 109;; 
 
 .
- ;;line 64;; 
+ ;;line 110;; 
 
-.L035 ;;line 65;;  if joy0up then player0y = player0y  -  1
+.L043 ;;line 111;;  if joy0up then player0y = player0y  -  1
 
  lda #$10
  bit SWCHA
-	BNE .skipL035
+	BNE .skipL043
 .condpart0
 	DEC player0y
-.skipL035
-.L036 ;;line 66;;  if joy0down then player0y = player0y  +  1
+.skipL043
+.L044 ;;line 112;;  if joy0down then player0y = player0y  +  1
 
  lda #$20
  bit SWCHA
-	BNE .skipL036
+	BNE .skipL044
 .condpart1
 	INC player0y
-.skipL036
-.L037 ;;line 67;;  if joy0left then player0x = player0x  -  1
+.skipL044
+.L045 ;;line 113;;  if joy0left then player0x = player0x  -  1
 
  bit SWCHA
-	BVS .skipL037
+	BVS .skipL045
 .condpart2
 	DEC player0x
-.skipL037
-.L038 ;;line 68;;  if joy0right then player0x = player0x  +  1
+.skipL045
+.L046 ;;line 114;;  if joy0right then player0x = player0x  +  1
 
  bit SWCHA
-	BMI .skipL038
+	BMI .skipL046
 .condpart3
 	INC player0x
-.skipL038
+.skipL046
 .
- ;;line 69;; 
+ ;;line 115;; 
 
 .
- ;;line 70;; 
+ ;;line 116;; 
 
-.L039 ;;line 71;;  if joy1up then p2_player0y = p2_player0y  -  1
+.L047 ;;line 117;;  if joy1up then p2_player0y = p2_player0y  -  1
 
  lda #1
  bit SWCHA
-	BNE .skipL039
+	BNE .skipL047
 .condpart4
 	DEC p2_player0y
-.skipL039
-.L040 ;;line 72;;  if joy1down then p2_player0y = p2_player0y  +  1
+.skipL047
+.L048 ;;line 118;;  if joy1down then p2_player0y = p2_player0y  +  1
 
  lda #2
  bit SWCHA
-	BNE .skipL040
+	BNE .skipL048
 .condpart5
 	INC p2_player0y
-.skipL040
-.L041 ;;line 73;;  if joy1left then p2_player0x = p2_player0x  -  1
+.skipL048
+.L049 ;;line 119;;  if joy1left then p2_player0x = p2_player0x  -  1
 
  lda #4
  bit SWCHA
-	BNE .skipL041
+	BNE .skipL049
 .condpart6
 	DEC p2_player0x
-.skipL041
-.L042 ;;line 74;;  if joy1right then p2_player0x = p2_player0x  +  1
+.skipL049
+.L050 ;;line 120;;  if joy1right then p2_player0x = p2_player0x  +  1
 
  lda #8
  bit SWCHA
-	BNE .skipL042
+	BNE .skipL050
 .condpart7
 	INC p2_player0x
-.skipL042
+.skipL050
 .
- ;;line 75;; 
+ ;;line 121;; 
 
 .
- ;;line 76;; 
+ ;;line 122;; 
 
-.L043 ;;line 77;;  if player0y  <  8 then player0y = 42  :  p0_room = move_north[p0_room]  :  gosub load_p0_room
+.L051 ;;line 123;;  if player0y  <  8 then player0y = 42  :  p0_room = move_north[p0_room]  :  gosub load_p0_room
 
 	LDA player0y
 	CMP #8
-     BCS .skipL043
+     BCS .skipL051
 .condpart8
 	LDA #42
 	STA player0y
@@ -262,12 +362,12 @@ game
 	LDA move_north,x
 	STA p0_room
  jsr .load_p0_room
-.skipL043
-.L044 ;;line 78;;  if player0y  >  44 then player0y = 8  :  p0_room = move_south[p0_room]  :  gosub load_p0_room
+.skipL051
+.L052 ;;line 124;;  if player0y  >  44 then player0y = 8  :  p0_room = move_south[p0_room]  :  gosub load_p0_room
 
 	LDA #44
 	CMP player0y
-     BCS .skipL044
+     BCS .skipL052
 .condpart9
 	LDA #8
 	STA player0y
@@ -275,12 +375,12 @@ game
 	LDA move_south,x
 	STA p0_room
  jsr .load_p0_room
-.skipL044
-.L045 ;;line 79;;  if player0x  <  16 then player0x = 136  :  p0_room = move_west[p0_room]  :  gosub load_p0_room
+.skipL052
+.L053 ;;line 125;;  if player0x  <  16 then player0x = 136  :  p0_room = move_west[p0_room]  :  gosub load_p0_room
 
 	LDA player0x
 	CMP #16
-     BCS .skipL045
+     BCS .skipL053
 .condpart10
 	LDA #136
 	STA player0x
@@ -288,12 +388,12 @@ game
 	LDA move_west,x
 	STA p0_room
  jsr .load_p0_room
-.skipL045
-.L046 ;;line 80;;  if player0x  >  138 then player0x = 24  :  p0_room = move_east[p0_room]  :  gosub load_p0_room
+.skipL053
+.L054 ;;line 126;;  if player0x  >  138 then player0x = 24  :  p0_room = move_east[p0_room]  :  gosub load_p0_room
 
 	LDA #138
 	CMP player0x
-     BCS .skipL046
+     BCS .skipL054
 .condpart11
 	LDA #24
 	STA player0x
@@ -301,18 +401,18 @@ game
 	LDA move_east,x
 	STA p0_room
  jsr .load_p0_room
-.skipL046
+.skipL054
 .
- ;;line 81;; 
+ ;;line 127;; 
 
 .
- ;;line 82;; 
+ ;;line 128;; 
 
-.L047 ;;line 83;;  if p2_player0y  <  8 then p2_player0y = 42  :  p1_room = move_north[p1_room]  :  gosub load_p1_room
+.L055 ;;line 129;;  if p2_player0y  <  6 then p2_player0y = 42  :  p1_room = move_north[p1_room]  :  gosub load_p1_room
 
 	LDA p2_player0y
-	CMP #8
-     BCS .skipL047
+	CMP #6
+     BCS .skipL055
 .condpart12
 	LDA #42
 	STA p2_player0y
@@ -320,12 +420,12 @@ game
 	LDA move_north,x
 	STA p1_room
  jsr .load_p1_room
-.skipL047
-.L048 ;;line 84;;  if p2_player0y  >  44 then p2_player0y = 8  :  p1_room = move_south[p1_room]  :  gosub load_p1_room
+.skipL055
+.L056 ;;line 130;;  if p2_player0y  >  44 then p2_player0y = 8  :  p1_room = move_south[p1_room]  :  gosub load_p1_room
 
 	LDA #44
 	CMP p2_player0y
-     BCS .skipL048
+     BCS .skipL056
 .condpart13
 	LDA #8
 	STA p2_player0y
@@ -333,25 +433,25 @@ game
 	LDA move_south,x
 	STA p1_room
  jsr .load_p1_room
-.skipL048
-.L049 ;;line 85;;  if p2_player0x  <  16 then p2_player0x = 138  :  p1_room = move_west[p1_room]  :  gosub load_p1_room
+.skipL056
+.L057 ;;line 131;;  if p2_player0x  <  16 then p2_player0x = 142  :  p1_room = move_west[p1_room]  :  gosub load_p1_room
 
 	LDA p2_player0x
 	CMP #16
-     BCS .skipL049
+     BCS .skipL057
 .condpart14
-	LDA #138
+	LDA #142
 	STA p2_player0x
 	LDX p1_room
 	LDA move_west,x
 	STA p1_room
  jsr .load_p1_room
-.skipL049
-.L050 ;;line 86;;  if p2_player0x  >  138 then p2_player0x = 24  :  p1_room = move_east[p1_room]  :  gosub load_p1_room
+.skipL057
+.L058 ;;line 132;;  if p2_player0x  >  142 then p2_player0x = 24  :  p1_room = move_east[p1_room]  :  gosub load_p1_room
 
-	LDA #138
+	LDA #142
 	CMP p2_player0x
-     BCS .skipL050
+     BCS .skipL058
 .condpart15
 	LDA #24
 	STA p2_player0x
@@ -359,24 +459,24 @@ game
 	LDA move_east,x
 	STA p1_room
  jsr .load_p1_room
-.skipL050
+.skipL058
 .
- ;;line 87;; 
+ ;;line 133;; 
 
-.L051 ;;line 88;;  COLUPF = room_color[p0_room]
+.L059 ;;line 134;;  COLUPF = room_color[p0_room]
 
 	LDX p0_room
 	LDA room_color,x
 	STA COLUPF
-.L052 ;;line 89;;  p2_colupf = room_color[p1_room]
+.L060 ;;line 135;;  p2_colupf = room_color[p1_room]
 
 	LDX p1_room
 	LDA room_color,x
 	STA p2_colupf
 .
- ;;line 90;; 
+ ;;line 136;; 
 
-.L053 ;;line 91;;  drawscreen
+.L061 ;;line 137;;  drawscreen
 
  sta temp7
  lda #>(ret_point1-1)
@@ -395,44 +495,44 @@ game
  jmp BS_jsr
 ret_point1
 .
- ;;line 92;; 
+ ;;line 138;; 
 
-.L054 ;;line 93;;  if collision(player0,playfield) then gosub knock_back
+.L062 ;;line 139;;  if collision(player0,playfield) then gosub knock_back
 
 	bit 	CXP0FB
-	BPL .skipL054
+	BPL .skipL062
 .condpart16
  jsr .knock_back
-.skipL054
+.skipL062
 .
- ;;line 94;; 
+ ;;line 140;; 
 
-.L055 ;;line 95;;  goto main_loop
+.L063 ;;line 141;;  goto main_loop
 
  jmp .main_loop
 .
- ;;line 96;; 
+ ;;line 142;; 
 
 .knock_back
- ;;line 97;; knock_back
+ ;;line 143;; knock_back
 
-.L056 ;;line 98;;  player0x = p0_oldx
+.L064 ;;line 144;;  player0x = p0_oldx
 
 	LDA p0_oldx
 	STA player0x
-.L057 ;;line 99;;  player0y = p0_oldy
+.L065 ;;line 145;;  player0y = p0_oldy
 
 	LDA p0_oldy
 	STA player0y
-.L058 ;;line 100;;  p2_player0x = p1_oldx
+.L066 ;;line 146;;  p2_player0x = p1_oldx
 
 	LDA p1_oldx
 	STA p2_player0x
-.L059 ;;line 101;;  p2_player0y = p1_oldy
+.L067 ;;line 147;;  p2_player0y = p1_oldy
 
 	LDA p1_oldy
 	STA p2_player0y
-.L060 ;;line 102;;  return
+.L068 ;;line 148;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -442,31 +542,31 @@ ret_point1
 	JMP BS_return
 	RTS
 .
- ;;line 103;; 
+ ;;line 149;; 
 
 .
- ;;line 104;; 
+ ;;line 150;; 
 
 .
- ;;line 105;; 
+ ;;line 151;; 
 
 .
- ;;line 106;; 
+ ;;line 152;; 
 
 .load_p0_room
- ;;line 107;; load_p0_room
+ ;;line 153;; load_p0_room
 
-.L061 ;;line 108;;  temp1 = room_shape[p0_room]
+.L069 ;;line 154;;  temp1 = room_shape[p0_room]
 
 	LDX p0_room
 	LDA room_shape,x
 	STA temp1
-.L062 ;;line 109;;  COLUPF = room_color[p0_room]
+.L070 ;;line 155;;  COLUPF = room_color[p0_room]
 
 	LDX p0_room
 	LDA room_color,x
 	STA COLUPF
-.L063 ;;line 110;;  asm
+.L071 ;;line 156;;  asm
 
    ldx temp1
 
@@ -478,7 +578,9 @@ ret_point1
 
    sta temp6
 
-   ldy #63
+   
+
+   ldy #(split_ram_offset - 1)  
 
 .loopTop
 
@@ -490,7 +592,7 @@ ret_point1
 
    bpl .loopTop
 
-.L064 ;;line 123;;  return
+.L072 ;;line 170;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -500,22 +602,22 @@ ret_point1
 	JMP BS_return
 	RTS
 .
- ;;line 124;; 
+ ;;line 171;; 
 
 .load_p1_room
- ;;line 125;; load_p1_room
+ ;;line 172;; load_p1_room
 
-.L065 ;;line 126;;  temp1 = room_shape[p1_room]
+.L073 ;;line 173;;  temp1 = room_shape[p1_room]
 
 	LDX p1_room
 	LDA room_shape,x
 	STA temp1
-.L066 ;;line 127;;  p2_colupf = room_color[p1_room]
+.L074 ;;line 174;;  p2_colupf = room_color[p1_room]
 
 	LDX p1_room
 	LDA room_color,x
 	STA p2_colupf
-.L067 ;;line 128;;  asm
+.L075 ;;line 175;;  asm
 
    ldx temp1
 
@@ -527,19 +629,21 @@ ret_point1
 
    sta temp6
 
-   ldy #63
+   
+
+   ldy #(split_ram_offset - 1)  
 
 .loopBot
 
    lda (temp5),y
 
-   sta playfield-128+64,y
+   sta playfield-128+split_ram_offset,y  
 
    dey
 
    bpl .loopBot
 
-.L068 ;;line 141;;  return
+.L076 ;;line 189;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -549,80 +653,80 @@ ret_point1
 	JMP BS_return
 	RTS
 .
- ;;line 142;; 
+ ;;line 190;; 
 
 .
- ;;line 143;; 
+ ;;line 191;; 
 
 .
- ;;line 144;; 
+ ;;line 192;; 
 
 .
- ;;line 145;; 
+ ;;line 193;; 
 
-.L069 ;;line 146;;  data room_shape
+.L077 ;;line 194;;  data room_shape
 
-	JMP .skipL069
+	JMP .skipL077
 room_shape
 	.byte  7,11,4,1,2,9,10,3,9,12,8,4,15,6,5,3,13
 
 	.byte  11,10,3,5,15,0,1,1,14,8,4,15,14,10,2,12,14
 
-.skipL069
+.skipL077
 .
- ;;line 150;; 
+ ;;line 198;; 
 
-.L070 ;;line 151;;  data move_north
+.L078 ;;line 199;;  data move_north
 
-	JMP .skipL070
+	JMP .skipL078
 move_north
 	.byte  0,0,0,0,5,2,4,8,9,0,11,12,0,0,0,14,0,0
 
 	.byte  3,21,0,0,20,0,0,22,23,28,0,27,24,32,0,31
 
-.skipL070
+.skipL078
 .
- ;;line 155;; 
+ ;;line 203;; 
 
-.L071 ;;line 156;;  data move_east
+.L079 ;;line 204;;  data move_east
 
-	JMP .skipL071
+	JMP .skipL079
 move_east
 	.byte  1,0,3,4,0,0,7,10,0,0,0,13,0,14,0,17,15,0
 
 	.byte  19,20,0,0,24,22,23,0,0,26,0,0,31,0,0,0
 
-.skipL071
+.skipL079
 .
- ;;line 160;; 
+ ;;line 208;; 
 
-.L072 ;;line 161;;  data move_south
+.L080 ;;line 209;;  data move_south
 
-	JMP .skipL072
+	JMP .skipL080
 move_south
 	.byte  2,0,5,18,6,4,0,0,7,8,0,10,11,0,15,0,0,0
 
 	.byte  0,0,22,19,25,26,30,0,0,29,27,0,0,33,31,0
 
-.skipL072
+.skipL080
 .
- ;;line 165;; 
+ ;;line 213;; 
 
-.L073 ;;line 166;;  data move_west
+.L081 ;;line 214;;  data move_west
 
-	JMP .skipL073
+	JMP .skipL081
 move_west
 	.byte  0,0,0,2,3,0,0,6,0,0,7,0,0,11,13,16,0,15
 
 	.byte  0,18,19,0,23,24,22,0,27,0,0,0,0,30,0,0
 
-.skipL073
+.skipL081
 .
- ;;line 170;; 
+ ;;line 218;; 
 
-.L074 ;;line 171;;  data room_color
+.L082 ;;line 219;;  data room_color
 
-	JMP .skipL074
+	JMP .skipL082
 room_color
 	.byte  $80,$82,$84,$86,$C2,$C4,$62,$66,$68
 
@@ -632,11 +736,11 @@ room_color
 
 	.byte  $2E,$26,$28,$F4,$F6,$F8,$E4,$A8
 
-.skipL074
+.skipL082
 .
- ;;line 177;; 
+ ;;line 225;; 
 
-.L075 ;;line 178;;  asm
+.L083 ;;line 226;;  asm
 
 room_pointers_lo
 
@@ -651,21 +755,21 @@ room_pointers_hi
  .byte >PF_data8, >PF_data9, >PF_data10, >PF_data11, >PF_data12, >PF_data13, >PF_data14, >PF_data15
 
 .
- ;;line 186;; 
+ ;;line 234;; 
 
 .
- ;;line 187;; 
+ ;;line 235;; 
 
 .
- ;;line 188;; 
+ ;;line 236;; 
 
 .
- ;;line 189;; 
+ ;;line 237;; 
 
 .draw_room_shape_0
- ;;line 190;; draw_room_shape_0
+ ;;line 238;; draw_room_shape_0
 
-.L076 ;;line 191;;  playfield:
+.L084 ;;line 239;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -743,7 +847,7 @@ pflabel0
 	sta playfield-128,x
 	dex
 	bpl pflabel0
-.L077 ;;line 209;;  return
+.L085 ;;line 257;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -753,12 +857,12 @@ pflabel0
 	JMP BS_return
 	RTS
 .
- ;;line 210;; 
+ ;;line 258;; 
 
 .draw_room_shape_1
- ;;line 211;; draw_room_shape_1
+ ;;line 259;; draw_room_shape_1
 
-.L078 ;;line 212;;  playfield:
+.L086 ;;line 260;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -836,7 +940,7 @@ pflabel1
 	sta playfield-128,x
 	dex
 	bpl pflabel1
-.L079 ;;line 230;;  return
+.L087 ;;line 278;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -846,12 +950,12 @@ pflabel1
 	JMP BS_return
 	RTS
 .
- ;;line 231;; 
+ ;;line 279;; 
 
 .draw_room_shape_2
- ;;line 232;; draw_room_shape_2
+ ;;line 280;; draw_room_shape_2
 
-.L080 ;;line 233;;  playfield:
+.L088 ;;line 281;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -929,7 +1033,7 @@ pflabel2
 	sta playfield-128,x
 	dex
 	bpl pflabel2
-.L081 ;;line 251;;  return
+.L089 ;;line 299;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -939,12 +1043,12 @@ pflabel2
 	JMP BS_return
 	RTS
 .
- ;;line 252;; 
+ ;;line 300;; 
 
 .draw_room_shape_3
- ;;line 253;; draw_room_shape_3
+ ;;line 301;; draw_room_shape_3
 
-.L082 ;;line 254;;  playfield:
+.L090 ;;line 302;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -1022,7 +1126,7 @@ pflabel3
 	sta playfield-128,x
 	dex
 	bpl pflabel3
-.L083 ;;line 272;;  return
+.L091 ;;line 320;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1032,12 +1136,12 @@ pflabel3
 	JMP BS_return
 	RTS
 .
- ;;line 273;; 
+ ;;line 321;; 
 
 .draw_room_shape_4
- ;;line 274;; draw_room_shape_4
+ ;;line 322;; draw_room_shape_4
 
-.L084 ;;line 275;;  playfield:
+.L092 ;;line 323;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -1115,7 +1219,7 @@ pflabel4
 	sta playfield-128,x
 	dex
 	bpl pflabel4
-.L085 ;;line 293;;  return
+.L093 ;;line 341;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1125,12 +1229,12 @@ pflabel4
 	JMP BS_return
 	RTS
 .
- ;;line 294;; 
+ ;;line 342;; 
 
 .draw_room_shape_5
- ;;line 295;; draw_room_shape_5
+ ;;line 343;; draw_room_shape_5
 
-.L086 ;;line 296;;  playfield:
+.L094 ;;line 344;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -1208,7 +1312,7 @@ pflabel5
 	sta playfield-128,x
 	dex
 	bpl pflabel5
-.L087 ;;line 314;;  return
+.L095 ;;line 362;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1218,12 +1322,12 @@ pflabel5
 	JMP BS_return
 	RTS
 .
- ;;line 315;; 
+ ;;line 363;; 
 
 .draw_room_shape_6
- ;;line 316;; draw_room_shape_6
+ ;;line 364;; draw_room_shape_6
 
-.L088 ;;line 317;;  playfield:
+.L096 ;;line 365;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -1301,7 +1405,7 @@ pflabel6
 	sta playfield-128,x
 	dex
 	bpl pflabel6
-.L089 ;;line 335;;  return
+.L097 ;;line 383;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1311,12 +1415,12 @@ pflabel6
 	JMP BS_return
 	RTS
 .
- ;;line 336;; 
+ ;;line 384;; 
 
 .draw_room_shape_7
- ;;line 337;; draw_room_shape_7
+ ;;line 385;; draw_room_shape_7
 
-.L090 ;;line 338;;  playfield:
+.L098 ;;line 386;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -1394,7 +1498,7 @@ pflabel7
 	sta playfield-128,x
 	dex
 	bpl pflabel7
-.L091 ;;line 356;;  return
+.L099 ;;line 404;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1404,12 +1508,12 @@ pflabel7
 	JMP BS_return
 	RTS
 .
- ;;line 357;; 
+ ;;line 405;; 
 
 .draw_room_shape_8
- ;;line 358;; draw_room_shape_8
+ ;;line 406;; draw_room_shape_8
 
-.L092 ;;line 359;;  playfield:
+.L0100 ;;line 407;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -1487,7 +1591,7 @@ pflabel8
 	sta playfield-128,x
 	dex
 	bpl pflabel8
-.L093 ;;line 377;;  return
+.L0101 ;;line 425;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1497,12 +1601,12 @@ pflabel8
 	JMP BS_return
 	RTS
 .
- ;;line 378;; 
+ ;;line 426;; 
 
 .draw_room_shape_9
- ;;line 379;; draw_room_shape_9
+ ;;line 427;; draw_room_shape_9
 
-.L094 ;;line 380;;  playfield:
+.L0102 ;;line 428;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -1580,7 +1684,7 @@ pflabel9
 	sta playfield-128,x
 	dex
 	bpl pflabel9
-.L095 ;;line 398;;  return
+.L0103 ;;line 446;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1590,12 +1694,12 @@ pflabel9
 	JMP BS_return
 	RTS
 .
- ;;line 399;; 
+ ;;line 447;; 
 
 .draw_room_shape_10
- ;;line 400;; draw_room_shape_10
+ ;;line 448;; draw_room_shape_10
 
-.L096 ;;line 401;;  playfield:
+.L0104 ;;line 449;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -1673,7 +1777,7 @@ pflabel10
 	sta playfield-128,x
 	dex
 	bpl pflabel10
-.L097 ;;line 419;;  return
+.L0105 ;;line 467;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1683,12 +1787,12 @@ pflabel10
 	JMP BS_return
 	RTS
 .
- ;;line 420;; 
+ ;;line 468;; 
 
 .draw_room_shape_11
- ;;line 421;; draw_room_shape_11
+ ;;line 469;; draw_room_shape_11
 
-.L098 ;;line 422;;  playfield:
+.L0106 ;;line 470;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -1766,7 +1870,7 @@ pflabel11
 	sta playfield-128,x
 	dex
 	bpl pflabel11
-.L099 ;;line 440;;  return
+.L0107 ;;line 488;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1776,12 +1880,12 @@ pflabel11
 	JMP BS_return
 	RTS
 .
- ;;line 441;; 
+ ;;line 489;; 
 
 .draw_room_shape_12
- ;;line 442;; draw_room_shape_12
+ ;;line 490;; draw_room_shape_12
 
-.L0100 ;;line 443;;  playfield:
+.L0108 ;;line 491;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -1859,7 +1963,7 @@ pflabel12
 	sta playfield-128,x
 	dex
 	bpl pflabel12
-.L0101 ;;line 461;;  return
+.L0109 ;;line 509;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1869,12 +1973,12 @@ pflabel12
 	JMP BS_return
 	RTS
 .
- ;;line 462;; 
+ ;;line 510;; 
 
 .draw_room_shape_13
- ;;line 463;; draw_room_shape_13
+ ;;line 511;; draw_room_shape_13
 
-.L0102 ;;line 464;;  playfield:
+.L0110 ;;line 512;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -1952,7 +2056,7 @@ pflabel13
 	sta playfield-128,x
 	dex
 	bpl pflabel13
-.L0103 ;;line 482;;  return
+.L0111 ;;line 530;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1962,12 +2066,12 @@ pflabel13
 	JMP BS_return
 	RTS
 .
- ;;line 483;; 
+ ;;line 531;; 
 
 .draw_room_shape_14
- ;;line 484;; draw_room_shape_14
+ ;;line 532;; draw_room_shape_14
 
-.L0104 ;;line 485;;  playfield:
+.L0112 ;;line 533;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -2045,7 +2149,7 @@ pflabel14
 	sta playfield-128,x
 	dex
 	bpl pflabel14
-.L0105 ;;line 503;;  return
+.L0113 ;;line 551;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -2055,12 +2159,12 @@ pflabel14
 	JMP BS_return
 	RTS
 .
- ;;line 504;; 
+ ;;line 552;; 
 
 .draw_room_shape_15
- ;;line 505;; draw_room_shape_15
+ ;;line 553;; draw_room_shape_15
 
-.L0106 ;;line 506;;  playfield:
+.L0114 ;;line 554;;  playfield:
 
   ifconst pfres
 	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
@@ -2138,7 +2242,7 @@ pflabel15
 	sta playfield-128,x
 	dex
 	bpl pflabel15
-.L0107 ;;line 524;;  return
+.L0115 ;;line 572;;  return
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -2336,19 +2440,54 @@ start_bank3 ldx #$ff
  .byte $ff
  repend
 ; bB.asm file is split here
- if (<*) > (<(*+6))
+ if (<*) > (<(*+5))
 	repeat ($100-<*)
 	.byte 0
 	repend
 	endif
-playerL024_0
+playerL027_0
+	.byte  %01101100
+	.byte  %00101000
+	.byte  %00111000
+	.byte  %11111110
+	.byte  %00111000
+	.byte  %00111000
+ if (<*) > (<(*+5))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL030_1
+	.byte  %10000001
+	.byte  %11000011
+	.byte  %11100111
+	.byte  %11111111
+	.byte  %00111100
+	.byte  %00011000
+ if (<*) > (<(*+5))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL033_0
 	.byte  %01101100
 	.byte  %00101000
 	.byte  %00111000
 	.byte  %01111100
 	.byte  %00010000
 	.byte  %00111000
-	.byte  %00111000
+ if (<*) > (<(*+5))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL034_1
+	.byte  %00011000
+	.byte  %00111100
+	.byte  %01111110
+	.byte  %11011011
+	.byte  %11111111
+	.byte  %01011010
  if ECHOFIRST
        echo "    ",[(scoretable - *)]d , "bytes of ROM space left in bank 4")
  endif 

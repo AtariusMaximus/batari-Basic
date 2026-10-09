@@ -6,7 +6,7 @@
  ; If you do not specify pfres, it will default to 12.
  ;const pfres = 12 
  ;const pfres = 24  
- const pfres = 32
+ ;const pfres = 32 
 
  dim p2_player0y = a        ; Bottom screen player 0 Y coordinate
  dim p2_player0x = b        ; Bottom screen player 0 X coordinate
@@ -30,22 +30,18 @@
  dim p2_player1pointerlo = n  ; Low byte of player 1 graphic address for the bottom screen
  dim p2_player1pointerhi = o  ; High byte of player 1 graphic address for the bottom screen
 
- dim p2_colup0 = p            ; Bottom screen Player 0 Color
- dim p2_colup1 = q            ; Bottom screen Player 1 Color
+ dim p2_colup0 = p          ; Bottom screen Player 0 Color
 
  ; Start positions
  player0x = 92 : player0y = 25
  p2_player0x = 92 : p2_player0y = 25
- player1x = 70 : player1y = 25          ; Static Player 1 TOP position
- p2_player1x = 70 : p2_player1y = 25    ; Static Player 1 BOTTOM position
- p0_room = 19 : p1_room = 18
+ p0_room = 19 : p1_room = 19
 
  ; Load the initial rooms
  gosub load_p0_room
  gosub load_p1_room
 
-
- ; Define graphics for Player 0 Bottom (Player Character)
+ ; Define the BOTTOM graphic using the native command
  player0:
  %01101100
  %00101000
@@ -55,31 +51,18 @@
  %00111000
 end
 
- ; Save the pointers for the bottom screen Player 0
+ ; Save the pointers for the bottom screen
  p2_player0pointerlo = player0pointerlo
  p2_player0pointerhi = player0pointerhi
 
- ; Define graphics for Player 1 Bottom (Object)
- player1:
- %10000001
- %11000011
- %11100111
- %11111111
- %00111100
- %00011000
-end
-
- ; Save the pointers for the bottom screen Player 1
+ ; Copy Player 1 over normally
  p2_player1pointerlo = player1pointerlo
  p2_player1pointerhi = player1pointerhi
 
-
 main_loop
 
- ; --- Define the TOP graphics ---
- ; When the loop hits this, it overwrites pointers with the top graphics.
-
- ; Define graphics for Player 0 Top (Player Character)
+ ; Define the TOP graphic.
+ ; When the loop hits this, it overwrites player0pointer with the top graphic.
  player0:
  %01101100
  %00101000
@@ -89,23 +72,10 @@ main_loop
  %00111000
 end
 
- ; Define graphics for Player 1 Top (Object)
- player1:
- %00011000
- %00111100
- %01111110
- %11011011
- %11111111
- %01011010
-end
-
  COLUBK = $00    
  CTRLPF = $21    ; CTRLPF must be $x1 for this kernel
- 
- COLUP0 = $1E    ; Player 0 Color TOP 
- p2_colup0 = $44 ; Player 0 Color BOTTOM 
- COLUP1 = $2F    ; Player 1 Color TOP 
- p2_colup1 = $84 ; Player 1 Color BOTTOM 
+ COLUP0 = $1E    
+ p2_colup0 = $44 ; Player 0 Color BOTTOM (Red)
 
  ; Store Position Rollback
  p0_oldx = player0x : p0_oldy = player0y
@@ -117,23 +87,23 @@ end
  if joy0left then player0x = player0x - 1
  if joy0right then player0x = player0x + 1
 
- ; Player 0 (Bottom Screen / Joy 1)
+ ; Player 1 (Bottom Screen / Joy 1)
  if joy1up then p2_player0y = p2_player0y - 1
  if joy1down then p2_player0y = p2_player0y + 1
  if joy1left then p2_player0x = p2_player0x - 1
  if joy1right then p2_player0x = p2_player0x + 1
 
- ; Player 0 Screen Wrap / Room Transition (Top Screen)
+ ; Player 0 Screen Wrap / Room Transition
  if player0y < 8 then player0y = 42 : p0_room = move_north[p0_room] : gosub load_p0_room
  if player0y > 44 then player0y = 8 : p0_room = move_south[p0_room] : gosub load_p0_room
  if player0x < 16 then player0x = 136 : p0_room = move_west[p0_room] : gosub load_p0_room
  if player0x > 138 then player0x = 24 : p0_room = move_east[p0_room] : gosub load_p0_room
 
- ; Player 0 Screen Wrap / Room Transition (Bottom Screen)
+ ; Player 1 Screen Wrap / Room Transition
  if p2_player0y < 6 then p2_player0y = 42 : p1_room = move_north[p1_room] : gosub load_p1_room
  if p2_player0y > 44 then p2_player0y = 8 : p1_room = move_south[p1_room] : gosub load_p1_room
- if p2_player0x < 16 then p2_player0x = 142 : p1_room = move_west[p1_room] : gosub load_p1_room
- if p2_player0x > 142 then p2_player0x = 24 : p1_room = move_east[p1_room] : gosub load_p1_room
+ if p2_player0x < 16 then p2_player0x = 138 : p1_room = move_west[p1_room] : gosub load_p1_room
+ if p2_player0x > 138 then p2_player0x = 24 : p1_room = move_east[p1_room] : gosub load_p1_room
  
  COLUPF = room_color[p0_room]
  p2_colupf = room_color[p1_room]
@@ -243,17 +213,7 @@ draw_room_shape_0
  playfield:
  XXXXXXXXXXXX........XXXXXXXXXXXX
  XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  ................................
- ................................
- ................................
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX............................XX
  XXXXXXXXXXXX........XXXXXXXXXXXX
  ................................
@@ -264,17 +224,7 @@ draw_room_shape_1
  playfield:
  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  ................................
- ................................
- ................................
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX............................XX
  XXXXXXXXXXXX........XXXXXXXXXXXX
  ................................
@@ -285,17 +235,7 @@ draw_room_shape_2
  playfield:
  XXXXXXXXXXXX........XXXXXXXXXXXX
  XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  ..............................XX
- ..............................XX
- ..............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX............................XX
  XXXXXXXXXXXX........XXXXXXXXXXXX
  ................................
@@ -306,17 +246,7 @@ draw_room_shape_3
  playfield:
  XXXXXXXXXXXX........XXXXXXXXXXXX
  XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  ................................
- ................................
- ................................
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX............................XX
  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  ................................
@@ -327,17 +257,7 @@ draw_room_shape_4
  playfield:
  XXXXXXXXXXXX........XXXXXXXXXXXX
  XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX..............................
- XX..............................
- XX..............................
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX............................XX
  XXXXXXXXXXXX........XXXXXXXXXXXX
  ................................
@@ -348,17 +268,7 @@ draw_room_shape_5
  playfield:
  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  ..............................XX
- ..............................XX
- ..............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX............................XX
  XXXXXXXXXXXX........XXXXXXXXXXXX
  ................................
@@ -369,17 +279,7 @@ draw_room_shape_6
  playfield:
  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  ................................
- ................................
- ................................
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX............................XX
  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  ................................
@@ -390,17 +290,7 @@ draw_room_shape_7
  playfield:
  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX..............................
- XX..............................
- XX..............................
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX............................XX
  XXXXXXXXXXXX........XXXXXXXXXXXX
  ................................
@@ -411,17 +301,7 @@ draw_room_shape_8
  playfield:
  XXXXXXXXXXXX........XXXXXXXXXXXX
  XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  ..............................XX
- ..............................XX
- ..............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX............................XX
  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  ................................
@@ -434,16 +314,6 @@ draw_room_shape_9
  XX............................XX
  XX............................XX
  XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XXXXXXXXXXXX........XXXXXXXXXXXX
  ................................
 end
@@ -453,17 +323,7 @@ draw_room_shape_10
  playfield:
  XXXXXXXXXXXX........XXXXXXXXXXXX
  XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX..............................
- XX..............................
- XX..............................
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX............................XX
  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  ................................
@@ -474,17 +334,7 @@ draw_room_shape_11
  playfield:
  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  ..............................XX
- ..............................XX
- ..............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX............................XX
  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  ................................
@@ -497,16 +347,6 @@ draw_room_shape_12
  XX............................XX
  XX............................XX
  XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XXXXXXXXXXXX........XXXXXXXXXXXX
  ................................
 end
@@ -516,17 +356,7 @@ draw_room_shape_13
  playfield:
  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX..............................
- XX..............................
- XX..............................
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XX............................XX
  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  ................................
@@ -539,16 +369,6 @@ draw_room_shape_14
  XX............................XX
  XX............................XX
  XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
- XX............................XX
  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  ................................
 end
@@ -557,18 +377,8 @@ end
 draw_room_shape_15
  playfield:
  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
- XX....X.X.X..........X.X.X....XX
- XX....X.X.X..........X.X.X....XX
- XX....XXXXX..........XXXXX....XX
- XX....XXXXX..........XXXXX....XX
- XX....XXXXX..XX..XX..XXXXX....XX
- XX....XXXXXXXXXXXXXXXXXXXX....XX
- XX....XXXXXXXXXXXXXXXXXXXX....XX
- XX....XXXXXXXXXXXXXXXXXXXX....XX
- XX....XXXXXXXXXXXXXXXXXXXX....XX
- XX....XXXXXXXXX..XXXXXXXXX....XX
+ XX....XXXXX..XXXXXX..XXXXX....XX
  XX....XXXXXXXX....XXXXXXXX....XX
- XX............................XX
  XX............................XX
  XXXXXXXXXXXX........XXXXXXXXXXXX
  ................................

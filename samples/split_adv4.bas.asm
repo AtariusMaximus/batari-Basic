@@ -51,340 +51,287 @@ game
 .
  ;;line 8;; 
 
-.L02 ;;line 9;;  const pfres = 32
+.
+ ;;line 9;; 
 
 .
  ;;line 10;; 
 
-.L03 ;;line 11;;  dim p2_player0y = a
+.L02 ;;line 11;;  dim p2_player0y = a
 
-.L04 ;;line 12;;  dim p2_player0x = b
+.L03 ;;line 12;;  dim p2_player0x = b
 
-.L05 ;;line 13;;  dim p2_colupf = c
+.L04 ;;line 13;;  dim p2_colupf = c
 
 .
  ;;line 14;; 
 
-.L06 ;;line 15;;  dim p0_room = d
+.L05 ;;line 15;;  dim p0_room = d
 
-.L07 ;;line 16;;  dim p1_room = e
+.L06 ;;line 16;;  dim p1_room = e
 
 .
  ;;line 17;; 
 
-.L08 ;;line 18;;  dim p0_oldx = f
+.L07 ;;line 18;;  dim p0_oldx = f
 
-.L09 ;;line 19;;  dim p0_oldy = g
+.L08 ;;line 19;;  dim p0_oldy = g
 
 .
  ;;line 20;; 
 
-.L010 ;;line 21;;  dim p1_oldx = h
+.L09 ;;line 21;;  dim p1_oldx = h
 
-.L011 ;;line 22;;  dim p1_oldy = i
+.L010 ;;line 22;;  dim p1_oldy = i
 
 .
  ;;line 23;; 
 
-.L012 ;;line 24;;  dim p2_player1y = j
+.L011 ;;line 24;;  dim p2_player1y = j
 
-.L013 ;;line 25;;  dim p2_player1x = k
+.L012 ;;line 25;;  dim p2_player1x = k
 
 .
  ;;line 26;; 
 
-.L014 ;;line 27;;  dim p2_player0pointerlo = l
+.L013 ;;line 27;;  dim p2_player0pointerlo = l
 
-.L015 ;;line 28;;  dim p2_player0pointerhi = m
+.L014 ;;line 28;;  dim p2_player0pointerhi = m
 
 .
  ;;line 29;; 
 
-.L016 ;;line 30;;  dim p2_player1pointerlo = n
+.L015 ;;line 30;;  dim p2_player1pointerlo = n
 
-.L017 ;;line 31;;  dim p2_player1pointerhi = o
+.L016 ;;line 31;;  dim p2_player1pointerhi = o
 
 .
  ;;line 32;; 
 
-.L018 ;;line 33;;  dim p2_colup0 = p
+.L017 ;;line 33;;  dim p2_colup0 = p
 
-.L019 ;;line 34;;  dim p2_colup1 = q
+.
+ ;;line 34;; 
 
 .
  ;;line 35;; 
 
-.
- ;;line 36;; 
-
-.L020 ;;line 37;;  player0x = 92  :  player0y = 25
+.L018 ;;line 36;;  player0x = 92  :  player0y = 25
 
 	LDA #92
 	STA player0x
 	LDA #25
 	STA player0y
-.L021 ;;line 38;;  p2_player0x = 92  :  p2_player0y = 25
+.L019 ;;line 37;;  p2_player0x = 92  :  p2_player0y = 25
 
 	LDA #92
 	STA p2_player0x
 	LDA #25
 	STA p2_player0y
-.L022 ;;line 39;;  player1x = 70  :  player1y = 25
-
-	LDA #70
-	STA player1x
-	LDA #25
-	STA player1y
-.L023 ;;line 40;;  p2_player1x = 70  :  p2_player1y = 25
-
-	LDA #70
-	STA p2_player1x
-	LDA #25
-	STA p2_player1y
-.L024 ;;line 41;;  p0_room = 19  :  p1_room = 18
+.L020 ;;line 38;;  p0_room = 19  :  p1_room = 19
 
 	LDA #19
 	STA p0_room
-	LDA #18
 	STA p1_room
 .
- ;;line 42;; 
+ ;;line 39;; 
 
 .
- ;;line 43;; 
+ ;;line 40;; 
 
-.L025 ;;line 44;;  gosub load_p0_room
+.L021 ;;line 41;;  gosub load_p0_room
 
  jsr .load_p0_room
-.L026 ;;line 45;;  gosub load_p1_room
+.L022 ;;line 42;;  gosub load_p1_room
 
  jsr .load_p1_room
 .
- ;;line 46;; 
+ ;;line 43;; 
 
 .
- ;;line 47;; 
+ ;;line 44;; 
 
-.
- ;;line 48;; 
+.L023 ;;line 45;;  player0:
 
-.L027 ;;line 49;;  player0:
-
-	LDX #<playerL027_0
+	LDX #<playerL023_0
 	STX player0pointerlo
-	LDA #>playerL027_0
+	LDA #>playerL023_0
 	STA player0pointerhi
 	LDA #5
 	STA player0height
+.
+ ;;line 53;; 
+
+.
+ ;;line 54;; 
+
+.L024 ;;line 55;;  p2_player0pointerlo = player0pointerlo
+
+	LDA player0pointerlo
+	STA p2_player0pointerlo
+.L025 ;;line 56;;  p2_player0pointerhi = player0pointerhi
+
+	LDA player0pointerhi
+	STA p2_player0pointerhi
 .
  ;;line 57;; 
 
 .
  ;;line 58;; 
 
-.L028 ;;line 59;;  p2_player0pointerlo = player0pointerlo
-
-	LDA player0pointerlo
-	STA p2_player0pointerlo
-.L029 ;;line 60;;  p2_player0pointerhi = player0pointerhi
-
-	LDA player0pointerhi
-	STA p2_player0pointerhi
-.
- ;;line 61;; 
-
-.L030 ;;line 62;;  player1:
-
-	LDX #<playerL030_1
-	STX player1pointerlo
-	LDA #>playerL030_1
-	STA player1pointerhi
-	LDA #5
-	STA player1height
-.
- ;;line 70;; 
-
-.
- ;;line 71;; 
-
-.L031 ;;line 72;;  p2_player1pointerlo = player1pointerlo
+.L026 ;;line 59;;  p2_player1pointerlo = player1pointerlo
 
 	LDA player1pointerlo
 	STA p2_player1pointerlo
-.L032 ;;line 73;;  p2_player1pointerhi = player1pointerhi
+.L027 ;;line 60;;  p2_player1pointerhi = player1pointerhi
 
 	LDA player1pointerhi
 	STA p2_player1pointerhi
 .
- ;;line 74;; 
-
-.
- ;;line 75;; 
+ ;;line 61;; 
 
 .main_loop
- ;;line 76;; main_loop
+ ;;line 62;; main_loop
 
 .
- ;;line 77;; 
+ ;;line 63;; 
 
 .
- ;;line 78;; 
+ ;;line 64;; 
 
 .
- ;;line 79;; 
+ ;;line 65;; 
 
-.L033 ;;line 80;;  player0:
+.L028 ;;line 66;;  player0:
 
-	LDX #<playerL033_0
+	LDX #<playerL028_0
 	STX player0pointerlo
-	LDA #>playerL033_0
+	LDA #>playerL028_0
 	STA player0pointerhi
 	LDA #5
 	STA player0height
 .
- ;;line 88;; 
+ ;;line 74;; 
 
-.L034 ;;line 89;;  player1:
-
-	LDX #<playerL034_1
-	STX player1pointerlo
-	LDA #>playerL034_1
-	STA player1pointerhi
-	LDA #5
-	STA player1height
-.
- ;;line 97;; 
-
-.L035 ;;line 98;;  COLUBK = $00
+.L029 ;;line 75;;  COLUBK = $00
 
 	LDA #$00
 	STA COLUBK
-.L036 ;;line 99;;  CTRLPF = $21
+.L030 ;;line 76;;  CTRLPF = $21
 
 	LDA #$21
 	STA CTRLPF
-.
- ;;line 100;; 
-
-.L037 ;;line 101;;  COLUP0 = $1E
+.L031 ;;line 77;;  COLUP0 = $1E
 
 	LDA #$1E
 	STA COLUP0
-.L038 ;;line 102;;  p2_colup0 = $44
+.L032 ;;line 78;;  p2_colup0 = $44
 
 	LDA #$44
 	STA p2_colup0
-.L039 ;;line 103;;  COLUP1 = $2F
-
-	LDA #$2F
-	STA COLUP1
-.L040 ;;line 104;;  p2_colup1 = $84
-
-	LDA #$84
-	STA p2_colup1
 .
- ;;line 105;; 
+ ;;line 79;; 
 
 .
- ;;line 106;; 
+ ;;line 80;; 
 
-.L041 ;;line 107;;  p0_oldx = player0x  :  p0_oldy = player0y
+.L033 ;;line 81;;  p0_oldx = player0x  :  p0_oldy = player0y
 
 	LDA player0x
 	STA p0_oldx
 	LDA player0y
 	STA p0_oldy
-.L042 ;;line 108;;  p1_oldx = p2_player0x  :  p1_oldy = p2_player0y
+.L034 ;;line 82;;  p1_oldx = p2_player0x  :  p1_oldy = p2_player0y
 
 	LDA p2_player0x
 	STA p1_oldx
 	LDA p2_player0y
 	STA p1_oldy
 .
- ;;line 109;; 
+ ;;line 83;; 
 
 .
- ;;line 110;; 
+ ;;line 84;; 
 
-.L043 ;;line 111;;  if joy0up then player0y = player0y  -  1
+.L035 ;;line 85;;  if joy0up then player0y = player0y  -  1
 
  lda #$10
  bit SWCHA
-	BNE .skipL043
+	BNE .skipL035
 .condpart0
 	DEC player0y
-.skipL043
-.L044 ;;line 112;;  if joy0down then player0y = player0y  +  1
+.skipL035
+.L036 ;;line 86;;  if joy0down then player0y = player0y  +  1
 
  lda #$20
  bit SWCHA
-	BNE .skipL044
+	BNE .skipL036
 .condpart1
 	INC player0y
-.skipL044
-.L045 ;;line 113;;  if joy0left then player0x = player0x  -  1
+.skipL036
+.L037 ;;line 87;;  if joy0left then player0x = player0x  -  1
 
  bit SWCHA
-	BVS .skipL045
+	BVS .skipL037
 .condpart2
 	DEC player0x
-.skipL045
-.L046 ;;line 114;;  if joy0right then player0x = player0x  +  1
+.skipL037
+.L038 ;;line 88;;  if joy0right then player0x = player0x  +  1
 
  bit SWCHA
-	BMI .skipL046
+	BMI .skipL038
 .condpart3
 	INC player0x
-.skipL046
+.skipL038
 .
- ;;line 115;; 
+ ;;line 89;; 
 
 .
- ;;line 116;; 
+ ;;line 90;; 
 
-.L047 ;;line 117;;  if joy1up then p2_player0y = p2_player0y  -  1
+.L039 ;;line 91;;  if joy1up then p2_player0y = p2_player0y  -  1
 
  lda #1
  bit SWCHA
-	BNE .skipL047
+	BNE .skipL039
 .condpart4
 	DEC p2_player0y
-.skipL047
-.L048 ;;line 118;;  if joy1down then p2_player0y = p2_player0y  +  1
+.skipL039
+.L040 ;;line 92;;  if joy1down then p2_player0y = p2_player0y  +  1
 
  lda #2
  bit SWCHA
-	BNE .skipL048
+	BNE .skipL040
 .condpart5
 	INC p2_player0y
-.skipL048
-.L049 ;;line 119;;  if joy1left then p2_player0x = p2_player0x  -  1
+.skipL040
+.L041 ;;line 93;;  if joy1left then p2_player0x = p2_player0x  -  1
 
  lda #4
  bit SWCHA
-	BNE .skipL049
+	BNE .skipL041
 .condpart6
 	DEC p2_player0x
-.skipL049
-.L050 ;;line 120;;  if joy1right then p2_player0x = p2_player0x  +  1
+.skipL041
+.L042 ;;line 94;;  if joy1right then p2_player0x = p2_player0x  +  1
 
  lda #8
  bit SWCHA
-	BNE .skipL050
+	BNE .skipL042
 .condpart7
 	INC p2_player0x
-.skipL050
+.skipL042
 .
- ;;line 121;; 
+ ;;line 95;; 
 
 .
- ;;line 122;; 
+ ;;line 96;; 
 
-.L051 ;;line 123;;  if player0y  <  8 then player0y = 42  :  p0_room = move_north[p0_room]  :  gosub load_p0_room
+.L043 ;;line 97;;  if player0y  <  8 then player0y = 42  :  p0_room = move_north[p0_room]  :  gosub load_p0_room
 
 	LDA player0y
 	CMP #8
-     BCS .skipL051
+     BCS .skipL043
 .condpart8
 	LDA #42
 	STA player0y
@@ -392,12 +339,12 @@ game
 	LDA move_north,x
 	STA p0_room
  jsr .load_p0_room
-.skipL051
-.L052 ;;line 124;;  if player0y  >  44 then player0y = 8  :  p0_room = move_south[p0_room]  :  gosub load_p0_room
+.skipL043
+.L044 ;;line 98;;  if player0y  >  44 then player0y = 8  :  p0_room = move_south[p0_room]  :  gosub load_p0_room
 
 	LDA #44
 	CMP player0y
-     BCS .skipL052
+     BCS .skipL044
 .condpart9
 	LDA #8
 	STA player0y
@@ -405,12 +352,12 @@ game
 	LDA move_south,x
 	STA p0_room
  jsr .load_p0_room
-.skipL052
-.L053 ;;line 125;;  if player0x  <  16 then player0x = 136  :  p0_room = move_west[p0_room]  :  gosub load_p0_room
+.skipL044
+.L045 ;;line 99;;  if player0x  <  16 then player0x = 136  :  p0_room = move_west[p0_room]  :  gosub load_p0_room
 
 	LDA player0x
 	CMP #16
-     BCS .skipL053
+     BCS .skipL045
 .condpart10
 	LDA #136
 	STA player0x
@@ -418,12 +365,12 @@ game
 	LDA move_west,x
 	STA p0_room
  jsr .load_p0_room
-.skipL053
-.L054 ;;line 126;;  if player0x  >  138 then player0x = 24  :  p0_room = move_east[p0_room]  :  gosub load_p0_room
+.skipL045
+.L046 ;;line 100;;  if player0x  >  138 then player0x = 24  :  p0_room = move_east[p0_room]  :  gosub load_p0_room
 
 	LDA #138
 	CMP player0x
-     BCS .skipL054
+     BCS .skipL046
 .condpart11
 	LDA #24
 	STA player0x
@@ -431,18 +378,18 @@ game
 	LDA move_east,x
 	STA p0_room
  jsr .load_p0_room
-.skipL054
+.skipL046
 .
- ;;line 127;; 
+ ;;line 101;; 
 
 .
- ;;line 128;; 
+ ;;line 102;; 
 
-.L055 ;;line 129;;  if p2_player0y  <  6 then p2_player0y = 42  :  p1_room = move_north[p1_room]  :  gosub load_p1_room
+.L047 ;;line 103;;  if p2_player0y  <  6 then p2_player0y = 42  :  p1_room = move_north[p1_room]  :  gosub load_p1_room
 
 	LDA p2_player0y
 	CMP #6
-     BCS .skipL055
+     BCS .skipL047
 .condpart12
 	LDA #42
 	STA p2_player0y
@@ -450,12 +397,12 @@ game
 	LDA move_north,x
 	STA p1_room
  jsr .load_p1_room
-.skipL055
-.L056 ;;line 130;;  if p2_player0y  >  44 then p2_player0y = 8  :  p1_room = move_south[p1_room]  :  gosub load_p1_room
+.skipL047
+.L048 ;;line 104;;  if p2_player0y  >  44 then p2_player0y = 8  :  p1_room = move_south[p1_room]  :  gosub load_p1_room
 
 	LDA #44
 	CMP p2_player0y
-     BCS .skipL056
+     BCS .skipL048
 .condpart13
 	LDA #8
 	STA p2_player0y
@@ -463,25 +410,25 @@ game
 	LDA move_south,x
 	STA p1_room
  jsr .load_p1_room
-.skipL056
-.L057 ;;line 131;;  if p2_player0x  <  16 then p2_player0x = 142  :  p1_room = move_west[p1_room]  :  gosub load_p1_room
+.skipL048
+.L049 ;;line 105;;  if p2_player0x  <  16 then p2_player0x = 138  :  p1_room = move_west[p1_room]  :  gosub load_p1_room
 
 	LDA p2_player0x
 	CMP #16
-     BCS .skipL057
+     BCS .skipL049
 .condpart14
-	LDA #142
+	LDA #138
 	STA p2_player0x
 	LDX p1_room
 	LDA move_west,x
 	STA p1_room
  jsr .load_p1_room
-.skipL057
-.L058 ;;line 132;;  if p2_player0x  >  142 then p2_player0x = 24  :  p1_room = move_east[p1_room]  :  gosub load_p1_room
+.skipL049
+.L050 ;;line 106;;  if p2_player0x  >  138 then p2_player0x = 24  :  p1_room = move_east[p1_room]  :  gosub load_p1_room
 
-	LDA #142
+	LDA #138
 	CMP p2_player0x
-     BCS .skipL058
+     BCS .skipL050
 .condpart15
 	LDA #24
 	STA p2_player0x
@@ -489,24 +436,24 @@ game
 	LDA move_east,x
 	STA p1_room
  jsr .load_p1_room
-.skipL058
+.skipL050
 .
- ;;line 133;; 
+ ;;line 107;; 
 
-.L059 ;;line 134;;  COLUPF = room_color[p0_room]
+.L051 ;;line 108;;  COLUPF = room_color[p0_room]
 
 	LDX p0_room
 	LDA room_color,x
 	STA COLUPF
-.L060 ;;line 135;;  p2_colupf = room_color[p1_room]
+.L052 ;;line 109;;  p2_colupf = room_color[p1_room]
 
 	LDX p1_room
 	LDA room_color,x
 	STA p2_colupf
 .
- ;;line 136;; 
+ ;;line 110;; 
 
-.L061 ;;line 137;;  drawscreen
+.L053 ;;line 111;;  drawscreen
 
  sta temp7
  lda #>(ret_point1-1)
@@ -525,44 +472,44 @@ game
  jmp BS_jsr
 ret_point1
 .
- ;;line 138;; 
+ ;;line 112;; 
 
-.L062 ;;line 139;;  if collision(player0,playfield) then gosub knock_back
+.L054 ;;line 113;;  if collision(player0,playfield) then gosub knock_back
 
 	bit 	CXP0FB
-	BPL .skipL062
+	BPL .skipL054
 .condpart16
  jsr .knock_back
-.skipL062
+.skipL054
 .
- ;;line 140;; 
+ ;;line 114;; 
 
-.L063 ;;line 141;;  goto main_loop
+.L055 ;;line 115;;  goto main_loop
 
  jmp .main_loop
 .
- ;;line 142;; 
+ ;;line 116;; 
 
 .knock_back
- ;;line 143;; knock_back
+ ;;line 117;; knock_back
 
-.L064 ;;line 144;;  player0x = p0_oldx
+.L056 ;;line 118;;  player0x = p0_oldx
 
 	LDA p0_oldx
 	STA player0x
-.L065 ;;line 145;;  player0y = p0_oldy
+.L057 ;;line 119;;  player0y = p0_oldy
 
 	LDA p0_oldy
 	STA player0y
-.L066 ;;line 146;;  p2_player0x = p1_oldx
+.L058 ;;line 120;;  p2_player0x = p1_oldx
 
 	LDA p1_oldx
 	STA p2_player0x
-.L067 ;;line 147;;  p2_player0y = p1_oldy
+.L059 ;;line 121;;  p2_player0y = p1_oldy
 
 	LDA p1_oldy
 	STA p2_player0y
-.L068 ;;line 148;;  return
+.L060 ;;line 122;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -572,31 +519,31 @@ ret_point1
 	JMP BS_return
 	RTS
 .
- ;;line 149;; 
+ ;;line 123;; 
 
 .
- ;;line 150;; 
+ ;;line 124;; 
 
 .
- ;;line 151;; 
+ ;;line 125;; 
 
 .
- ;;line 152;; 
+ ;;line 126;; 
 
 .load_p0_room
- ;;line 153;; load_p0_room
+ ;;line 127;; load_p0_room
 
-.L069 ;;line 154;;  temp1 = room_shape[p0_room]
+.L061 ;;line 128;;  temp1 = room_shape[p0_room]
 
 	LDX p0_room
 	LDA room_shape,x
 	STA temp1
-.L070 ;;line 155;;  COLUPF = room_color[p0_room]
+.L062 ;;line 129;;  COLUPF = room_color[p0_room]
 
 	LDX p0_room
 	LDA room_color,x
 	STA COLUPF
-.L071 ;;line 156;;  asm
+.L063 ;;line 130;;  asm
 
    ldx temp1
 
@@ -622,7 +569,7 @@ ret_point1
 
    bpl .loopTop
 
-.L072 ;;line 170;;  return
+.L064 ;;line 144;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -632,22 +579,22 @@ ret_point1
 	JMP BS_return
 	RTS
 .
- ;;line 171;; 
+ ;;line 145;; 
 
 .load_p1_room
- ;;line 172;; load_p1_room
+ ;;line 146;; load_p1_room
 
-.L073 ;;line 173;;  temp1 = room_shape[p1_room]
+.L065 ;;line 147;;  temp1 = room_shape[p1_room]
 
 	LDX p1_room
 	LDA room_shape,x
 	STA temp1
-.L074 ;;line 174;;  p2_colupf = room_color[p1_room]
+.L066 ;;line 148;;  p2_colupf = room_color[p1_room]
 
 	LDX p1_room
 	LDA room_color,x
 	STA p2_colupf
-.L075 ;;line 175;;  asm
+.L067 ;;line 149;;  asm
 
    ldx temp1
 
@@ -673,7 +620,7 @@ ret_point1
 
    bpl .loopBot
 
-.L076 ;;line 189;;  return
+.L068 ;;line 163;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -683,80 +630,80 @@ ret_point1
 	JMP BS_return
 	RTS
 .
- ;;line 190;; 
+ ;;line 164;; 
 
 .
- ;;line 191;; 
+ ;;line 165;; 
 
 .
- ;;line 192;; 
+ ;;line 166;; 
 
 .
- ;;line 193;; 
+ ;;line 167;; 
 
-.L077 ;;line 194;;  data room_shape
+.L069 ;;line 168;;  data room_shape
 
-	JMP .skipL077
+	JMP .skipL069
 room_shape
 	.byte  7,11,4,1,2,9,10,3,9,12,8,4,15,6,5,3,13
 
 	.byte  11,10,3,5,15,0,1,1,14,8,4,15,14,10,2,12,14
 
-.skipL077
+.skipL069
 .
- ;;line 198;; 
+ ;;line 172;; 
 
-.L078 ;;line 199;;  data move_north
+.L070 ;;line 173;;  data move_north
 
-	JMP .skipL078
+	JMP .skipL070
 move_north
 	.byte  0,0,0,0,5,2,4,8,9,0,11,12,0,0,0,14,0,0
 
 	.byte  3,21,0,0,20,0,0,22,23,28,0,27,24,32,0,31
 
-.skipL078
+.skipL070
 .
- ;;line 203;; 
+ ;;line 177;; 
 
-.L079 ;;line 204;;  data move_east
+.L071 ;;line 178;;  data move_east
 
-	JMP .skipL079
+	JMP .skipL071
 move_east
 	.byte  1,0,3,4,0,0,7,10,0,0,0,13,0,14,0,17,15,0
 
 	.byte  19,20,0,0,24,22,23,0,0,26,0,0,31,0,0,0
 
-.skipL079
+.skipL071
 .
- ;;line 208;; 
+ ;;line 182;; 
 
-.L080 ;;line 209;;  data move_south
+.L072 ;;line 183;;  data move_south
 
-	JMP .skipL080
+	JMP .skipL072
 move_south
 	.byte  2,0,5,18,6,4,0,0,7,8,0,10,11,0,15,0,0,0
 
 	.byte  0,0,22,19,25,26,30,0,0,29,27,0,0,33,31,0
 
-.skipL080
+.skipL072
 .
- ;;line 213;; 
+ ;;line 187;; 
 
-.L081 ;;line 214;;  data move_west
+.L073 ;;line 188;;  data move_west
 
-	JMP .skipL081
+	JMP .skipL073
 move_west
 	.byte  0,0,0,2,3,0,0,6,0,0,7,0,0,11,13,16,0,15
 
 	.byte  0,18,19,0,23,24,22,0,27,0,0,0,0,30,0,0
 
-.skipL081
+.skipL073
 .
- ;;line 218;; 
+ ;;line 192;; 
 
-.L082 ;;line 219;;  data room_color
+.L074 ;;line 193;;  data room_color
 
-	JMP .skipL082
+	JMP .skipL074
 room_color
 	.byte  $80,$82,$84,$86,$C2,$C4,$62,$66,$68
 
@@ -766,11 +713,11 @@ room_color
 
 	.byte  $2E,$26,$28,$F4,$F6,$F8,$E4,$A8
 
-.skipL082
+.skipL074
 .
- ;;line 225;; 
+ ;;line 199;; 
 
-.L083 ;;line 226;;  asm
+.L075 ;;line 200;;  asm
 
 room_pointers_lo
 
@@ -785,26 +732,26 @@ room_pointers_hi
  .byte >PF_data8, >PF_data9, >PF_data10, >PF_data11, >PF_data12, >PF_data13, >PF_data14, >PF_data15
 
 .
- ;;line 234;; 
+ ;;line 208;; 
 
 .
- ;;line 235;; 
+ ;;line 209;; 
 
 .
- ;;line 236;; 
+ ;;line 210;; 
 
 .
- ;;line 237;; 
+ ;;line 211;; 
 
 .draw_room_shape_0
- ;;line 238;; draw_room_shape_0
+ ;;line 212;; draw_room_shape_0
 
-.L084 ;;line 239;;  playfield:
+.L076 ;;line 213;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel0
 PF_data0
@@ -816,49 +763,9 @@ PF_data0
 	if (pfwidth>2)
 	.byte %11000000, %00000000
  endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
 	.byte %00000000, %00000000
 	if (pfwidth>2)
 	.byte %00000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
@@ -877,7 +784,7 @@ pflabel0
 	sta playfield-128,x
 	dex
 	bpl pflabel0
-.L085 ;;line 257;;  return
+.L077 ;;line 221;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -887,17 +794,17 @@ pflabel0
 	JMP BS_return
 	RTS
 .
- ;;line 258;; 
+ ;;line 222;; 
 
 .draw_room_shape_1
- ;;line 259;; draw_room_shape_1
+ ;;line 223;; draw_room_shape_1
 
-.L086 ;;line 260;;  playfield:
+.L078 ;;line 224;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel1
 PF_data1
@@ -909,49 +816,9 @@ PF_data1
 	if (pfwidth>2)
 	.byte %11000000, %00000000
  endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
 	.byte %00000000, %00000000
 	if (pfwidth>2)
 	.byte %00000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
@@ -970,7 +837,7 @@ pflabel1
 	sta playfield-128,x
 	dex
 	bpl pflabel1
-.L087 ;;line 278;;  return
+.L079 ;;line 232;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -980,17 +847,17 @@ pflabel1
 	JMP BS_return
 	RTS
 .
- ;;line 279;; 
+ ;;line 233;; 
 
 .draw_room_shape_2
- ;;line 280;; draw_room_shape_2
+ ;;line 234;; draw_room_shape_2
 
-.L088 ;;line 281;;  playfield:
+.L080 ;;line 235;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel2
 PF_data2
@@ -1002,47 +869,7 @@ PF_data2
 	if (pfwidth>2)
 	.byte %11000000, %00000000
  endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
 	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
 	if (pfwidth>2)
 	.byte %11000000, %00000000
  endif
@@ -1063,7 +890,7 @@ pflabel2
 	sta playfield-128,x
 	dex
 	bpl pflabel2
-.L089 ;;line 299;;  return
+.L081 ;;line 243;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1073,17 +900,17 @@ pflabel2
 	JMP BS_return
 	RTS
 .
- ;;line 300;; 
+ ;;line 244;; 
 
 .draw_room_shape_3
- ;;line 301;; draw_room_shape_3
+ ;;line 245;; draw_room_shape_3
 
-.L090 ;;line 302;;  playfield:
+.L082 ;;line 246;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel3
 PF_data3
@@ -1095,49 +922,9 @@ PF_data3
 	if (pfwidth>2)
 	.byte %11000000, %00000000
  endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
 	.byte %00000000, %00000000
 	if (pfwidth>2)
 	.byte %00000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
@@ -1156,7 +943,7 @@ pflabel3
 	sta playfield-128,x
 	dex
 	bpl pflabel3
-.L091 ;;line 320;;  return
+.L083 ;;line 254;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1166,17 +953,17 @@ pflabel3
 	JMP BS_return
 	RTS
 .
- ;;line 321;; 
+ ;;line 255;; 
 
 .draw_room_shape_4
- ;;line 322;; draw_room_shape_4
+ ;;line 256;; draw_room_shape_4
 
-.L092 ;;line 323;;  playfield:
+.L084 ;;line 257;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel4
 PF_data4
@@ -1190,47 +977,7 @@ PF_data4
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
 	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
@@ -1249,7 +996,7 @@ pflabel4
 	sta playfield-128,x
 	dex
 	bpl pflabel4
-.L093 ;;line 341;;  return
+.L085 ;;line 265;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1259,17 +1006,17 @@ pflabel4
 	JMP BS_return
 	RTS
 .
- ;;line 342;; 
+ ;;line 266;; 
 
 .draw_room_shape_5
- ;;line 343;; draw_room_shape_5
+ ;;line 267;; draw_room_shape_5
 
-.L094 ;;line 344;;  playfield:
+.L086 ;;line 268;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel5
 PF_data5
@@ -1281,47 +1028,7 @@ PF_data5
 	if (pfwidth>2)
 	.byte %11000000, %00000000
  endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
 	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
 	if (pfwidth>2)
 	.byte %11000000, %00000000
  endif
@@ -1342,7 +1049,7 @@ pflabel5
 	sta playfield-128,x
 	dex
 	bpl pflabel5
-.L095 ;;line 362;;  return
+.L087 ;;line 276;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1352,17 +1059,17 @@ pflabel5
 	JMP BS_return
 	RTS
 .
- ;;line 363;; 
+ ;;line 277;; 
 
 .draw_room_shape_6
- ;;line 364;; draw_room_shape_6
+ ;;line 278;; draw_room_shape_6
 
-.L096 ;;line 365;;  playfield:
+.L088 ;;line 279;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel6
 PF_data6
@@ -1374,49 +1081,9 @@ PF_data6
 	if (pfwidth>2)
 	.byte %11000000, %00000000
  endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
 	.byte %00000000, %00000000
 	if (pfwidth>2)
 	.byte %00000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
@@ -1435,7 +1102,7 @@ pflabel6
 	sta playfield-128,x
 	dex
 	bpl pflabel6
-.L097 ;;line 383;;  return
+.L089 ;;line 287;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1445,17 +1112,17 @@ pflabel6
 	JMP BS_return
 	RTS
 .
- ;;line 384;; 
+ ;;line 288;; 
 
 .draw_room_shape_7
- ;;line 385;; draw_room_shape_7
+ ;;line 289;; draw_room_shape_7
 
-.L098 ;;line 386;;  playfield:
+.L090 ;;line 290;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel7
 PF_data7
@@ -1469,47 +1136,7 @@ PF_data7
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
 	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
@@ -1528,7 +1155,7 @@ pflabel7
 	sta playfield-128,x
 	dex
 	bpl pflabel7
-.L099 ;;line 404;;  return
+.L091 ;;line 298;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1538,17 +1165,17 @@ pflabel7
 	JMP BS_return
 	RTS
 .
- ;;line 405;; 
+ ;;line 299;; 
 
 .draw_room_shape_8
- ;;line 406;; draw_room_shape_8
+ ;;line 300;; draw_room_shape_8
 
-.L0100 ;;line 407;;  playfield:
+.L092 ;;line 301;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel8
 PF_data8
@@ -1560,47 +1187,7 @@ PF_data8
 	if (pfwidth>2)
 	.byte %11000000, %00000000
  endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
 	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
 	if (pfwidth>2)
 	.byte %11000000, %00000000
  endif
@@ -1621,7 +1208,7 @@ pflabel8
 	sta playfield-128,x
 	dex
 	bpl pflabel8
-.L0101 ;;line 425;;  return
+.L093 ;;line 309;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1631,63 +1218,23 @@ pflabel8
 	JMP BS_return
 	RTS
 .
- ;;line 426;; 
+ ;;line 310;; 
 
 .draw_room_shape_9
- ;;line 427;; draw_room_shape_9
+ ;;line 311;; draw_room_shape_9
 
-.L0102 ;;line 428;;  playfield:
+.L094 ;;line 312;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel9
 PF_data9
 	.byte %11111111, %00001111
 	if (pfwidth>2)
 	.byte %11111111, %00001111
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
@@ -1714,7 +1261,7 @@ pflabel9
 	sta playfield-128,x
 	dex
 	bpl pflabel9
-.L0103 ;;line 446;;  return
+.L095 ;;line 320;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1724,17 +1271,17 @@ pflabel9
 	JMP BS_return
 	RTS
 .
- ;;line 447;; 
+ ;;line 321;; 
 
 .draw_room_shape_10
- ;;line 448;; draw_room_shape_10
+ ;;line 322;; draw_room_shape_10
 
-.L0104 ;;line 449;;  playfield:
+.L096 ;;line 323;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel10
 PF_data10
@@ -1748,47 +1295,7 @@ PF_data10
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
 	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
@@ -1807,7 +1314,7 @@ pflabel10
 	sta playfield-128,x
 	dex
 	bpl pflabel10
-.L0105 ;;line 467;;  return
+.L097 ;;line 331;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1817,17 +1324,17 @@ pflabel10
 	JMP BS_return
 	RTS
 .
- ;;line 468;; 
+ ;;line 332;; 
 
 .draw_room_shape_11
- ;;line 469;; draw_room_shape_11
+ ;;line 333;; draw_room_shape_11
 
-.L0106 ;;line 470;;  playfield:
+.L098 ;;line 334;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel11
 PF_data11
@@ -1839,47 +1346,7 @@ PF_data11
 	if (pfwidth>2)
 	.byte %11000000, %00000000
  endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
 	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
 	if (pfwidth>2)
 	.byte %11000000, %00000000
  endif
@@ -1900,7 +1367,7 @@ pflabel11
 	sta playfield-128,x
 	dex
 	bpl pflabel11
-.L0107 ;;line 488;;  return
+.L099 ;;line 342;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -1910,63 +1377,23 @@ pflabel11
 	JMP BS_return
 	RTS
 .
- ;;line 489;; 
+ ;;line 343;; 
 
 .draw_room_shape_12
- ;;line 490;; draw_room_shape_12
+ ;;line 344;; draw_room_shape_12
 
-.L0108 ;;line 491;;  playfield:
+.L0100 ;;line 345;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel12
 PF_data12
 	.byte %11111111, %11111111
 	if (pfwidth>2)
 	.byte %11111111, %11111111
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
@@ -1993,7 +1420,7 @@ pflabel12
 	sta playfield-128,x
 	dex
 	bpl pflabel12
-.L0109 ;;line 509;;  return
+.L0101 ;;line 353;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -2003,17 +1430,17 @@ pflabel12
 	JMP BS_return
 	RTS
 .
- ;;line 510;; 
+ ;;line 354;; 
 
 .draw_room_shape_13
- ;;line 511;; draw_room_shape_13
+ ;;line 355;; draw_room_shape_13
 
-.L0110 ;;line 512;;  playfield:
+.L0102 ;;line 356;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel13
 PF_data13
@@ -2027,47 +1454,7 @@ PF_data13
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
 	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
@@ -2086,7 +1473,7 @@ pflabel13
 	sta playfield-128,x
 	dex
 	bpl pflabel13
-.L0111 ;;line 530;;  return
+.L0103 ;;line 364;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -2096,63 +1483,23 @@ pflabel13
 	JMP BS_return
 	RTS
 .
- ;;line 531;; 
+ ;;line 365;; 
 
 .draw_room_shape_14
- ;;line 532;; draw_room_shape_14
+ ;;line 366;; draw_room_shape_14
 
-.L0112 ;;line 533;;  playfield:
+.L0104 ;;line 367;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel14
 PF_data14
 	.byte %11111111, %00001111
 	if (pfwidth>2)
 	.byte %11111111, %00001111
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
@@ -2179,7 +1526,7 @@ pflabel14
 	sta playfield-128,x
 	dex
 	bpl pflabel14
-.L0113 ;;line 551;;  return
+.L0105 ;;line 375;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -2189,17 +1536,17 @@ pflabel14
 	JMP BS_return
 	RTS
 .
- ;;line 552;; 
+ ;;line 376;; 
 
 .draw_room_shape_15
- ;;line 553;; draw_room_shape_15
+ ;;line 377;; draw_room_shape_15
 
-.L0114 ;;line 554;;  playfield:
+.L0106 ;;line 378;;  playfield:
 
   ifconst pfres
-	  ldx #(16>pfres)*(pfres*pfwidth-1)+(16<=pfres)*63
+	  ldx #(6>pfres)*(pfres*pfwidth-1)+(6<=pfres)*23
   else
-	  ldx #((16*pfwidth-1)*((16*pfwidth-1)<47))+(47*((16*pfwidth-1)>=47))
+	  ldx #((6*pfwidth-1)*((6*pfwidth-1)<47))+(47*((6*pfwidth-1)>=47))
   endif
 	jmp pflabel15
 PF_data15
@@ -2207,53 +1554,13 @@ PF_data15
 	if (pfwidth>2)
 	.byte %11111111, %11111111
  endif
-	.byte %11000010, %00000101
+	.byte %11000011, %11100111
 	if (pfwidth>2)
-	.byte %11000010, %00000101
- endif
-	.byte %11000010, %00000101
-	if (pfwidth>2)
-	.byte %11000010, %00000101
- endif
-	.byte %11000011, %00000111
-	if (pfwidth>2)
-	.byte %11000011, %00000111
- endif
-	.byte %11000011, %00000111
-	if (pfwidth>2)
-	.byte %11000011, %00000111
- endif
-	.byte %11000011, %01100111
-	if (pfwidth>2)
-	.byte %11000011, %01100111
- endif
-	.byte %11000011, %11111111
-	if (pfwidth>2)
-	.byte %11000011, %11111111
- endif
-	.byte %11000011, %11111111
-	if (pfwidth>2)
-	.byte %11000011, %11111111
- endif
-	.byte %11000011, %11111111
-	if (pfwidth>2)
-	.byte %11000011, %11111111
- endif
-	.byte %11000011, %11111111
-	if (pfwidth>2)
-	.byte %11000011, %11111111
- endif
-	.byte %11000011, %01111111
-	if (pfwidth>2)
-	.byte %11000011, %01111111
+	.byte %11000011, %11100111
  endif
 	.byte %11000011, %00111111
 	if (pfwidth>2)
 	.byte %11000011, %00111111
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
@@ -2272,7 +1579,7 @@ pflabel15
 	sta playfield-128,x
 	dex
 	bpl pflabel15
-.L0115 ;;line 572;;  return
+.L0107 ;;line 386;;  return
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -3231,7 +2538,7 @@ SplitDoDivider
      txa               ; Push playfield offset X to stack
      pha               
      
-     ; Scanline 1: Swap Y, Colors, and P0 Pointers
+     ; Scanline 1: Swap Variables (Y, Color, and Pointers)
      sta WSYNC
      lda p2_player0y
      sta player0y
@@ -3239,16 +2546,15 @@ SplitDoDivider
      sta player1y
      lda p2_colupf
      sta COLUPF
-     
-     lda p2_colup0
-     sta COLUP0
-     lda p2_colup1
-     sta COLUP1
 
      lda p2_player0pointerlo
      sta player0pointerlo
      lda p2_player0pointerhi
      sta player0pointerhi
+
+     ; Swap Player 0 Color
+     lda p2_colup0
+     sta COLUP0
 
      ; Clamp Player 1 X for visual positioning only
      lda p2_player1x
@@ -3276,24 +2582,20 @@ SplitDoDivider
 .c_safe  
      tay               ; Stash safe P0 X in Y register
          
-     ; Scanline 2: Coarse position P0 + Cycle-pack P1 Pointer Lo
+     ; Scanline 2: Coarse position Player 0
      sta WSYNC
-     lda p2_player1pointerlo
-     sta player1pointerlo
-     sleep 4           ; Replaces 'sleep 10' to perfectly maintain 10-cycle timing!
+     sleep 10          ; Increased from 8 to fix the 9-pixel left-shift error
      tya               
      sec
 SplitPosP0
      sbc #15
      bcs SplitPosP0
      sta RESP0         
-     tay               ; 2-cycle save 
+     tay               ; 2-cycle save (prevents scanline issue on the right edge movement bug)
      
-     ; Scanline 3: Coarse position P1 + Cycle-pack P1 Pointer Hi
+     ; Scanline 3: Coarse position Player 1
      sta WSYNC
-     lda p2_player1pointerhi
-     sta player1pointerhi
-     sleep 4           ; Replaces 'sleep 10'
+     sleep 10          ; Increased padding for P1
      txa               
      sec
 SplitPosP1
@@ -3304,7 +2606,7 @@ SplitPosP1
 
      ; Scanline 4: Fine Positioning Math
      sta WSYNC
-     tya               
+     tya               ; Retrieve P0 remainder
      eor #7
      asl
      asl
@@ -3312,7 +2614,7 @@ SplitPosP1
      asl
      sta HMP0
 
-     txa               
+     txa               ; Retrieve P1 remainder
      eor #7
      asl
      asl
@@ -4154,7 +3456,7 @@ scorepointerset
 	.byte 0
 	repend
 	endif
-playerL027_0
+playerL023_0
 	.byte  %01101100
 	.byte  %00101000
 	.byte  %00111000
@@ -4166,37 +3468,13 @@ playerL027_0
 	.byte 0
 	repend
 	endif
-playerL030_1
-	.byte  %10000001
-	.byte  %11000011
-	.byte  %11100111
-	.byte  %11111111
-	.byte  %00111100
-	.byte  %00011000
- if (<*) > (<(*+5))
-	repeat ($100-<*)
-	.byte 0
-	repend
-	endif
-playerL033_0
+playerL028_0
 	.byte  %01101100
 	.byte  %00101000
 	.byte  %00111000
 	.byte  %01111100
 	.byte  %00010000
 	.byte  %00111000
- if (<*) > (<(*+5))
-	repeat ($100-<*)
-	.byte 0
-	repend
-	endif
-playerL034_1
-	.byte  %00011000
-	.byte  %00111100
-	.byte  %01111110
-	.byte  %11011011
-	.byte  %11111111
-	.byte  %01011010
  if ECHOFIRST
        echo "    ",[(scoretable - *)]d , "bytes of ROM space left in bank 4")
  endif 
