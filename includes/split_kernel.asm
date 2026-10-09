@@ -320,7 +320,11 @@ altkernel
              ifnconst PFheights
                  ifnconst no_blank_lines
                      ; --- DUAL SCREEN INJECTION POINT ---
-                     cpx #68               ; 2 cycles (Controls where the split is)
+                     ifconst split_position
+                         cpx #split_position   ; 2 cycles (User-defined split)
+                     else
+                         cpx #68               ; 2 cycles (Default fallback)
+                     endif
                      bne SplitNoDivider    ; 3 cycles if branch taken (not row 16)
                      jmp SplitDoDivider    ; 3 cycles (Absolute jump to bypass 127-byte limit)
 SplitNoDivider
@@ -740,15 +744,22 @@ SplitDoDivider
      txa               ; Push playfield offset X to stack
      pha               
      
-     ; Scanline 1: Swap variables and strictly clamp DRAWING bounds
+     ; Scanline 1: Swap Variables (Y, Color, and Pointers)
      sta WSYNC
-     lda a             ; Load p2_player0y
+     lda p2_player0y
      sta player0y
-     lda i             ; Load p2_colupf
+     lda p2_colupf
      sta COLUPF
 
-     ; Clamp Player 1 (d) for visual positioning only
-     lda d
+     ; --- NEW: Swap the Sprite Graphic Pointers! ---
+     lda p2_player0pointerlo
+     sta player0pointerlo
+     lda p2_player0pointerhi
+     sta player0pointerhi
+     ; ----------------------------------------------
+
+     ; Clamp Player 1 X (p2_player1x) for visual positioning only
+     lda p2_player1x
      cmp #160          ; Is it safely on screen (0-159)?
      bcc .d_safe
      cmp #240          ; Did it wrap past 0 to the left (240-255)?
@@ -760,8 +771,8 @@ SplitDoDivider
 .d_safe  
      tax               ; Stash safe P1 X in X register
          
-     ; Clamp Player 0 (c) for visual positioning only
-     lda c
+     ; Clamp Player 0 X (p2_player0x) for visual positioning only
+     lda p2_player0x
      cmp #160
      bcc .c_safe
      cmp #240

@@ -1,4 +1,3 @@
- 
  set kernel split 
  set romsize 16kSC
 
@@ -12,6 +11,7 @@
  dim p2_player1pointerhi = h
  dim p2_colupf = i
  const pfres=32
+ const split_position = 68
  
  player0:
  %11110000

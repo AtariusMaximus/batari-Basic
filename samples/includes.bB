@@ -1,10 +1,12 @@
-2600basicheader.asm
+superchipheader.asm
+bB.asm
+split_kernel.asm
 startup.asm
-std_kernel.asm
 pf_drawing.asm
 pf_scrolling.asm
 std_routines.asm
 std_overscan.asm
-bB.asm
+bB2.asm
 score_graphics.asm
+banksw.asm
 2600basicfooter.asm

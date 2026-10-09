@@ -39,104 +39,85 @@ game
 .
  ;;line 4;; 
 
-.
- ;;line 5;; 
+.L02 ;;line 5;;  dim p2_player0y = a
+
+.L03 ;;line 6;;  dim p2_player1y = b
+
+.L04 ;;line 7;;  dim p2_player0x = c
+
+.L05 ;;line 8;;  dim p2_player1x = d
+
+.L06 ;;line 9;;  dim p2_player0pointerlo = e
+
+.L07 ;;line 10;;  dim p2_player0pointerhi = f
+
+.L08 ;;line 11;;  dim p2_player1pointerlo = g
+
+.L09 ;;line 12;;  dim p2_player1pointerhi = h
+
+.L010 ;;line 13;;  dim p2_colupf = i
+
+.L011 ;;line 14;;  const pfres = 32
+
+.L012 ;;line 15;;  const split_position = 88
 
 .
- ;;line 6;; 
+ ;;line 16;; 
 
-.
- ;;line 7;; 
+.L013 ;;line 17;;  player0:
 
-.
- ;;line 8;; 
-
-.
- ;;line 9;; 
-
-.
- ;;line 10;; 
-
-.L02 ;;line 11;;  dim p2_player0y = a
-
-.L03 ;;line 12;;  dim p2_player1y = b
-
-.L04 ;;line 13;;  dim p2_player0x = c
-
-.L05 ;;line 14;;  dim p2_player1x = d
-
-.L06 ;;line 15;;  dim p2_player0pointerlo = e
-
-.L07 ;;line 16;;  dim p2_player0pointerhi = f
-
-.L08 ;;line 17;;  dim p2_player1pointerlo = g
-
-.L09 ;;line 18;;  dim p2_player1pointerhi = h
-
-.L010 ;;line 19;;  dim p2_colupf = i
-
-.L011 ;;line 20;;  const pfres = 32
-
-.
- ;;line 21;; 
-
-.
- ;;line 22;; 
-
-.L012 ;;line 23;;  player0:
-
-	LDX #<playerL012_0
+	LDX #<playerL013_0
 	STX player0pointerlo
-	LDA #>playerL012_0
+	LDA #>playerL013_0
 	STA player0pointerhi
 	LDA #3
 	STA player0height
 .
- ;;line 29;; 
+ ;;line 23;; 
 
-.L013 ;;line 30;;  player1:
+.L014 ;;line 24;;  player1:
 
-	LDX #<playerL013_1
+	LDX #<playerL014_1
 	STX player1pointerlo
-	LDA #>playerL013_1
+	LDA #>playerL014_1
 	STA player1pointerhi
 	LDA #3
 	STA player1height
 .
- ;;line 36;; 
+ ;;line 30;; 
 
 .
- ;;line 37;; 
+ ;;line 31;; 
 
 .
- ;;line 38;; 
+ ;;line 32;; 
 
-.L014 ;;line 39;;  player0x = 40
+.L015 ;;line 33;;  player0x = 40
 
 	LDA #40
 	STA player0x
-.L015 ;;line 40;;  player0y = 40
+.L016 ;;line 34;;  player0y = 40
 
 	LDA #40
 	STA player0y
 .
- ;;line 41;; 
+ ;;line 35;; 
 
-.L016 ;;line 42;;  p2_player0x = 40
+.L017 ;;line 36;;  p2_player0x = 40
 
 	LDA #40
 	STA p2_player0x
-.L017 ;;line 43;;  p2_player0y = 58
+.L018 ;;line 37;;  p2_player0y = 58
 
 	LDA #58
 	STA p2_player0y
 .
- ;;line 44;; 
+ ;;line 38;; 
 
 .
- ;;line 45;; 
+ ;;line 39;; 
 
-.L018 ;;line 46;;  playfield:
+.L019 ;;line 40;;  playfield:
 
   ifconst pfres
 	  ldx #(32>pfres)*(pfres*pfwidth-1)+(32<=pfres)*127
@@ -279,24 +260,24 @@ pflabel0
 	dex
 	bpl pflabel0
 .
- ;;line 80;; 
+ ;;line 74;; 
 
 .main
- ;;line 81;; main
+ ;;line 75;; main
 
 .
- ;;line 82;; 
+ ;;line 76;; 
 
-.L019 ;;line 83;;  ballx = 30 : bally = 30
+.L020 ;;line 77;;  ballx = 30 : bally = 30
 
 	LDA #30
 	STA ballx
 	STA bally
-.L020 ;;line 84;;  scorecolor = $08
+.L021 ;;line 78;;  scorecolor = $08
 
 	LDA #$08
 	STA scorecolor
-.L021 ;;line 85;;  score = 999999
+.L022 ;;line 79;;  score = 999999
 
 	LDA #$99
 	STA score+2
@@ -304,15 +285,15 @@ pflabel0
 	STA score+1
 	LDA #$99
 	STA score
-.L022 ;;line 86;;  CTRLPF = $21
+.L023 ;;line 80;;  CTRLPF = $21
 
 	LDA #$21
 	STA CTRLPF
-.L023 ;;line 87;;  COLUPF = $84
+.L024 ;;line 81;;  COLUPF = $84
 
 	LDA #$84
 	STA COLUPF
-.L024 ;;line 88;;  p2_colupf = rand
+.L025 ;;line 82;;  p2_colupf = rand
 
  sta temp7
  lda #>(ret_point1-1)
@@ -332,147 +313,147 @@ pflabel0
 ret_point1
 	STA p2_colupf
 .
- ;;line 89;; 
+ ;;line 83;; 
 
 .
- ;;line 90;; 
+ ;;line 84;; 
 
-.L025 ;;line 91;;  COLUBK = $00
+.L026 ;;line 85;;  COLUBK = $00
 
 	LDA #$00
 	STA COLUBK
-.L026 ;;line 92;;  COLUP0 = $1E
+.L027 ;;line 86;;  COLUP0 = $1E
 
 	LDA #$1E
 	STA COLUP0
-.L027 ;;line 93;;  COLUP1 = $2F
+.L028 ;;line 87;;  COLUP1 = $2F
 
 	LDA #$2F
 	STA COLUP1
+.
+ ;;line 88;; 
+
+.
+ ;;line 89;; 
+
+.L029 ;;line 90;;  if joy0up then player0y = player0y  -  1
+
+ lda #$10
+ bit SWCHA
+	BNE .skipL029
+.condpart0
+	DEC player0y
+.skipL029
+.L030 ;;line 91;;  if joy0down then player0y = player0y  +  1
+
+ lda #$20
+ bit SWCHA
+	BNE .skipL030
+.condpart1
+	INC player0y
+.skipL030
+.L031 ;;line 92;;  if joy0left then player0x = player0x  -  1
+
+ bit SWCHA
+	BVS .skipL031
+.condpart2
+	DEC player0x
+.skipL031
+.L032 ;;line 93;;  if joy0right then player0x = player0x  +  1
+
+ bit SWCHA
+	BMI .skipL032
+.condpart3
+	INC player0x
+.skipL032
 .
  ;;line 94;; 
 
 .
  ;;line 95;; 
 
-.L028 ;;line 96;;  if joy0up then player0y = player0y  -  1
-
- lda #$10
- bit SWCHA
-	BNE .skipL028
-.condpart0
-	DEC player0y
-.skipL028
-.L029 ;;line 97;;  if joy0down then player0y = player0y  +  1
-
- lda #$20
- bit SWCHA
-	BNE .skipL029
-.condpart1
-	INC player0y
-.skipL029
-.L030 ;;line 98;;  if joy0left then player0x = player0x  -  1
-
- bit SWCHA
-	BVS .skipL030
-.condpart2
-	DEC player0x
-.skipL030
-.L031 ;;line 99;;  if joy0right then player0x = player0x  +  1
-
- bit SWCHA
-	BMI .skipL031
-.condpart3
-	INC player0x
-.skipL031
-.
- ;;line 100;; 
-
-.
- ;;line 101;; 
-
-.L032 ;;line 102;;  if player0y  >  42 then player0y = 42
+.L033 ;;line 96;;  if player0y  >  42 then player0y = 42
 
 	LDA #42
 	CMP player0y
-     BCS .skipL032
+     BCS .skipL033
 .condpart4
 	LDA #42
 	STA player0y
-.skipL032
-.L033 ;;line 103;;  if player0y  <  8 then player0y = 8
+.skipL033
+.L034 ;;line 97;;  if player0y  <  8 then player0y = 8
 
 	LDA player0y
 	CMP #8
-     BCS .skipL033
+     BCS .skipL034
 .condpart5
 	LDA #8
 	STA player0y
-.skipL033
+.skipL034
 .
- ;;line 104;; 
+ ;;line 98;; 
 
 .
- ;;line 105;; 
+ ;;line 99;; 
 
-.L034 ;;line 106;;  if p2_player0y  >  42 then p2_player0y = 42
+.L035 ;;line 100;;  if p2_player0y  >  42 then p2_player0y = 42
 
 	LDA #42
 	CMP p2_player0y
-     BCS .skipL034
+     BCS .skipL035
 .condpart6
 	LDA #42
 	STA p2_player0y
-.skipL034
-.L035 ;;line 107;;  if p2_player0y  <  8 then p2_player0y = 8
+.skipL035
+.L036 ;;line 101;;  if p2_player0y  <  8 then p2_player0y = 8
 
 	LDA p2_player0y
 	CMP #8
-     BCS .skipL035
+     BCS .skipL036
 .condpart7
 	LDA #8
 	STA p2_player0y
-.skipL035
+.skipL036
 .
- ;;line 108;; 
+ ;;line 102;; 
 
 .
- ;;line 109;; 
+ ;;line 103;; 
 
-.L036 ;;line 110;;  if joy0left then p2_player0x = p2_player0x  -  1
+.L037 ;;line 104;;  if joy0left then p2_player0x = p2_player0x  -  1
 
  bit SWCHA
-	BVS .skipL036
+	BVS .skipL037
 .condpart8
 	DEC p2_player0x
-.skipL036
-.L037 ;;line 111;;  if joy0right then p2_player0x = p2_player0x  +  1
+.skipL037
+.L038 ;;line 105;;  if joy0right then p2_player0x = p2_player0x  +  1
 
  bit SWCHA
-	BMI .skipL037
+	BMI .skipL038
 .condpart9
 	INC p2_player0x
-.skipL037
-.L038 ;;line 112;;  if joy0up then p2_player0y = p2_player0y  -  1
+.skipL038
+.L039 ;;line 106;;  if joy0up then p2_player0y = p2_player0y  -  1
 
  lda #$10
  bit SWCHA
-	BNE .skipL038
+	BNE .skipL039
 .condpart10
 	DEC p2_player0y
-.skipL038
-.L039 ;;line 113;;  if joy0down then p2_player0y = p2_player0y  +  1
+.skipL039
+.L040 ;;line 107;;  if joy0down then p2_player0y = p2_player0y  +  1
 
  lda #$20
  bit SWCHA
-	BNE .skipL039
+	BNE .skipL040
 .condpart11
 	INC p2_player0y
-.skipL039
+.skipL040
 .
- ;;line 114;; 
+ ;;line 108;; 
 
-.L040 ;;line 115;;  drawscreen
+.L041 ;;line 109;;  drawscreen
 
  sta temp7
  lda #>(ret_point2-1)
@@ -490,7 +471,8 @@ ret_point1
  ldx #4
  jmp BS_jsr
 ret_point2
-.L041 ;;line 116;;  goto main
+.L042 ;;line 110;;  goto main
+
  jmp .main
  if ECHO1
  echo "    ",[(start_bank1 - *)]d , "bytes of ROM space left in bank 1")
@@ -1003,7 +985,11 @@ altkernel
              ifnconst PFheights
                  ifnconst no_blank_lines
                      ; --- DUAL SCREEN INJECTION POINT ---
-                     cpx #68               ; 2 cycles (Controls where the split is)
+                     ifconst split_position
+                         cpx #split_position   ; 2 cycles (User-defined split)
+                     else
+                         cpx #68               ; 2 cycles (Default fallback)
+                     endif
                      bne SplitNoDivider    ; 3 cycles if branch taken (not row 16)
                      jmp SplitDoDivider    ; 3 cycles (Absolute jump to bypass 127-byte limit)
 SplitNoDivider
@@ -2330,7 +2316,7 @@ scorepointerset
 	.byte 0
 	repend
 	endif
-playerL012_0
+playerL013_0
 	.byte  %11110000
 	.byte  %11110000
 	.byte  %11110000
@@ -2340,7 +2326,7 @@ playerL012_0
 	.byte 0
 	repend
 	endif
-playerL013_1
+playerL014_1
 	.byte  %11111111
 	.byte  %11111111
 	.byte  %11111111
