@@ -8,44 +8,97 @@
  ;const pfres = 24  
  const pfres = 32
 
- dim p2_player0y = a        ; Bottom screen player 0 Y coordinate
- dim p2_player0x = b        ; Bottom screen player 0 X coordinate
- dim p2_colupf = c          ; Bottom screen playfield color
+ const split_color = $00 ; Optional, will be set to black if not explicitly set.
 
- dim p0_room = d            ; Current room index for the top screen
- dim p1_room = e            ; Current room index for the bottom screen
+ ; These 11 variables MUST be declared, even if they are unused in your game.
+ ;
+ ;  Positions:
+ ;  p2_player0x / p2_player0y (Player 0 bottom position)
+ ;  p2_player1x / p2_player1y (Player 1 bottom position)
+ ;
+ ;  Colors:
+ ;  p2_colupf (Bottom playfield color)
+ ;  p2_colup0 (Bottom Player 0 color)
+ ;  p2_colup1 (Bottom Player 1 color)
+ ;
+ ;  Graphics Pointers:
+ ;  p2_player0pointerlo / p2_player0pointerhi (Bottom Player 0 shape)
+ ;  p2_player1pointerlo / p2_player1pointerhi (Bottom Player 1 shape)
 
- dim p0_oldx = f            ; Top screen player X position before movement 
- dim p0_oldy = g            ; Top screen player Y position before movement 
+ ; The Top Screen: 
+ ;   Movement: Uses standard batari Basic variables (player0x, player0y, player1x, player1y). 
+ ;   Color: Player colors use COLUP0 and COLUP1.
+ ;   Range X 0-159, Y 0-47
+ ;
+ ; The Bottom Screen: 
+ ;   Uses the custom "p2_" variables (p2_player0x, p2_player0y, p2_player1x, p2_player1y).
+ ;   Color: Player colors use p2_colup0 and p2_colup1.
+ ;   Range X 0-159, Y 0-45
+ ;
+ ; Missiles and Ball:
+ ;   These are not split, and will behave in the same way as any other batari Basic kernel.
+ ;   They can traverse both the top and the bottom screen.
+
+ dim p2_colup0 = a          ; Bottom screen Player 0 Color
+ dim p2_colup1 = b          ; Bottom screen Player 1 Color
+
+ dim p2_player0y = c        ; Bottom screen player 0 Y coordinate
+ dim p2_player0x = d        ; Bottom screen player 0 X coordinate
+
+ dim p2_colupf = e          ; Bottom screen playfield color
+
+ dim p0_room = f            ; Current room index for the top screen
+ dim p1_room = g            ; Current room index for the bottom screen
+
+ dim p0_oldx = h            ; Top screen player X position before movement 
+ dim p0_oldy = i            ; Top screen player Y position before movement 
  
- dim p1_oldx = h            ; Bottom screen player X position before movement 
- dim p1_oldy = i            ; Bottom screen player Y position before movement
+ dim p1_oldx = j            ; Bottom screen player X position before movement 
+ dim p1_oldy = k            ; Bottom screen player Y position before movement
 
- dim p2_player1y = j        ; Bottom screen player 1 Y coordinate
- dim p2_player1x = k        ; Bottom screen player 1 X coordinate
+ dim p2_player1y = l        ; Bottom screen player 1 Y coordinate
+ dim p2_player1x = m        ; Bottom screen player 1 X coordinate
  
- dim p2_player0pointerlo = l  ; Low byte of player 0 graphic address for the bottom screen
- dim p2_player0pointerhi = m  ; High byte of player 0 graphic address for the bottom screen
+ dim p2_player0pointerlo = n  ; Low byte of player 0 graphic address for the bottom screen
+ dim p2_player0pointerhi = o  ; High byte of player 0 graphic address for the bottom screen
 
- dim p2_player1pointerlo = n  ; Low byte of player 1 graphic address for the bottom screen
- dim p2_player1pointerhi = o  ; High byte of player 1 graphic address for the bottom screen
+ dim p2_player1pointerlo = p  ; Low byte of player 1 graphic address for the bottom screen
+ dim p2_player1pointerhi = q  ; High byte of player 1 graphic address for the bottom screen
 
- dim p2_colup0 = p            ; Bottom screen Player 0 Color
- dim p2_colup1 = q            ; Bottom screen Player 1 Color
+ dim anim_timer = r
+ dim frame = s
+
+ dim p1_top_dir = t
+ dim p1_bot_dir = u
 
  ; Start positions
  player0x = 92 : player0y = 25
  p2_player0x = 92 : p2_player0y = 25
- player1x = 70 : player1y = 25          ; Static Player 1 TOP position
- p2_player1x = 70 : p2_player1y = 25    ; Static Player 1 BOTTOM position
+ 
+ player1x = 60 : player1y = 25         
+ p2_player1x = 80 : p2_player1y = 25    
+ 
+ p1_top_dir = 0 : p1_bot_dir = 1        ; Set initial movement directions
+
  p0_room = 19 : p1_room = 18
 
  ; Load the initial rooms
  gosub load_p0_room
  gosub load_p1_room
 
+main_loop
 
- ; Define graphics for Player 0 Bottom (Player Character)
+ scorecolor=$06
+ score=123456
+
+ anim_timer = anim_timer + 1
+ if anim_timer = 15 then anim_timer = 0 : frame = frame ^ 1 ; Toggles between 0 and 1
+
+ ; Animate Bottom Screen Sprites
+ if frame = 1 then goto bot_frame1
+ 
+bot_frame0
+ ; Player 0 Bottom (Character - Frame 0)
  player0:
  %01101100
  %00101000
@@ -55,11 +108,7 @@
  %00111000
 end
 
- ; Save the pointers for the bottom screen Player 0
- p2_player0pointerlo = player0pointerlo
- p2_player0pointerhi = player0pointerhi
-
- ; Define graphics for Player 1 Bottom (Object)
+ ; Player 1 Bottom (Object/Enemy - Frame 0)
  player1:
  %10000001
  %11000011
@@ -68,18 +117,42 @@ end
  %00111100
  %00011000
 end
+ goto bot_save
 
- ; Save the pointers for the bottom screen Player 1
+bot_frame1
+ ; Player 0 Bottom (Character - Frame 1)
+ player0:
+ %01101100
+ %00101000
+ %00111000
+ %11111110
+ %00010000
+ %00101000
+end
+
+ ; Player 1 Bottom (Object/Enemy - Frame 1)
+ player1:
+ %00000000
+ %01000010
+ %01100110
+ %01111110
+ %00111100
+ %00011000
+end
+
+bot_save
+ ; Save the calculated pointers for the bottom screen
+ p2_player0pointerlo = player0pointerlo
+ p2_player0pointerhi = player0pointerhi
  p2_player1pointerlo = player1pointerlo
  p2_player1pointerhi = player1pointerhi
 
 
-main_loop
-
- ; --- Define the TOP graphics ---
- ; When the loop hits this, it overwrites pointers with the top graphics.
-
- ; Define graphics for Player 0 Top (Player Character)
+ ; Animate Top Screen Sprites
+ if frame = 1 then goto top_frame1
+ 
+top_frame0
+ ; Player 0 Top (Skull Character - Frame 0)
  player0:
  %01101100
  %00101000
@@ -89,7 +162,7 @@ main_loop
  %00111000
 end
 
- ; Define graphics for Player 1 Top (Object)
+ ; Player 1 Top (Object - Frame 0)
  player1:
  %00011000
  %00111100
@@ -98,6 +171,37 @@ end
  %11111111
  %01011010
 end
+ goto top_save
+
+top_frame1
+ ; Player 0 Top (Skull Character - Frame 1)
+ player0:
+ %01101100
+ %00101000
+ %00111000
+ %01111100
+ %00101000
+ %00010000
+end
+
+ ; Player 1 Top (Object - Frame 1)
+ player1:
+ %00000000
+ %00011000
+ %00111100
+ %01011010
+ %01111110
+ %00100100
+end
+top_save
+
+ ; Player 1 Auto-Movement (Top Screen)
+ if p1_top_dir = 0 then player1x = player1x + 1 : if player1x > 80 then p1_top_dir = 1
+ if p1_top_dir = 1 then player1x = player1x - 1 : if player1x < 60 then p1_top_dir = 0
+
+ ; Player 1 Auto-Movement (Bottom Screen)
+ if p1_bot_dir = 0 then p2_player1x = p2_player1x + 1 : if p2_player1x > 80 then p1_bot_dir = 1
+ if p1_bot_dir = 1 then p2_player1x = p2_player1x - 1 : if p2_player1x < 60 then p1_bot_dir = 0
 
  COLUBK = $00    
  CTRLPF = $21    ; CTRLPF must be $x1 for this kernel
@@ -171,6 +275,7 @@ load_p0_room
    dey
    bpl .loopTop
 end
+ drawscreen
  return
 
 load_p1_room
@@ -190,6 +295,7 @@ load_p1_room
    dey
    bpl .loopBot
 end
+ drawscreen
  return
 
 ; -----------------------------------------------------------
@@ -560,14 +666,14 @@ draw_room_shape_15
  XX....X.X.X..........X.X.X....XX
  XX....X.X.X..........X.X.X....XX
  XX....XXXXX..........XXXXX....XX
- XX....XXXXX..........XXXXX....XX
  XX....XXXXX..XX..XX..XXXXX....XX
- XX....XXXXXXXXXXXXXXXXXXXX....XX
  XX....XXXXXXXXXXXXXXXXXXXX....XX
  XX....XXXXXXXXXXXXXXXXXXXX....XX
  XX....XXXXXXXXXXXXXXXXXXXX....XX
  XX....XXXXXXXXX..XXXXXXXXX....XX
  XX....XXXXXXXX....XXXXXXXX....XX
+ XX............................XX
+ XX............................XX
  XX............................XX
  XX............................XX
  XXXXXXXXXXXX........XXXXXXXXXXXX

@@ -760,26 +760,30 @@ SplitDoDivider
      txa               ; Push playfield offset X to stack
      pha               
      
-     ; Scanline 1: Swap Y, Colors, and P0 Pointers
+     ; Clear leftover top-screen playfield to prevent divider artifacts
+     ifconst split_color
+         lda #0
+         sta PF1       
+         sta PF2
+     endif
+     
+     ; Scanline 1: The 1-Pixel Colored Line + Clamps
      sta WSYNC
+     ifconst split_color
+         lda #split_color
+         sta COLUBK    
+     endif
+     
      lda p2_player0y
      sta player0y
      lda p2_player1y         
      sta player1y
-     lda p2_colupf
-     sta COLUPF
-     
-     lda p2_colup0
-     sta COLUP0
-     lda p2_colup1
-     sta COLUP1
-
      lda p2_player0pointerlo
      sta player0pointerlo
      lda p2_player0pointerhi
      sta player0pointerhi
 
-     ; Clamp Player 1 X for visual positioning only
+     ; Clamp Player 1 X 
      lda p2_player1x
      cmp #160          
      bcc .d_safe
@@ -790,9 +794,9 @@ SplitDoDivider
 .d_left  
      lda #0            
 .d_safe  
-     tax               ; Stash safe P1 X in X register
+     tax               
          
-     ; Clamp Player 0 X for visual positioning only
+     ; Clamp Player 0 X 
      lda p2_player0x
      cmp #160
      bcc .c_safe
@@ -803,36 +807,40 @@ SplitDoDivider
 .c_left  
      lda #0
 .c_safe  
-     tay               ; Stash safe P0 X in Y register
+     tay               
          
-     ; Scanline 2: Coarse position P0 + Cycle-pack P1 Pointer Lo
+     ; Scanline 2: Turn off color + Position P0
      sta WSYNC
-     lda p2_player1pointerlo
-     sta player1pointerlo
-     sleep 4           ; Replaces 'sleep 10' to perfectly maintain 10-cycle timing!
+     ifconst split_color
+         lda #0
+         sta COLUBK      
+         lda temp1       ; <--- FIXED: Harmless 3-cycle read replaces destructive CXCLR!
+         nop             ; 2-cycle padding 
+     else
+         sleep 10        
+     endif
      tya               
      sec
 SplitPosP0
      sbc #15
      bcs SplitPosP0
      sta RESP0         
-     tay               ; 2-cycle save 
+     tay               
      
-     ; Scanline 3: Coarse position P1 + Cycle-pack P1 Pointer Hi
+     ; Scanline 3: Position P1 
      sta WSYNC
-     lda p2_player1pointerhi
-     sta player1pointerhi
-     sleep 4           ; Replaces 'sleep 10'
+     sleep 10          
      txa               
      sec
 SplitPosP1
      sbc #15
      bcs SplitPosP1
      sta RESP1         
-     tax               ; 2-cycle save 
+     tax               
 
-     ; Scanline 4: Fine Positioning Math
+     ; Scanline 4: Fine Positioning Math + Remaining Swaps
      sta WSYNC
+     sta HMCLR         ; Keeps the ball from shifting!
      tya               
      eor #7
      asl
@@ -849,9 +857,21 @@ SplitPosP1
      asl
      sta HMP1
      
+     ; Offload remaining variable swaps to Scanline 4
+     lda p2_colupf
+     sta COLUPF        
+     lda p2_colup0
+     sta COLUP0        
+     lda p2_colup1
+     sta COLUP1        
+     lda p2_player1pointerlo
+     sta player1pointerlo 
+     lda p2_player1pointerhi
+     sta player1pointerhi 
+     
      ; Scanline 5: Apply fine position, restore playfield, and phase sync
      sta WSYNC
-     sta HMOVE
+     sta HMOVE         
      
      pla
      tax               
