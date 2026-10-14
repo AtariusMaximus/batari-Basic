@@ -3,26 +3,36 @@
 ; Steve Engelhardt
 ; 10/8/2026
 
+top_player0y     = player0y
+top_player1y     = player1y
+top_p0_ptr_lo    = player0pointerlo
+top_p0_ptr_hi    = player0pointerhi
+top_p1_ptr_lo    = player1pointerlo
+top_p1_ptr_hi    = player1pointerhi
+top_colup0       = COLUP0
+top_colup1       = COLUP1
+top_colupf       = COLUPF
+
      ifnconst vertical_reflect
 kernel
 ; --- DUAL SCREEN AUTO-CONFIGURATION ---
  ifconst pfres
      if pfres == 32
 split_ram_offset = 64
-split_pos_auto   = 68
+split_pos_auto   = 64
      endif
      if pfres == 24
 split_ram_offset = 48
-split_pos_auto   = 84
+split_pos_auto   = 80
      endif
      if pfres == 12
 split_ram_offset = 24
-split_pos_auto   = 108
+split_pos_auto   = 104
      endif
  else
      ; Default to 12 lines TOTAL (6 per half) if pfres is omitted
 split_ram_offset = 24
-split_pos_auto   = 108
+split_pos_auto   = 104
  endif
  ; --------------------------------------
      endif
@@ -70,9 +80,9 @@ split_pos_auto   = 108
      sta temp2,x
 
      ifnconst pfres
-         ldx #128-44+(4-pfwidth)*12
+         ldx #128-48+(4-pfwidth)*12
      else
-         ldx #132-pfres*pfwidth
+         ldx #128-pfres*pfwidth
      endif
 
      dec player0y
@@ -117,24 +127,24 @@ continuekernel2
      lda ballheight
      
      ifconst pfres
-         ldy playfield+pfres*pfwidth-132,x
+         ldy playfield+pfres*pfwidth-128,x
          sty PF1L ;3
-         ldy playfield+pfres*pfwidth-131-pfadjust,x
+         ldy playfield+pfres*pfwidth-127-pfadjust,x
          sty PF2L ;3
          ;sleep 14 
-         ldy playfield+pfres*pfwidth-130,x
+         ldy playfield+pfres*pfwidth-126,x
          sty PF1 
-         ldy playfield+pfres*pfwidth-129-pfadjust,x
+         ldy playfield+pfres*pfwidth-125-pfadjust,x
          sty PF2
      else
-             ldy playfield-48+pfwidth*12+44-128,x
+             ldy playfield-48+pfwidth*12+48-128,x
              sty PF1L ;3
-             ldy playfield-48+pfwidth*12+45-128-pfadjust,x ;4
+             ldy playfield-48+pfwidth*12+49-128-pfadjust,x ;4
              sty PF2L ;3
              
-             ldy playfield-48+pfwidth*12+46-128,x
+             ldy playfield-48+pfwidth*12+50-128,x
              sty PF1 
-             ldy playfield-48+pfwidth*12+47-128-pfadjust,x
+             ldy playfield-48+pfwidth*12+51-128-pfadjust,x
              sty PF2
          endif
 
@@ -171,26 +181,26 @@ goback
      endif
 
      ifconst pfres
-         lda playfield+pfres*pfwidth-132,x 
+         lda playfield+pfres*pfwidth-128,x 
          sta PF1L ;3
-         lda playfield+pfres*pfwidth-131-pfadjust,x 
+         lda playfield+pfres*pfwidth-127-pfadjust,x 
          sta PF2L ;3
          ;sleep 14 
-         ldy playfield+pfres*pfwidth-130,x
+         ldy playfield+pfres*pfwidth-126,x
          sty PF1 
-         ldy playfield+pfres*pfwidth-129-pfadjust,x
+         ldy playfield+pfres*pfwidth-125-pfadjust,x
          sty PF2
      else
-             lda playfield-48+pfwidth*12+44-128,x ;4
+             lda playfield-48+pfwidth*12+48-128,x ;4
              sta PF1L ;3
-             lda playfield-48+pfwidth*12+45-128-pfadjust,x ;4
+             lda playfield-48+pfwidth*12+49-128-pfadjust,x ;4
              sta PF2L ;3
              
-             ldy playfield-48+pfwidth*12+46-128,x
+             ldy playfield-48+pfwidth*12+50-128,x
              sty PF1 
-             ldy playfield-48+pfwidth*12+47-128-pfadjust,x
+             ldy playfield-48+pfwidth*12+51-128-pfadjust,x
              sty PF2
-         endif 
+         endif
 
      lda player0height
      dcp player0y
@@ -417,14 +427,15 @@ lastkernelline
 
 .enterfromNBL
      ifconst pfres
-         ldy.w playfield+pfres*pfwidth-4
+         ldy.w playfield-128+pfres*pfwidth-4      ; Fixed A7 memory addressing
          sty PF1L ;3
-         ldy.w playfield+pfres*pfwidth-3-pfadjust
+         ldy.w playfield-128+pfres*pfwidth-3-pfadjust
          sty PF2L ;3
+
          ;sleep 14 
-         ldy playfield+pfres*pfwidth-130,x
+         ldy.w playfield-128+pfres*pfwidth-2      ; Fixed A7 memory addressing
          sty PF1 
-         ldy playfield+pfres*pfwidth-129-pfadjust,x
+         ldy.w playfield-128+pfres*pfwidth-1-pfadjust
          sty PF2
      else
              ldy.w playfield-48+pfwidth*12+44
@@ -432,9 +443,9 @@ lastkernelline
              ldy.w playfield-48+pfwidth*12+45-pfadjust
              sty PF2L ;3
              
-             ldy playfield-48+pfwidth*12+46-128,x
+             ldy.w playfield-48+pfwidth*12+46         ; Fixed
              sty PF1 
-             ldy playfield-48+pfwidth*12+47-128-pfadjust,x
+             ldy.w playfield-48+pfwidth*12+47-pfadjust; Fixed
              sty PF2
          endif
 
@@ -464,31 +475,31 @@ enterlastkernel
      endif
 
      dex
-     beq endkernel
+             beq endkernel
 
-     ifconst pfres
-         ldy.w playfield+pfres*pfwidth-4
-         sty PF1L ;3
-         ldy.w playfield+pfres*pfwidth-3-pfadjust
-         sty PF2L ;3
+             ifconst pfres
+            ldy.w playfield-128+pfres*pfwidth-4      ; Fixed A7 memory addressing
+            sty PF1L ;3
+            ldy.w playfield-128+pfres*pfwidth-3-pfadjust
+            sty PF2L ;3
 
-         ;sleep 14 
-         ldy playfield+pfres*pfwidth-130,x
-         sty PF1 
-         ldy playfield+pfres*pfwidth-129-pfadjust,x
-         sty PF2
+            ;sleep 14 
+            ldy.w playfield-128+pfres*pfwidth-2      ; Fixed A7 memory addressing
+            sty PF1 
+            ldy.w playfield-128+pfres*pfwidth-1-pfadjust
+            sty PF2
 
-     else
-             ldy.w playfield-48+pfwidth*12+44
-             sty PF1L ;3
-             ldy.w playfield-48+pfwidth*12+45-pfadjust
-             sty PF2L ;3
-             
-             ldy playfield-48+pfwidth*12+46-128,x
-             sty PF1 
-             ldy playfield-48+pfwidth*12+47-128-pfadjust,x
-             sty PF2
-         endif
+             else
+                     ldy.w playfield-48+pfwidth*12+44
+                     sty PF1L ;3
+                     ldy.w playfield-48+pfwidth*12+45-pfadjust
+                     sty PF2L ;3
+                     
+                     ldy.w playfield-48+pfwidth*12+46         ; Fixed
+                     sty PF1 
+                     ldy.w playfield-48+pfwidth*12+47-pfadjust; Fixed
+                     sty PF2
+                 endif
 
      ifnconst player1colors
          rol;2
@@ -755,67 +766,73 @@ beginscore
  sta WSYNC
  sta VBLANK
  jmp SplitReturnSafely
-
+ 
+; =========================================================
+; THE DIVIDER & SWAP ROUTINE 
+; =========================================================
 SplitDoDivider
-     txa               ; Push playfield offset X to stack
-     pha               
+     txa                ; Push playfield offset X to stack (Cycle 37)
+     pha                ; (Cycle 40)
      
-     ; Clear leftover top-screen playfield to prevent divider artifacts
-     ifconst split_color
-         lda #0
-         sta PF1       
-         sta PF2
-     endif
+     ; --- CACHE TOP SCREEN COLLISIONS ---
+     lda CXBLPF         ; (Cycle 43)
+     sta top_cxblpf     ; (Cycle 46)
+     lda CXP0FB         ; (Cycle 49)
+     sta top_cxp0fb     ; (Cycle 52)
+     lda CXP1FB         ; (Cycle 55)
+     sta top_cxp1fb     ; (Cycle 58)
+     sta CXCLR          ; (Cycle 61)
      
-     ; Scanline 1: The 1-Pixel Colored Line + Clamps
+     ; Clear leftover top-screen sprites & ball before divider scanlines
+     ; (GRP1 MUST be written last to latch GRP0 and ENABL via VDELP0/VDELBL)
+     lda #0             ; (Cycle 63)
+     sta GRP0           ; (Cycle 66)
+     sta ENABL          ; (Cycle 69)
+     sta GRP1           ; (Cycle 72 -before Cycle 76 WSYNC)
+     
+     ; Scanline 1: The 1-Pixel Colored Line + Pointer Swaps
      sta WSYNC
      ifconst split_color
          lda #split_color
          sta COLUBK    
      endif
      
-     lda p2_player0y
-     sta player0y
-     lda p2_player1y         
-     sta player1y
-     lda p2_player0pointerlo
-     sta player0pointerlo
-     lda p2_player0pointerhi
-     sta player0pointerhi
+     lda bottom_player0y
+     sta top_player0y
+     lda bottom_player1y         
+     sta top_player1y
+     lda bottom_p0_ptr_lo
+     sta top_p0_ptr_lo
+     lda bottom_p0_ptr_hi
+     sta top_p0_ptr_hi
+     lda bottom_p1_ptr_lo
+     sta top_p1_ptr_lo
+     lda bottom_p1_ptr_hi
+     sta top_p1_ptr_hi
 
-     ; Clamp Player 1 X 
-     lda p2_player1x
+     ; Fast Clamp Bottom Player 1 X 
+     lda bottom_player1x
      cmp #160          
      bcc .d_safe
-     cmp #240          
-     bcs .d_left
      lda #159          
-     bne .d_safe       
-.d_left  
-     lda #0            
 .d_safe  
      tax               
          
-     ; Clamp Player 0 X 
-     lda p2_player0x
+     ; Fast Clamp Bottom Player 0 X 
+     lda bottom_player0x
      cmp #160
      bcc .c_safe
-     cmp #240
-     bcs .c_left
      lda #159
-     bne .c_safe
-.c_left  
-     lda #0
 .c_safe  
      tay               
          
-     ; Scanline 2: Turn off color + Position P0
+     ; Scanline 2: Position Bottom P0
      sta WSYNC
      ifconst split_color
          lda #0
          sta COLUBK      
-         lda temp1       ; <--- FIXED: Harmless 3-cycle read replaces destructive CXCLR!
-         nop             ; 2-cycle padding 
+         lda temp1       
+         nop             
      else
          sleep 10        
      endif
@@ -827,7 +844,7 @@ SplitPosP0
      sta RESP0         
      tay               
      
-     ; Scanline 3: Position P1 
+     ; Scanline 3: Position Bottom P1 
      sta WSYNC
      sleep 10          
      txa               
@@ -838,9 +855,21 @@ SplitPosP1
      sta RESP1         
      tax               
 
-     ; Scanline 4: Fine Positioning Math + Remaining Swaps
+     ; Scanline 4: Position Bottom Ball
      sta WSYNC
-     sta HMCLR         ; Keeps the ball from shifting!
+     sleep 10          
+     lda p2_ballx
+     sec
+SplitPosBall
+     sbc #15
+     bcs SplitPosBall
+     sta RESBL
+     pha               ; PUSH remainder to stack
+     
+     ; Scanline 5: Fine Positioning Math + Remaining Swaps
+     sta WSYNC
+     sta HMCLR         
+     
      tya               
      eor #7
      asl
@@ -857,28 +886,36 @@ SplitPosP1
      asl
      sta HMP1
      
-     ; Offload remaining variable swaps to Scanline 4
-     lda p2_colupf
-     sta COLUPF        
-     lda p2_colup0
-     sta COLUP0        
-     lda p2_colup1
-     sta COLUP1        
-     lda p2_player1pointerlo
-     sta player1pointerlo 
-     lda p2_player1pointerhi
-     sta player1pointerhi 
+     pla               ; PULL ball remainder from stack
+     eor #7
+     asl
+     asl
+     asl
+     asl
+     sta HMBL
      
-     ; Scanline 5: Apply fine position, restore playfield, and phase sync
+     ; Offload remaining color swaps 
+     lda bottom_colupf
+     sta top_colupf        
+     lda bottom_colup0
+     sta top_colup0        
+     lda bottom_colup1
+     sta top_colup1        
+     
+     ; Scanline 6: Apply fine position, restore playfield, and phase sync
      sta WSYNC
      sta HMOVE         
      
+     ; Swap Ball Y-Coordinate 
+     ; (The kernel automatically restores the true top 'bally' at the end of the frame)
+     lda p2_bally
+     sta bally
+
      pla
      tax               
          
-     ; Proven 25-cycle playfield phase sync
-     sleep 10
-     sleep 15
+     ; Proven playfield phase sync (25 cycles minus 12 cycles used above = 13)
+     sleep 13
          
      jmp SplitReturnFromDivider
 SplitReturnSafely
