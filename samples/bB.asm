@@ -13,7 +13,8 @@ game
 
 .L03 ;;line 6;;  const noscore = 1
 
-.L04 ;;line 7;;  const split_color = $A0
+.
+ ;;line 7;; 
 
 .
  ;;line 8;; 
@@ -33,7 +34,8 @@ game
 .
  ;;line 13;; 
 
-.L05 ;;line 14;;  const DEBUG_NO_SWALLOW = 1
+.
+ ;;line 14;; 
 
 .
  ;;line 15;; 
@@ -47,27 +49,38 @@ game
 .
  ;;line 18;; 
 
-.L06 ;;line 19;;  dim top_player0x = player0x
+.
+ ;;line 19;; 
 
-.L07 ;;line 20;;  dim top_player0y = player0y
+.
+ ;;line 20;; 
 
-.L08 ;;line 21;;  dim top_player1x = player1x
+.
+ ;;line 21;; 
 
-.L09 ;;line 22;;  dim top_player1y = player1y
+.
+ ;;line 22;; 
 
-.L010 ;;line 23;;  dim top_colup0 = COLUP0
+.
+ ;;line 23;; 
 
-.L011 ;;line 24;;  dim top_colup1 = COLUP1
+.
+ ;;line 24;; 
 
-.L012 ;;line 25;;  dim top_colupf = COLUPF
+.
+ ;;line 25;; 
 
-.L013 ;;line 26;;  dim top_p0_ptr_lo = player0pointerlo
+.
+ ;;line 26;; 
 
-.L014 ;;line 27;;  dim top_p0_ptr_hi = player0pointerhi
+.
+ ;;line 27;; 
 
-.L015 ;;line 28;;  dim top_p1_ptr_lo = player1pointerlo
+.
+ ;;line 28;; 
 
-.L016 ;;line 29;;  dim top_p1_ptr_hi = player1pointerhi
+.
+ ;;line 29;; 
 
 .
  ;;line 30;; 
@@ -81,42 +94,59 @@ game
 .
  ;;line 33;; 
 
-.L017 ;;line 34;;  const OBJ_RED_DRAGON = 0
+.
+ ;;line 34;; 
 
-.L018 ;;line 35;;  const OBJ_YEL_DRAGON = 1
+.
+ ;;line 35;; 
 
-.L019 ;;line 36;;  const OBJ_GRN_DRAGON = 2
+.
+ ;;line 36;; 
 
-.L020 ;;line 37;;  const OBJ_MAGNET = 3
+.
+ ;;line 37;; 
 
-.L021 ;;line 38;;  const OBJ_SWORD = 4
+.
+ ;;line 38;; 
 
-.L022 ;;line 39;;  const OBJ_CHALICE = 5
+.
+ ;;line 39;; 
 
-.L023 ;;line 40;;  const OBJ_BRIDGE = 6
+.
+ ;;line 40;; 
 
-.L024 ;;line 41;;  const OBJ_YEL_KEY = 7
+.
+ ;;line 41;; 
 
-.L025 ;;line 42;;  const OBJ_WHT_KEY = 8
+.
+ ;;line 42;; 
 
-.L026 ;;line 43;;  const OBJ_BLK_KEY = 9
+.
+ ;;line 43;; 
 
-.L027 ;;line 44;;  const OBJ_BAT = 10
+.
+ ;;line 44;; 
 
 .
  ;;line 45;; 
 
-.L028 ;;line 46;;  const ENTRY_YELLOW = 2
+.
+ ;;line 46;; 
 
-.L029 ;;line 47;;  const ENTRY_WHITE = 23
+.
+ ;;line 47;; 
 
-.L030 ;;line 48;;  const ENTRY_BLACK = 13
+.
+ ;;line 48;; 
 
-.L031 ;;line 49;;  const CASTLE_YELLOW = 1
+.
+ ;;line 49;; 
 
-.L032 ;;line 50;;  const CASTLE_WHITE = 21
+.
+ ;;line 50;; 
 
-.L033 ;;line 51;;  const CASTLE_BLACK = 12
+.
+ ;;line 51;; 
 
 .
  ;;line 52;; 
@@ -133,29 +163,41 @@ game
 .
  ;;line 56;; 
 
-.L034 ;;line 57;;  dim w_top_obj_room = w000
+.
+ ;;line 57;; 
 
-.L035 ;;line 58;;  dim w_bot_obj_room = w011
+.
+ ;;line 58;; 
 
-.L036 ;;line 59;;  dim w_top_oldx = w022
+.
+ ;;line 59;; 
 
-.L037 ;;line 60;;  dim w_top_oldy = w023
+.
+ ;;line 60;; 
 
-.L038 ;;line 61;;  dim w_bottom_oldx = w024
+.
+ ;;line 61;; 
 
-.L039 ;;line 62;;  dim w_bottom_oldy = w025
+.
+ ;;line 62;; 
 
-.L040 ;;line 63;;  dim w_top_carry_off_x = w026
+.
+ ;;line 63;; 
 
-.L041 ;;line 64;;  dim w_top_carry_off_y = w027
+.
+ ;;line 64;; 
 
-.L042 ;;line 65;;  dim w_bot_carry_off_x = w028
+.
+ ;;line 65;; 
 
-.L043 ;;line 66;;  dim w_bot_carry_off_y = w029
+.
+ ;;line 66;; 
 
-.L044 ;;line 67;;  dim w_top_obj_hit = w030
+.
+ ;;line 67;; 
 
-.L045 ;;line 68;;  dim w_bot_obj_hit = w031
+.
+ ;;line 68;; 
 
 .
  ;;line 69;; 
@@ -163,29 +205,41 @@ game
 .
  ;;line 70;; 
 
-.L046 ;;line 71;;  dim r_top_obj_room = r000
+.
+ ;;line 71;; 
 
-.L047 ;;line 72;;  dim r_bot_obj_room = r011
+.
+ ;;line 72;; 
 
-.L048 ;;line 73;;  dim r_top_oldx = r022
+.
+ ;;line 73;; 
 
-.L049 ;;line 74;;  dim r_top_oldy = r023
+.
+ ;;line 74;; 
 
-.L050 ;;line 75;;  dim r_bottom_oldx = r024
+.
+ ;;line 75;; 
 
-.L051 ;;line 76;;  dim r_bottom_oldy = r025
+.
+ ;;line 76;; 
 
-.L052 ;;line 77;;  dim r_top_carry_off_x = r026
+.
+ ;;line 77;; 
 
-.L053 ;;line 78;;  dim r_top_carry_off_y = r027
+.
+ ;;line 78;; 
 
-.L054 ;;line 79;;  dim r_bot_carry_off_x = r028
+.
+ ;;line 79;; 
 
-.L055 ;;line 80;;  dim r_bot_carry_off_y = r029
+.
+ ;;line 80;; 
 
-.L056 ;;line 81;;  dim r_top_obj_hit = r030
+.
+ ;;line 81;; 
 
-.L057 ;;line 82;;  dim r_bot_obj_hit = r031
+.
+ ;;line 82;; 
 
 .
  ;;line 83;; 
@@ -199,21 +253,29 @@ game
 .
  ;;line 86;; 
 
-.L058 ;;line 87;;  dim top_obj_x = var0
+.
+ ;;line 87;; 
 
-.L059 ;;line 88;;  dim top_obj_y = var11
+.
+ ;;line 88;; 
 
-.L060 ;;line 89;;  dim bot_obj_x = var22
+.
+ ;;line 89;; 
 
-.L061 ;;line 90;;  dim bot_obj_y = var33
+.
+ ;;line 90;; 
 
-.L062 ;;line 91;;  dim room_flags = var44
+.
+ ;;line 91;; 
 
-.L063 ;;line 92;;  dim bot_flicker_idx = var45
+.
+ ;;line 92;; 
 
-.L064 ;;line 93;;  dim flicker_idx = var46
+.
+ ;;line 93;; 
 
-.L065 ;;line 94;;  dim top_cxp1fb = var47
+.
+ ;;line 94;; 
 
 .
  ;;line 95;; 
@@ -227,57 +289,80 @@ game
 .
  ;;line 98;; 
 
-.L066 ;;line 99;;  dim bottom_colup0 = a
+.
+ ;;line 99;; 
 
-.L067 ;;line 100;;  dim bottom_colup1 = b
+.
+ ;;line 100;; 
 
-.L068 ;;line 101;;  dim bottom_player0y = c
+.
+ ;;line 101;; 
 
-.L069 ;;line 102;;  dim bottom_player0x = d
+.
+ ;;line 102;; 
 
-.L070 ;;line 103;;  dim bottom_colupf = e
+.
+ ;;line 103;; 
 
-.L071 ;;line 104;;  dim top_room = f
+.
+ ;;line 104;; 
 
-.L072 ;;line 105;;  dim bottom_room = g
+.
+ ;;line 105;; 
 
-.L073 ;;line 106;;  dim top_carried_item = h
+.
+ ;;line 106;; 
 
-.L074 ;;line 107;;  dim bot_carried_item = i
+.
+ ;;line 107;; 
 
-.L075 ;;line 108;;  dim gate_state = j
+.
+ ;;line 108;; 
 
-.L076 ;;line 109;;  dim top_drag_state = k
+.
+ ;;line 109;; 
 
-.L077 ;;line 110;;  dim bottom_player1y = l
+.
+ ;;line 110;; 
 
-.L078 ;;line 111;;  dim bottom_player1x = m
+.
+ ;;line 111;; 
 
-.L079 ;;line 112;;  dim bottom_p0_ptr_lo = n
+.
+ ;;line 112;; 
 
-.L080 ;;line 113;;  dim bottom_p0_ptr_hi = o
+.
+ ;;line 113;; 
 
-.L081 ;;line 114;;  dim bottom_p1_ptr_lo = p
+.
+ ;;line 114;; 
 
-.L082 ;;line 115;;  dim bottom_p1_ptr_hi = q
+.
+ ;;line 115;; 
 
-.L083 ;;line 116;;  dim bot_drag_state = r
+.
+ ;;line 116;; 
 
-.L084 ;;line 117;;  dim drag_dead = s
+.
+ ;;line 117;; 
 
 .
  ;;line 118;; 
 
-.L085 ;;line 119;;  dim p2_ballx = v
+.
+ ;;line 119;; 
 
-.L086 ;;line 120;;  dim p2_bally = w
+.
+ ;;line 120;; 
 
 .
  ;;line 121;; 
 
-.L087 ;;line 122;;  dim top_cxblpf = y
+.
+ ;;line 122;; 
 
-.L088 ;;line 123;;  dim top_cxp0fb = z
+.
+ ;;line 123;; 
 
 .
  ;;line 124;; 
@@ -291,142 +376,349 @@ game
 .
  ;;line 127;; 
 
-.L089 ;;line 128;;  ballx = 92  :  bally = 38
+.
+ ;;line 128;; 
 
-	LDA #92
-	STA ballx
-	LDA #38
-	STA bally
-.L090 ;;line 129;;  p2_ballx = 92  :  p2_bally = 38
+.
+ ;;line 129;; 
 
-	LDA #92
-	STA p2_ballx
-	LDA #38
-	STA p2_bally
-.L091 ;;line 130;;  ballheight = 4
+.
+ ;;line 130;; 
 
-	LDA #4
-	STA ballheight
 .
  ;;line 131;; 
 
 .
  ;;line 132;; 
 
-.L092 ;;line 133;;  top_player0x = 71  :  top_player0y = 255
+.
+ ;;line 133;; 
 
-	LDA #71
-	STA top_player0x
-	LDA #255
-	STA top_player0y
-.L093 ;;line 134;;  bottom_player0x = 76  :  bottom_player0y = 255
+.
+ ;;line 134;; 
 
-	LDA #76
-	STA bottom_player0x
-	LDA #255
-	STA bottom_player0y
 .
  ;;line 135;; 
 
-.L094 ;;line 136;;  top_player1x = 120  :  top_player1y = 255
+.
+ ;;line 136;; 
 
-	LDA #120
-	STA top_player1x
-	LDA #255
-	STA top_player1y
-.L095 ;;line 137;;  bottom_player1x = 120  :  bottom_player1y = 255
+.
+ ;;line 137;; 
 
-	LDA #120
-	STA bottom_player1x
-	LDA #255
-	STA bottom_player1y
 .
  ;;line 138;; 
 
-.L096 ;;line 139;;  missile0y = 255  :  missile1y = 255
+.
+ ;;line 139;; 
 
-	LDA #255
-	STA missile0y
-	STA missile1y
 .
  ;;line 140;; 
 
 .
  ;;line 141;; 
 
-.L097 ;;line 142;;  player0:
-
-	LDX #<playerL097_0
-	STX player0pointerlo
-	LDA #>playerL097_0
-	STA player0pointerhi
-	LDA #14
-	STA player0height
 .
- ;;line 159;; 
+ ;;line 142;; 
 
-.L098 ;;line 160;;  bottom_p0_ptr_lo = top_p0_ptr_lo
-
-	LDA top_p0_ptr_lo
-	STA bottom_p0_ptr_lo
-.L099 ;;line 161;;  bottom_p0_ptr_hi = top_p0_ptr_hi
-
-	LDA top_p0_ptr_hi
-	STA bottom_p0_ptr_hi
-.L0100 ;;line 162;;  player0height = 15
-
-	LDA #15
-	STA player0height
-.L0101 ;;line 163;;  NUSIZ0 = 5
-
-	LDA #5
-	STA NUSIZ0
 .
- ;;line 164;; 
+ ;;line 143;; 
 
-.L0102 ;;line 165;;  top_room = 2  :  bottom_room = 2
+.
+ ;;line 144;; 
 
-	LDA #2
-	STA top_room
-	STA bottom_room
-.L0103 ;;line 166;;  room_flags = 0
+.
+ ;;line 145;; 
 
-	LDA #0
-	STA room_flags
-.L0104 ;;line 167;;  gosub init_level_2 bank2
+.
+ ;;line 146;; 
+
+.
+ ;;line 147;; 
+
+.L04 ;;line 148;;  const DEBUG_NO_SWALLOW = 0
+
+.L05 ;;line 149;;  dim split_color = aux4
+
+.L06 ;;line 150;;  const logo_color = $00
+
+.L07 ;;line 151;;  const logo_height = 48
+
+.
+ ;;line 152;; 
+
+.
+ ;;line 153;; 
+
+.
+ ;;line 154;; 
+
+.
+ ;;line 155;; 
+
+.L08 ;;line 156;;  dim top_player0x = player0x
+
+.L09 ;;line 157;;  dim top_player0y = player0y
+
+.L010 ;;line 158;;  dim top_player1x = player1x
+
+.L011 ;;line 159;;  dim top_player1y = player1y
+
+.L012 ;;line 160;;  dim top_colup0 = COLUP0
+
+.L013 ;;line 161;;  dim top_colup1 = COLUP1
+
+.L014 ;;line 162;;  dim top_colupf = COLUPF
+
+.L015 ;;line 163;;  dim top_p0_ptr_lo = player0pointerlo
+
+.L016 ;;line 164;;  dim top_p0_ptr_hi = player0pointerhi
+
+.L017 ;;line 165;;  dim top_p1_ptr_lo = player1pointerlo
+
+.L018 ;;line 166;;  dim top_p1_ptr_hi = player1pointerhi
+
+.
+ ;;line 167;; 
+
+.
+ ;;line 168;; 
+
+.
+ ;;line 169;; 
+
+.
+ ;;line 170;; 
+
+.L019 ;;line 171;;  const OBJ_RED_DRAGON = 0
+
+.L020 ;;line 172;;  const OBJ_YEL_DRAGON = 1
+
+.L021 ;;line 173;;  const OBJ_GRN_DRAGON = 2
+
+.L022 ;;line 174;;  const OBJ_MAGNET = 3
+
+.L023 ;;line 175;;  const OBJ_SWORD = 4
+
+.L024 ;;line 176;;  const OBJ_CHALICE = 5
+
+.L025 ;;line 177;;  const OBJ_BRIDGE = 6
+
+.L026 ;;line 178;;  const OBJ_YEL_KEY = 7
+
+.L027 ;;line 179;;  const OBJ_WHT_KEY = 8
+
+.L028 ;;line 180;;  const OBJ_BLK_KEY = 9
+
+.L029 ;;line 181;;  const OBJ_BAT = 10
+
+.
+ ;;line 182;; 
+
+.L030 ;;line 183;;  const ENTRY_YELLOW = 2
+
+.L031 ;;line 184;;  const ENTRY_WHITE = 23
+
+.L032 ;;line 185;;  const ENTRY_BLACK = 13
+
+.L033 ;;line 186;;  const CASTLE_YELLOW = 1
+
+.L034 ;;line 187;;  const CASTLE_WHITE = 21
+
+.L035 ;;line 188;;  const CASTLE_BLACK = 12
+
+.
+ ;;line 189;; 
+
+.
+ ;;line 190;; 
+
+.
+ ;;line 191;; 
+
+.
+ ;;line 192;; 
+
+.
+ ;;line 193;; 
+
+.L036 ;;line 194;;  dim w_top_obj_room = w000
+
+.L037 ;;line 195;;  dim w_bot_obj_room = w011
+
+.L038 ;;line 196;;  dim w_top_oldx = w022
+
+.L039 ;;line 197;;  dim w_top_oldy = w023
+
+.L040 ;;line 198;;  dim w_bottom_oldx = w024
+
+.L041 ;;line 199;;  dim w_bottom_oldy = w025
+
+.L042 ;;line 200;;  dim w_top_carry_off_x = w026
+
+.L043 ;;line 201;;  dim w_top_carry_off_y = w027
+
+.L044 ;;line 202;;  dim w_bot_carry_off_x = w028
+
+.L045 ;;line 203;;  dim w_bot_carry_off_y = w029
+
+.L046 ;;line 204;;  dim w_bottom_ctrlpf = w030
+
+.L047 ;;line 205;;  dim w_bottom_nusiz1 = w031
+
+.
+ ;;line 206;; 
+
+.
+ ;;line 207;; 
+
+.L048 ;;line 208;;  dim r_top_obj_room = r000
+
+.L049 ;;line 209;;  dim r_bot_obj_room = r011
+
+.L050 ;;line 210;;  dim r_top_oldx = r022
+
+.L051 ;;line 211;;  dim r_top_oldy = r023
+
+.L052 ;;line 212;;  dim r_bottom_oldx = r024
+
+.L053 ;;line 213;;  dim r_bottom_oldy = r025
+
+.L054 ;;line 214;;  dim r_top_carry_off_x = r026
+
+.L055 ;;line 215;;  dim r_top_carry_off_y = r027
+
+.L056 ;;line 216;;  dim r_bot_carry_off_x = r028
+
+.L057 ;;line 217;;  dim r_bot_carry_off_y = r029
+
+.L058 ;;line 218;;  dim r_bottom_ctrlpf = r030
+
+.L059 ;;line 219;;  dim r_bottom_nusiz1 = r031
+
+.
+ ;;line 220;; 
+
+.
+ ;;line 221;; 
+
+.
+ ;;line 222;; 
+
+.
+ ;;line 223;; 
+
+.L060 ;;line 224;;  dim top_obj_x = var0
+
+.L061 ;;line 225;;  dim top_obj_y = var11
+
+.L062 ;;line 226;;  dim bot_obj_x = var22
+
+.L063 ;;line 227;;  dim bot_obj_y = var33
+
+.
+ ;;line 228;; 
+
+.L064 ;;line 229;;  dim room_flags = var44
+
+.L065 ;;line 230;;  dim bot_flicker_idx = var45
+
+.L066 ;;line 231;;  dim flicker_idx = var46
+
+.L067 ;;line 232;;  dim bot_nusiz0 = var47
+
+.L068 ;;line 233;;  dim drag_awake = aux3
+
+.
+ ;;line 234;; 
+
+.
+ ;;line 235;; 
+
+.L069 ;;line 236;;  const bottom_colubk_val = $06
+
+.
+ ;;line 237;; 
+
+.
+ ;;line 238;; 
+
+.
+ ;;line 239;; 
+
+.
+ ;;line 240;; 
+
+.L070 ;;line 241;;  dim bottom_colup0 = a
+
+.L071 ;;line 242;;  dim bottom_colup1 = b
+
+.L072 ;;line 243;;  dim bottom_player0y = c
+
+.L073 ;;line 244;;  dim bottom_player0x = d
+
+.L074 ;;line 245;;  dim bottom_colupf = e
+
+.L075 ;;line 246;;  dim top_room = f
+
+.L076 ;;line 247;;  dim bottom_room = g
+
+.L077 ;;line 248;;  dim top_carried_item = h
+
+.L078 ;;line 249;;  dim bot_carried_item = i
+
+.L079 ;;line 250;;  dim gate_state = j
+
+.L080 ;;line 251;;  dim top_drag_state = k
+
+.L081 ;;line 252;;  dim bottom_player1y = l
+
+.L082 ;;line 253;;  dim bottom_player1x = m
+
+.L083 ;;line 254;;  dim bottom_p0_ptr_lo = n
+
+.L084 ;;line 255;;  dim bottom_p0_ptr_hi = o
+
+.L085 ;;line 256;;  dim bottom_p1_ptr_lo = p
+
+.L086 ;;line 257;;  dim bottom_p1_ptr_hi = q
+
+.L087 ;;line 258;;  dim bot_drag_state = r
+
+.L088 ;;line 259;;  dim drag_dead = s
+
+.L089 ;;line 260;;  dim top_bat_state = t
+
+.L090 ;;line 261;;  dim bot_bat_state = u
+
+.L091 ;;line 262;;  dim p2_ballx = v
+
+.L092 ;;line 263;;  dim p2_bally = w
+
+.L093 ;;line 264;;  dim bat_fedup = x
+
+.L094 ;;line 265;;  dim top_cxblpf = y
+
+.L095 ;;line 266;;  dim top_cxp0fb = z
+
+.
+ ;;line 267;; 
+
+.
+ ;;line 268;; 
+
+.
+ ;;line 269;; 
+
+.
+ ;;line 270;; 
+
+.L096 ;;line 271;;  goto _title_screen bank3
 
  sta temp7
- lda #>(ret_point1-1)
+ lda #>(._title_screen-1)
  pha
- lda #<(ret_point1-1)
- pha
- lda #>(.init_level_2-1)
- pha
- lda #<(.init_level_2-1)
- pha
- lda temp7
- pha
- txa
- pha
- ldx #2
- jmp BS_jsr
-ret_point1
-.L0105 ;;line 168;;  gosub load_top_room
-
- jsr .load_top_room
-.L0106 ;;line 169;;  gosub load_bottom_room
-
- jsr .load_bottom_room
-.L0107 ;;line 170;;  gosub check_gates bank3
-
- sta temp7
- lda #>(ret_point2-1)
- pha
- lda #<(ret_point2-1)
- pha
- lda #>(.check_gates-1)
- pha
- lda #<(.check_gates-1)
+ lda #<(._title_screen-1)
  pha
  lda temp7
  pha
@@ -434,254 +726,63 @@ ret_point1
  pha
  ldx #3
  jmp BS_jsr
-ret_point2
 .
- ;;line 171;; 
+ ;;line 272;; 
 
 .main_loop
- ;;line 172;; main_loop
+ ;;line 273;; main_loop
 
-.
- ;;line 173;; 
+.L097 ;;line 274;;  split_color = $00
 
-.
- ;;line 174;; 
+	LDA #$00
+	STA split_color
+.L098 ;;line 275;;  if switchreset then reboot
 
-.
- ;;line 175;; 
+ lda #1
+ bit SWCHB
+	BNE .skipL098
+.condpart0
+	JMP ($FFFC)
+.skipL098
+.L099 ;;line 276;;  if r005 = 1  ||  r016 = 1 then top_drag_state = 0  :  goto game_won
 
-.L0108 ;;line 176;;  PF0 = 0
-
+	LDA r005
+	CMP #1
+     BNE .skipL099
+.condpart1
+ jmp .condpart2
+.skipL099
+	LDA r016
+	CMP #1
+     BNE .skip0OR
+.condpart2
 	LDA #0
-	STA PF0
-.L0109 ;;line 177;;  COLUBK = $04
-
-	LDA #$04
-	STA COLUBK
-.L0110 ;;line 178;;  CTRLPF = $21
-
-	LDA #$21
-	STA CTRLPF
-.L0111 ;;line 179;;  NUSIZ0 = 5
-
-	LDA #5
-	STA NUSIZ0
-.L0112 ;;line 180;;  top_colup0 = $02
-
-	LDA #$02
-	STA top_colup0
-.L0113 ;;line 181;;  bottom_colup0 = $02
-
-	LDA #$02
-	STA bottom_colup0
+	STA top_drag_state
+ jmp .game_won
+.skip0OR
 .
- ;;line 182;; 
+ ;;line 277;; 
 
 .
- ;;line 183;; 
+ ;;line 278;; 
 
-.L0114 ;;line 184;;  room_flags = room_flags  ^  $80
+.L0100 ;;line 279;;  room_flags = room_flags  ^  $80
 
 	LDA room_flags
 	EOR #$80
 	STA room_flags
 .
- ;;line 185;; 
+ ;;line 280;; 
 
 .
- ;;line 186;; 
+ ;;line 281;; 
 
-.L0115 ;;line 187;;  w_top_oldx = ballx  :  w_top_oldy = bally
-
-	LDA ballx
-	STA w_top_oldx
-	LDA bally
-	STA w_top_oldy
-.L0116 ;;line 188;;  w_bottom_oldx = p2_ballx  :  w_bottom_oldy = p2_bally
-
-	LDA p2_ballx
-	STA w_bottom_oldx
-	LDA p2_bally
-	STA w_bottom_oldy
-.
- ;;line 189;; 
-
-.
- ;;line 190;; 
-
-.L0117 ;;line 191;;  if top_drag_state{7} then goto _skip_top_move
-
-	BIT top_drag_state
-	BPL .skipL0117
-.condpart0
- jmp ._skip_top_move
-.skipL0117
-.L0118 ;;line 192;;  if joy0up then bally = bally  -  1
-
- lda #$10
- bit SWCHA
-	BNE .skipL0118
-.condpart1
-	DEC bally
-.skipL0118
-.L0119 ;;line 193;;  if joy0down then bally = bally  +  1
-
- lda #$20
- bit SWCHA
-	BNE .skipL0119
-.condpart2
-	INC bally
-.skipL0119
-.L0120 ;;line 194;;  if joy0left then ballx = ballx  -  1
-
- bit SWCHA
-	BVS .skipL0120
-.condpart3
-	DEC ballx
-.skipL0120
-.L0121 ;;line 195;;  if joy0right then ballx = ballx  +  1
-
- bit SWCHA
-	BMI .skipL0121
-.condpart4
-	INC ballx
-.skipL0121
-._skip_top_move
- ;;line 196;; _skip_top_move
-
-.
- ;;line 197;; 
-
-.
- ;;line 198;; 
-
-.L0122 ;;line 199;;  if bot_drag_state{7} then goto _skip_bot_move
-
-	BIT bot_drag_state
-	BPL .skipL0122
-.condpart5
- jmp ._skip_bot_move
-.skipL0122
-.L0123 ;;line 200;;  if joy1up then p2_bally = p2_bally  -  1
-
- lda #1
- bit SWCHA
-	BNE .skipL0123
-.condpart6
-	DEC p2_bally
-.skipL0123
-.L0124 ;;line 201;;  if joy1down then p2_bally = p2_bally  +  1
-
- lda #2
- bit SWCHA
-	BNE .skipL0124
-.condpart7
-	INC p2_bally
-.skipL0124
-.L0125 ;;line 202;;  if joy1left then p2_ballx = p2_ballx  -  1
-
- lda #4
- bit SWCHA
-	BNE .skipL0125
-.condpart8
-	DEC p2_ballx
-.skipL0125
-.L0126 ;;line 203;;  if joy1right then p2_ballx = p2_ballx  +  1
-
- lda #8
- bit SWCHA
-	BNE .skipL0126
-.condpart9
-	INC p2_ballx
-.skipL0126
-._skip_bot_move
- ;;line 204;; _skip_bot_move
-
-.
- ;;line 205;; 
-
-.L0127 ;;line 206;;  top_colupf = room_color[top_room]
-
-	LDX top_room
-	LDA room_color,x
-	STA top_colupf
-.L0128 ;;line 207;;  bottom_colupf = room_color[bottom_room]
-
-	LDX bottom_room
-	LDA room_color,x
-	STA bottom_colupf
-.
- ;;line 208;; 
-
-.
- ;;line 209;; 
-
-.L0129 ;;line 210;;  temp1 = top_carried_item
-
-	LDA top_carried_item
-	STA temp1
-.L0130 ;;line 211;;  if temp1  <>  255 then w_top_obj_room[temp1] = top_room  :  top_obj_x[temp1] = ballx  +  r_top_carry_off_x  :  top_obj_y[temp1] = bally  +  r_top_carry_off_y
-
-	LDA temp1
-	CMP #255
-     BEQ .skipL0130
-.condpart10
-	LDA top_room
-	LDX temp1
-	STA w_top_obj_room,x
-	LDA ballx
-	CLC
-	ADC r_top_carry_off_x
-	LDX temp1
-	STA top_obj_x,x
-	LDA bally
-	CLC
-	ADC r_top_carry_off_y
-	LDX temp1
-	STA top_obj_y,x
-.skipL0130
-.
- ;;line 212;; 
-
-.
- ;;line 213;; 
-
-.L0131 ;;line 214;;  temp1 = bot_carried_item
-
-	LDA bot_carried_item
-	STA temp1
-.L0132 ;;line 215;;  if temp1  <>  255 then w_bot_obj_room[temp1] = bottom_room  :  bot_obj_x[temp1] = p2_ballx  +  r_bot_carry_off_x  :  bot_obj_y[temp1] = p2_bally  +  r_bot_carry_off_y
-
-	LDA temp1
-	CMP #255
-     BEQ .skipL0132
-.condpart11
-	LDA bottom_room
-	LDX temp1
-	STA w_bot_obj_room,x
-	LDA p2_ballx
-	CLC
-	ADC r_bot_carry_off_x
-	LDX temp1
-	STA bot_obj_x,x
-	LDA p2_bally
-	CLC
-	ADC r_bot_carry_off_y
-	LDX temp1
-	STA bot_obj_y,x
-.skipL0132
-.
- ;;line 216;; 
-
-.
- ;;line 217;; 
-
-.L0133 ;;line 218;;  gosub run_flicker_logic bank2
+.L0101 ;;line 282;;  gosub run_flicker_logic bank2
 
  sta temp7
- lda #>(ret_point3-1)
+ lda #>(ret_point1-1)
  pha
- lda #<(ret_point3-1)
+ lda #<(ret_point1-1)
  pha
  lda #>(.run_flicker_logic-1)
  pha
@@ -693,16 +794,134 @@ ret_point2
  pha
  ldx #2
  jmp BS_jsr
-ret_point3
+ret_point1
 .
- ;;line 219;; 
+ ;;line 283;; 
 
-.L0134 ;;line 220;;  drawscreen
+._draw_now
+ ;;line 284;; _draw_now
+
+.
+ ;;line 285;; 
+
+.L0102 ;;line 286;;  PF0 = 0
+
+	LDA #0
+	STA PF0
+.L0103 ;;line 287;;  top_colubk = $06
+
+	LDA #$06
+	STA top_colubk
+.L0104 ;;line 288;;  COLUBK = $06
+
+	LDA #$06
+	STA COLUBK
+.L0105 ;;line 289;;  top_colupf = room_color[top_room]
+
+	LDX top_room
+	LDA room_color,x
+	STA top_colupf
+.L0106 ;;line 290;;  bottom_colupf = room_color[bottom_room]
+
+	LDX bottom_room
+	LDA room_color,x
+	STA bottom_colupf
+.
+ ;;line 291;; 
+
+.L0107 ;;line 292;;  top_colup0 = $02
+
+	LDA #$02
+	STA top_colup0
+.L0108 ;;line 293;;  player0color = $02
+
+	LDA #$02
+	STA player0color
+.L0109 ;;line 294;;  bottom_colup0 = $02
+
+	LDA #$02
+	STA bottom_colup0
+.L0110 ;;line 295;;  NUSIZ0 = 5
+
+	LDA #5
+	STA NUSIZ0
+.L0111 ;;line 296;;  CTRLPF = $21
+
+	LDA #$21
+	STA CTRLPF
+.
+ ;;line 297;; 
+
+.L0112 ;;line 298;;  if !room_flags{2} then goto _skip_top_torch
+
+	LDA room_flags
+	AND #4
+	BNE .skipL0112
+.condpart3
+ jmp ._skip_top_torch
+.skipL0112
+.L0113 ;;line 299;;  top_colup0 = $28
+
+	LDA #$28
+	STA top_colup0
+.L0114 ;;line 300;;  player0color = $28
+
+	LDA #$28
+	STA player0color
+.L0115 ;;line 301;;  NUSIZ0 = 7
+
+	LDA #7
+	STA NUSIZ0
+.L0116 ;;line 302;;  CTRLPF = $25
+
+	LDA #$25
+	STA CTRLPF
+._skip_top_torch
+ ;;line 303;; _skip_top_torch
+
+.
+ ;;line 304;; 
+
+.L0117 ;;line 305;;  if room_flags{3} then bottom_colup0 = $28
+
+	LDA room_flags
+	AND #8
+	BEQ .skipL0117
+.condpart4
+	LDA #$28
+	STA bottom_colup0
+.skipL0117
+.
+ ;;line 306;; 
+
+.L0118 ;;line 307;;  asm
+
+ lda room_flags
+
+ and #8
+
+ lsr
+
+ tax
+
+ ora #$21
+
+ sta w_bottom_ctrlpf
+
+ txa
+
+ lsr
+
+ ora #5
+
+ sta bot_nusiz0
+
+.L0119 ;;line 319;;  drawscreen
 
  sta temp7
- lda #>(ret_point4-1)
+ lda #>(ret_point2-1)
  pha
- lda #<(ret_point4-1)
+ lda #<(ret_point2-1)
  pha
  lda #>(drawscreen-1)
  pha
@@ -714,28 +933,36 @@ ret_point3
  pha
  ldx #4
  jmp BS_jsr
-ret_point4
+ret_point2
 .
- ;;line 221;; 
+ ;;line 320;; 
 
 .
- ;;line 222;; 
+ ;;line 321;; 
 
 .
- ;;line 223;; 
+ ;;line 322;; 
 
 .
- ;;line 224;; 
+ ;;line 323;; 
 
-.L0135 ;;line 225;;  if top_cxp0fb{6} then gosub gate_collide_top bank3
+.L0120 ;;line 324;;  temp5 = 0
+
+	LDA #0
+	STA temp5
+.L0121 ;;line 325;;  if top_cxp0fb{6}  &&  !room_flags{2} then gosub gate_collide_top bank4
 
 	BIT top_cxp0fb
-	BVC .skipL0135
-.condpart12
+	BVC .skipL0121
+.condpart5
+	LDA room_flags
+	AND #4
+	BNE .skip5then
+.condpart6
  sta temp7
- lda #>(ret_point5-1)
+ lda #>(ret_point3-1)
  pha
- lda #<(ret_point5-1)
+ lda #<(ret_point3-1)
  pha
  lda #>(.gate_collide_top-1)
  pha
@@ -745,36 +972,68 @@ ret_point4
  pha
  txa
  pha
- ldx #3
+ ldx #4
  jmp BS_jsr
-ret_point5
-.skipL0135
-.L0136 ;;line 226;;  if top_cxblpf{7}  &&  !top_drag_state{7} then ballx = r_top_oldx  :  bally = r_top_oldy
+ret_point3
+.skip5then
+.skipL0121
+.L0122 ;;line 326;;  if temp5  <>  0 then goto _skip_top_pf_check
+
+	LDA temp5
+	CMP #0
+     BEQ .skipL0122
+.condpart7
+ jmp ._skip_top_pf_check
+.skipL0122
+.L0123 ;;line 327;;  if top_cxblpf{7}  &&  !top_drag_state{7} then gosub bridge_pf_check_top bank4
 
 	BIT top_cxblpf
-	BPL .skipL0136
-.condpart13
+	BPL .skipL0123
+.condpart8
 	BIT top_drag_state
-	BMI .skip13then
-.condpart14
-	LDA r_top_oldx
-	STA ballx
-	LDA r_top_oldy
-	STA bally
-.skip13then
-.skipL0136
-.
- ;;line 227;; 
+	BMI .skip8then
+.condpart9
+ sta temp7
+ lda #>(ret_point4-1)
+ pha
+ lda #<(ret_point4-1)
+ pha
+ lda #>(.bridge_pf_check_top-1)
+ pha
+ lda #<(.bridge_pf_check_top-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #4
+ jmp BS_jsr
+ret_point4
+.skip8then
+.skipL0123
+._skip_top_pf_check
+ ;;line 328;; _skip_top_pf_check
 
-.L0137 ;;line 228;;  if collision(player0,ball) then gosub gate_collide_bot bank3
+.
+ ;;line 329;; 
+
+.L0124 ;;line 330;;  temp6 = 0
+
+	LDA #0
+	STA temp6
+.L0125 ;;line 331;;  if collision(player0,ball)  &&  !room_flags{3} then gosub gate_collide_bot bank4
 
 	bit 	CXP0FB
-	BVC .skipL0137
-.condpart15
+	BVC .skipL0125
+.condpart10
+	LDA room_flags
+	AND #8
+	BNE .skip10then
+.condpart11
  sta temp7
- lda #>(ret_point6-1)
+ lda #>(ret_point5-1)
  pha
- lda #<(ret_point6-1)
+ lda #<(ret_point5-1)
  pha
  lda #>(.gate_collide_bot-1)
  pha
@@ -784,158 +1043,368 @@ ret_point5
  pha
  txa
  pha
- ldx #3
+ ldx #4
  jmp BS_jsr
-ret_point6
-.skipL0137
-.L0138 ;;line 229;;  if collision(ball,playfield)  &&  !bot_drag_state{7} then p2_ballx = r_bottom_oldx  :  p2_bally = r_bottom_oldy
+ret_point5
+.skip10then
+.skipL0125
+.L0126 ;;line 332;;  if temp6  <>  0 then goto _skip_bot_pf_check
+
+	LDA temp6
+	CMP #0
+     BEQ .skipL0126
+.condpart12
+ jmp ._skip_bot_pf_check
+.skipL0126
+.L0127 ;;line 333;;  if collision(ball,playfield)  &&  !bot_drag_state{7} then gosub bridge_pf_check_bot bank4
 
 	bit 	CXBLPF
-	BPL .skipL0138
-.condpart16
+	BPL .skipL0127
+.condpart13
 	BIT bot_drag_state
-	BMI .skip16then
-.condpart17
-	LDA r_bottom_oldx
-	STA p2_ballx
-	LDA r_bottom_oldy
-	STA p2_bally
-.skip16then
-.skipL0138
-.
- ;;line 230;; 
-
-.
- ;;line 231;; 
-
-.
- ;;line 232;; 
-
-.
- ;;line 233;; 
-
-.
- ;;line 234;; 
-
-.L0139 ;;line 235;;  if !room_flags{7} then goto _even_frame_logic
-
-	BIT room_flags
-	BMI .skipL0139
-.condpart18
- jmp ._even_frame_logic
-.skipL0139
-.L0140 ;;line 236;;  goto _odd_frame_logic
-
- jmp ._odd_frame_logic
-.
- ;;line 237;; 
-
-._even_frame_logic
- ;;line 238;; _even_frame_logic
-
-.
- ;;line 239;; 
-
-.L0141 ;;line 240;;  if bally  <  32  ||  bally  >  44 then gosub castle_transitions_top bank3
-
-	LDA bally
-	CMP #32
-     BCS .skipL0141
-.condpart19
- jmp .condpart20
-.skipL0141
-	LDA #44
-	CMP bally
-     BCS .skip2OR
-.condpart20
+	BMI .skip13then
+.condpart14
  sta temp7
- lda #>(ret_point7-1)
+ lda #>(ret_point6-1)
  pha
- lda #<(ret_point7-1)
+ lda #<(ret_point6-1)
  pha
- lda #>(.castle_transitions_top-1)
+ lda #>(.bridge_pf_check_bot-1)
  pha
- lda #<(.castle_transitions_top-1)
+ lda #<(.bridge_pf_check_bot-1)
  pha
  lda temp7
  pha
  txa
  pha
- ldx #3
+ ldx #4
+ jmp BS_jsr
+ret_point6
+.skip13then
+.skipL0127
+._skip_bot_pf_check
+ ;;line 334;; _skip_bot_pf_check
+
+.
+ ;;line 335;; 
+
+.
+ ;;line 336;; 
+
+.L0128 ;;line 337;;  if temp5 = 0 then w_top_oldx = ballx  :  w_top_oldy = bally
+
+	LDA temp5
+	CMP #0
+     BNE .skipL0128
+.condpart15
+	LDA ballx
+	STA w_top_oldx
+	LDA bally
+	STA w_top_oldy
+.skipL0128
+.L0129 ;;line 338;;  if temp6 = 0 then w_bottom_oldx = p2_ballx  :  w_bottom_oldy = p2_bally
+
+	LDA temp6
+	CMP #0
+     BNE .skipL0129
+.condpart16
+	LDA p2_ballx
+	STA w_bottom_oldx
+	LDA p2_bally
+	STA w_bottom_oldy
+.skipL0129
+.
+ ;;line 339;; 
+
+.
+ ;;line 340;; 
+
+.L0130 ;;line 341;;  asm
+
+   lda room_flags
+
+   bmi .odd_frame_x
+
+
+
+.even_frame_y
+
+   
+
+   lda top_drag_state
+
+   bmi .skip_ty
+
+   lda SWCHA
+
+   and #$30
+
+   cmp #$20       
+
+   beq .t_up
+
+   cmp #$10       
+
+   bne .skip_ty
+
+   inc bally
+
+   inc bally
+
+   jmp .skip_ty
+
+.t_up
+
+   dec bally
+
+   dec bally
+
+.skip_ty
+
+
+
+   
+
+   lda bot_drag_state
+
+   bmi .joy_done
+
+   lda SWCHA
+
+   and #$03
+
+   cmp #$02       
+
+   beq .b_up
+
+   cmp #$01       
+
+   bne .joy_done
+
+   inc p2_bally
+
+   inc p2_bally
+
+   jmp .joy_done
+
+.b_up
+
+   dec p2_bally
+
+   dec p2_bally
+
+   jmp .joy_done
+
+
+
+.odd_frame_x
+
+   
+
+   lda top_drag_state
+
+   bmi .skip_tx
+
+   lda SWCHA
+
+   and #$C0
+
+   cmp #$80       
+
+   beq .t_left
+
+   cmp #$40       
+
+   bne .skip_tx
+
+   inc ballx
+
+   inc ballx
+
+   jmp .skip_tx
+
+.t_left
+
+   dec ballx
+
+   dec ballx
+
+.skip_tx
+
+
+
+   
+
+   lda bot_drag_state
+
+   bmi .joy_done
+
+   lda SWCHA
+
+   and #$0C
+
+   cmp #$08       
+
+   beq .b_left
+
+   cmp #$04       
+
+   bne .joy_done
+
+   inc p2_ballx
+
+   inc p2_ballx
+
+   jmp .joy_done
+
+.b_left
+
+   dec p2_ballx
+
+   dec p2_ballx
+
+.joy_done
+
+.
+ ;;line 415;; 
+
+.
+ ;;line 416;; 
+
+.
+ ;;line 417;; 
+
+.
+ ;;line 418;; 
+
+.
+ ;;line 419;; 
+
+.
+ ;;line 420;; 
+
+.L0131 ;;line 421;;  if !room_flags{7} then goto _even_frame_logic
+
+	BIT room_flags
+	BMI .skipL0131
+.condpart17
+ jmp ._even_frame_logic
+.skipL0131
+.L0132 ;;line 422;;  goto _odd_frame_logic
+
+ jmp ._odd_frame_logic
+.
+ ;;line 423;; 
+
+._even_frame_logic
+ ;;line 424;; _even_frame_logic
+
+.
+ ;;line 425;; 
+
+.L0133 ;;line 426;;  if top_drag_state{7} then gosub update_top_dragons bank2  :  goto main_loop
+
+	BIT top_drag_state
+	BPL .skipL0133
+.condpart18
+ sta temp7
+ lda #>(ret_point7-1)
+ pha
+ lda #<(ret_point7-1)
+ pha
+ lda #>(.update_top_dragons-1)
+ pha
+ lda #<(.update_top_dragons-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #2
  jmp BS_jsr
 ret_point7
-.skip2OR
+ jmp .main_loop
+.skipL0133
 .
- ;;line 241;; 
+ ;;line 427;; 
 
-.L0142 ;;line 242;;  if bally  <  3 then bally = 44  :  w_top_oldy = 44  :  top_room = move_north[top_room]  :  room_flags{0} = 1
+.L0134 ;;line 428;;  if bally  <  32  ||  bally  >  46 then gosub castle_transitions_top
 
 	LDA bally
-	CMP #3
-     BCS .skipL0142
-.condpart21
-	LDA #44
-	STA bally
-	STA w_top_oldy
-	LDX top_room
-	LDA move_north,x
-	STA top_room
-	LDA room_flags
-	ORA #1
-	STA room_flags
-.skipL0142
-.L0143 ;;line 243;;  if bally  >  44 then bally = 3  :  w_top_oldy = 3  :  top_room = move_south[top_room]  :  room_flags{0} = 1
-
-	LDA #44
+	CMP #32
+     BCS .skipL0134
+.condpart19
+ jmp .condpart20
+.skipL0134
+	LDA #46
 	CMP bally
-     BCS .skipL0143
-.condpart22
-	LDA #3
-	STA bally
-	STA w_top_oldy
-	LDX top_room
-	LDA move_south,x
-	STA top_room
+     BCS .skip5OR
+.condpart20
+ jsr .castle_transitions_top
+.skip5OR
+.L0135 ;;line 429;;  if room_flags{0} then room_flags{0} = 0  :  goto _top_room_changed
+
 	LDA room_flags
-	ORA #1
+	LSR
+	BCC .skipL0135
+.condpart21
+	LDA room_flags
+	AND #254
 	STA room_flags
-.skipL0143
-.L0144 ;;line 244;;  if ballx  <  17 then ballx = 139  :  w_top_oldx = 139  :  top_room = move_west[top_room]  :  room_flags{0} = 1
+ jmp ._top_room_changed
+.skipL0135
+.
+ ;;line 430;; 
+
+.
+ ;;line 431;; 
+
+.L0136 ;;line 432;;  if ballx  <  15 then ballx = 139  :  top_room = move_west[top_room]  :  goto _t_x_adj
 
 	LDA ballx
-	CMP #17
-     BCS .skipL0144
-.condpart23
+	CMP #15
+     BCS .skipL0136
+.condpart22
 	LDA #139
 	STA ballx
-	STA w_top_oldx
 	LDX top_room
 	LDA move_west,x
 	STA top_room
-	LDA room_flags
-	ORA #1
-	STA room_flags
-.skipL0144
-.L0145 ;;line 245;;  if ballx  >  139 then ballx = 17  :  w_top_oldx = 17  :  top_room = move_east[top_room]  :  room_flags{0} = 1
+ jmp ._t_x_adj
+.skipL0136
+.L0137 ;;line 433;;  if ballx  >  141 then ballx = 17  :  top_room = move_east[top_room]  :  goto _t_x_adj
 
-	LDA #139
+	LDA #141
 	CMP ballx
-     BCS .skipL0145
-.condpart24
+     BCS .skipL0137
+.condpart23
 	LDA #17
 	STA ballx
-	STA w_top_oldx
 	LDX top_room
 	LDA move_east,x
 	STA top_room
-	LDA room_flags
-	ORA #1
-	STA room_flags
-.skipL0145
-.
- ;;line 246;; 
+ jmp ._t_x_adj
+.skipL0137
+.L0138 ;;line 434;;  if bally  <  2 then goto _t_go_north
 
-.L0146 ;;line 247;;  gosub update_top_dragons bank2
+	LDA bally
+	CMP #2
+     BCS .skipL0138
+.condpart24
+ jmp ._t_go_north
+.skipL0138
+.L0139 ;;line 435;;  if bally  >  46 then goto _t_go_south
+
+	LDA #46
+	CMP bally
+     BCS .skipL0139
+.condpart25
+ jmp ._t_go_south
+.skipL0139
+.
+ ;;line 436;; 
+
+.L0140 ;;line 437;;  gosub update_top_dragons bank2
 
  sta temp7
  lda #>(ret_point8-1)
@@ -953,38 +1422,166 @@ ret_point7
  ldx #2
  jmp BS_jsr
 ret_point8
-.L0147 ;;line 248;;  goto main_loop
+.L0141 ;;line 438;;  goto main_loop
 
  jmp .main_loop
 .
- ;;line 249;; 
+ ;;line 439;; 
 
-._odd_frame_logic
- ;;line 250;; _odd_frame_logic
+._t_go_north
+ ;;line 440;; _t_go_north
 
+.L0142 ;;line 441;;  asm
+
+   ldx top_room
+
+   lda move_north,x
+
+   sta temp6
+
+   jsr check_g1_temp6
+
+   
+
+   lda r_top_obj_room+6
+
+   cmp top_room
+
+   bne .t_n_done
+
+   lda top_obj_y+6
+
+   cmp #8
+
+   bcs .t_n_done
+
+   lda #53
+
+   sta top_obj_y+6
+
+   lda temp6
+
+   sta w_top_obj_room+6
+
+.t_n_done
+
+   lda #44
+
+   sta bally
+
+   lda temp6
+
+   sta top_room
+
+.L0143 ;;line 463;;  goto _t_y_adj
+
+ jmp ._t_y_adj
 .
- ;;line 251;; 
+ ;;line 464;; 
 
-.L0148 ;;line 252;;  if p2_bally  <  31  ||  p2_bally  >  45 then gosub castle_transitions_bot bank3
+._t_go_south
+ ;;line 465;; _t_go_south
 
-	LDA p2_bally
-	CMP #31
-     BCS .skipL0148
-.condpart25
- jmp .condpart26
-.skipL0148
-	LDA #45
-	CMP p2_bally
-     BCS .skip3OR
-.condpart26
+.L0144 ;;line 466;;  asm
+
+   ldx top_room
+
+   lda move_south,x
+
+   sta temp6
+
+   jsr check_g1_temp6
+
+   
+
+   lda r_top_obj_room+6
+
+   cmp top_room
+
+   bne .t_s_done
+
+   lda top_obj_y+6
+
+   cmp #44
+
+   bcc .t_s_done
+
+   lda #5
+
+   sta top_obj_y+6
+
+   lda temp6
+
+   sta w_top_obj_room+6
+
+.t_s_done
+
+   lda #3
+
+   sta bally
+
+   lda temp6
+
+   sta top_room
+
+.L0145 ;;line 488;;  goto _t_y_adj
+
+ jmp ._t_y_adj
+.
+ ;;line 489;; 
+
+._t_x_adj
+ ;;line 490;; _t_x_adj
+
+.L0146 ;;line 491;;  bally = r_top_oldy  :  goto _top_room_changed
+
+	LDA r_top_oldy
+	STA bally
+ jmp ._top_room_changed
+._t_y_adj
+ ;;line 492;; _t_y_adj
+
+.L0147 ;;line 493;;  ballx = r_top_oldx
+
+	LDA r_top_oldx
+	STA ballx
+.
+ ;;line 494;; 
+
+._top_room_changed
+ ;;line 495;; _top_room_changed
+
+.L0148 ;;line 496;;  w_top_oldx = ballx  :  w_top_oldy = bally
+
+	LDA ballx
+	STA w_top_oldx
+	LDA bally
+	STA w_top_oldy
+.L0149 ;;line 497;;  asm
+
+   lda top_room
+
+   sta temp6
+
+   jsr check_g1_temp6
+
+   lda temp6
+
+   sta top_room
+
+.L0150 ;;line 504;;  gosub load_top_room
+
+ jsr .load_top_room
+.L0151 ;;line 505;;  gosub check_gates bank3
+
  sta temp7
  lda #>(ret_point9-1)
  pha
  lda #<(ret_point9-1)
  pha
- lda #>(.castle_transitions_bot-1)
+ lda #>(.check_gates-1)
  pha
- lda #<(.castle_transitions_bot-1)
+ lda #<(.check_gates-1)
  pha
  lda temp7
  pha
@@ -993,79 +1590,69 @@ ret_point8
  ldx #3
  jmp BS_jsr
 ret_point9
-.skip3OR
 .
- ;;line 253;; 
+ ;;line 506;; 
 
-.L0149 ;;line 254;;  if p2_bally  <  3 then p2_bally = 45  :  w_bottom_oldy = 45  :  bottom_room = move_north[bottom_room]  :  room_flags{1} = 1
-
-	LDA p2_bally
-	CMP #3
-     BCS .skipL0149
-.condpart27
-	LDA #45
-	STA p2_bally
-	STA w_bottom_oldy
-	LDX bottom_room
-	LDA move_north,x
-	STA bottom_room
-	LDA room_flags
-	ORA #2
-	STA room_flags
-.skipL0149
-.L0150 ;;line 255;;  if p2_bally  >  45 then p2_bally = 3  :  w_bottom_oldy = 3  :  bottom_room = move_south[bottom_room]  :  room_flags{1} = 1
-
-	LDA #45
-	CMP p2_bally
-     BCS .skipL0150
-.condpart28
-	LDA #3
-	STA p2_bally
-	STA w_bottom_oldy
-	LDX bottom_room
-	LDA move_south,x
-	STA bottom_room
-	LDA room_flags
-	ORA #2
-	STA room_flags
-.skipL0150
-.L0151 ;;line 256;;  if p2_ballx  <  17 then p2_ballx = 139  :  w_bottom_oldx = 139  :  bottom_room = move_west[bottom_room]  :  room_flags{1} = 1
-
-	LDA p2_ballx
-	CMP #17
-     BCS .skipL0151
-.condpart29
-	LDA #139
-	STA p2_ballx
-	STA w_bottom_oldx
-	LDX bottom_room
-	LDA move_west,x
-	STA bottom_room
-	LDA room_flags
-	ORA #2
-	STA room_flags
-.skipL0151
-.L0152 ;;line 257;;  if p2_ballx  >  139 then p2_ballx = 17  :  w_bottom_oldx = 17  :  bottom_room = move_east[bottom_room]  :  room_flags{1} = 1
-
-	LDA #139
-	CMP p2_ballx
-     BCS .skipL0152
-.condpart30
-	LDA #17
-	STA p2_ballx
-	STA w_bottom_oldx
-	LDX bottom_room
-	LDA move_east,x
-	STA bottom_room
-	LDA room_flags
-	ORA #2
-	STA room_flags
-.skipL0152
 .
- ;;line 258;; 
+ ;;line 507;; 
 
-.L0153 ;;line 259;;  gosub update_bot_dragons bank2
+.L0152 ;;line 508;;  asm
 
+   lda #255
+
+   sta top_player1y
+
+   sta flicker_idx
+
+   ldx top_carried_item
+
+   bmi .done_top_tr_sync
+
+   stx flicker_idx
+
+   lda top_room
+
+   sta w_top_obj_room,x
+
+   lda ballx
+
+   clc
+
+   adc r_top_carry_off_x
+
+   sta top_obj_x,x
+
+   sta top_player1x
+
+   lda bally
+
+   clc
+
+   adc r_top_carry_off_y
+
+   sta top_obj_y,x
+
+   sta top_player1y
+
+.done_top_tr_sync
+
+.L0153 ;;line 529;;  goto _draw_now
+
+ jmp ._draw_now
+.
+ ;;line 530;; 
+
+._odd_frame_logic
+ ;;line 531;; _odd_frame_logic
+
+.
+ ;;line 532;; 
+
+.L0154 ;;line 533;;  if bot_drag_state{7} then gosub update_bot_dragons bank2  :  goto main_loop
+
+	BIT bot_drag_state
+	BPL .skipL0154
+.condpart26
  sta temp7
  lda #>(ret_point10-1)
  pha
@@ -1082,118 +1669,957 @@ ret_point9
  ldx #2
  jmp BS_jsr
 ret_point10
-.L0154 ;;line 260;;  goto main_loop
+ jmp .main_loop
+.skipL0154
+.
+ ;;line 534;; 
+
+.L0155 ;;line 535;;  if p2_bally  <  31  ||  p2_bally  >  47 then gosub castle_transitions_bot
+
+	LDA p2_bally
+	CMP #31
+     BCS .skipL0155
+.condpart27
+ jmp .condpart28
+.skipL0155
+	LDA #47
+	CMP p2_bally
+     BCS .skip6OR
+.condpart28
+ jsr .castle_transitions_bot
+.skip6OR
+.L0156 ;;line 536;;  if room_flags{1} then room_flags{1} = 0  :  goto _bot_room_changed
+
+	LDA room_flags
+	AND #2
+	BEQ .skipL0156
+.condpart29
+	LDA room_flags
+	AND #253
+	STA room_flags
+ jmp ._bot_room_changed
+.skipL0156
+.
+ ;;line 537;; 
+
+.
+ ;;line 538;; 
+
+.L0157 ;;line 539;;  if p2_ballx  <  15 then p2_ballx = 139  :  bottom_room = move_west[bottom_room]  :  goto _b_x_adj
+
+	LDA p2_ballx
+	CMP #15
+     BCS .skipL0157
+.condpart30
+	LDA #139
+	STA p2_ballx
+	LDX bottom_room
+	LDA move_west,x
+	STA bottom_room
+ jmp ._b_x_adj
+.skipL0157
+.L0158 ;;line 540;;  if p2_ballx  >  141 then p2_ballx = 17  :  bottom_room = move_east[bottom_room]  :  goto _b_x_adj
+
+	LDA #141
+	CMP p2_ballx
+     BCS .skipL0158
+.condpart31
+	LDA #17
+	STA p2_ballx
+	LDX bottom_room
+	LDA move_east,x
+	STA bottom_room
+ jmp ._b_x_adj
+.skipL0158
+.L0159 ;;line 541;;  if p2_bally  <  2 then goto _b_go_north
+
+	LDA p2_bally
+	CMP #2
+     BCS .skipL0159
+.condpart32
+ jmp ._b_go_north
+.skipL0159
+.L0160 ;;line 542;;  if p2_bally  >  47 then goto _b_go_south
+
+	LDA #47
+	CMP p2_bally
+     BCS .skipL0160
+.condpart33
+ jmp ._b_go_south
+.skipL0160
+.
+ ;;line 543;; 
+
+.L0161 ;;line 544;;  gosub update_bot_dragons bank2
+
+ sta temp7
+ lda #>(ret_point11-1)
+ pha
+ lda #<(ret_point11-1)
+ pha
+ lda #>(.update_bot_dragons-1)
+ pha
+ lda #<(.update_bot_dragons-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #2
+ jmp BS_jsr
+ret_point11
+.L0162 ;;line 545;;  goto main_loop
 
  jmp .main_loop
 .
- ;;line 261;; 
+ ;;line 546;; 
+
+._b_go_north
+ ;;line 547;; _b_go_north
+
+.L0163 ;;line 548;;  asm
+
+   ldx bottom_room
+
+   lda move_north,x
+
+   sta temp6
+
+   jsr check_g1_temp6
+
+   
+
+   lda r_bot_obj_room+6
+
+   cmp bottom_room
+
+   bne .b_n_done
+
+   lda bot_obj_y+6
+
+   cmp #8
+
+   bcs .b_n_done
+
+   lda #53
+
+   sta bot_obj_y+6
+
+   lda temp6
+
+   sta w_bot_obj_room+6
+
+.b_n_done
+
+   lda #45
+
+   sta p2_bally
+
+   lda temp6
+
+   sta bottom_room
+
+.L0164 ;;line 570;;  goto _b_y_adj
+
+ jmp ._b_y_adj
+.
+ ;;line 571;; 
+
+._b_go_south
+ ;;line 572;; _b_go_south
+
+.L0165 ;;line 573;;  asm
+
+   ldx bottom_room
+
+   lda move_south,x
+
+   sta temp6
+
+   jsr check_g1_temp6
+
+   
+
+   lda r_bot_obj_room+6
+
+   cmp bottom_room
+
+   bne .b_s_done
+
+   lda bot_obj_y+6
+
+   cmp #44
+
+   bcc .b_s_done
+
+   lda #5
+
+   sta bot_obj_y+6
+
+   lda temp6
+
+   sta w_bot_obj_room+6
+
+.b_s_done
+
+   lda #3
+
+   sta p2_bally
+
+   lda temp6
+
+   sta bottom_room
+
+.L0166 ;;line 595;;  goto _b_y_adj
+
+ jmp ._b_y_adj
+.
+ ;;line 596;; 
+
+._b_x_adj
+ ;;line 597;; _b_x_adj
+
+.L0167 ;;line 598;;  p2_bally = r_bottom_oldy  :  goto _bot_room_changed
+
+	LDA r_bottom_oldy
+	STA p2_bally
+ jmp ._bot_room_changed
+._b_y_adj
+ ;;line 599;; _b_y_adj
+
+.L0168 ;;line 600;;  p2_ballx = r_bottom_oldx
+
+	LDA r_bottom_oldx
+	STA p2_ballx
+.
+ ;;line 601;; 
+
+._bot_room_changed
+ ;;line 602;; _bot_room_changed
+
+.L0169 ;;line 603;;  w_bottom_oldx = p2_ballx  :  w_bottom_oldy = p2_bally
+
+	LDA p2_ballx
+	STA w_bottom_oldx
+	LDA p2_bally
+	STA w_bottom_oldy
+.L0170 ;;line 604;;  asm
+
+   lda bottom_room
+
+   sta temp6
+
+   jsr check_g1_temp6
+
+   lda temp6
+
+   sta bottom_room
+
+.L0171 ;;line 611;;  gosub load_bottom_room
+
+ jsr .load_bottom_room
+.L0172 ;;line 612;;  gosub check_gates bank3
+
+ sta temp7
+ lda #>(ret_point12-1)
+ pha
+ lda #<(ret_point12-1)
+ pha
+ lda #>(.check_gates-1)
+ pha
+ lda #<(.check_gates-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #3
+ jmp BS_jsr
+ret_point12
+.
+ ;;line 613;; 
 
 .
- ;;line 262;; 
+ ;;line 614;; 
+
+.L0173 ;;line 615;;  asm
+
+   lda #255
+
+   sta bottom_player1y
+
+   sta bot_flicker_idx
+
+   ldx bot_carried_item
+
+   bmi .done_bot_tr_sync
+
+   stx bot_flicker_idx
+
+   lda bottom_room
+
+   sta w_bot_obj_room,x
+
+   lda p2_ballx
+
+   clc
+
+   adc r_bot_carry_off_x
+
+   sta bot_obj_x,x
+
+   sta bottom_player1x
+
+   lda p2_bally
+
+   clc
+
+   adc r_bot_carry_off_y
+
+   sta bot_obj_y,x
+
+   sta bottom_player1y
+
+.done_bot_tr_sync
+
+.L0174 ;;line 636;;  goto _draw_now
+
+ jmp ._draw_now
+.
+ ;;line 637;; 
+
+.game_won
+ ;;line 638;; game_won
+
+.L0175 ;;line 639;;  PF0 = 0
+
+	LDA #0
+	STA PF0
+.L0176 ;;line 640;;  COLUBK = $06
+
+	LDA #$06
+	STA COLUBK
+.L0177 ;;line 641;;  CTRLPF = $21
+
+	LDA #$21
+	STA CTRLPF
+.L0178 ;;line 642;;  NUSIZ0 = 5
+
+	LDA #5
+	STA NUSIZ0
+.L0179 ;;line 643;;  if switchreset then reboot
+
+ lda #1
+ bit SWCHB
+	BNE .skipL0179
+.condpart34
+	JMP ($FFFC)
+.skipL0179
+.
+ ;;line 644;; 
 
 .
- ;;line 263;; 
+ ;;line 645;; 
+
+.L0180 ;;line 646;;  top_colupf = room_color[top_room]
+
+	LDX top_room
+	LDA room_color,x
+	STA top_colupf
+.L0181 ;;line 647;;  bottom_colupf = room_color[bottom_room]
+
+	LDX bottom_room
+	LDA room_color,x
+	STA bottom_colupf
+.L0182 ;;line 648;;  top_colup0 = $02
+
+	LDA #$02
+	STA top_colup0
+.L0183 ;;line 649;;  bottom_colup0 = $02
+
+	LDA #$02
+	STA bottom_colup0
+.
+ ;;line 650;; 
 
 .
- ;;line 264;; 
+ ;;line 651;; 
 
-.L0155 ;;line 265;;  data move_north
+.L0184 ;;line 652;;  bat_fedup = bat_fedup  +  2
 
-	JMP .skipL0155
+	LDA bat_fedup
+	CLC
+	ADC #2
+	STA bat_fedup
+.
+ ;;line 653;; 
+
+.
+ ;;line 654;; 
+
+.L0185 ;;line 655;;  if r005 = 1 then top_colupf = bat_fedup  :  top_colup0 = bat_fedup  +  $80
+
+	LDA r005
+	CMP #1
+     BNE .skipL0185
+.condpart35
+	LDA bat_fedup
+	STA top_colupf
+	CLC
+	ADC #$80
+	STA top_colup0
+.skipL0185
+.L0186 ;;line 656;;  if r016 = 1 then bottom_colupf = bat_fedup  :  bottom_colup0 = bat_fedup  +  $80
+
+	LDA r016
+	CMP #1
+     BNE .skipL0186
+.condpart36
+	LDA bat_fedup
+	STA bottom_colupf
+	CLC
+	ADC #$80
+	STA bottom_colup0
+.skipL0186
+.
+ ;;line 657;; 
+
+.
+ ;;line 658;; 
+
+.L0187 ;;line 659;;  gosub run_flicker_logic bank2
+
+ sta temp7
+ lda #>(ret_point13-1)
+ pha
+ lda #<(ret_point13-1)
+ pha
+ lda #>(.run_flicker_logic-1)
+ pha
+ lda #<(.run_flicker_logic-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #2
+ jmp BS_jsr
+ret_point13
+.L0188 ;;line 660;;  asm
+
+ lda room_flags
+
+ and #8
+
+ lsr
+
+ tax
+
+ ora #$21
+
+ sta w_bottom_ctrlpf
+
+ txa
+
+ lsr
+
+ ora #5
+
+ sta bot_nusiz0
+
+.L0189 ;;line 672;;  drawscreen
+
+ sta temp7
+ lda #>(ret_point14-1)
+ pha
+ lda #<(ret_point14-1)
+ pha
+ lda #>(drawscreen-1)
+ pha
+ lda #<(drawscreen-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #4
+ jmp BS_jsr
+ret_point14
+.L0190 ;;line 673;;  goto game_won
+
+ jmp .game_won
+.
+ ;;line 674;; 
+
+.L0191 ;;line 675;;  asm
+
+check_g1_temp6
+
+   lda gate_state
+
+   cmp #$40
+
+   bcs .cg1_done
+
+   
+
+   
+
+   lda temp6
+
+   cmp #25
+
+   bne .cg1_chk20
+
+   lda #22
+
+   sta temp6
+
+   rts
+
+   
+
+.cg1_chk20
+
+   
+
+   cmp #20
+
+   bne .cg1_chk11
+
+   lda #16
+
+   sta temp6
+
+   rts
+
+   
+
+.cg1_chk11
+
+   
+
+   cmp #11
+
+   bne .cg1_chk29
+
+   lda #28
+
+   sta temp6
+
+   rts
+
+   
+
+.cg1_chk29
+
+   
+
+   cmp #29
+
+   bne .cg1_chk18
+
+   lda #12
+
+   sta temp6
+
+   rts
+
+   
+
+.cg1_chk18
+
+   
+
+   cmp #18
+
+   bne .cg1_chk31
+
+   cpx #22        
+
+   bne .cg1_done
+
+   lda #16
+
+   sta temp6
+
+   rts
+
+   
+
+.cg1_chk31
+
+   
+
+   cmp #31
+
+   bne .cg1_done
+
+   cpx #28        
+
+   bne .cg1_done
+
+   lda #12
+
+   sta temp6
+
+   
+
+.cg1_done
+
+   rts
+
+.
+ ;;line 735;; 
+
+.
+ ;;line 736;; 
+
+.
+ ;;line 737;; 
+
+.
+ ;;line 738;; 
+
+.
+ ;;line 739;; 
+
+.castle_transitions_top
+ ;;line 740;; castle_transitions_top
+
+.L0192 ;;line 741;;  asm
+
+   lda ballx
+
+   sec
+
+   sbc #71
+
+   cmp #15
+
+   bcs .t_ct_done
+
+   lda bally
+
+   cmp #47
+
+   bcs .t_ct_south
+
+   
+
+   
+
+   lda top_room
+
+   cmp #2
+
+   beq .do_t_n
+
+   cmp #23
+
+   beq .do_t_n
+
+   cmp #13
+
+   bne .t_ct_done
+
+.do_t_n
+
+.L0193 ;;line 761;;  top_room = move_north[top_room]  :  ballx = 78  :  bally = 42  :  room_flags{0} = 1  :  return
+
+	LDX top_room
+	LDA move_north,x
+	STA top_room
+	LDA #78
+	STA ballx
+	LDA #42
+	STA bally
+	LDA room_flags
+	ORA #1
+	STA room_flags
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.L0194 ;;line 762;;  asm
+
+.t_ct_south
+
+   
+
+   lda top_room
+
+   cmp #1
+
+   beq .do_t_s
+
+   cmp #21
+
+   beq .do_t_s
+
+   cmp #12
+
+   bne .t_ct_done
+
+.do_t_s
+
+.L0195 ;;line 774;;  top_room = move_south[top_room]  :  ballx = 78  :  bally = 34  :  room_flags{0} = 1
+
+	LDX top_room
+	LDA move_south,x
+	STA top_room
+	LDA #78
+	STA ballx
+	LDA #34
+	STA bally
+	LDA room_flags
+	ORA #1
+	STA room_flags
+.L0196 ;;line 775;;  asm
+
+.t_ct_done
+
+.L0197 ;;line 778;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 779;; 
+
+.castle_transitions_bot
+ ;;line 780;; castle_transitions_bot
+
+.L0198 ;;line 781;;  asm
+
+   lda p2_ballx
+
+   sec
+
+   sbc #76
+
+   cmp #15
+
+   bcs .b_ct_done
+
+   lda p2_bally
+
+   cmp #48
+
+   bcs .b_ct_south
+
+   
+
+   
+
+   lda bottom_room
+
+   cmp #2
+
+   beq .do_b_n
+
+   cmp #23
+
+   beq .do_b_n
+
+   cmp #13
+
+   bne .b_ct_done
+
+.do_b_n
+
+.L0199 ;;line 801;;  bottom_room = move_north[bottom_room]  :  p2_ballx = 78  :  p2_bally = 42  :  room_flags{1} = 1  :  return
+
+	LDX bottom_room
+	LDA move_north,x
+	STA bottom_room
+	LDA #78
+	STA p2_ballx
+	LDA #42
+	STA p2_bally
+	LDA room_flags
+	ORA #2
+	STA room_flags
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.L0200 ;;line 802;;  asm
+
+.b_ct_south
+
+   
+
+   lda bottom_room
+
+   cmp #1
+
+   beq .do_b_s
+
+   cmp #21
+
+   beq .do_b_s
+
+   cmp #12
+
+   bne .b_ct_done
+
+.do_b_s
+
+.L0201 ;;line 814;;  bottom_room = move_south[bottom_room]  :  p2_ballx = 78  :  p2_bally = 33  :  room_flags{1} = 1
+
+	LDX bottom_room
+	LDA move_south,x
+	STA bottom_room
+	LDA #78
+	STA p2_ballx
+	LDA #33
+	STA p2_bally
+	LDA room_flags
+	ORA #2
+	STA room_flags
+.L0202 ;;line 815;;  asm
+
+.b_ct_done
+
+.L0203 ;;line 818;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 819;; 
+
+.
+ ;;line 820;; 
+
+.
+ ;;line 821;; 
+
+.
+ ;;line 822;; 
+
+.
+ ;;line 823;; 
+
+.
+ ;;line 824;; 
+
+.L0204 ;;line 825;;  data move_north
+
+	JMP .skipL0204
 move_north
-	.byte  0,0,1,2,3,4,0,0,10,0,8,9,11,12,7,13
+	.byte  0,30,1,2,3,4,32,14,10,9,8,9,11,12,7
 
-	.byte  0,5,0,0,18,19,20,21,23,16,25,26,0,28,5
+	.byte  13,15,5,22,21,18,19,20,21,23,16,25,26,31,28
 
-.skipL0155
+	.byte  5,17,6,24
+
+.skipL0204
 .
- ;;line 269;; 
+ ;;line 830;; 
 
-.L0156 ;;line 270;;  data move_east
+.L0205 ;;line 831;;  data move_east
 
-	JMP .skipL0156
+	JMP .skipL0205
 move_east
-	.byte  0,0,0,6,7,3,5,4,9,10,11,8,0,0,15,16
+	.byte  0,1,2,6,7,3,5,4,9,10,11,8,12,13,15
 
-	.byte  14,14,19,18,21,0,0,0,27,26,25,29,0,24,0
+	.byte  16,14,14,19,18,21,20,22,23,27,26,25,29,28,24
 
-.skipL0156
+	.byte  30,31,32,33
+
+.skipL0205
 .
- ;;line 274;; 
+ ;;line 836;; 
 
-.L0157 ;;line 275;;  data move_south
+.L0206 ;;line 837;;  data move_south
 
-	JMP .skipL0157
+	JMP .skipL0206
 move_south
-	.byte  0,2,3,4,5,30,0,14,10,11,8,12,13,15,0,0
+	.byte  0,2,3,4,5,30,32,14,10,11,8,12,13,15,7
 
-	.byte  25,0,20,21,22,23,0,24,24,26,27,0,29,29,0
+	.byte  16,25,31,20,21,22,23,18,24,33,26,27,33,29,33
 
-.skipL0157
+	.byte  1,28,6,33
+
+.skipL0206
 .
- ;;line 279;; 
+ ;;line 842;; 
 
-.L0158 ;;line 280;;  data move_west
+.L0207 ;;line 843;;  data move_west
 
-	JMP .skipL0158
+	JMP .skipL0207
 move_west
-	.byte  0,0,0,5,7,6,3,4,11,8,9,10,0,0,16,14
+	.byte  0,1,2,5,7,6,3,4,11,8,9,10,12,13,16
 
-	.byte  15,16,19,18,21,0,0,0,29,26,25,24,0,27,0
+	.byte  14,15,16,19,18,21,20,22,23,29,26,25,24,28,27
 
-.skipL0158
+	.byte  30,31,32,33
+
+.skipL0207
 .
- ;;line 284;; 
+ ;;line 848;; 
 
-.L0159 ;;line 285;;  data room_shape
+.L0208 ;;line 849;;  data room_shape
 
-	JMP .skipL0159
+	JMP .skipL0208
 room_shape
 	.byte  0,5,19,0,1,3,4,2,20,21,22,23,18,19,6,6
 
 	.byte  7,6,13,16,14,17,15,19,12,8,9,10,5,12,15
 
-.skipL0159
+	.byte  24,24,24
+
+.skipL0208
 .
- ;;line 289;; 
+ ;;line 854;; 
 
-.L0160 ;;line 290;;  data room_color
+.L0209 ;;line 855;;  data room_color
 
-	JMP .skipL0160
+	JMP .skipL0209
 room_color
-	.byte  $00,$18,$18,$86,$86,$86,$86,$86,$38,$38,$38,$38,$46,$02,$64,$64
+	.byte  $00,$18,$18,$86,$86,$86,$86,$86,$06,$06,$06,$06,$46,$00,$64,$64
 
-	.byte  $64,$64,$38,$38,$38,$38,$38,$1A,$64,$38,$38,$38,$66,$A8,$86
+	.byte  $64,$64,$38,$38,$38,$38,$38,$0E,$64,$06,$06,$06,$66,$A8,$86
 
-.skipL0160
+	.byte  $86,$86,$86
+
+.skipL0209
 .
- ;;line 294;; 
-
-.
- ;;line 295;; 
-
-.
- ;;line 296;; 
+ ;;line 860;; 
 
 .
- ;;line 297;; 
+ ;;line 861;; 
+
+.
+ ;;line 862;; 
+
+.
+ ;;line 863;; 
 
 .load_top_room
- ;;line 298;; load_top_room
+ ;;line 864;; load_top_room
 
-.L0161 ;;line 299;;  temp1 = room_shape[top_room]
+.L0210 ;;line 865;;  asm
 
-	LDX top_room
-	LDA room_shape,x
-	STA temp1
-.L0162 ;;line 300;;  top_colupf = room_color[top_room]
+   ldy top_room
 
-	LDX top_room
-	LDA room_color,x
-	STA top_colupf
-.L0163 ;;line 301;;  asm
-
-   ldx temp1
+   ldx room_shape,y
 
    lda room_pointers_lo,x
 
@@ -1203,9 +2629,7 @@ room_color
 
    sta temp6
 
-   
-
-   ldy #(split_ram_offset - 1)  
+   ldy #47
 
 .loopTop
 
@@ -1215,30 +2639,40 @@ room_color
 
    dey
 
+   lda (temp5),y
+
+   sta playfield-128,y
+
+   dey
+
+   lda (temp5),y
+
+   sta playfield-128,y
+
+   dey
+
+   lda (temp5),y
+
+   sta playfield-128,y
+
+   dey
+
    bpl .loopTop
 
-.L0164 ;;line 315;;  return otherbank
+.L0211 ;;line 888;;  return otherbank
 
 	JMP BS_return
 .
- ;;line 316;; 
+ ;;line 889;; 
 
 .load_bottom_room
- ;;line 317;; load_bottom_room
+ ;;line 890;; load_bottom_room
 
-.L0165 ;;line 318;;  temp1 = room_shape[bottom_room]
+.L0212 ;;line 891;;  asm
 
-	LDX bottom_room
-	LDA room_shape,x
-	STA temp1
-.L0166 ;;line 319;;  bottom_colupf = room_color[bottom_room]
+   ldy bottom_room
 
-	LDX bottom_room
-	LDA room_color,x
-	STA bottom_colupf
-.L0167 ;;line 320;;  asm
-
-   ldx temp1
+   ldx room_shape,y
 
    lda room_pointers_lo,x
 
@@ -1248,42 +2682,58 @@ room_color
 
    sta temp6
 
-   
-
-   ldy #(split_ram_offset - 1)  
+   ldy #47
 
 .loopBot
 
    lda (temp5),y
 
-   sta playfield-128+split_ram_offset,y  
+   sta playfield-128+48,y
+
+   dey
+
+   lda (temp5),y
+
+   sta playfield-128+48,y
+
+   dey
+
+   lda (temp5),y
+
+   sta playfield-128+48,y
+
+   dey
+
+   lda (temp5),y
+
+   sta playfield-128+48,y
 
    dey
 
    bpl .loopBot
 
-.L0168 ;;line 334;;  return otherbank
+.L0213 ;;line 914;;  return otherbank
 
 	JMP BS_return
 .
- ;;line 335;; 
+ ;;line 915;; 
 
 .
- ;;line 336;; 
+ ;;line 916;; 
 
 .
- ;;line 337;; 
+ ;;line 917;; 
 
 .
- ;;line 338;; 
+ ;;line 918;; 
 
 .
- ;;line 339;; 
+ ;;line 919;; 
 
-.room_0
- ;;line 340;; room_0
+.
+ ;;line 920;; 
 
-.L0169 ;;line 341;;  playfield:
+.L0214 ;;line 921;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -1345,25 +2795,16 @@ pflabel0
 	sta playfield-128,x
 	dex
 	bpl pflabel0
-.L0170 ;;line 355;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 356;; 
+ ;;line 935;; 
 
 .
- ;;line 357;; 
+ ;;line 936;; 
 
-.room_1
- ;;line 358;; room_1
+.
+ ;;line 937;; 
 
-.L0171 ;;line 359;;  playfield:
+.L0215 ;;line 938;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -1425,25 +2866,16 @@ pflabel1
 	sta playfield-128,x
 	dex
 	bpl pflabel1
-.L0172 ;;line 373;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 374;; 
+ ;;line 952;; 
 
 .
- ;;line 375;; 
+ ;;line 953;; 
 
-.room_2
- ;;line 376;; room_2
+.
+ ;;line 954;; 
 
-.L0173 ;;line 377;;  playfield:
+.L0216 ;;line 955;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -1505,25 +2937,16 @@ pflabel2
 	sta playfield-128,x
 	dex
 	bpl pflabel2
-.L0174 ;;line 391;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 392;; 
+ ;;line 969;; 
 
 .
- ;;line 393;; 
+ ;;line 970;; 
 
-.room_3
- ;;line 394;; room_3
+.
+ ;;line 971;; 
 
-.L0175 ;;line 395;;  playfield:
+.L0217 ;;line 972;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -1536,37 +2959,37 @@ PF_data3
 	if (pfwidth>2)
 	.byte %11111111, %00001111
  endif
-	.byte %00000000, %00001100
+	.byte %00000000, %00000011
 	if (pfwidth>2)
-	.byte %00000000, %00001100
+	.byte %00000000, %00000011
  endif
-	.byte %00000000, %00001100
+	.byte %00000000, %00000011
 	if (pfwidth>2)
-	.byte %00000000, %00001100
+	.byte %00000000, %00000011
  endif
-	.byte %11001111, %00001111
+	.byte %11001111, %11110011
 	if (pfwidth>2)
-	.byte %11001111, %00001111
+	.byte %11001111, %11110011
  endif
-	.byte %11001111, %00001111
+	.byte %11001111, %11110011
 	if (pfwidth>2)
-	.byte %11001111, %00001111
+	.byte %11001111, %11110011
  endif
-	.byte %11000000, %00000000
+	.byte %11000000, %00110000
 	if (pfwidth>2)
-	.byte %11000000, %00000000
+	.byte %11000000, %00110000
  endif
-	.byte %11000000, %00000000
+	.byte %11000000, %00110000
 	if (pfwidth>2)
-	.byte %11000000, %00000000
+	.byte %11000000, %00110000
  endif
-	.byte %11111111, %11111111
+	.byte %11111111, %00111111
 	if (pfwidth>2)
-	.byte %11111111, %11111111
+	.byte %11111111, %00111111
  endif
-	.byte %11111111, %11111111
+	.byte %11111111, %00111111
 	if (pfwidth>2)
-	.byte %11111111, %11111111
+	.byte %11111111, %00111111
  endif
 	.byte %00001100, %00000000
 	if (pfwidth>2)
@@ -1585,25 +3008,16 @@ pflabel3
 	sta playfield-128,x
 	dex
 	bpl pflabel3
-.L0176 ;;line 409;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 410;; 
+ ;;line 986;; 
 
 .
- ;;line 411;; 
+ ;;line 987;; 
 
-.room_4
- ;;line 412;; room_4
+.
+ ;;line 988;; 
 
-.L0177 ;;line 413;;  playfield:
+.L0218 ;;line 989;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -1665,22 +3079,13 @@ pflabel4
 	sta playfield-128,x
 	dex
 	bpl pflabel4
-.L0178 ;;line 427;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 428;; 
+ ;;line 1003;; 
 
-.room_5
- ;;line 429;; room_5
+.
+ ;;line 1004;; 
 
-.L0179 ;;line 430;;  playfield:
+.L0219 ;;line 1005;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -1742,22 +3147,13 @@ pflabel5
 	sta playfield-128,x
 	dex
 	bpl pflabel5
-.L0180 ;;line 444;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 445;; 
+ ;;line 1019;; 
 
-.room_6
- ;;line 446;; room_6
+.
+ ;;line 1020;; 
 
-.L0181 ;;line 447;;  playfield:
+.L0220 ;;line 1021;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -1774,9 +3170,9 @@ PF_data6
 	if (pfwidth>2)
 	.byte %00000000, %00000000
  endif
-	.byte %00110000, %10000000
+	.byte %00000000, %00000000
 	if (pfwidth>2)
-	.byte %00110000, %10000000
+	.byte %00000000, %00000000
  endif
 	.byte %00110000, %10000000
 	if (pfwidth>2)
@@ -1819,25 +3215,16 @@ pflabel6
 	sta playfield-128,x
 	dex
 	bpl pflabel6
-.L0182 ;;line 461;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 462;; 
+ ;;line 1035;; 
 
 .
- ;;line 463;; 
+ ;;line 1036;; 
 
-.room_7
- ;;line 464;; room_7
+.
+ ;;line 1037;; 
 
-.L0183 ;;line 465;;  playfield:
+.L0221 ;;line 1038;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -1854,9 +3241,9 @@ PF_data7
 	if (pfwidth>2)
 	.byte %00000000, %00001010
  endif
-	.byte %00001000, %01000101
+	.byte %00000000, %00000101
 	if (pfwidth>2)
-	.byte %00000100, %10001010
+	.byte %00000000, %00001010
  endif
 	.byte %00001000, %01000101
 	if (pfwidth>2)
@@ -1899,25 +3286,16 @@ pflabel7
 	sta playfield-128,x
 	dex
 	bpl pflabel7
-.L0184 ;;line 479;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 480;; 
+ ;;line 1052;; 
 
 .
- ;;line 481;; 
+ ;;line 1053;; 
 
-.room_8
- ;;line 482;; room_8
+.
+ ;;line 1054;; 
 
-.L0185 ;;line 483;;  playfield:
+.L0222 ;;line 1055;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -1979,25 +3357,16 @@ pflabel8
 	sta playfield-128,x
 	dex
 	bpl pflabel8
-.L0186 ;;line 497;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 498;; 
+ ;;line 1069;; 
 
 .
- ;;line 499;; 
+ ;;line 1070;; 
 
-.room_9
- ;;line 500;; room_9
+.
+ ;;line 1071;; 
 
-.L0187 ;;line 501;;  playfield:
+.L0223 ;;line 1072;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -2059,25 +3428,16 @@ pflabel9
 	sta playfield-128,x
 	dex
 	bpl pflabel9
-.L0188 ;;line 515;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 516;; 
+ ;;line 1086;; 
 
 .
- ;;line 517;; 
+ ;;line 1087;; 
 
-.room_10
- ;;line 518;; room_10
+.
+ ;;line 1088;; 
 
-.L0189 ;;line 519;;  playfield:
+.L0224 ;;line 1089;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -2139,22 +3499,13 @@ pflabel10
 	sta playfield-128,x
 	dex
 	bpl pflabel10
-.L0190 ;;line 533;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 534;; 
+ ;;line 1103;; 
 
-.room_11
- ;;line 535;; room_11
+.
+ ;;line 1104;; 
 
-.L0191 ;;line 536;;  playfield:
+.L0225 ;;line 1105;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -2183,13 +3534,13 @@ PF_data11
 	if (pfwidth>2)
 	.byte %11100111, %00001111
  endif
-	.byte %10000000, %00000000
+	.byte %11000000, %00000000
 	if (pfwidth>2)
-	.byte %10000000, %00000000
+	.byte %11000000, %00000000
  endif
-	.byte %10000000, %00000000
+	.byte %11000000, %00000000
 	if (pfwidth>2)
-	.byte %10000000, %00000000
+	.byte %11000000, %00000000
  endif
 	.byte %11100111, %00001111
 	if (pfwidth>2)
@@ -2216,25 +3567,16 @@ pflabel11
 	sta playfield-128,x
 	dex
 	bpl pflabel11
-.L0192 ;;line 550;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 551;; 
+ ;;line 1119;; 
 
 .
- ;;line 552;; 
+ ;;line 1120;; 
 
-.room_12
- ;;line 553;; room_12
+.
+ ;;line 1121;; 
 
-.L0193 ;;line 554;;  playfield:
+.L0226 ;;line 1122;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -2251,9 +3593,9 @@ PF_data12
 	if (pfwidth>2)
 	.byte %00011000, %00000110
  endif
-	.byte %00011000, %10000110
+	.byte %00011000, %00000110
 	if (pfwidth>2)
-	.byte %00011000, %10000110
+	.byte %00011000, %00000110
  endif
 	.byte %00110000, %10000011
 	if (pfwidth>2)
@@ -2296,25 +3638,16 @@ pflabel12
 	sta playfield-128,x
 	dex
 	bpl pflabel12
-.L0194 ;;line 568;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 569;; 
+ ;;line 1136;; 
 
 .
- ;;line 570;; 
+ ;;line 1137;; 
 
-.room_13
- ;;line 571;; room_13
+.
+ ;;line 1138;; 
 
-.L0195 ;;line 572;;  playfield:
+.L0227 ;;line 1139;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -2323,9 +3656,9 @@ pflabel12
   endif
 	jmp pflabel13
 PF_data13
-	.byte %11111111, %00001111
+	.byte %11111111, %11111111
 	if (pfwidth>2)
-	.byte %11111111, %00001111
+	.byte %11111111, %11111111
  endif
 	.byte %00000000, %00000000
 	if (pfwidth>2)
@@ -2376,25 +3709,16 @@ pflabel13
 	sta playfield-128,x
 	dex
 	bpl pflabel13
-.L0196 ;;line 586;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 587;; 
+ ;;line 1153;; 
 
 .
- ;;line 588;; 
+ ;;line 1154;; 
 
-.room_14
- ;;line 589;; room_14
+.
+ ;;line 1155;; 
 
-.L0197 ;;line 590;;  playfield:
+.L0228 ;;line 1156;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -2456,25 +3780,16 @@ pflabel14
 	sta playfield-128,x
 	dex
 	bpl pflabel14
-.L0198 ;;line 604;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 605;; 
+ ;;line 1170;; 
 
 .
- ;;line 606;; 
+ ;;line 1171;; 
 
-.room_15
- ;;line 607;; room_15
+.
+ ;;line 1172;; 
 
-.L0199 ;;line 608;;  playfield:
+.L0229 ;;line 1173;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -2503,13 +3818,13 @@ PF_data15
 	if (pfwidth>2)
 	.byte %11100111, %00001111
  endif
-	.byte %10000000, %00000000
+	.byte %11000000, %00000000
 	if (pfwidth>2)
-	.byte %10000000, %00000000
+	.byte %11000000, %00000000
  endif
-	.byte %10000000, %00000000
+	.byte %11000000, %00000000
 	if (pfwidth>2)
-	.byte %10000000, %00000000
+	.byte %11000000, %00000000
  endif
 	.byte %11100111, %00001111
 	if (pfwidth>2)
@@ -2536,25 +3851,16 @@ pflabel15
 	sta playfield-128,x
 	dex
 	bpl pflabel15
-.L0200 ;;line 622;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 623;; 
+ ;;line 1187;; 
 
 .
- ;;line 624;; 
+ ;;line 1188;; 
 
-.room_16
- ;;line 625;; room_16
+.
+ ;;line 1189;; 
 
-.L0201 ;;line 626;;  playfield:
+.L0230 ;;line 1190;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -2616,25 +3922,16 @@ pflabel16
 	sta playfield-128,x
 	dex
 	bpl pflabel16
-.L0202 ;;line 640;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 641;; 
+ ;;line 1204;; 
 
 .
- ;;line 642;; 
+ ;;line 1205;; 
 
-.room_17
- ;;line 643;; room_17
+.
+ ;;line 1206;; 
 
-.L0203 ;;line 644;;  playfield:
+.L0231 ;;line 1207;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -2647,13 +3944,13 @@ PF_data17
 	if (pfwidth>2)
 	.byte %11110011, %00001111
  endif
-	.byte %11110000, %00000000
+	.byte %11000000, %00000000
 	if (pfwidth>2)
-	.byte %11110000, %00000000
+	.byte %11000000, %00000000
  endif
-	.byte %11110000, %00000000
+	.byte %11000000, %00000000
 	if (pfwidth>2)
-	.byte %11110000, %00000000
+	.byte %11000000, %00000000
  endif
 	.byte %11111111, %00001111
 	if (pfwidth>2)
@@ -2696,25 +3993,16 @@ pflabel17
 	sta playfield-128,x
 	dex
 	bpl pflabel17
-.L0204 ;;line 658;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 659;; 
+ ;;line 1221;; 
 
 .
- ;;line 660;; 
+ ;;line 1222;; 
 
-.room_18
- ;;line 661;; room_18
+.
+ ;;line 1223;; 
 
-.L0205 ;;line 662;;  playfield:
+.L0232 ;;line 1224;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -2727,9 +4015,37 @@ PF_data18
 	if (pfwidth>2)
 	.byte %11111111, %00001111
  endif
-	.byte %11000000, %00000000
+	.byte %11000000, %00001100
 	if (pfwidth>2)
-	.byte %11000000, %00000000
+	.byte %11000000, %00001100
+ endif
+	.byte %11000000, %00001100
+	if (pfwidth>2)
+	.byte %11000000, %00001100
+ endif
+	.byte %11001111, %00111100
+	if (pfwidth>2)
+	.byte %11001111, %00111100
+ endif
+	.byte %11001111, %00111100
+	if (pfwidth>2)
+	.byte %11001111, %00111100
+ endif
+	.byte %11001100, %00000000
+	if (pfwidth>2)
+	.byte %11001100, %00000000
+ endif
+	.byte %11001100, %00000000
+	if (pfwidth>2)
+	.byte %11001100, %00000000
+ endif
+	.byte %11001111, %11111111
+	if (pfwidth>2)
+	.byte %11001111, %11111111
+ endif
+	.byte %11001111, %11111111
+	if (pfwidth>2)
+	.byte %11001111, %11111111
  endif
 	.byte %11000000, %00000000
 	if (pfwidth>2)
@@ -2739,59 +4055,22 @@ PF_data18
 	if (pfwidth>2)
 	.byte %11000000, %00000000
  endif
-	.byte %11000000, %00000000
+	.byte %11111111, %00001111
 	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11000000, %00000000
-	if (pfwidth>2)
-	.byte %11000000, %00000000
- endif
-	.byte %11111111, %00000111
-	if (pfwidth>2)
-	.byte %11111111, %00000111
- endif
-	.byte %11000000, %00000110
-	if (pfwidth>2)
-	.byte %11000000, %00000110
- endif
-	.byte %11000000, %00000110
-	if (pfwidth>2)
-	.byte %11000000, %00000110
- endif
-	.byte %11000000, %00000110
-	if (pfwidth>2)
-	.byte %11000000, %00000110
- endif
-	.byte %11000000, %00000110
-	if (pfwidth>2)
-	.byte %11000000, %00000110
- endif
-	.byte %11111111, %11111111
-	if (pfwidth>2)
-	.byte %11111111, %11111111
+	.byte %11111111, %00001111
  endif
 pflabel18
 	lda PF_data18,x
 	sta playfield-128,x
 	dex
 	bpl pflabel18
-.L0206 ;;line 676;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 677;; 
+ ;;line 1238;; 
 
-.room_19
- ;;line 678;; room_19
+.
+ ;;line 1239;; 
 
-.L0207 ;;line 679;;  playfield:
+.L0233 ;;line 1240;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -2853,25 +4132,16 @@ pflabel19
 	sta playfield-128,x
 	dex
 	bpl pflabel19
-.L0208 ;;line 693;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 694;; 
-
-.room_20
- ;;line 695;; room_20
+ ;;line 1254;; 
 
 .
- ;;line 696;; 
+ ;;line 1255;; 
 
-.L0209 ;;line 697;;  playfield:
+.
+ ;;line 1256;; 
+
+.L0234 ;;line 1257;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -2933,25 +4203,16 @@ pflabel20
 	sta playfield-128,x
 	dex
 	bpl pflabel20
-.L0210 ;;line 711;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 712;; 
-
-.room_21
- ;;line 713;; room_21
+ ;;line 1271;; 
 
 .
- ;;line 714;; 
+ ;;line 1272;; 
 
-.L0211 ;;line 715;;  playfield:
+.
+ ;;line 1273;; 
+
+.L0235 ;;line 1274;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -2960,78 +4221,69 @@ pflabel20
   endif
 	jmp pflabel21
 PF_data21
-	.byte %11111111, %00001111
+	.byte %11111100, %11111111
 	if (pfwidth>2)
-	.byte %11111111, %00001111
+	.byte %11111100, %11111111
  endif
-	.byte %00000000, %00000000
+	.byte %11000000, %00000000
 	if (pfwidth>2)
-	.byte %00000000, %00000000
+	.byte %00000000, %11000000
  endif
-	.byte %00000000, %00000000
+	.byte %11000000, %00000000
 	if (pfwidth>2)
-	.byte %00000000, %00000000
+	.byte %00000000, %11000000
  endif
-	.byte %11111111, %11111111
+	.byte %11001111, %11111111
 	if (pfwidth>2)
-	.byte %11111111, %11111111
+	.byte %11111111, %11001111
  endif
-	.byte %11111111, %11111111
+	.byte %11001111, %11111111
 	if (pfwidth>2)
-	.byte %11111111, %11111111
+	.byte %11111111, %11001111
  endif
-	.byte %00000000, %00000000
+	.byte %00001100, %00000000
 	if (pfwidth>2)
-	.byte %00000000, %00000000
+	.byte %00000000, %00001100
  endif
-	.byte %00000000, %00000000
+	.byte %00001100, %00000000
 	if (pfwidth>2)
-	.byte %00000000, %00000000
+	.byte %00000000, %00001100
  endif
-	.byte %11111111, %11111111
+	.byte %11111100, %11111111
 	if (pfwidth>2)
-	.byte %11111111, %11111111
+	.byte %11111111, %11111100
  endif
-	.byte %11111111, %11111111
+	.byte %11111100, %11111111
 	if (pfwidth>2)
-	.byte %11111111, %11111111
+	.byte %11111111, %11111100
  endif
-	.byte %00000000, %00000000
+	.byte %11000000, %00000011
 	if (pfwidth>2)
-	.byte %00000000, %00000000
+	.byte %00000011, %11000000
  endif
-	.byte %00000000, %00000000
+	.byte %11000000, %00000011
 	if (pfwidth>2)
-	.byte %00000000, %00000000
+	.byte %00000011, %11000000
  endif
-	.byte %11111111, %00001111
+	.byte %11111100, %11111111
 	if (pfwidth>2)
-	.byte %11111111, %00001111
+	.byte %11111111, %11111100
  endif
 pflabel21
 	lda PF_data21,x
 	sta playfield-128,x
 	dex
 	bpl pflabel21
-.L0212 ;;line 729;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 730;; 
-
-.room_22
- ;;line 731;; room_22
+ ;;line 1288;; 
 
 .
- ;;line 732;; 
+ ;;line 1289;; 
 
-.L0213 ;;line 733;;  playfield:
+.
+ ;;line 1290;; 
+
+.L0236 ;;line 1291;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -3040,78 +4292,69 @@ pflabel21
   endif
 	jmp pflabel22
 PF_data22
-	.byte %11111111, %00001111
-	if (pfwidth>2)
-	.byte %11111111, %00001111
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
 	.byte %11111111, %11111111
 	if (pfwidth>2)
 	.byte %11111111, %11111111
  endif
-	.byte %11111111, %11111111
+	.byte %00000000, %11000000
 	if (pfwidth>2)
-	.byte %11111111, %11111111
+	.byte %11000000, %00000000
  endif
-	.byte %00000000, %00000000
+	.byte %00000000, %11000000
 	if (pfwidth>2)
-	.byte %00000000, %00000000
+	.byte %11000000, %00000000
  endif
-	.byte %00000000, %00000000
+	.byte %11111111, %11001111
 	if (pfwidth>2)
-	.byte %00000000, %00000000
+	.byte %11001111, %11111111
  endif
-	.byte %11111111, %11111111
+	.byte %11111111, %11001111
 	if (pfwidth>2)
-	.byte %11111111, %11111111
+	.byte %11001111, %11111111
  endif
-	.byte %11111111, %11111111
+	.byte %00000000, %00001100
 	if (pfwidth>2)
-	.byte %11111111, %11111111
+	.byte %00001100, %00000000
  endif
-	.byte %00000000, %00000000
+	.byte %00000000, %00001100
 	if (pfwidth>2)
-	.byte %00000000, %00000000
+	.byte %00001100, %00000000
  endif
-	.byte %00000000, %00000000
+	.byte %11000001, %11111111
 	if (pfwidth>2)
-	.byte %00000000, %00000000
+	.byte %11111111, %11000011
  endif
-	.byte %11111111, %00001111
+	.byte %11000001, %11111111
 	if (pfwidth>2)
-	.byte %11111111, %00001111
+	.byte %11111111, %11000011
+ endif
+	.byte %00000001, %11000000
+	if (pfwidth>2)
+	.byte %11000000, %00000011
+ endif
+	.byte %00000001, %11000000
+	if (pfwidth>2)
+	.byte %11000000, %00000011
+ endif
+	.byte %11001001, %11001100
+	if (pfwidth>2)
+	.byte %11001100, %00110011
  endif
 pflabel22
 	lda PF_data22,x
 	sta playfield-128,x
 	dex
 	bpl pflabel22
-.L0214 ;;line 747;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 748;; 
-
-.room_23
- ;;line 749;; room_23
+ ;;line 1305;; 
 
 .
- ;;line 750;; 
+ ;;line 1306;; 
 
-.L0215 ;;line 751;;  playfield:
+.
+ ;;line 1307;; 
+
+.L0237 ;;line 1308;;  playfield:
 
   ifconst pfres
 	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
@@ -3120,25 +4363,25 @@ pflabel22
   endif
 	jmp pflabel23
 PF_data23
+	.byte %11001001, %11001100
+	if (pfwidth>2)
+	.byte %11001100, %00110011
+ endif
+	.byte %00001000, %11001100
+	if (pfwidth>2)
+	.byte %00001100, %00110000
+ endif
+	.byte %00001000, %11001100
+	if (pfwidth>2)
+	.byte %00001100, %00110000
+ endif
 	.byte %11111111, %00001111
 	if (pfwidth>2)
+	.byte %11111111, %00111111
+ endif
 	.byte %11111111, %00001111
- endif
-	.byte %00000000, %00000000
 	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %00000000, %00000000
-	if (pfwidth>2)
-	.byte %00000000, %00000000
- endif
-	.byte %11111111, %11111111
-	if (pfwidth>2)
-	.byte %11111111, %11111111
- endif
-	.byte %11111111, %11111111
-	if (pfwidth>2)
-	.byte %11111111, %11111111
+	.byte %11111111, %00111111
  endif
 	.byte %00000000, %00000000
 	if (pfwidth>2)
@@ -3173,19 +4416,78 @@ pflabel23
 	sta playfield-128,x
 	dex
 	bpl pflabel23
-.L0216 ;;line 765;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
 .
- ;;line 766;; 
+ ;;line 1322;; 
 
-.L0217 ;;line 767;;  asm
+.
+ ;;line 1323;; 
+
+.L0238 ;;line 1324;;  playfield:
+
+  ifconst pfres
+	  ldx #(12>pfres)*(pfres*pfwidth-1)+(12<=pfres)*47
+  else
+	  ldx #((12*pfwidth-1)*((12*pfwidth-1)<47))+(47*((12*pfwidth-1)>=47))
+  endif
+	jmp pflabel24
+PF_data24
+	.byte %11111111, %11111111
+	if (pfwidth>2)
+	.byte %11111111, %11111111
+ endif
+	.byte %11000000, %00000000
+	if (pfwidth>2)
+	.byte %11000000, %00000000
+ endif
+	.byte %11000000, %00000000
+	if (pfwidth>2)
+	.byte %11000000, %00000000
+ endif
+	.byte %11000000, %00000000
+	if (pfwidth>2)
+	.byte %11000000, %00000000
+ endif
+	.byte %11000000, %00000000
+	if (pfwidth>2)
+	.byte %11000000, %00000000
+ endif
+	.byte %11000000, %00000000
+	if (pfwidth>2)
+	.byte %11000000, %00000000
+ endif
+	.byte %11000000, %00000000
+	if (pfwidth>2)
+	.byte %11000000, %00000000
+ endif
+	.byte %11000000, %00000000
+	if (pfwidth>2)
+	.byte %11000000, %00000000
+ endif
+	.byte %11000000, %00000000
+	if (pfwidth>2)
+	.byte %11000000, %00000000
+ endif
+	.byte %11000000, %00000000
+	if (pfwidth>2)
+	.byte %11000000, %00000000
+ endif
+	.byte %11000000, %00000000
+	if (pfwidth>2)
+	.byte %11000000, %00000000
+ endif
+	.byte %11111111, %11111111
+	if (pfwidth>2)
+	.byte %11111111, %11111111
+ endif
+pflabel24
+	lda PF_data24,x
+	sta playfield-128,x
+	dex
+	bpl pflabel24
+.
+ ;;line 1338;; 
+
+.L0239 ;;line 1339;;  asm
 
 room_pointers_lo
 
@@ -3195,6 +4497,8 @@ room_pointers_lo
 
  .byte <PF_data16, <PF_data17, <PF_data18, <PF_data19, <PF_data20, <PF_data21, <PF_data22, <PF_data23
 
+ .byte <PF_data24
+
 room_pointers_hi
 
  .byte >PF_data0, >PF_data1, >PF_data2, >PF_data3, >PF_data4, >PF_data5, >PF_data6, >PF_data7
@@ -3203,10 +4507,12 @@ room_pointers_hi
 
  .byte >PF_data16, >PF_data17, >PF_data18, >PF_data19, >PF_data20, >PF_data21, >PF_data22, >PF_data23
 
-.
- ;;line 777;; 
+ .byte >PF_data24
 
-.L0218 ;;line 778;;  bank 2
+.
+ ;;line 1351;; 
+
+.L0240 ;;line 1352;;  bank 2
 
  if ECHO1
  echo "    ",[(start_bank1 - *)]d , "bytes of ROM space left in bank 1")
@@ -3272,371 +4578,646 @@ start_bank1 ldx #$ff
  .byte $ff
  repend
 .
- ;;line 779;; 
+ ;;line 1353;; 
 
 .
- ;;line 780;; 
+ ;;line 1354;; 
 
 .
- ;;line 781;; 
+ ;;line 1355;; 
 
 .
- ;;line 782;; 
+ ;;line 1356;; 
 
 .
- ;;line 783;; 
+ ;;line 1357;; 
 
 .
- ;;line 784;; 
+ ;;line 1358;; 
 
 .
- ;;line 785;; 
+ ;;line 1359;; 
 
 .
- ;;line 786;; 
+ ;;line 1360;; 
 
 .
- ;;line 787;; 
+ ;;line 1361;; 
 
 .
- ;;line 788;; 
+ ;;line 1362;; 
 
 .
- ;;line 789;; 
+ ;;line 1363;; 
 
 .
- ;;line 790;; 
+ ;;line 1364;; 
 
 .
- ;;line 791;; 
+ ;;line 1365;; 
 
 .
- ;;line 792;; 
+ ;;line 1366;; 
 
 .
- ;;line 793;; 
+ ;;line 1367;; 
 
 .
- ;;line 794;; 
+ ;;line 1368;; 
 
 .
- ;;line 795;; 
+ ;;line 1369;; 
 
 .
- ;;line 796;; 
+ ;;line 1370;; 
 
 .
- ;;line 797;; 
+ ;;line 1371;; 
 
 .
- ;;line 798;; 
+ ;;line 1372;; 
 
 .
- ;;line 799;; 
+ ;;line 1373;; 
 
-.
- ;;line 800;; 
+.L0241 ;;line 1374;;  data init_rooms
 
-.
- ;;line 801;; 
-
-.
- ;;line 802;; 
-
-.
- ;;line 803;; 
-
-.
- ;;line 804;; 
-
-.L0219 ;;line 805;;  data init_rooms
-
-	JMP .skipL0219
+	JMP .skipL0241
 init_rooms
-	.byte            8, 19, 26, 16,  1, 14, 11,  2,  5, 24,  8
+	.byte              9, 19, 26, 27,  5,  9,  16,  28,  30,   22,  2
 
-.skipL0219
+.skipL0241
 .
- ;;line 808;; 
+ ;;line 1377;; 
 
-.L0220 ;;line 809;;  data init_x
+.L0242 ;;line 1378;;  data init_x
 
-	JMP .skipL0220
+	JMP .skipL0242
 init_x
-	.byte           30, 50, 70, 90, 30, 50, 70, 40, 70, 100, 70
+	.byte            78, 68, 78, 56, 24, 68,  96, 127,  42,  42, 32
 
-.skipL0220
+.skipL0242
 .
- ;;line 812;; 
+ ;;line 1381;; 
 
-.L0221 ;;line 813;;  data init_y
+.L0243 ;;line 1382;;  data init_y
 
-	JMP .skipL0221
+	JMP .skipL0243
 init_y
-	.byte           20, 20, 20, 20, 20, 20, 20, 25, 25,  25, 25
+	.byte            42, 16, 22, 44, 42, 38,  36,  42,  42,  42, 20
 
-.skipL0221
+.skipL0243
 .
- ;;line 816;; 
+ ;;line 1385;; 
 
 .
- ;;line 817;; 
+ ;;line 1386;; 
 
-.L0222 ;;line 818;;  data move_north_b2
+.L0244 ;;line 1387;;  data move_north_b2
 
-	JMP .skipL0222
+	JMP .skipL0244
 move_north_b2
-	.byte  0,0,1,2,3,4,0,0,10,0,8,9,11,12,7,13
+	.byte  0,30,1,2,3,4,0,14,10,9,8,9,11,12,7
 
-	.byte  0,5,0,0,18,19,20,21,23,16,25,26,0,28,5
+	.byte  13,15,5,22,21,18,19,20,21,23,16,25,26,0,28
 
-.skipL0222
+	.byte  5,17,6,24
+
+.skipL0244
 .
- ;;line 822;; 
+ ;;line 1392;; 
 
-.L0223 ;;line 823;;  data move_east_b2
+.L0245 ;;line 1393;;  data move_east_b2
 
-	JMP .skipL0223
+	JMP .skipL0245
 move_east_b2
-	.byte  0,0,0,6,7,3,5,4,9,10,11,8,0,0,15,16
+	.byte  0,1,2,6,7,3,5,4,9,10,11,8,12,13,15
 
-	.byte  14,14,19,18,21,0,0,0,27,26,25,29,0,24,0
+	.byte  16,14,14,19,18,21,20,22,23,27,26,25,29,28,24
 
-.skipL0223
+	.byte  30,0,0,0
+
+.skipL0245
 .
- ;;line 827;; 
+ ;;line 1398;; 
 
-.L0224 ;;line 828;;  data move_south_b2
+.L0246 ;;line 1399;;  data move_south_b2
 
-	JMP .skipL0224
+	JMP .skipL0246
 move_south_b2
-	.byte  0,2,3,4,5,30,0,14,10,11,8,12,13,15,0,0
+	.byte  0,2,3,4,5,30,0,14,10,11,8,12,13,15,7
 
-	.byte  25,0,20,21,22,23,0,24,24,26,27,0,29,29,0
+	.byte  16,25,0,20,21,22,23,18,24,0,26,27,0,29,0
 
-.skipL0224
+	.byte  1,28,6,0
+
+.skipL0246
 .
- ;;line 832;; 
+ ;;line 1404;; 
 
-.L0225 ;;line 833;;  data move_west_b2
+.L0247 ;;line 1405;;  data move_west_b2
 
-	JMP .skipL0225
+	JMP .skipL0247
 move_west_b2
-	.byte  0,0,0,5,7,6,3,4,11,8,9,10,0,0,16,14
+	.byte  0,1,2,5,7,6,3,4,11,8,9,10,12,13,16
 
-	.byte  15,16,19,18,21,0,0,0,29,26,25,24,0,27,0
+	.byte  14,15,16,19,18,21,20,22,23,29,26,25,24,28,27
 
-.skipL0225
+	.byte  30,0,0,0
+
+.skipL0247
 .
- ;;line 837;; 
+ ;;line 1410;; 
 
 .init_level_2
- ;;line 838;; init_level_2
+ ;;line 1411;; init_level_2
 
-.L0226 ;;line 839;;  top_carried_item = 255  :  bot_carried_item = 255
+.L0248 ;;line 1412;;  ballx = 92  :  bally = 38
+
+	LDA #92
+	STA ballx
+	LDA #38
+	STA bally
+.L0249 ;;line 1413;;  p2_ballx = 92  :  p2_bally = 38
+
+	LDA #92
+	STA p2_ballx
+	LDA #38
+	STA p2_bally
+.L0250 ;;line 1414;;  ballheight = 4
+
+	LDA #4
+	STA ballheight
+.
+ ;;line 1415;; 
+
+.L0251 ;;line 1416;;  top_player0x = 71  :  bottom_player0x = 71
+
+	LDA #71
+	STA top_player0x
+	STA bottom_player0x
+.L0252 ;;line 1417;;  top_player1x = 120  :  bottom_player1x = 120
+
+	LDA #120
+	STA top_player1x
+	STA bottom_player1x
+.L0253 ;;line 1418;;  top_player0y = 255  :  bottom_player0y = 255
+
+	LDA #255
+	STA top_player0y
+	STA bottom_player0y
+.L0254 ;;line 1419;;  top_player1y = 255  :  bottom_player1y = 255
+
+	LDA #255
+	STA top_player1y
+	STA bottom_player1y
+.L0255 ;;line 1420;;  missile0y = 255  :  missile1y = 255
+
+	LDA #255
+	STA missile0y
+	STA missile1y
+.
+ ;;line 1421;; 
+
+.L0256 ;;line 1422;;  player0height = 15
+
+	LDA #15
+	STA player0height
+.L0257 ;;line 1423;;  NUSIZ0 = 5
+
+	LDA #5
+	STA NUSIZ0
+.
+ ;;line 1424;; 
+
+.
+ ;;line 1425;; 
+
+.L0258 ;;line 1426;;  top_room = 2  :  bottom_room = 2
+
+	LDA #2
+	STA top_room
+	STA bottom_room
+.
+ ;;line 1427;; 
+
+.L0259 ;;line 1428;;  room_flags = 0
+
+	LDA #0
+	STA room_flags
+.L0260 ;;line 1429;;  top_carried_item = 255  :  bot_carried_item = 255
 
 	LDA #255
 	STA top_carried_item
 	STA bot_carried_item
-.L0227 ;;line 840;;  gate_state = 0  :  drag_dead = 0
+.L0261 ;;line 1430;;  gate_state = gate_state  &  $C0  :  drag_dead = 0
 
-	LDA #0
+	LDA gate_state
+	AND #$C0
 	STA gate_state
+	LDA #0
 	STA drag_dead
 .
- ;;line 841;; 
+ ;;line 1431;; 
 
-.L0228 ;;line 842;;  top_drag_state = 3  :  bot_drag_state = 3
+.L0262 ;;line 1432;;  top_drag_state = 3  :  bot_drag_state = 3
 
 	LDA #3
 	STA top_drag_state
 	STA bot_drag_state
-.L0229 ;;line 843;;  flicker_idx = 0  :  bot_flicker_idx = 0
+.L0263 ;;line 1433;;  drag_awake = 0
+
+	LDA #0
+	STA drag_awake
+.
+ ;;line 1434;; 
+
+.L0264 ;;line 1435;;  top_bat_state = $4F  :  bot_bat_state = $4F  :  bat_fedup = $66
+
+	LDA #$4F
+	STA top_bat_state
+	STA bot_bat_state
+	LDA #$66
+	STA bat_fedup
+.L0265 ;;line 1436;;  flicker_idx = 0  :  bot_flicker_idx = 0
 
 	LDA #0
 	STA flicker_idx
 	STA bot_flicker_idx
 .
- ;;line 844;; 
+ ;;line 1437;; 
 
 .
- ;;line 845;; 
+ ;;line 1438;; 
 
-.L0230 ;;line 846;;  for temp1 = 0 to 10
+.
+ ;;line 1439;; 
+
+.
+ ;;line 1440;; 
+
+.
+ ;;line 1441;; 
+
+.L0266 ;;line 1442;;  if gate_state = $80 then return otherbank
+
+	LDA gate_state
+	CMP #$80
+     BNE .skipL0266
+.condpart37
+	JMP BS_return
+.skipL0266
+.
+ ;;line 1443;; 
+
+.
+ ;;line 1444;; 
+
+.L0267 ;;line 1445;;  for temp1 = 0 to 10
 
 	LDA #0
 	STA temp1
-.L0230fortemp1
-.L0231 ;;line 847;;  temp2 = init_rooms[temp1]
+.L0267fortemp1
+.L0268 ;;line 1446;;  if gate_state = $00 then temp2 = init_rooms_g1[temp1] else temp2 = init_rooms[temp1]
 
+	LDA gate_state
+	CMP #$00
+     BNE .skipL0268
+.condpart38
+	LDX temp1
+	LDA init_rooms_g1,x
+	STA temp2
+ jmp .skipelse0
+.skipL0268
 	LDX temp1
 	LDA init_rooms,x
 	STA temp2
-.L0232 ;;line 848;;  w_top_obj_room[temp1] = temp2
+.skipelse0
+.L0269 ;;line 1447;;  w_top_obj_room[temp1] = temp2
 
 	LDA temp2
 	LDX temp1
 	STA w_top_obj_room,x
-.L0233 ;;line 849;;  w_bot_obj_room[temp1] = temp2
+.L0270 ;;line 1448;;  w_bot_obj_room[temp1] = temp2
 
 	LDA temp2
 	LDX temp1
 	STA w_bot_obj_room,x
 .
- ;;line 850;; 
+ ;;line 1449;; 
 
-.L0234 ;;line 851;;  temp2 = init_x[temp1]
+.L0271 ;;line 1450;;  if gate_state = $00 then temp2 = init_x_g1[temp1] else temp2 = init_x[temp1]
 
+	LDA gate_state
+	CMP #$00
+     BNE .skipL0271
+.condpart39
+	LDX temp1
+	LDA init_x_g1,x
+	STA temp2
+ jmp .skipelse1
+.skipL0271
 	LDX temp1
 	LDA init_x,x
 	STA temp2
-.L0235 ;;line 852;;  top_obj_x[temp1] = temp2
+.skipelse1
+.L0272 ;;line 1451;;  top_obj_x[temp1] = temp2
 
 	LDA temp2
 	LDX temp1
 	STA top_obj_x,x
-.L0236 ;;line 853;;  bot_obj_x[temp1] = temp2
+.L0273 ;;line 1452;;  bot_obj_x[temp1] = temp2
 
 	LDA temp2
 	LDX temp1
 	STA bot_obj_x,x
 .
- ;;line 854;; 
+ ;;line 1453;; 
 
-.L0237 ;;line 855;;  temp2 = init_y[temp1]
+.L0274 ;;line 1454;;  if gate_state = $00 then temp2 = init_y_g1[temp1] else temp2 = init_y[temp1]
 
+	LDA gate_state
+	CMP #$00
+     BNE .skipL0274
+.condpart40
+	LDX temp1
+	LDA init_y_g1,x
+	STA temp2
+ jmp .skipelse2
+.skipL0274
 	LDX temp1
 	LDA init_y,x
 	STA temp2
-.L0238 ;;line 856;;  top_obj_y[temp1] = temp2
+.skipelse2
+.L0275 ;;line 1455;;  top_obj_y[temp1] = temp2
 
 	LDA temp2
 	LDX temp1
 	STA top_obj_y,x
-.L0239 ;;line 857;;  bot_obj_y[temp1] = temp2
+.L0276 ;;line 1456;;  bot_obj_y[temp1] = temp2
 
 	LDA temp2
 	LDX temp1
 	STA bot_obj_y,x
-.L0240 ;;line 858;;  next
+.L0277 ;;line 1457;;  next
 
 	LDA temp1
 	CMP #10
 	INC temp1
-	bcc .L0230fortemp1
- if ( (((((#>*)&$1f)*256)|(#<.L0230fortemp1))>=bankswitch_hotspot) && (((((#>*)&$1f)*256)|(#<.L0230fortemp1))<=(bankswitch_hotspot+bs_mask)) )
+	bcc .L0267fortemp1
+ if ( (((((#>*)&$1f)*256)|(#<.L0267fortemp1))>=bankswitch_hotspot) && (((((#>*)&$1f)*256)|(#<.L0267fortemp1))<=(bankswitch_hotspot+bs_mask)) )
    echo "WARNING: branch near the end of bank 2 may accidentally trigger a bankswitch. Reposition code there if bad things happen."
  endif
-.L0241 ;;line 859;;  return otherbank
+.L0278 ;;line 1458;;  return otherbank
 
 	JMP BS_return
 .
- ;;line 860;; 
+ ;;line 1459;; 
 
 .
- ;;line 861;; 
+ ;;line 1460;; 
 
 .
- ;;line 862;; 
+ ;;line 1461;; 
 
 .
- ;;line 863;; 
-
-.
- ;;line 864;; 
-
-.
- ;;line 865;; 
-
-.
- ;;line 866;; 
-
-.
- ;;line 867;; 
-
-.
- ;;line 868;; 
-
-.
- ;;line 869;; 
-
-.
- ;;line 870;; 
-
-.
- ;;line 871;; 
-
-.
- ;;line 872;; 
+ ;;line 1462;; 
 
 .update_top_dragons
- ;;line 873;; update_top_dragons
+ ;;line 1463;; update_top_dragons
 
-.L0242 ;;line 874;;  if top_drag_state{7} then gosub top_drag_eaten  :  return otherbank
+.L0279 ;;line 1464;;  if top_drag_state{7} then gosub top_drag_eaten  :  goto update_top_magnet
 
 	BIT top_drag_state
-	BPL .skipL0242
-.condpart31
+	BPL .skipL0279
+.condpart41
  jsr .top_drag_eaten
-	JMP BS_return
-.skipL0242
-.L0243 ;;line 875;;  temp1 = top_drag_state  &  3
+ jmp .update_top_magnet
+.skipL0279
+.L0280 ;;line 1465;;  temp1 = top_drag_state  &  3
 
 	LDA top_drag_state
 	AND #3
 	STA temp1
-.L0244 ;;line 876;;  if temp1  <  3 then gosub top_drag_roaring  :  return otherbank
+.L0281 ;;line 1466;;  if temp1  <  3 then gosub top_drag_roaring  :  goto update_top_magnet
 
 	LDA temp1
 	CMP #3
-     BCS .skipL0244
-.condpart32
+     BCS .skipL0281
+.condpart42
  jsr .top_drag_roaring
-	JMP BS_return
-.skipL0244
+ jmp .update_top_magnet
+.skipL0281
 .
- ;;line 877;; 
+ ;;line 1467;; 
 
-.L0245 ;;line 878;;  temp1 = 0  :  gosub top_one_dragon
+.
+ ;;line 1468;; 
 
+.L0282 ;;line 1469;;  if r_top_obj_room[0] = top_room then temp1 = 0  :  gosub top_one_dragon  :  if temp4 = 2 then goto update_top_magnet
+
+	LDX #0
+	LDA r_top_obj_room,x
+	CMP top_room
+     BNE .skipL0282
+.condpart43
 	LDA #0
 	STA temp1
  jsr .top_one_dragon
-.L0246 ;;line 879;;  temp1 = 1  :  gosub top_one_dragon
+	LDA temp4
+	CMP #2
+     BNE .skip43then
+.condpart44
+ jmp .update_top_magnet
+.skip43then
+.skipL0282
+.L0283 ;;line 1470;;  if r_top_obj_room[1] = top_room then temp1 = 1  :  gosub top_one_dragon  :  if temp4 = 2 then goto update_top_magnet
 
+	LDX #1
+	LDA r_top_obj_room,x
+	CMP top_room
+     BNE .skipL0283
+.condpart45
 	LDA #1
 	STA temp1
  jsr .top_one_dragon
-.L0247 ;;line 880;;  temp1 = 2  :  gosub top_one_dragon
+	LDA temp4
+	CMP #2
+     BNE .skip45then
+.condpart46
+ jmp .update_top_magnet
+.skip45then
+.skipL0283
+.L0284 ;;line 1471;;  if r_top_obj_room[2] = top_room then temp1 = 2  :  gosub top_one_dragon  :  if temp4 = 2 then goto update_top_magnet
 
+	LDX #2
+	LDA r_top_obj_room,x
+	CMP top_room
+     BNE .skipL0284
+.condpart47
 	LDA #2
 	STA temp1
  jsr .top_one_dragon
-.L0248 ;;line 881;;  return otherbank
-
-	JMP BS_return
+	LDA temp4
+	CMP #2
+     BNE .skip47then
+.condpart48
+ jmp .update_top_magnet
+.skip47then
+.skipL0284
 .
- ;;line 882;; 
+ ;;line 1472;; 
+
+.
+ ;;line 1473;; 
+
+.L0285 ;;line 1474;;  if !drag_dead{0} then temp1 = 0  :  gosub top_dragon_offscreen
+
+	LDA drag_dead
+	LSR
+	BCS .skipL0285
+.condpart49
+	LDA #0
+	STA temp1
+ jsr .top_dragon_offscreen
+.skipL0285
+.L0286 ;;line 1475;;  if !drag_dead{1} then temp1 = 1  :  gosub top_dragon_offscreen
+
+	LDA drag_dead
+	AND #2
+	BNE .skipL0286
+.condpart50
+	LDA #1
+	STA temp1
+ jsr .top_dragon_offscreen
+.skipL0286
+.L0287 ;;line 1476;;  if !drag_dead{2} then temp1 = 2  :  gosub top_dragon_offscreen
+
+	LDA drag_dead
+	AND #4
+	BNE .skipL0287
+.condpart51
+	LDA #2
+	STA temp1
+ jsr .top_dragon_offscreen
+.skipL0287
+.L0288 ;;line 1477;;  goto update_top_magnet
+
+ jmp .update_top_magnet
+.
+ ;;line 1478;; 
 
 .top_drag_eaten
- ;;line 883;; top_drag_eaten
+ ;;line 1479;; top_drag_eaten
 
-.L0249 ;;line 884;;  if joy0fire then top_drag_state = 3  :  top_room = ENTRY_YELLOW  :  ballx = 92  :  bally = 38  :  room_flags{0} = 1  :  return
+.L0289 ;;line 1480;;  temp1 = top_drag_state  &  3
+
+	LDA top_drag_state
+	AND #3
+	STA temp1
+.L0290 ;;line 1481;;  if !joy0fire then goto _top_eaten_pos
 
  bit INPT4
-	BMI .skipL0249
-.condpart33
+	BPL .skipL0290
+.condpart52
+ jmp ._top_eaten_pos
+.skipL0290
+.L0291 ;;line 1482;;  if r_top_obj_room[temp1]  <>  ENTRY_YELLOW then goto _skip_top_d_home
+
+	LDX temp1
+	LDA r_top_obj_room,x
+	CMP #ENTRY_YELLOW
+     BEQ .skipL0291
+.condpart53
+ jmp ._skip_top_d_home
+.skipL0291
+.L0292 ;;line 1483;;  if gate_state  <  $40 then temp2 = init_rooms_g1[temp1] else temp2 = init_rooms[temp1]
+
+	LDA gate_state
+	CMP #$40
+     BCS .skipL0292
+.condpart54
+	LDX temp1
+	LDA init_rooms_g1,x
+	STA temp2
+ jmp .skipelse3
+.skipL0292
+	LDX temp1
+	LDA init_rooms,x
+	STA temp2
+.skipelse3
+.L0293 ;;line 1484;;  w_top_obj_room[temp1] = temp2
+
+	LDA temp2
+	LDX temp1
+	STA w_top_obj_room,x
+.L0294 ;;line 1485;;  temp2 = bit_mask[temp1]  ^  255
+
+	LDX temp1
+	LDA bit_mask,x
+	EOR #255
+	STA temp2
+.L0295 ;;line 1486;;  drag_awake = drag_awake  &  temp2
+
+	LDA drag_awake
+	AND temp2
+	STA drag_awake
+._skip_top_d_home
+ ;;line 1487;; _skip_top_d_home
+
+.L0296 ;;line 1488;;  top_drag_state = 3  :  drag_dead = drag_dead  &  %11111000
+
 	LDA #3
 	STA top_drag_state
+	LDA drag_dead
+	AND #%11111000
+	STA drag_dead
+.L0297 ;;line 1489;;  top_room = ENTRY_YELLOW  :  ballx = 92  :  bally = 38  :  w_top_oldx = 92  :  w_top_oldy = 38
+
 	LDA #ENTRY_YELLOW
 	STA top_room
 	LDA #92
 	STA ballx
 	LDA #38
 	STA bally
-	LDA room_flags
-	ORA #1
-	STA room_flags
+	LDA #92
+	STA w_top_oldx
+	LDA #38
+	STA w_top_oldy
+.L0298 ;;line 1490;;  gosub load_top_room bank1  :  gosub check_gates bank3  :  return
+
+ sta temp7
+ lda #>(ret_point15-1)
+ pha
+ lda #<(ret_point15-1)
+ pha
+ lda #>(.load_top_room-1)
+ pha
+ lda #<(.load_top_room-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #1
+ jmp BS_jsr
+ret_point15
+ sta temp7
+ lda #>(ret_point16-1)
+ pha
+ lda #<(ret_point16-1)
+ pha
+ lda #>(.check_gates-1)
+ pha
+ lda #<(.check_gates-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #3
+ jmp BS_jsr
+ret_point16
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -3644,30 +5225,27 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0249
-.L0250 ;;line 885;;  temp1 = top_drag_state  &  3
+._top_eaten_pos
+ ;;line 1491;; _top_eaten_pos
 
-	LDA top_drag_state
-	AND #3
-	STA temp1
-.L0251 ;;line 886;;  if temp1  <  3 then ballx = top_obj_x[temp1]  +  2  :  bally = top_obj_y[temp1]  -  13
+.L0299 ;;line 1492;;  if temp1  <  3 then ballx = top_obj_x[temp1]  +  3  :  bally = top_obj_y[temp1]  -  6
 
 	LDA temp1
 	CMP #3
-     BCS .skipL0251
-.condpart34
+     BCS .skipL0299
+.condpart55
 	LDX temp1
 	LDA top_obj_x,x
 	CLC
-	ADC #2
+	ADC #3
 	STA ballx
 	LDX temp1
 	LDA top_obj_y,x
 	SEC
-	SBC #13
+	SBC #6
 	STA bally
-.skipL0251
-.L0252 ;;line 887;;  return
+.skipL0299
+.L0300 ;;line 1493;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -3677,21 +5255,21 @@ move_west_b2
 	JMP BS_return
 	RTS
 .
- ;;line 888;; 
+ ;;line 1494;; 
 
 .top_drag_roaring
- ;;line 889;; top_drag_roaring
+ ;;line 1495;; top_drag_roaring
 
 .
- ;;line 890;; 
+ ;;line 1496;; 
 
-.L0253 ;;line 891;;  if r_top_obj_room[temp1]  <>  top_room then top_drag_state = 3  :  return
+.L0301 ;;line 1497;;  if r_top_obj_room[temp1]  <>  top_room then top_drag_state = 3  :  return
 
 	LDX temp1
 	LDA r_top_obj_room,x
 	CMP top_room
-     BEQ .skipL0253
-.condpart35
+     BEQ .skipL0301
+.condpart56
 	LDA #3
 	STA top_drag_state
 	tsx
@@ -3701,8 +5279,8 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0253
-.L0254 ;;line 892;;  temp5 = top_obj_x[temp1]  :  temp6 = top_obj_y[temp1]
+.skipL0301
+.L0302 ;;line 1498;;  temp5 = top_obj_x[temp1]  :  temp6 = top_obj_y[temp1]
 
 	LDX temp1
 	LDA top_obj_x,x
@@ -3710,20 +5288,20 @@ move_west_b2
 	LDX temp1
 	LDA top_obj_y,x
 	STA temp6
-.L0255 ;;line 893;;  gosub check_top_sword_hit
+.L0303 ;;line 1499;;  gosub check_top_sword_hit
 
  jsr .check_top_sword_hit
-.L0256 ;;line 894;;  if temp4 = 1 then drag_dead = drag_dead  |  bit_mask[temp1]  :  top_drag_state = 3  :  return
+.L0304 ;;line 1500;;  if temp4 = 1 then drag_dead = drag_dead  |  bit_mask[temp1]  :  top_drag_state = 103  :  return
 
 	LDA temp4
 	CMP #1
-     BNE .skipL0256
-.condpart36
+     BNE .skipL0304
+.condpart57
 	LDA drag_dead
 	LDX temp1
 	ORA bit_mask,x
 	STA drag_dead
-	LDA #3
+	LDA #103
 	STA top_drag_state
 	tsx
 	lda 2,x ; check return address
@@ -3732,25 +5310,121 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0256
+.skipL0304
 .
- ;;line 895;; 
+ ;;line 1501;; 
 
 .
- ;;line 896;; 
+ ;;line 1502;; 
 
-.L0257 ;;line 897;;  temp2 = top_drag_state  +  4
+.L0305 ;;line 1503;;  temp2 = ballx  -  temp5
+
+	LDA ballx
+	SEC
+	SBC temp5
+	STA temp2
+.L0306 ;;line 1504;;  if temp2  >  7 then goto _skip_top_head_block
+
+	LDA #7
+	CMP temp2
+     BCS .skipL0306
+.condpart58
+ jmp ._skip_top_head_block
+.skipL0306
+.L0307 ;;line 1505;;  temp2 = temp6  -  bally  -  4
+
+; complex statement detected
+	LDA temp6
+	SEC
+	SBC bally
+	SEC
+	SBC #4
+	STA temp2
+.L0308 ;;line 1506;;  if temp2  >  15 then goto _skip_top_head_block
+
+	LDA #15
+	CMP temp2
+     BCS .skipL0308
+.condpart59
+ jmp ._skip_top_head_block
+.skipL0308
+.
+ ;;line 1507;; 
+
+.
+ ;;line 1508;; 
+
+.L0309 ;;line 1509;;  ballx = r_top_oldx  :  bally = r_top_oldy
+
+	LDA r_top_oldx
+	STA ballx
+	LDA r_top_oldy
+	STA bally
+.
+ ;;line 1510;; 
+
+.
+ ;;line 1511;; 
+
+.L0310 ;;line 1512;;  if !top_drag_state{2} then goto _skip_top_head_block
+
+	LDA top_drag_state
+	AND #4
+	BNE .skipL0310
+.condpart60
+ jmp ._skip_top_head_block
+.skipL0310
+.L0311 ;;line 1513;;  if joy0right then ballx = ballx  -  1
+
+ bit SWCHA
+	BMI .skipL0311
+.condpart61
+	DEC ballx
+.skipL0311
+.L0312 ;;line 1514;;  if joy0left then ballx = ballx  +  1
+
+ bit SWCHA
+	BVS .skipL0312
+.condpart62
+	INC ballx
+.skipL0312
+.L0313 ;;line 1515;;  if joy0down then bally = bally  -  1
+
+ lda #$20
+ bit SWCHA
+	BNE .skipL0313
+.condpart63
+	DEC bally
+.skipL0313
+.L0314 ;;line 1516;;  if joy0up then bally = bally  +  1
+
+ lda #$10
+ bit SWCHA
+	BNE .skipL0314
+.condpart64
+	INC bally
+.skipL0314
+._skip_top_head_block
+ ;;line 1517;; _skip_top_head_block
+
+.
+ ;;line 1518;; 
+
+.
+ ;;line 1519;; 
+
+.L0315 ;;line 1520;;  temp2 = top_drag_state  +  4
 
 	LDA top_drag_state
 	CLC
 	ADC #4
 	STA temp2
-.L0258 ;;line 898;;  if temp2  <  88 then top_drag_state = temp2  :  return
+.L0316 ;;line 1521;;  if temp2  <  88 then top_drag_state = temp2  :  return
 
 	LDA temp2
 	CMP #88
-     BCS .skipL0258
-.condpart37
+     BCS .skipL0316
+.condpart65
 	LDA temp2
 	STA top_drag_state
 	tsx
@@ -3760,22 +5434,22 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0258
+.skipL0316
 .
- ;;line 899;; 
+ ;;line 1522;; 
 
 .
- ;;line 900;; 
+ ;;line 1523;; 
 
-.L0259 ;;line 901;;  gosub check_top_ball_hit
+.L0317 ;;line 1524;;  gosub check_top_ball_hit
 
  jsr .check_top_ball_hit
-.L0260 ;;line 902;;  if temp4 = 0 then top_drag_state = 3  :  return
+.L0318 ;;line 1525;;  if temp4 = 0 then top_drag_state = 3  :  return
 
 	LDA temp4
 	CMP #0
-     BNE .skipL0260
-.condpart38
+     BNE .skipL0318
+.condpart66
 	LDA #3
 	STA top_drag_state
 	tsx
@@ -3785,19 +5459,19 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0260
+.skipL0318
 .
- ;;line 903;; 
+ ;;line 1526;; 
 
 .
- ;;line 904;; 
+ ;;line 1527;; 
 
-.L0261 ;;line 905;;  if DEBUG_NO_SWALLOW = 1 then top_drag_state = 3  :  return
+.L0319 ;;line 1528;;  if DEBUG_NO_SWALLOW = 1 then top_drag_state = 3  :  return
 
 	LDA #DEBUG_NO_SWALLOW
 	CMP #1
-     BNE .skipL0261
-.condpart39
+     BNE .skipL0319
+.condpart67
 	LDA #3
 	STA top_drag_state
 	tsx
@@ -3807,27 +5481,27 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0261
-.L0262 ;;line 906;;  top_drag_state = temp1  |  128
+.skipL0319
+.L0320 ;;line 1529;;  top_drag_state = temp1  |  188
 
 	LDA temp1
-	ORA #128
+	ORA #188
 	STA top_drag_state
-.L0263 ;;line 907;;  top_carried_item = 255
+.L0321 ;;line 1530;;  top_carried_item = 255
 
 	LDA #255
 	STA top_carried_item
-.L0264 ;;line 908;;  ballx = temp5  +  2  :  bally = temp6  -  13
+.L0322 ;;line 1531;;  ballx = temp5  +  3  :  bally = temp6  -  6
 
 	LDA temp5
 	CLC
-	ADC #2
+	ADC #3
 	STA ballx
 	LDA temp6
 	SEC
-	SBC #13
+	SBC #6
 	STA bally
-.L0265 ;;line 909;;  return
+.L0323 ;;line 1532;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -3837,528 +5511,31 @@ move_west_b2
 	JMP BS_return
 	RTS
 .
- ;;line 910;; 
+ ;;line 1533;; 
 
 .top_one_dragon
- ;;line 911;; top_one_dragon
+ ;;line 1534;; top_one_dragon
 
-.L0266 ;;line 912;;  temp4 = drag_dead  &  bit_mask[temp1]
+.L0324 ;;line 1535;;  temp4 = bit_mask[temp1]
+
+	LDX temp1
+	LDA bit_mask,x
+	STA temp4
+.L0325 ;;line 1536;;  drag_awake = drag_awake  |  temp4
+
+	LDA drag_awake
+	ORA temp4
+	STA drag_awake
+.L0326 ;;line 1537;;  temp4 = drag_dead  &  temp4
 
 	LDA drag_dead
-	LDX temp1
-	AND bit_mask,x
+	AND temp4
 	STA temp4
-.L0267 ;;line 913;;  if temp4  <>  0 then return
+.L0327 ;;line 1538;;  if temp4  <>  0 then return
 
 	LDA temp4
 	CMP #0
-     BEQ .skipL0267
-.condpart40
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.skipL0267
-.L0268 ;;line 914;;  if r_top_obj_room[temp1]  <>  top_room then goto top_dragon_offscreen
-
-	LDX temp1
-	LDA r_top_obj_room,x
-	CMP top_room
-     BEQ .skipL0268
-.condpart41
- jmp .top_dragon_offscreen
-.skipL0268
-.
- ;;line 915;; 
-
-.L0269 ;;line 916;;  temp5 = top_obj_x[temp1]  :  temp6 = top_obj_y[temp1]
-
-	LDX temp1
-	LDA top_obj_x,x
-	STA temp5
-	LDX temp1
-	LDA top_obj_y,x
-	STA temp6
-.L0270 ;;line 917;;  gosub check_top_sword_hit
-
- jsr .check_top_sword_hit
-.L0271 ;;line 918;;  if temp4 = 1 then drag_dead = drag_dead  |  bit_mask[temp1]  :  return
-
-	LDA temp4
-	CMP #1
-     BNE .skipL0271
-.condpart42
-	LDA drag_dead
-	LDX temp1
-	ORA bit_mask,x
-	STA drag_dead
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.skipL0271
-.
- ;;line 919;; 
-
-.
- ;;line 920;; 
-
-.L0272 ;;line 921;;  if temp1 = 1  &&  r_top_obj_room[7] = top_room then goto _top_flee_key
-
-	LDA temp1
-	CMP #1
-     BNE .skipL0272
-.condpart43
-	LDX #7
-	LDA r_top_obj_room,x
-	CMP top_room
-     BNE .skip43then
-.condpart44
- jmp ._top_flee_key
-.skip43then
-.skipL0272
-.
- ;;line 922;; 
-
-.
- ;;line 923;; 
-
-.L0273 ;;line 924;;  temp2 = ballx  +  3
-
-	LDA ballx
-	CLC
-	ADC #3
-	STA temp2
-.L0274 ;;line 925;;  temp3 = bally  +  12
-
-	LDA bally
-	CLC
-	ADC #12
-	STA temp3
-.L0275 ;;line 926;;  if temp5  <  temp2 then temp5 = temp5  +  1
-
-	LDA temp5
-	CMP temp2
-     BCS .skipL0275
-.condpart45
-	INC temp5
-.skipL0275
-.L0276 ;;line 927;;  if temp5  >  temp2 then temp5 = temp5  -  1
-
-	LDA temp2
-	CMP temp5
-     BCS .skipL0276
-.condpart46
-	DEC temp5
-.skipL0276
-.L0277 ;;line 928;;  if temp6  <  temp3 then temp6 = temp6  +  1
-
-	LDA temp6
-	CMP temp3
-     BCS .skipL0277
-.condpart47
-	INC temp6
-.skipL0277
-.L0278 ;;line 929;;  if temp6  >  temp3 then temp6 = temp6  -  1
-
-	LDA temp3
-	CMP temp6
-     BCS .skipL0278
-.condpart48
-	DEC temp6
-.skipL0278
-.L0279 ;;line 930;;  top_obj_x[temp1] = temp5  :  top_obj_y[temp1] = temp6
-
-	LDA temp5
-	LDX temp1
-	STA top_obj_x,x
-	LDA temp6
-	LDX temp1
-	STA top_obj_y,x
-.
- ;;line 931;; 
-
-.L0280 ;;line 932;;  gosub check_top_ball_hit
-
- jsr .check_top_ball_hit
-.L0281 ;;line 933;;  if temp4 = 1 then top_drag_state = temp1
-
-	LDA temp4
-	CMP #1
-     BNE .skipL0281
-.condpart49
-	LDA temp1
-	STA top_drag_state
-.skipL0281
-.L0282 ;;line 934;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.
- ;;line 935;; 
-
-._top_flee_key
- ;;line 936;; _top_flee_key
-
-.L0283 ;;line 937;;  if temp5  <  top_obj_x[7]  &&  temp5  >  20 then temp5 = temp5  -  1
-
-	LDA temp5
-	LDX #7
-	CMP top_obj_x,x
-     BCS .skipL0283
-.condpart50
-	LDA #20
-	CMP temp5
-     BCS .skip50then
-.condpart51
-	DEC temp5
-.skip50then
-.skipL0283
-.L0284 ;;line 938;;  if temp5  >=  top_obj_x[7]  &&  temp5  <  130 then temp5 = temp5  +  1
-
-	LDA temp5
-	LDX #7
-	CMP top_obj_x,x
-     BCC .skipL0284
-.condpart52
-	LDA temp5
-	CMP #130
-     BCS .skip52then
-.condpart53
-	INC temp5
-.skip52then
-.skipL0284
-.L0285 ;;line 939;;  if temp6  <  top_obj_y[7]  &&  temp6  >  18 then temp6 = temp6  -  1
-
-	LDA temp6
-	LDX #7
-	CMP top_obj_y,x
-     BCS .skipL0285
-.condpart54
-	LDA #18
-	CMP temp6
-     BCS .skip54then
-.condpart55
-	DEC temp6
-.skip54then
-.skipL0285
-.L0286 ;;line 940;;  if temp6  >=  top_obj_y[7]  &&  temp6  <  42 then temp6 = temp6  +  1
-
-	LDA temp6
-	LDX #7
-	CMP top_obj_y,x
-     BCC .skipL0286
-.condpart56
-	LDA temp6
-	CMP #42
-     BCS .skip56then
-.condpart57
-	INC temp6
-.skip56then
-.skipL0286
-.L0287 ;;line 941;;  top_obj_x[1] = temp5  :  top_obj_y[1] = temp6
-
-	LDA temp5
-	LDX #1
-	STA top_obj_x,x
-	LDA temp6
-	LDX #1
-	STA top_obj_y,x
-.L0288 ;;line 942;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.
- ;;line 943;; 
-
-.
- ;;line 944;; 
-
-.top_dragon_offscreen
- ;;line 945;; top_dragon_offscreen
-
-.L0289 ;;line 946;;  temp4 = r_top_obj_room[temp1]
-
-	LDX temp1
-	LDA r_top_obj_room,x
-	STA temp4
-.L0290 ;;line 947;;  temp5 = top_obj_x[temp1]  :  temp6 = top_obj_y[temp1]
-
-	LDX temp1
-	LDA top_obj_x,x
-	STA temp5
-	LDX temp1
-	LDA top_obj_y,x
-	STA temp6
-.L0291 ;;line 948;;  if move_north_b2[temp4] = top_room then goto _top_pursue_n
-
-	LDX temp4
-	LDA move_north_b2,x
-	CMP top_room
-     BNE .skipL0291
-.condpart58
- jmp ._top_pursue_n
-.skipL0291
-.L0292 ;;line 949;;  if move_south_b2[temp4] = top_room then goto _top_pursue_s
-
-	LDX temp4
-	LDA move_south_b2,x
-	CMP top_room
-     BNE .skipL0292
-.condpart59
- jmp ._top_pursue_s
-.skipL0292
-.L0293 ;;line 950;;  if move_east_b2[temp4] = top_room then goto _top_pursue_e
-
-	LDX temp4
-	LDA move_east_b2,x
-	CMP top_room
-     BNE .skipL0293
-.condpart60
- jmp ._top_pursue_e
-.skipL0293
-.L0294 ;;line 951;;  if move_west_b2[temp4] = top_room then goto _top_pursue_w
-
-	LDX temp4
-	LDA move_west_b2,x
-	CMP top_room
-     BNE .skipL0294
-.condpart61
- jmp ._top_pursue_w
-.skipL0294
-.L0295 ;;line 952;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.
- ;;line 953;; 
-
-._top_pursue_n
- ;;line 954;; _top_pursue_n
-
-.L0296 ;;line 955;;  if temp6  >  3 then top_obj_y[temp1] = temp6  -  1  :  return
-
-	LDA #3
-	CMP temp6
-     BCS .skipL0296
-.condpart62
-	LDA temp6
-	SEC
-	SBC #1
-	LDX temp1
-	STA top_obj_y,x
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.skipL0296
-.L0297 ;;line 956;;  w_top_obj_room[temp1] = top_room  :  top_obj_y[temp1] = 28  :  return
-
-	LDA top_room
-	LDX temp1
-	STA w_top_obj_room,x
-	LDA #28
-	LDX temp1
-	STA top_obj_y,x
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.
- ;;line 957;; 
-
-._top_pursue_s
- ;;line 958;; _top_pursue_s
-
-.L0298 ;;line 959;;  if temp6  <  38 then top_obj_y[temp1] = temp6  +  1  :  return
-
-	LDA temp6
-	CMP #38
-     BCS .skipL0298
-.condpart63
-	LDA temp6
-	CLC
-	ADC #1
-	LDX temp1
-	STA top_obj_y,x
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.skipL0298
-.L0299 ;;line 960;;  w_top_obj_room[temp1] = top_room  :  top_obj_y[temp1] = 4  :  return
-
-	LDA top_room
-	LDX temp1
-	STA w_top_obj_room,x
-	LDA #4
-	LDX temp1
-	STA top_obj_y,x
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.
- ;;line 961;; 
-
-._top_pursue_e
- ;;line 962;; _top_pursue_e
-
-.L0300 ;;line 963;;  if temp5  <  134 then top_obj_x[temp1] = temp5  +  1  :  return
-
-	LDA temp5
-	CMP #134
-     BCS .skipL0300
-.condpart64
-	LDA temp5
-	CLC
-	ADC #1
-	LDX temp1
-	STA top_obj_x,x
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.skipL0300
-.L0301 ;;line 964;;  w_top_obj_room[temp1] = top_room  :  top_obj_x[temp1] = 18  :  return
-
-	LDA top_room
-	LDX temp1
-	STA w_top_obj_room,x
-	LDA #18
-	LDX temp1
-	STA top_obj_x,x
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.
- ;;line 965;; 
-
-._top_pursue_w
- ;;line 966;; _top_pursue_w
-
-.L0302 ;;line 967;;  if temp5  >  18 then top_obj_x[temp1] = temp5  -  1  :  return
-
-	LDA #18
-	CMP temp5
-     BCS .skipL0302
-.condpart65
-	LDA temp5
-	SEC
-	SBC #1
-	LDX temp1
-	STA top_obj_x,x
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.skipL0302
-.L0303 ;;line 968;;  w_top_obj_room[temp1] = top_room  :  top_obj_x[temp1] = 132  :  return
-
-	LDA top_room
-	LDX temp1
-	STA w_top_obj_room,x
-	LDA #132
-	LDX temp1
-	STA top_obj_x,x
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.
- ;;line 969;; 
-
-.check_top_sword_hit
- ;;line 970;; check_top_sword_hit
-
-.L0304 ;;line 971;;  temp4 = 0
-
-	LDA #0
-	STA temp4
-.L0305 ;;line 972;;  if r_top_obj_room[4]  <>  top_room then return
-
-	LDX #4
-	LDA r_top_obj_room,x
-	CMP top_room
-     BEQ .skipL0305
-.condpart66
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.skipL0305
-.L0306 ;;line 973;;  temp2 = temp5  +  8  :  temp3 = top_obj_x[4]  +  8
-
-	LDA temp5
-	CLC
-	ADC #8
-	STA temp2
-	LDX #4
-	LDA top_obj_x,x
-	CLC
-	ADC #8
-	STA temp3
-.L0307 ;;line 974;;  if temp2  <  top_obj_x[4]  ||  temp5  >  temp3 then return
-
-	LDA temp2
-	LDX #4
-	CMP top_obj_x,x
-     BCS .skipL0307
-.condpart67
- jmp .condpart68
-.skipL0307
-	LDA temp3
-	CMP temp5
-     BCS .skip9OR
+     BEQ .skipL0327
 .condpart68
 	tsx
 	lda 2,x ; check return address
@@ -4367,275 +5544,35 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skip9OR
-.L0308 ;;line 975;;  temp2 = temp6  +  20  :  temp3 = top_obj_y[4]  +  6
+.skipL0327
+.
+ ;;line 1539;; 
 
-	LDA temp6
-	CLC
-	ADC #20
-	STA temp2
-	LDX #4
+.L0328 ;;line 1540;;  temp5 = top_obj_x[temp1]  :  temp6 = top_obj_y[temp1]
+
+	LDX temp1
+	LDA top_obj_x,x
+	STA temp5
+	LDX temp1
 	LDA top_obj_y,x
-	CLC
-	ADC #6
-	STA temp3
-.L0309 ;;line 976;;  if temp2  <  top_obj_y[4]  ||  temp6  >  temp3 then return
+	STA temp6
+.L0329 ;;line 1541;;  gosub check_top_sword_hit
 
-	LDA temp2
-	LDX #4
-	CMP top_obj_y,x
-     BCS .skipL0309
+ jsr .check_top_sword_hit
+.L0330 ;;line 1542;;  if temp4 = 1 then drag_dead = drag_dead  |  bit_mask[temp1]  :  top_drag_state = 103  :  temp4 = 2  :  return
+
+	LDA temp4
+	CMP #1
+     BNE .skipL0330
 .condpart69
- jmp .condpart70
-.skipL0309
-	LDA temp3
-	CMP temp6
-     BCS .skip10OR
-.condpart70
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.skip10OR
-.L0310 ;;line 977;;  temp4 = 1
-
-	LDA #1
-	STA temp4
-.L0311 ;;line 978;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.
- ;;line 979;; 
-
-.check_top_ball_hit
- ;;line 980;; check_top_ball_hit
-
-.L0312 ;;line 981;;  temp4 = 0
-
-	LDA #0
-	STA temp4
-.
- ;;line 982;; 
-
-.L0313 ;;line 983;;  temp2 = ballx  +  1  :  temp3 = ballx  +  6
-
-	LDA ballx
-	CLC
-	ADC #1
-	STA temp2
-	LDA ballx
-	CLC
-	ADC #6
-	STA temp3
-.L0314 ;;line 984;;  if temp5  <  temp2  ||  temp5  >  temp3 then return
-
-	LDA temp5
-	CMP temp2
-     BCS .skipL0314
-.condpart71
- jmp .condpart72
-.skipL0314
-	LDA temp3
-	CMP temp5
-     BCS .skip11OR
-.condpart72
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.skip11OR
-.L0315 ;;line 985;;  temp2 = bally  +  9  :  temp3 = bally  +  15
-
-	LDA bally
-	CLC
-	ADC #9
-	STA temp2
-	LDA bally
-	CLC
-	ADC #15
-	STA temp3
-.L0316 ;;line 986;;  if temp6  <  temp2  ||  temp6  >  temp3 then return
-
-	LDA temp6
-	CMP temp2
-     BCS .skipL0316
-.condpart73
- jmp .condpart74
-.skipL0316
-	LDA temp3
-	CMP temp6
-     BCS .skip12OR
-.condpart74
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.skip12OR
-.L0317 ;;line 987;;  temp4 = 1
-
-	LDA #1
-	STA temp4
-.L0318 ;;line 988;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.
- ;;line 989;; 
-
-.
- ;;line 990;; 
-
-.
- ;;line 991;; 
-
-.
- ;;line 992;; 
-
-.update_bot_dragons
- ;;line 993;; update_bot_dragons
-
-.L0319 ;;line 994;;  if bot_drag_state{7} then gosub bot_drag_eaten  :  return otherbank
-
-	BIT bot_drag_state
-	BPL .skipL0319
-.condpart75
- jsr .bot_drag_eaten
-	JMP BS_return
-.skipL0319
-.L0320 ;;line 995;;  temp1 = bot_drag_state  &  3
-
-	LDA bot_drag_state
-	AND #3
-	STA temp1
-.L0321 ;;line 996;;  if temp1  <  3 then gosub bot_drag_roaring  :  return otherbank
-
-	LDA temp1
-	CMP #3
-     BCS .skipL0321
-.condpart76
- jsr .bot_drag_roaring
-	JMP BS_return
-.skipL0321
-.
- ;;line 997;; 
-
-.L0322 ;;line 998;;  temp1 = 0  :  gosub bot_one_dragon
-
-	LDA #0
-	STA temp1
- jsr .bot_one_dragon
-.L0323 ;;line 999;;  temp1 = 1  :  gosub bot_one_dragon
-
-	LDA #1
-	STA temp1
- jsr .bot_one_dragon
-.L0324 ;;line 1000;;  temp1 = 2  :  gosub bot_one_dragon
-
+	LDA drag_dead
+	LDX temp1
+	ORA bit_mask,x
+	STA drag_dead
+	LDA #103
+	STA top_drag_state
 	LDA #2
-	STA temp1
- jsr .bot_one_dragon
-.L0325 ;;line 1001;;  return otherbank
-
-	JMP BS_return
-.
- ;;line 1002;; 
-
-.bot_drag_eaten
- ;;line 1003;; bot_drag_eaten
-
-.L0326 ;;line 1004;;  if joy1fire then bot_drag_state = 3  :  bottom_room = ENTRY_YELLOW  :  p2_ballx = 92  :  p2_bally = 38  :  room_flags{1} = 1  :  return
-
- bit INPT5
-	BMI .skipL0326
-.condpart77
-	LDA #3
-	STA bot_drag_state
-	LDA #ENTRY_YELLOW
-	STA bottom_room
-	LDA #92
-	STA p2_ballx
-	LDA #38
-	STA p2_bally
-	LDA room_flags
-	ORA #2
-	STA room_flags
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.skipL0326
-.L0327 ;;line 1005;;  temp1 = bot_drag_state  &  3
-
-	LDA bot_drag_state
-	AND #3
-	STA temp1
-.L0328 ;;line 1006;;  if temp1  <  3 then p2_ballx = bot_obj_x[temp1]  +  2  :  p2_bally = bot_obj_y[temp1]  -  13
-
-	LDA temp1
-	CMP #3
-     BCS .skipL0328
-.condpart78
-	LDX temp1
-	LDA bot_obj_x,x
-	CLC
-	ADC #2
-	STA p2_ballx
-	LDX temp1
-	LDA bot_obj_y,x
-	SEC
-	SBC #13
-	STA p2_bally
-.skipL0328
-.L0329 ;;line 1007;;  return
-
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
-.
- ;;line 1008;; 
-
-.bot_drag_roaring
- ;;line 1009;; bot_drag_roaring
-
-.
- ;;line 1010;; 
-
-.L0330 ;;line 1011;;  if r_bot_obj_room[temp1]  <>  bottom_room then bot_drag_state = 3  :  return
-
-	LDX temp1
-	LDA r_bot_obj_room,x
-	CMP bottom_room
-     BEQ .skipL0330
-.condpart79
-	LDA #3
-	STA bot_drag_state
+	STA temp4
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -4644,27 +5581,983 @@ move_west_b2
 	JMP BS_return
 	RTS
 .skipL0330
-.L0331 ;;line 1012;;  temp5 = bot_obj_x[temp1]  :  temp6 = bot_obj_y[temp1]
+.
+ ;;line 1543;; 
 
+.
+ ;;line 1544;; 
+
+.L0331 ;;line 1545;;  if temp1 = 1  &&  r_top_obj_room[7] = top_room then goto _top_flee_key
+
+	LDA temp1
+	CMP #1
+     BNE .skipL0331
+.condpart70
+	LDX #7
+	LDA r_top_obj_room,x
+	CMP top_room
+     BNE .skip70then
+.condpart71
+ jmp ._top_flee_key
+.skip70then
+.skipL0331
+.
+ ;;line 1546;; 
+
+.
+ ;;line 1547;; 
+
+.L0332 ;;line 1548;;  temp2 = ballx  +  1
+
+	LDA ballx
+	CLC
+	ADC #1
+	STA temp2
+.L0333 ;;line 1549;;  temp3 = bally  +  16
+
+	LDA bally
+	CLC
+	ADC #16
+	STA temp3
+.L0334 ;;line 1550;;  if temp5  <  temp2 then temp5 = temp5  +  1
+
+	LDA temp5
+	CMP temp2
+     BCS .skipL0334
+.condpart72
+	INC temp5
+.skipL0334
+.L0335 ;;line 1551;;  if temp5  >  temp2 then temp5 = temp5  -  1
+
+	LDA temp2
+	CMP temp5
+     BCS .skipL0335
+.condpart73
+	DEC temp5
+.skipL0335
+.L0336 ;;line 1552;;  if temp6  <  temp3 then temp6 = temp6  +  1
+
+	LDA temp6
+	CMP temp3
+     BCS .skipL0336
+.condpart74
+	INC temp6
+.skipL0336
+.L0337 ;;line 1553;;  if temp6  >  temp3 then temp6 = temp6  -  1
+
+	LDA temp3
+	CMP temp6
+     BCS .skipL0337
+.condpart75
+	DEC temp6
+.skipL0337
+.L0338 ;;line 1554;;  top_obj_x[temp1] = temp5  :  top_obj_y[temp1] = temp6
+
+	LDA temp5
+	LDX temp1
+	STA top_obj_x,x
+	LDA temp6
+	LDX temp1
+	STA top_obj_y,x
+.
+ ;;line 1555;; 
+
+.
+ ;;line 1556;; 
+
+.L0339 ;;line 1557;;  if temp5 = temp2  &&  temp6 = temp3 then top_drag_state = temp1
+
+	LDA temp5
+	CMP temp2
+     BNE .skipL0339
+.condpart76
+	LDA temp6
+	CMP temp3
+     BNE .skip76then
+.condpart77
+	LDA temp1
+	STA top_drag_state
+.skip76then
+.skipL0339
+.L0340 ;;line 1558;;  temp4 = 2
+
+	LDA #2
+	STA temp4
+.L0341 ;;line 1559;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 1560;; 
+
+._top_flee_key
+ ;;line 1561;; _top_flee_key
+
+.L0342 ;;line 1562;;  if temp5  <  top_obj_x[7]  &&  temp5  >  20 then temp5 = temp5  -  1
+
+	LDA temp5
+	LDX #7
+	CMP top_obj_x,x
+     BCS .skipL0342
+.condpart78
+	LDA #20
+	CMP temp5
+     BCS .skip78then
+.condpart79
+	DEC temp5
+.skip78then
+.skipL0342
+.L0343 ;;line 1563;;  if temp5  >=  top_obj_x[7]  &&  temp5  <  130 then temp5 = temp5  +  1
+
+	LDA temp5
+	LDX #7
+	CMP top_obj_x,x
+     BCC .skipL0343
+.condpart80
+	LDA temp5
+	CMP #130
+     BCS .skip80then
+.condpart81
+	INC temp5
+.skip80then
+.skipL0343
+.L0344 ;;line 1564;;  if temp6  <  top_obj_y[7]  &&  temp6  >  18 then temp6 = temp6  -  1
+
+	LDA temp6
+	LDX #7
+	CMP top_obj_y,x
+     BCS .skipL0344
+.condpart82
+	LDA #18
+	CMP temp6
+     BCS .skip82then
+.condpart83
+	DEC temp6
+.skip82then
+.skipL0344
+.L0345 ;;line 1565;;  if temp6  >=  top_obj_y[7]  &&  temp6  <  42 then temp6 = temp6  +  1
+
+	LDA temp6
+	LDX #7
+	CMP top_obj_y,x
+     BCC .skipL0345
+.condpart84
+	LDA temp6
+	CMP #42
+     BCS .skip84then
+.condpart85
+	INC temp6
+.skip84then
+.skipL0345
+.L0346 ;;line 1566;;  top_obj_x[1] = temp5  :  top_obj_y[1] = temp6
+
+	LDA temp5
+	LDX #1
+	STA top_obj_x,x
+	LDA temp6
+	LDX #1
+	STA top_obj_y,x
+.L0347 ;;line 1567;;  temp4 = 2
+
+	LDA #2
+	STA temp4
+.L0348 ;;line 1568;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 1569;; 
+
+.
+ ;;line 1570;; 
+
+.
+ ;;line 1571;; 
+
+.
+ ;;line 1572;; 
+
+.top_dragon_offscreen
+ ;;line 1573;; top_dragon_offscreen
+
+.L0349 ;;line 1574;;  asm
+
+   ldy top_room
+
+   bne .t_pursue_go
+
+   rts
+
+.t_pursue_go
+
+   ldx temp1
+
+   lda drag_awake
+
+   and bit_mask,x
+
+   bne .t_pursue_awake
+
+   rts
+
+.t_pursue_awake
+
+   lda r_top_obj_room,x
+
+   sta temp4
+
+   lda top_obj_x,x
+
+   sta temp5
+
+   lda top_obj_y,x
+
+   sta temp6
+
+   ldx temp4
+
+
+
+   lda gate_state
+
+   cmp #$40
+
+   bcs .t_std_adj
+
+   cpx #16
+
+   bne .t_g1_22
+
+   cpy #22
+
+   bne .t_std_adj
+
+   jmp ._top_pursue_s
+
+.t_g1_22
+
+   cpx #22
+
+   bne .t_g1_12
+
+   cpy #16
+
+   bne .t_std_adj
+
+   jmp ._top_pursue_n
+
+.t_g1_12
+
+   cpx #12
+
+   bne .t_g1_28
+
+   cpy #28
+
+   bne .t_std_adj
+
+   jmp ._top_pursue_n
+
+.t_g1_28
+
+   cpx #28
+
+   bne .t_std_adj
+
+   cpy #12
+
+   bne .t_std_adj
+
+   jmp ._top_pursue_s
+
+
+
+.t_std_adj
+
+   tya
+
+   cmp move_north_b2,x
+
+   bne .t_not_n
+
+   jmp ._top_pursue_n
+
+.t_not_n
+
+   cmp move_south_b2,x
+
+   bne .t_not_s
+
+   jmp ._top_pursue_s
+
+.t_not_s
+
+   cmp move_east_b2,x
+
+   bne .t_not_e
+
+   jmp ._top_pursue_e
+
+.t_not_e
+
+   cmp move_west_b2,x
+
+   bne .t_not_w
+
+   jmp ._top_pursue_w
+
+.t_not_w
+
+   rts
+
+.
+ ;;line 1640;; 
+
+._top_pursue_n
+ ;;line 1641;; _top_pursue_n
+
+.L0350 ;;line 1642;;  if temp6  >  3 then top_obj_y[temp1] = temp6  -  1  :  return
+
+	LDA #3
+	CMP temp6
+     BCS .skipL0350
+.condpart86
+	LDA temp6
+	SEC
+	SBC #1
+	LDX temp1
+	STA top_obj_y,x
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0350
+.L0351 ;;line 1643;;  w_top_obj_room[temp1] = top_room  :  top_obj_y[temp1] = bally  +  16  :  top_obj_x[temp1] = ballx  :  return
+
+	LDA top_room
+	LDX temp1
+	STA w_top_obj_room,x
+	LDA bally
+	CLC
+	ADC #16
+	LDX temp1
+	STA top_obj_y,x
+	LDA ballx
+	LDX temp1
+	STA top_obj_x,x
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 1644;; 
+
+._top_pursue_s
+ ;;line 1645;; _top_pursue_s
+
+.L0352 ;;line 1646;;  if temp6  <  42 then top_obj_y[temp1] = temp6  +  1  :  return
+
+	LDA temp6
+	CMP #42
+     BCS .skipL0352
+.condpart87
+	LDA temp6
+	CLC
+	ADC #1
+	LDX temp1
+	STA top_obj_y,x
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0352
+.L0353 ;;line 1647;;  w_top_obj_room[temp1] = top_room  :  top_obj_y[temp1] = 4  :  top_obj_x[temp1] = ballx  :  return
+
+	LDA top_room
+	LDX temp1
+	STA w_top_obj_room,x
+	LDA #4
+	LDX temp1
+	STA top_obj_y,x
+	LDA ballx
+	LDX temp1
+	STA top_obj_x,x
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 1648;; 
+
+._top_pursue_e
+ ;;line 1649;; _top_pursue_e
+
+.L0354 ;;line 1650;;  if temp5  <  134 then top_obj_x[temp1] = temp5  +  1  :  return
+
+	LDA temp5
+	CMP #134
+     BCS .skipL0354
+.condpart88
+	LDA temp5
+	CLC
+	ADC #1
+	LDX temp1
+	STA top_obj_x,x
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0354
+.L0355 ;;line 1651;;  w_top_obj_room[temp1] = top_room  :  top_obj_x[temp1] = 18  :  top_obj_y[temp1] = bally  +  16  :  return
+
+	LDA top_room
+	LDX temp1
+	STA w_top_obj_room,x
+	LDA #18
+	LDX temp1
+	STA top_obj_x,x
+	LDA bally
+	CLC
+	ADC #16
+	LDX temp1
+	STA top_obj_y,x
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 1652;; 
+
+._top_pursue_w
+ ;;line 1653;; _top_pursue_w
+
+.L0356 ;;line 1654;;  if temp5  >  18 then top_obj_x[temp1] = temp5  -  1  :  return
+
+	LDA #18
+	CMP temp5
+     BCS .skipL0356
+.condpart89
+	LDA temp5
+	SEC
+	SBC #1
+	LDX temp1
+	STA top_obj_x,x
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0356
+.L0357 ;;line 1655;;  w_top_obj_room[temp1] = top_room  :  top_obj_x[temp1] = 132  :  top_obj_y[temp1] = bally  +  16  :  return
+
+	LDA top_room
+	LDX temp1
+	STA w_top_obj_room,x
+	LDA #132
+	LDX temp1
+	STA top_obj_x,x
+	LDA bally
+	CLC
+	ADC #16
+	LDX temp1
+	STA top_obj_y,x
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 1656;; 
+
+.
+ ;;line 1657;; 
+
+.check_top_sword_hit
+ ;;line 1658;; check_top_sword_hit
+
+.L0358 ;;line 1659;;  temp4 = 0
+
+	LDA #0
+	STA temp4
+.L0359 ;;line 1660;;  if r_top_obj_room[4]  <>  top_room then return
+
+	LDX #4
+	LDA r_top_obj_room,x
+	CMP top_room
+     BEQ .skipL0359
+.condpart90
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0359
+.L0360 ;;line 1661;;  temp2 = temp5  -  top_obj_x[4]  +  7
+
+; complex statement detected
+	LDA temp5
+	LDX #4
+	SEC
+	SBC top_obj_x,x
+	CLC
+	ADC #7
+	STA temp2
+.L0361 ;;line 1662;;  if temp2  >  14 then return
+
+	LDA #14
+	CMP temp2
+     BCS .skipL0361
+.condpart91
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0361
+.L0362 ;;line 1663;;  temp2 = temp6  -  top_obj_y[4]  +  3
+
+; complex statement detected
+	LDA temp6
+	LDX #4
+	SEC
+	SBC top_obj_y,x
+	CLC
+	ADC #3
+	STA temp2
+.L0363 ;;line 1664;;  if temp2  >  22 then return
+
+	LDA #22
+	CMP temp2
+     BCS .skipL0363
+.condpart92
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0363
+.L0364 ;;line 1665;;  temp4 = 1
+
+	LDA #1
+	STA temp4
+.L0365 ;;line 1666;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 1667;; 
+
+.check_top_ball_hit
+ ;;line 1668;; check_top_ball_hit
+
+.L0366 ;;line 1669;;  temp4 = 0
+
+	LDA #0
+	STA temp4
+.
+ ;;line 1670;; 
+
+.L0367 ;;line 1671;;  temp2 = temp5  -  ballx  +  1
+
+; complex statement detected
+	LDA temp5
+	SEC
+	SBC ballx
+	CLC
+	ADC #1
+	STA temp2
+.L0368 ;;line 1672;;  if temp2  >  5 then return
+
+	LDA #5
+	CMP temp2
+     BCS .skipL0368
+.condpart93
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0368
+.L0369 ;;line 1673;;  temp2 = temp6  -  bally  -  13
+
+; complex statement detected
+	LDA temp6
+	SEC
+	SBC bally
+	SEC
+	SBC #13
+	STA temp2
+.L0370 ;;line 1674;;  if temp2  >  6 then return
+
+	LDA #6
+	CMP temp2
+     BCS .skipL0370
+.condpart94
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0370
+.L0371 ;;line 1675;;  temp4 = 1
+
+	LDA #1
+	STA temp4
+.L0372 ;;line 1676;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 1677;; 
+
+.
+ ;;line 1678;; 
+
+.
+ ;;line 1679;; 
+
+.
+ ;;line 1680;; 
+
+.update_bot_dragons
+ ;;line 1681;; update_bot_dragons
+
+.L0373 ;;line 1682;;  if bot_drag_state{7} then gosub bot_drag_eaten  :  goto update_bot_magnet
+
+	BIT bot_drag_state
+	BPL .skipL0373
+.condpart95
+ jsr .bot_drag_eaten
+ jmp .update_bot_magnet
+.skipL0373
+.L0374 ;;line 1683;;  temp1 = bot_drag_state  &  3
+
+	LDA bot_drag_state
+	AND #3
+	STA temp1
+.L0375 ;;line 1684;;  if temp1  <  3 then gosub bot_drag_roaring  :  goto update_bot_magnet
+
+	LDA temp1
+	CMP #3
+     BCS .skipL0375
+.condpart96
+ jsr .bot_drag_roaring
+ jmp .update_bot_magnet
+.skipL0375
+.
+ ;;line 1685;; 
+
+.
+ ;;line 1686;; 
+
+.L0376 ;;line 1687;;  if r_bot_obj_room[0] = bottom_room then temp1 = 0  :  gosub bot_one_dragon  :  if temp4 = 2 then goto update_bot_magnet
+
+	LDX #0
+	LDA r_bot_obj_room,x
+	CMP bottom_room
+     BNE .skipL0376
+.condpart97
+	LDA #0
+	STA temp1
+ jsr .bot_one_dragon
+	LDA temp4
+	CMP #2
+     BNE .skip97then
+.condpart98
+ jmp .update_bot_magnet
+.skip97then
+.skipL0376
+.L0377 ;;line 1688;;  if r_bot_obj_room[1] = bottom_room then temp1 = 1  :  gosub bot_one_dragon  :  if temp4 = 2 then goto update_bot_magnet
+
+	LDX #1
+	LDA r_bot_obj_room,x
+	CMP bottom_room
+     BNE .skipL0377
+.condpart99
+	LDA #1
+	STA temp1
+ jsr .bot_one_dragon
+	LDA temp4
+	CMP #2
+     BNE .skip99then
+.condpart100
+ jmp .update_bot_magnet
+.skip99then
+.skipL0377
+.L0378 ;;line 1689;;  if r_bot_obj_room[2] = bottom_room then temp1 = 2  :  gosub bot_one_dragon  :  if temp4 = 2 then goto update_bot_magnet
+
+	LDX #2
+	LDA r_bot_obj_room,x
+	CMP bottom_room
+     BNE .skipL0378
+.condpart101
+	LDA #2
+	STA temp1
+ jsr .bot_one_dragon
+	LDA temp4
+	CMP #2
+     BNE .skip101then
+.condpart102
+ jmp .update_bot_magnet
+.skip101then
+.skipL0378
+.
+ ;;line 1690;; 
+
+.
+ ;;line 1691;; 
+
+.L0379 ;;line 1692;;  if !drag_dead{3} then temp1 = 0  :  gosub bot_dragon_offscreen
+
+	LDA drag_dead
+	AND #8
+	BNE .skipL0379
+.condpart103
+	LDA #0
+	STA temp1
+ jsr .bot_dragon_offscreen
+.skipL0379
+.L0380 ;;line 1693;;  if !drag_dead{4} then temp1 = 1  :  gosub bot_dragon_offscreen
+
+	LDA drag_dead
+	AND #16
+	BNE .skipL0380
+.condpart104
+	LDA #1
+	STA temp1
+ jsr .bot_dragon_offscreen
+.skipL0380
+.L0381 ;;line 1694;;  if !drag_dead{5} then temp1 = 2  :  gosub bot_dragon_offscreen
+
+	LDA drag_dead
+	AND #32
+	BNE .skipL0381
+.condpart105
+	LDA #2
+	STA temp1
+ jsr .bot_dragon_offscreen
+.skipL0381
+.L0382 ;;line 1695;;  goto update_bot_magnet
+
+ jmp .update_bot_magnet
+.
+ ;;line 1696;; 
+
+.bot_drag_eaten
+ ;;line 1697;; bot_drag_eaten
+
+.L0383 ;;line 1698;;  temp1 = bot_drag_state  &  3
+
+	LDA bot_drag_state
+	AND #3
+	STA temp1
+.L0384 ;;line 1699;;  if !joy1fire then goto _bot_eaten_pos
+
+ bit INPT5
+	BPL .skipL0384
+.condpart106
+ jmp ._bot_eaten_pos
+.skipL0384
+.L0385 ;;line 1700;;  if r_bot_obj_room[temp1]  <>  ENTRY_YELLOW then goto _skip_bot_d_home
+
+	LDX temp1
+	LDA r_bot_obj_room,x
+	CMP #ENTRY_YELLOW
+     BEQ .skipL0385
+.condpart107
+ jmp ._skip_bot_d_home
+.skipL0385
+.L0386 ;;line 1701;;  if gate_state  <  $40 then temp2 = init_rooms_g1[temp1] else temp2 = init_rooms[temp1]
+
+	LDA gate_state
+	CMP #$40
+     BCS .skipL0386
+.condpart108
+	LDX temp1
+	LDA init_rooms_g1,x
+	STA temp2
+ jmp .skipelse4
+.skipL0386
+	LDX temp1
+	LDA init_rooms,x
+	STA temp2
+.skipelse4
+.L0387 ;;line 1702;;  w_bot_obj_room[temp1] = temp2
+
+	LDA temp2
+	LDX temp1
+	STA w_bot_obj_room,x
+.L0388 ;;line 1703;;  temp2 = bot_bit_mask[temp1]  ^  255
+
+	LDX temp1
+	LDA bot_bit_mask,x
+	EOR #255
+	STA temp2
+.L0389 ;;line 1704;;  drag_awake = drag_awake  &  temp2
+
+	LDA drag_awake
+	AND temp2
+	STA drag_awake
+._skip_bot_d_home
+ ;;line 1705;; _skip_bot_d_home
+
+.L0390 ;;line 1706;;  bot_drag_state = 3  :  drag_dead = drag_dead  &  %11000111
+
+	LDA #3
+	STA bot_drag_state
+	LDA drag_dead
+	AND #%11000111
+	STA drag_dead
+.L0391 ;;line 1707;;  bottom_room = ENTRY_YELLOW  :  p2_ballx = 92  :  p2_bally = 38  :  w_bottom_oldx = 92  :  w_bottom_oldy = 38
+
+	LDA #ENTRY_YELLOW
+	STA bottom_room
+	LDA #92
+	STA p2_ballx
+	LDA #38
+	STA p2_bally
+	LDA #92
+	STA w_bottom_oldx
+	LDA #38
+	STA w_bottom_oldy
+.L0392 ;;line 1708;;  gosub load_bottom_room bank1  :  gosub check_gates bank3  :  return
+
+ sta temp7
+ lda #>(ret_point17-1)
+ pha
+ lda #<(ret_point17-1)
+ pha
+ lda #>(.load_bottom_room-1)
+ pha
+ lda #<(.load_bottom_room-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #1
+ jmp BS_jsr
+ret_point17
+ sta temp7
+ lda #>(ret_point18-1)
+ pha
+ lda #<(ret_point18-1)
+ pha
+ lda #>(.check_gates-1)
+ pha
+ lda #<(.check_gates-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #3
+ jmp BS_jsr
+ret_point18
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+._bot_eaten_pos
+ ;;line 1709;; _bot_eaten_pos
+
+.L0393 ;;line 1710;;  if temp1  <  3 then p2_ballx = bot_obj_x[temp1]  + 3  :  p2_bally = bot_obj_y[temp1]  -  6
+
+	LDA temp1
+	CMP #3
+     BCS .skipL0393
+.condpart109
 	LDX temp1
 	LDA bot_obj_x,x
-	STA temp5
+	CLC
+	ADC #3
+	STA p2_ballx
 	LDX temp1
 	LDA bot_obj_y,x
-	STA temp6
-.L0332 ;;line 1013;;  gosub check_bot_sword_hit
+	SEC
+	SBC #6
+	STA p2_bally
+.skipL0393
+.L0394 ;;line 1711;;  return
 
- jsr .check_bot_sword_hit
-.L0333 ;;line 1014;;  if temp4 = 1 then drag_dead = drag_dead  |  bot_bit_mask[temp1]  :  bot_drag_state = 3  :  return
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 1712;; 
 
-	LDA temp4
-	CMP #1
-     BNE .skipL0333
-.condpart80
-	LDA drag_dead
+.bot_drag_roaring
+ ;;line 1713;; bot_drag_roaring
+
+.
+ ;;line 1714;; 
+
+.L0395 ;;line 1715;;  if r_bot_obj_room[temp1]  <>  bottom_room then bot_drag_state = 3  :  return
+
 	LDX temp1
-	ORA bot_bit_mask,x
-	STA drag_dead
+	LDA r_bot_obj_room,x
+	CMP bottom_room
+     BEQ .skipL0395
+.condpart110
 	LDA #3
 	STA bot_drag_state
 	tsx
@@ -4674,25 +6567,154 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0333
+.skipL0395
+.L0396 ;;line 1716;;  temp5 = bot_obj_x[temp1]  :  temp6 = bot_obj_y[temp1]
+
+	LDX temp1
+	LDA bot_obj_x,x
+	STA temp5
+	LDX temp1
+	LDA bot_obj_y,x
+	STA temp6
+.L0397 ;;line 1717;;  gosub check_bot_sword_hit
+
+ jsr .check_bot_sword_hit
+.L0398 ;;line 1718;;  if temp4 = 1 then drag_dead = drag_dead  |  bot_bit_mask[temp1]  :  bot_drag_state = 103  :  return
+
+	LDA temp4
+	CMP #1
+     BNE .skipL0398
+.condpart111
+	LDA drag_dead
+	LDX temp1
+	ORA bot_bit_mask,x
+	STA drag_dead
+	LDA #103
+	STA bot_drag_state
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0398
 .
- ;;line 1015;; 
+ ;;line 1719;; 
 
 .
- ;;line 1016;; 
+ ;;line 1720;; 
 
-.L0334 ;;line 1017;;  temp2 = bot_drag_state  +  4
+.L0399 ;;line 1721;;  temp2 = p2_ballx  -  temp5
+
+	LDA p2_ballx
+	SEC
+	SBC temp5
+	STA temp2
+.L0400 ;;line 1722;;  if temp2  >  7 then goto _skip_bot_head_block
+
+	LDA #7
+	CMP temp2
+     BCS .skipL0400
+.condpart112
+ jmp ._skip_bot_head_block
+.skipL0400
+.L0401 ;;line 1723;;  temp2 = temp6  -  p2_bally  -  4
+
+; complex statement detected
+	LDA temp6
+	SEC
+	SBC p2_bally
+	SEC
+	SBC #4
+	STA temp2
+.L0402 ;;line 1724;;  if temp2  >  15 then goto _skip_bot_head_block
+
+	LDA #15
+	CMP temp2
+     BCS .skipL0402
+.condpart113
+ jmp ._skip_bot_head_block
+.skipL0402
+.
+ ;;line 1725;; 
+
+.
+ ;;line 1726;; 
+
+.L0403 ;;line 1727;;  p2_ballx = r_bottom_oldx  :  p2_bally = r_bottom_oldy
+
+	LDA r_bottom_oldx
+	STA p2_ballx
+	LDA r_bottom_oldy
+	STA p2_bally
+.
+ ;;line 1728;; 
+
+.
+ ;;line 1729;; 
+
+.L0404 ;;line 1730;;  if !bot_drag_state{2} then goto _skip_bot_head_block
+
+	LDA bot_drag_state
+	AND #4
+	BNE .skipL0404
+.condpart114
+ jmp ._skip_bot_head_block
+.skipL0404
+.L0405 ;;line 1731;;  if joy1right then p2_ballx = p2_ballx  -  1
+
+ lda #8
+ bit SWCHA
+	BNE .skipL0405
+.condpart115
+	DEC p2_ballx
+.skipL0405
+.L0406 ;;line 1732;;  if joy1left then p2_ballx = p2_ballx  +  1
+
+ lda #4
+ bit SWCHA
+	BNE .skipL0406
+.condpart116
+	INC p2_ballx
+.skipL0406
+.L0407 ;;line 1733;;  if joy1down then p2_bally = p2_bally  -  1
+
+ lda #2
+ bit SWCHA
+	BNE .skipL0407
+.condpart117
+	DEC p2_bally
+.skipL0407
+.L0408 ;;line 1734;;  if joy1up then p2_bally = p2_bally  +  1
+
+ lda #1
+ bit SWCHA
+	BNE .skipL0408
+.condpart118
+	INC p2_bally
+.skipL0408
+._skip_bot_head_block
+ ;;line 1735;; _skip_bot_head_block
+
+.
+ ;;line 1736;; 
+
+.
+ ;;line 1737;; 
+
+.L0409 ;;line 1738;;  temp2 = bot_drag_state  +  4
 
 	LDA bot_drag_state
 	CLC
 	ADC #4
 	STA temp2
-.L0335 ;;line 1018;;  if temp2  <  88 then bot_drag_state = temp2  :  return
+.L0410 ;;line 1739;;  if temp2  <  88 then bot_drag_state = temp2  :  return
 
 	LDA temp2
 	CMP #88
-     BCS .skipL0335
-.condpart81
+     BCS .skipL0410
+.condpart119
 	LDA temp2
 	STA bot_drag_state
 	tsx
@@ -4702,22 +6724,22 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0335
+.skipL0410
 .
- ;;line 1019;; 
+ ;;line 1740;; 
 
 .
- ;;line 1020;; 
+ ;;line 1741;; 
 
-.L0336 ;;line 1021;;  gosub check_bot_ball_hit
+.L0411 ;;line 1742;;  gosub check_bot_ball_hit
 
  jsr .check_bot_ball_hit
-.L0337 ;;line 1022;;  if temp4 = 0 then bot_drag_state = 3  :  return
+.L0412 ;;line 1743;;  if temp4 = 0 then bot_drag_state = 3  :  return
 
 	LDA temp4
 	CMP #0
-     BNE .skipL0337
-.condpart82
+     BNE .skipL0412
+.condpart120
 	LDA #3
 	STA bot_drag_state
 	tsx
@@ -4727,19 +6749,19 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0337
+.skipL0412
 .
- ;;line 1023;; 
+ ;;line 1744;; 
 
 .
- ;;line 1024;; 
+ ;;line 1745;; 
 
-.L0338 ;;line 1025;;  if DEBUG_NO_SWALLOW = 1 then bot_drag_state = 3  :  return
+.L0413 ;;line 1746;;  if DEBUG_NO_SWALLOW = 1 then bot_drag_state = 3  :  return
 
 	LDA #DEBUG_NO_SWALLOW
 	CMP #1
-     BNE .skipL0338
-.condpart83
+     BNE .skipL0413
+.condpart121
 	LDA #3
 	STA bot_drag_state
 	tsx
@@ -4749,27 +6771,27 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0338
-.L0339 ;;line 1026;;  bot_drag_state = temp1  |  128
+.skipL0413
+.L0414 ;;line 1747;;  bot_drag_state = temp1  |  188
 
 	LDA temp1
-	ORA #128
+	ORA #188
 	STA bot_drag_state
-.L0340 ;;line 1027;;  bot_carried_item = 255
+.L0415 ;;line 1748;;  bot_carried_item = 255
 
 	LDA #255
 	STA bot_carried_item
-.L0341 ;;line 1028;;  p2_ballx = temp5  +  2  :  p2_bally = temp6  -  13
+.L0416 ;;line 1749;;  p2_ballx = temp5  +  3  :  p2_bally = temp6  -  6
 
 	LDA temp5
 	CLC
-	ADC #2
+	ADC #3
 	STA p2_ballx
 	LDA temp6
 	SEC
-	SBC #13
+	SBC #6
 	STA p2_bally
-.L0342 ;;line 1029;;  return
+.L0417 ;;line 1750;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -4779,23 +6801,32 @@ move_west_b2
 	JMP BS_return
 	RTS
 .
- ;;line 1030;; 
+ ;;line 1751;; 
 
 .bot_one_dragon
- ;;line 1031;; bot_one_dragon
+ ;;line 1752;; bot_one_dragon
 
-.L0343 ;;line 1032;;  temp4 = drag_dead  &  bot_bit_mask[temp1]
+.L0418 ;;line 1753;;  temp4 = bot_bit_mask[temp1]
+
+	LDX temp1
+	LDA bot_bit_mask,x
+	STA temp4
+.L0419 ;;line 1754;;  drag_awake = drag_awake  |  temp4
+
+	LDA drag_awake
+	ORA temp4
+	STA drag_awake
+.L0420 ;;line 1755;;  temp4 = drag_dead  &  temp4
 
 	LDA drag_dead
-	LDX temp1
-	AND bot_bit_mask,x
+	AND temp4
 	STA temp4
-.L0344 ;;line 1033;;  if temp4  <>  0 then return
+.L0421 ;;line 1756;;  if temp4  <>  0 then return
 
 	LDA temp4
 	CMP #0
-     BEQ .skipL0344
-.condpart84
+     BEQ .skipL0421
+.condpart122
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -4803,20 +6834,11 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0344
-.L0345 ;;line 1034;;  if r_bot_obj_room[temp1]  <>  bottom_room then goto bot_dragon_offscreen
-
-	LDX temp1
-	LDA r_bot_obj_room,x
-	CMP bottom_room
-     BEQ .skipL0345
-.condpart85
- jmp .bot_dragon_offscreen
-.skipL0345
+.skipL0421
 .
- ;;line 1035;; 
+ ;;line 1757;; 
 
-.L0346 ;;line 1036;;  temp5 = bot_obj_x[temp1]  :  temp6 = bot_obj_y[temp1]
+.L0422 ;;line 1758;;  temp5 = bot_obj_x[temp1]  :  temp6 = bot_obj_y[temp1]
 
 	LDX temp1
 	LDA bot_obj_x,x
@@ -4824,19 +6846,23 @@ move_west_b2
 	LDX temp1
 	LDA bot_obj_y,x
 	STA temp6
-.L0347 ;;line 1037;;  gosub check_bot_sword_hit
+.L0423 ;;line 1759;;  gosub check_bot_sword_hit
 
  jsr .check_bot_sword_hit
-.L0348 ;;line 1038;;  if temp4 = 1 then drag_dead = drag_dead  |  bot_bit_mask[temp1]  :  return
+.L0424 ;;line 1760;;  if temp4 = 1 then drag_dead = drag_dead  |  bot_bit_mask[temp1]  :  bot_drag_state = 103  :  temp4 = 2  :  return
 
 	LDA temp4
 	CMP #1
-     BNE .skipL0348
-.condpart86
+     BNE .skipL0424
+.condpart123
 	LDA drag_dead
 	LDX temp1
 	ORA bot_bit_mask,x
 	STA drag_dead
+	LDA #103
+	STA bot_drag_state
+	LDA #2
+	STA temp4
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -4844,78 +6870,78 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0348
+.skipL0424
 .
- ;;line 1039;; 
+ ;;line 1761;; 
 
 .
- ;;line 1040;; 
+ ;;line 1762;; 
 
-.L0349 ;;line 1041;;  if temp1 = 1  &&  r_bot_obj_room[7] = bottom_room then goto _bot_flee_key
+.L0425 ;;line 1763;;  if temp1 = 1  &&  r_bot_obj_room[7] = bottom_room then goto _bot_flee_key
 
 	LDA temp1
 	CMP #1
-     BNE .skipL0349
-.condpart87
+     BNE .skipL0425
+.condpart124
 	LDX #7
 	LDA r_bot_obj_room,x
 	CMP bottom_room
-     BNE .skip87then
-.condpart88
+     BNE .skip124then
+.condpart125
  jmp ._bot_flee_key
-.skip87then
-.skipL0349
+.skip124then
+.skipL0425
 .
- ;;line 1042;; 
+ ;;line 1764;; 
 
 .
- ;;line 1043;; 
+ ;;line 1765;; 
 
-.L0350 ;;line 1044;;  temp2 = p2_ballx  +  3
+.L0426 ;;line 1766;;  temp2 = p2_ballx  +  1
 
 	LDA p2_ballx
 	CLC
-	ADC #3
+	ADC #1
 	STA temp2
-.L0351 ;;line 1045;;  temp3 = p2_bally  +  12
+.L0427 ;;line 1767;;  temp3 = p2_bally  +  16
 
 	LDA p2_bally
 	CLC
-	ADC #12
+	ADC #16
 	STA temp3
-.L0352 ;;line 1046;;  if temp5  <  temp2 then temp5 = temp5  +  1
+.L0428 ;;line 1768;;  if temp5  <  temp2 then temp5 = temp5  +  1
 
 	LDA temp5
 	CMP temp2
-     BCS .skipL0352
-.condpart89
+     BCS .skipL0428
+.condpart126
 	INC temp5
-.skipL0352
-.L0353 ;;line 1047;;  if temp5  >  temp2 then temp5 = temp5  -  1
+.skipL0428
+.L0429 ;;line 1769;;  if temp5  >  temp2 then temp5 = temp5  -  1
 
 	LDA temp2
 	CMP temp5
-     BCS .skipL0353
-.condpart90
+     BCS .skipL0429
+.condpart127
 	DEC temp5
-.skipL0353
-.L0354 ;;line 1048;;  if temp6  <  temp3 then temp6 = temp6  +  1
+.skipL0429
+.L0430 ;;line 1770;;  if temp6  <  temp3 then temp6 = temp6  +  1
 
 	LDA temp6
 	CMP temp3
-     BCS .skipL0354
-.condpart91
+     BCS .skipL0430
+.condpart128
 	INC temp6
-.skipL0354
-.L0355 ;;line 1049;;  if temp6  >  temp3 then temp6 = temp6  -  1
+.skipL0430
+.L0431 ;;line 1771;;  if temp6  >  temp3 then temp6 = temp6  -  1
 
 	LDA temp3
 	CMP temp6
-     BCS .skipL0355
-.condpart92
+     BCS .skipL0431
+.condpart129
 	DEC temp6
-.skipL0355
-.L0356 ;;line 1050;;  bot_obj_x[temp1] = temp5  :  bot_obj_y[temp1] = temp6
+.skipL0431
+.L0432 ;;line 1772;;  bot_obj_x[temp1] = temp5  :  bot_obj_y[temp1] = temp6
 
 	LDA temp5
 	LDX temp1
@@ -4924,21 +6950,30 @@ move_west_b2
 	LDX temp1
 	STA bot_obj_y,x
 .
- ;;line 1051;; 
+ ;;line 1773;; 
 
-.L0357 ;;line 1052;;  gosub check_bot_ball_hit
+.
+ ;;line 1774;; 
 
- jsr .check_bot_ball_hit
-.L0358 ;;line 1053;;  if temp4 = 1 then bot_drag_state = temp1
+.L0433 ;;line 1775;;  if temp5 = temp2  &&  temp6 = temp3 then bot_drag_state = temp1
 
-	LDA temp4
-	CMP #1
-     BNE .skipL0358
-.condpart93
+	LDA temp5
+	CMP temp2
+     BNE .skipL0433
+.condpart130
+	LDA temp6
+	CMP temp3
+     BNE .skip130then
+.condpart131
 	LDA temp1
 	STA bot_drag_state
-.skipL0358
-.L0359 ;;line 1054;;  return
+.skip130then
+.skipL0433
+.L0434 ;;line 1776;;  temp4 = 2
+
+	LDA #2
+	STA temp4
+.L0435 ;;line 1777;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -4948,68 +6983,68 @@ move_west_b2
 	JMP BS_return
 	RTS
 .
- ;;line 1055;; 
+ ;;line 1778;; 
 
 ._bot_flee_key
- ;;line 1056;; _bot_flee_key
+ ;;line 1779;; _bot_flee_key
 
-.L0360 ;;line 1057;;  if temp5  <  bot_obj_x[7]  &&  temp5  >  20 then temp5 = temp5  -  1
+.L0436 ;;line 1780;;  if temp5  <  bot_obj_x[7]  &&  temp5  >  20 then temp5 = temp5  -  1
 
 	LDA temp5
 	LDX #7
 	CMP bot_obj_x,x
-     BCS .skipL0360
-.condpart94
+     BCS .skipL0436
+.condpart132
 	LDA #20
 	CMP temp5
-     BCS .skip94then
-.condpart95
+     BCS .skip132then
+.condpart133
 	DEC temp5
-.skip94then
-.skipL0360
-.L0361 ;;line 1058;;  if temp5  >=  bot_obj_x[7]  &&  temp5  <  130 then temp5 = temp5  +  1
+.skip132then
+.skipL0436
+.L0437 ;;line 1781;;  if temp5  >=  bot_obj_x[7]  &&  temp5  <  130 then temp5 = temp5  +  1
 
 	LDA temp5
 	LDX #7
 	CMP bot_obj_x,x
-     BCC .skipL0361
-.condpart96
+     BCC .skipL0437
+.condpart134
 	LDA temp5
 	CMP #130
-     BCS .skip96then
-.condpart97
+     BCS .skip134then
+.condpart135
 	INC temp5
-.skip96then
-.skipL0361
-.L0362 ;;line 1059;;  if temp6  <  bot_obj_y[7]  &&  temp6  >  18 then temp6 = temp6  -  1
+.skip134then
+.skipL0437
+.L0438 ;;line 1782;;  if temp6  <  bot_obj_y[7]  &&  temp6  >  18 then temp6 = temp6  -  1
 
 	LDA temp6
 	LDX #7
 	CMP bot_obj_y,x
-     BCS .skipL0362
-.condpart98
+     BCS .skipL0438
+.condpart136
 	LDA #18
 	CMP temp6
-     BCS .skip98then
-.condpart99
+     BCS .skip136then
+.condpart137
 	DEC temp6
-.skip98then
-.skipL0362
-.L0363 ;;line 1060;;  if temp6  >=  bot_obj_y[7]  &&  temp6  <  42 then temp6 = temp6  +  1
+.skip136then
+.skipL0438
+.L0439 ;;line 1783;;  if temp6  >=  bot_obj_y[7]  &&  temp6  <  42 then temp6 = temp6  +  1
 
 	LDA temp6
 	LDX #7
 	CMP bot_obj_y,x
-     BCC .skipL0363
-.condpart100
+     BCC .skipL0439
+.condpart138
 	LDA temp6
 	CMP #42
-     BCS .skip100then
-.condpart101
+     BCS .skip138then
+.condpart139
 	INC temp6
-.skip100then
-.skipL0363
-.L0364 ;;line 1061;;  bot_obj_x[1] = temp5  :  bot_obj_y[1] = temp6
+.skip138then
+.skipL0439
+.L0440 ;;line 1784;;  bot_obj_x[1] = temp5  :  bot_obj_y[1] = temp6
 
 	LDA temp5
 	LDX #1
@@ -5017,7 +7052,11 @@ move_west_b2
 	LDA temp6
 	LDX #1
 	STA bot_obj_y,x
-.L0365 ;;line 1062;;  return
+.L0441 ;;line 1785;;  temp4 = 2
+
+	LDA #2
+	STA temp4
+.L0442 ;;line 1786;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -5027,84 +7066,159 @@ move_west_b2
 	JMP BS_return
 	RTS
 .
- ;;line 1063;; 
+ ;;line 1787;; 
 
 .
- ;;line 1064;; 
+ ;;line 1788;; 
+
+.
+ ;;line 1789;; 
 
 .bot_dragon_offscreen
- ;;line 1065;; bot_dragon_offscreen
+ ;;line 1790;; bot_dragon_offscreen
 
-.L0366 ;;line 1066;;  temp4 = r_bot_obj_room[temp1]
+.L0443 ;;line 1791;;  asm
 
-	LDX temp1
-	LDA r_bot_obj_room,x
-	STA temp4
-.L0367 ;;line 1067;;  temp5 = bot_obj_x[temp1]  :  temp6 = bot_obj_y[temp1]
+   ldy bottom_room
 
-	LDX temp1
-	LDA bot_obj_x,x
-	STA temp5
-	LDX temp1
-	LDA bot_obj_y,x
-	STA temp6
-.L0368 ;;line 1068;;  if move_north_b2[temp4] = bottom_room then goto _bot_pursue_n
+   bne .b_pursue_go
 
-	LDX temp4
-	LDA move_north_b2,x
-	CMP bottom_room
-     BNE .skipL0368
-.condpart102
- jmp ._bot_pursue_n
-.skipL0368
-.L0369 ;;line 1069;;  if move_south_b2[temp4] = bottom_room then goto _bot_pursue_s
+   rts
 
-	LDX temp4
-	LDA move_south_b2,x
-	CMP bottom_room
-     BNE .skipL0369
-.condpart103
- jmp ._bot_pursue_s
-.skipL0369
-.L0370 ;;line 1070;;  if move_east_b2[temp4] = bottom_room then goto _bot_pursue_e
+.b_pursue_go
 
-	LDX temp4
-	LDA move_east_b2,x
-	CMP bottom_room
-     BNE .skipL0370
-.condpart104
- jmp ._bot_pursue_e
-.skipL0370
-.L0371 ;;line 1071;;  if move_west_b2[temp4] = bottom_room then goto _bot_pursue_w
+   ldx temp1
 
-	LDX temp4
-	LDA move_west_b2,x
-	CMP bottom_room
-     BNE .skipL0371
-.condpart105
- jmp ._bot_pursue_w
-.skipL0371
-.L0372 ;;line 1072;;  return
+   lda drag_awake
 
-	tsx
-	lda 2,x ; check return address
-	eor #(>*) ; vs. current PCH
-	and #$E0 ;  mask off all but top 3 bits
-	beq *+5 ; if equal, do normal return
-	JMP BS_return
-	RTS
+   and bot_bit_mask,x
+
+   bne .b_pursue_awake
+
+   rts
+
+.b_pursue_awake
+
+   lda r_bot_obj_room,x
+
+   sta temp4
+
+   lda bot_obj_x,x
+
+   sta temp5
+
+   lda bot_obj_y,x
+
+   sta temp6
+
+   ldx temp4
+
+
+
+   lda gate_state
+
+   cmp #$40
+
+   bcs .b_std_adj
+
+   cpx #16
+
+   bne .b_g1_22
+
+   cpy #22
+
+   bne .b_std_adj
+
+   jmp ._bot_pursue_s
+
+.b_g1_22
+
+   cpx #22
+
+   bne .b_g1_12
+
+   cpy #16
+
+   bne .b_std_adj
+
+   jmp ._bot_pursue_n
+
+.b_g1_12
+
+   cpx #12
+
+   bne .b_g1_28
+
+   cpy #28
+
+   bne .b_std_adj
+
+   jmp ._bot_pursue_n
+
+.b_g1_28
+
+   cpx #28
+
+   bne .b_std_adj
+
+   cpy #12
+
+   bne .b_std_adj
+
+   jmp ._bot_pursue_s
+
+
+
+.b_std_adj
+
+   tya
+
+   cmp move_north_b2,x
+
+   bne .b_not_n
+
+   jmp ._bot_pursue_n
+
+.b_not_n
+
+   cmp move_south_b2,x
+
+   bne .b_not_s
+
+   jmp ._bot_pursue_s
+
+.b_not_s
+
+   cmp move_east_b2,x
+
+   bne .b_not_e
+
+   jmp ._bot_pursue_e
+
+.b_not_e
+
+   cmp move_west_b2,x
+
+   bne .b_not_w
+
+   jmp ._bot_pursue_w
+
+.b_not_w
+
+   rts
+
 .
- ;;line 1073;; 
+ ;;line 1857;; 
 
 ._bot_pursue_n
- ;;line 1074;; _bot_pursue_n
+ ;;line 1858;; _bot_pursue_n
 
-.L0373 ;;line 1075;;  if temp6  >  3 then bot_obj_y[temp1] = temp6  -  1  :  return
+.L0444 ;;line 1859;;  if temp6  >  3 then bot_obj_y[temp1] = temp6  -  1  :  return
 
 	LDA #3
 	CMP temp6
-     BCS .skipL0373
-.condpart106
+     BCS .skipL0444
+.condpart140
 	LDA temp6
 	SEC
 	SBC #1
@@ -5117,15 +7231,20 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0373
-.L0374 ;;line 1076;;  w_bot_obj_room[temp1] = bottom_room  :  bot_obj_y[temp1] = 28  :  return
+.skipL0444
+.L0445 ;;line 1860;;  w_bot_obj_room[temp1] = bottom_room  :  bot_obj_y[temp1] = p2_bally  +  16  :  bot_obj_x[temp1] = p2_ballx  :  return
 
 	LDA bottom_room
 	LDX temp1
 	STA w_bot_obj_room,x
-	LDA #28
+	LDA p2_bally
+	CLC
+	ADC #16
 	LDX temp1
 	STA bot_obj_y,x
+	LDA p2_ballx
+	LDX temp1
+	STA bot_obj_x,x
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -5134,17 +7253,17 @@ move_west_b2
 	JMP BS_return
 	RTS
 .
- ;;line 1077;; 
+ ;;line 1861;; 
 
 ._bot_pursue_s
- ;;line 1078;; _bot_pursue_s
+ ;;line 1862;; _bot_pursue_s
 
-.L0375 ;;line 1079;;  if temp6  <  38 then bot_obj_y[temp1] = temp6  +  1  :  return
+.L0446 ;;line 1863;;  if temp6  <  42 then bot_obj_y[temp1] = temp6  +  1  :  return
 
 	LDA temp6
-	CMP #38
-     BCS .skipL0375
-.condpart107
+	CMP #42
+     BCS .skipL0446
+.condpart141
 	LDA temp6
 	CLC
 	ADC #1
@@ -5157,8 +7276,8 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0375
-.L0376 ;;line 1080;;  w_bot_obj_room[temp1] = bottom_room  :  bot_obj_y[temp1] = 4  :  return
+.skipL0446
+.L0447 ;;line 1864;;  w_bot_obj_room[temp1] = bottom_room  :  bot_obj_y[temp1] = 4  :  bot_obj_x[temp1] = p2_ballx  :  return
 
 	LDA bottom_room
 	LDX temp1
@@ -5166,6 +7285,9 @@ move_west_b2
 	LDA #4
 	LDX temp1
 	STA bot_obj_y,x
+	LDA p2_ballx
+	LDX temp1
+	STA bot_obj_x,x
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -5174,17 +7296,17 @@ move_west_b2
 	JMP BS_return
 	RTS
 .
- ;;line 1081;; 
+ ;;line 1865;; 
 
 ._bot_pursue_e
- ;;line 1082;; _bot_pursue_e
+ ;;line 1866;; _bot_pursue_e
 
-.L0377 ;;line 1083;;  if temp5  <  134 then bot_obj_x[temp1] = temp5  +  1  :  return
+.L0448 ;;line 1867;;  if temp5  <  134 then bot_obj_x[temp1] = temp5  +  1  :  return
 
 	LDA temp5
 	CMP #134
-     BCS .skipL0377
-.condpart108
+     BCS .skipL0448
+.condpart142
 	LDA temp5
 	CLC
 	ADC #1
@@ -5197,8 +7319,8 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0377
-.L0378 ;;line 1084;;  w_bot_obj_room[temp1] = bottom_room  :  bot_obj_x[temp1] = 18  :  return
+.skipL0448
+.L0449 ;;line 1868;;  w_bot_obj_room[temp1] = bottom_room  :  bot_obj_x[temp1] = 18  :  bot_obj_y[temp1] = p2_bally  +  16  :  return
 
 	LDA bottom_room
 	LDX temp1
@@ -5206,6 +7328,11 @@ move_west_b2
 	LDA #18
 	LDX temp1
 	STA bot_obj_x,x
+	LDA p2_bally
+	CLC
+	ADC #16
+	LDX temp1
+	STA bot_obj_y,x
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -5214,17 +7341,17 @@ move_west_b2
 	JMP BS_return
 	RTS
 .
- ;;line 1085;; 
+ ;;line 1869;; 
 
 ._bot_pursue_w
- ;;line 1086;; _bot_pursue_w
+ ;;line 1870;; _bot_pursue_w
 
-.L0379 ;;line 1087;;  if temp5  >  18 then bot_obj_x[temp1] = temp5  -  1  :  return
+.L0450 ;;line 1871;;  if temp5  >  18 then bot_obj_x[temp1] = temp5  -  1  :  return
 
 	LDA #18
 	CMP temp5
-     BCS .skipL0379
-.condpart109
+     BCS .skipL0450
+.condpart143
 	LDA temp5
 	SEC
 	SBC #1
@@ -5237,8 +7364,8 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0379
-.L0380 ;;line 1088;;  w_bot_obj_room[temp1] = bottom_room  :  bot_obj_x[temp1] = 132  :  return
+.skipL0450
+.L0451 ;;line 1872;;  w_bot_obj_room[temp1] = bottom_room  :  bot_obj_x[temp1] = 132  :  bot_obj_y[temp1] = p2_bally  +  16  :  return
 
 	LDA bottom_room
 	LDX temp1
@@ -5246,6 +7373,11 @@ move_west_b2
 	LDA #132
 	LDX temp1
 	STA bot_obj_x,x
+	LDA p2_bally
+	CLC
+	ADC #16
+	LDX temp1
+	STA bot_obj_y,x
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -5254,22 +7386,25 @@ move_west_b2
 	JMP BS_return
 	RTS
 .
- ;;line 1089;; 
+ ;;line 1873;; 
+
+.
+ ;;line 1874;; 
 
 .check_bot_sword_hit
- ;;line 1090;; check_bot_sword_hit
+ ;;line 1875;; check_bot_sword_hit
 
-.L0381 ;;line 1091;;  temp4 = 0
+.L0452 ;;line 1876;;  temp4 = 0
 
 	LDA #0
 	STA temp4
-.L0382 ;;line 1092;;  if r_bot_obj_room[4]  <>  bottom_room then return
+.L0453 ;;line 1877;;  if r_bot_obj_room[4]  <>  bottom_room then return
 
 	LDX #4
 	LDA r_bot_obj_room,x
 	CMP bottom_room
-     BEQ .skipL0382
-.condpart110
+     BEQ .skipL0453
+.condpart144
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -5277,31 +7412,23 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skipL0382
-.L0383 ;;line 1093;;  temp2 = temp5  +  8  :  temp3 = bot_obj_x[4]  +  8
+.skipL0453
+.L0454 ;;line 1878;;  temp2 = temp5  -  bot_obj_x[4]  +  7
 
+; complex statement detected
 	LDA temp5
+	LDX #4
+	SEC
+	SBC bot_obj_x,x
 	CLC
-	ADC #8
+	ADC #7
 	STA temp2
-	LDX #4
-	LDA bot_obj_x,x
-	CLC
-	ADC #8
-	STA temp3
-.L0384 ;;line 1094;;  if temp2  <  bot_obj_x[4]  ||  temp5  >  temp3 then return
+.L0455 ;;line 1879;;  if temp2  >  14 then return
 
-	LDA temp2
-	LDX #4
-	CMP bot_obj_x,x
-     BCS .skipL0384
-.condpart111
- jmp .condpart112
-.skipL0384
-	LDA temp3
-	CMP temp5
-     BCS .skip18OR
-.condpart112
+	LDA #14
+	CMP temp2
+     BCS .skipL0455
+.condpart145
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -5309,31 +7436,23 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skip18OR
-.L0385 ;;line 1095;;  temp2 = temp6  +  20  :  temp3 = bot_obj_y[4]  +  6
+.skipL0455
+.L0456 ;;line 1880;;  temp2 = temp6  -  bot_obj_y[4]  +  3
 
+; complex statement detected
 	LDA temp6
+	LDX #4
+	SEC
+	SBC bot_obj_y,x
 	CLC
-	ADC #20
+	ADC #3
 	STA temp2
-	LDX #4
-	LDA bot_obj_y,x
-	CLC
-	ADC #6
-	STA temp3
-.L0386 ;;line 1096;;  if temp2  <  bot_obj_y[4]  ||  temp6  >  temp3 then return
+.L0457 ;;line 1881;;  if temp2  >  22 then return
 
-	LDA temp2
-	LDX #4
-	CMP bot_obj_y,x
-     BCS .skipL0386
-.condpart113
- jmp .condpart114
-.skipL0386
-	LDA temp3
-	CMP temp6
-     BCS .skip19OR
-.condpart114
+	LDA #22
+	CMP temp2
+     BCS .skipL0457
+.condpart146
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -5341,12 +7460,12 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skip19OR
-.L0387 ;;line 1097;;  temp4 = 1
+.skipL0457
+.L0458 ;;line 1882;;  temp4 = 1
 
 	LDA #1
 	STA temp4
-.L0388 ;;line 1098;;  return
+.L0459 ;;line 1883;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -5356,49 +7475,33 @@ move_west_b2
 	JMP BS_return
 	RTS
 .
- ;;line 1099;; 
-
-.
- ;;line 1100;; 
-
-.
- ;;line 1101;; 
-
-.
- ;;line 1102;; 
+ ;;line 1884;; 
 
 .check_bot_ball_hit
- ;;line 1103;; check_bot_ball_hit
+ ;;line 1885;; check_bot_ball_hit
 
-.L0389 ;;line 1104;;  temp4 = 0
+.L0460 ;;line 1886;;  temp4 = 0
 
 	LDA #0
 	STA temp4
 .
- ;;line 1105;; 
+ ;;line 1887;; 
 
-.L0390 ;;line 1106;;  temp2 = p2_ballx  +  1  :  temp3 = p2_ballx  +  6
+.L0461 ;;line 1888;;  temp2 = temp5  -  p2_ballx  +  1
 
-	LDA p2_ballx
+; complex statement detected
+	LDA temp5
+	SEC
+	SBC p2_ballx
 	CLC
 	ADC #1
 	STA temp2
-	LDA p2_ballx
-	CLC
-	ADC #6
-	STA temp3
-.L0391 ;;line 1107;;  if temp5  <  temp2  ||  temp5  >  temp3 then return
+.L0462 ;;line 1889;;  if temp2  >  5 then return
 
-	LDA temp5
+	LDA #5
 	CMP temp2
-     BCS .skipL0391
-.condpart115
- jmp .condpart116
-.skipL0391
-	LDA temp3
-	CMP temp5
-     BCS .skip20OR
-.condpart116
+     BCS .skipL0462
+.condpart147
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -5406,29 +7509,22 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skip20OR
-.L0392 ;;line 1108;;  temp2 = p2_bally  +  9  :  temp3 = p2_bally  +  15
+.skipL0462
+.L0463 ;;line 1890;;  temp2 = temp6  -  p2_bally  -  13
 
-	LDA p2_bally
-	CLC
-	ADC #9
-	STA temp2
-	LDA p2_bally
-	CLC
-	ADC #15
-	STA temp3
-.L0393 ;;line 1109;;  if temp6  <  temp2  ||  temp6  >  temp3 then return
-
+; complex statement detected
 	LDA temp6
+	SEC
+	SBC p2_bally
+	SEC
+	SBC #13
+	STA temp2
+.L0464 ;;line 1891;;  if temp2  >  6 then return
+
+	LDA #6
 	CMP temp2
-     BCS .skipL0393
-.condpart117
- jmp .condpart118
-.skipL0393
-	LDA temp3
-	CMP temp6
-     BCS .skip21OR
-.condpart118
+     BCS .skipL0464
+.condpart148
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -5436,12 +7532,12 @@ move_west_b2
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
-.skip21OR
-.L0394 ;;line 1110;;  temp4 = 1
+.skipL0464
+.L0465 ;;line 1892;;  temp4 = 1
 
 	LDA #1
 	STA temp4
-.L0395 ;;line 1111;;  return
+.L0466 ;;line 1893;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -5451,45 +7547,284 @@ move_west_b2
 	JMP BS_return
 	RTS
 .
- ;;line 1112;; 
+ ;;line 1894;; 
 
-.L0396 ;;line 1113;;  data bit_mask
+.L0467 ;;line 1895;;  data bit_mask
 
-	JMP .skipL0396
+	JMP .skipL0467
 bit_mask
 	.byte  1, 2, 4
 
-.skipL0396
+.skipL0467
 .
- ;;line 1116;; 
+ ;;line 1898;; 
 
-.L0397 ;;line 1117;;  data bot_bit_mask
+.L0468 ;;line 1899;;  data bot_bit_mask
 
-	JMP .skipL0397
+	JMP .skipL0468
 bot_bit_mask
 	.byte  8, 16, 32
 
-.skipL0397
+.skipL0468
 .
- ;;line 1120;; 
+ ;;line 1902;; 
 
 .
- ;;line 1121;; 
+ ;;line 1903;; 
+
+.
+ ;;line 1904;; 
+
+.
+ ;;line 1905;; 
+
+.update_top_magnet
+ ;;line 1906;; update_top_magnet
+
+.L0469 ;;line 1907;;  asm
+
+   lda r_top_obj_room+3
+
+   cmp top_room
+
+   beq .do_mag_top
+
+   jmp .done_mag_top
+
+.do_mag_top
+
+   lda top_obj_x+3
+
+   sta temp5
+
+   lda top_obj_y+3
+
+   clc
+
+   adc #8
+
+   cmp #43
+
+   bcc .mag_y_top_ok
+
+   lda #42
+
+.mag_y_top_ok
+
+   sta temp6
+
+   lda top_bat_state
+
+   and #15
+
+   sta temp2
+
+   ldx #9
+
+.loop_mag_top
+
+   lda r_top_obj_room,x
+
+   cmp top_room
+
+   bne .next_mag_top
+
+   
+
+   cpx top_carried_item
+
+   beq .next_mag_top
+
+   
+
+   cpx temp2
+
+   beq .next_mag_top
+
+   
+
+   lda top_obj_x,x
+
+   cmp temp5
+
+   beq .y_mag_top
+
+   bcc .inc_x_mag_top
+
+   dec top_obj_x,x
+
+   jmp .y_mag_top
+
+.inc_x_mag_top
+
+   inc top_obj_x,x
+
+.y_mag_top
+
+   lda top_obj_y,x
+
+   cmp temp6
+
+   beq .done_mag_top
+
+   bcc .inc_y_mag_top
+
+   dec top_obj_y,x
+
+   jmp .done_mag_top
+
+.inc_y_mag_top
+
+   inc top_obj_y,x
+
+   jmp .done_mag_top
+
+.next_mag_top
+
+   dex
+
+   cpx #3
+
+   bne .loop_mag_top
+
+.done_mag_top
+
+.L0470 ;;line 1962;;  return otherbank
+
+	JMP BS_return
+.
+ ;;line 1963;; 
+
+.update_bot_magnet
+ ;;line 1964;; update_bot_magnet
+
+.L0471 ;;line 1965;;  asm
+
+   lda r_bot_obj_room+3
+
+   cmp bottom_room
+
+   beq .do_mag_bot
+
+   jmp .done_mag_bot
+
+.do_mag_bot
+
+   lda bot_obj_x+3
+
+   sta temp5
+
+   lda bot_obj_y+3
+
+   clc
+
+   adc #8
+
+   cmp #43
+
+   bcc .mag_y_bot_ok
+
+   lda #42
+
+.mag_y_bot_ok
+
+   sta temp6
+
+   lda bot_bat_state
+
+   and #15
+
+   sta temp2
+
+   ldx #9
+
+.loop_mag_bot
+
+   lda r_bot_obj_room,x
+
+   cmp bottom_room
+
+   bne .next_mag_bot
+
+   
+
+   cpx bot_carried_item
+
+   beq .next_mag_bot
+
+   
+
+   cpx temp2
+
+   beq .next_mag_bot
+
+   
+
+   lda bot_obj_x,x
+
+   cmp temp5
+
+   beq .y_mag_bot
+
+   bcc .inc_x_mag_bot
+
+   dec bot_obj_x,x
+
+   jmp .y_mag_bot
+
+.inc_x_mag_bot
+
+   inc bot_obj_x,x
+
+.y_mag_bot
+
+   lda bot_obj_y,x
+
+   cmp temp6
+
+   beq .done_mag_bot
+
+   bcc .inc_y_mag_bot
+
+   dec bot_obj_y,x
+
+   jmp .done_mag_bot
+
+.inc_y_mag_bot
+
+   inc bot_obj_y,x
+
+   jmp .done_mag_bot
+
+.next_mag_bot
+
+   dex
+
+   cpx #3
+
+   bne .loop_mag_bot
+
+.done_mag_bot
+
+.L0472 ;;line 2020;;  return otherbank
+
+	JMP BS_return
+.
+ ;;line 2021;; 
+
+.
+ ;;line 2022;; 
 
 .run_flicker_logic
- ;;line 1122;; run_flicker_logic
+ ;;line 2023;; run_flicker_logic
 
-.L0398 ;;line 1123;;  asm
+.L0473 ;;line 2024;;  asm
 
-   lda #255
+   lda #0
 
-   sta w_top_obj_hit
+   sta top_nusiz1
 
-   sta top_player1y
-
-   sta w_bot_obj_hit
-
-   sta bottom_player1y
+   sta w_bottom_nusiz1
 
 
 
@@ -5501,13 +7836,11 @@ bot_bit_mask
 
 .loop_top_flicker
 
-   inx
+   dex
 
-   cpx #11
+   bpl .top_idx_ok
 
-   bcc .top_idx_ok
-
-   ldx #0
+   ldx #10
 
 .top_idx_ok
 
@@ -5521,15 +7854,23 @@ bot_bit_mask
 
    bne .loop_top_flicker
 
-   beq .done_top_flicker
+   
+
+   
+
+   lda #255
+
+   sta flicker_idx
+
+   sta top_player1y
+
+   jmp .done_top_flicker
 
 
 
 .found_top_obj
 
    stx flicker_idx
-
-   stx w_top_obj_hit
 
    lda top_obj_x,x
 
@@ -5543,6 +7884,14 @@ bot_bit_mask
 
    sta top_colup1
 
+   cpx #6                  
+
+   bne .done_top_flicker
+
+   lda #5                  
+
+   sta top_nusiz1
+
 
 
 .done_top_flicker
@@ -5555,13 +7904,11 @@ bot_bit_mask
 
 .loop_bot_flicker
 
-   inx
+   dex
 
-   cpx #11
+   bpl .bot_idx_ok
 
-   bcc .bot_idx_ok
-
-   ldx #0
+   ldx #10
 
 .bot_idx_ok
 
@@ -5575,15 +7922,21 @@ bot_bit_mask
 
    bne .loop_bot_flicker
 
-   beq .done_bot_flicker
+   
+
+   lda #255
+
+   sta bot_flicker_idx
+
+   sta bottom_player1y
+
+   jmp .done_bot_flicker
 
 
 
 .found_bot_obj
 
    stx bot_flicker_idx
-
-   stx w_bot_obj_hit
 
    lda bot_obj_x,x
 
@@ -5597,30 +7950,143 @@ bot_bit_mask
 
    sta bottom_colup1
 
+   cpx #6                  
+
+   bne .done_bot_flicker
+
+   lda #5                  
+
+   sta w_bottom_nusiz1
+
 
 
 .done_bot_flicker
 
-.L0399 ;;line 1185;;  return otherbank
+.L0474 ;;line 2097;;  return otherbank
 
 	JMP BS_return
 .
- ;;line 1186;; 
+ ;;line 2098;; 
 
 .
- ;;line 1187;; 
+ ;;line 2099;; 
 
-.L0400 ;;line 1188;;  data obj_colors
+.L0475 ;;line 2100;;  data obj_colors
 
-	JMP .skipL0400
+	JMP .skipL0475
 obj_colors
 	.byte  $44, $1E, $C4, $00, $1E, $1E, $44, $1E, $0E, $00, $00
 
-.skipL0400
+.skipL0475
 .
- ;;line 1191;; 
+ ;;line 2103;; 
 
-.L0401 ;;line 1192;;  bank 3
+.
+ ;;line 2104;; 
+
+.
+ ;;line 2105;; 
+
+.
+ ;;line 2106;; 
+
+.
+ ;;line 2107;; 
+
+.
+ ;;line 2108;; 
+
+.
+ ;;line 2109;; 
+
+.
+ ;;line 2110;; 
+
+.
+ ;;line 2111;; 
+
+.
+ ;;line 2112;; 
+
+.
+ ;;line 2113;; 
+
+.
+ ;;line 2114;; 
+
+.
+ ;;line 2115;; 
+
+.
+ ;;line 2116;; 
+
+.
+ ;;line 2117;; 
+
+.
+ ;;line 2118;; 
+
+.
+ ;;line 2119;; 
+
+.
+ ;;line 2120;; 
+
+.
+ ;;line 2121;; 
+
+.
+ ;;line 2122;; 
+
+.
+ ;;line 2123;; 
+
+.
+ ;;line 2124;; 
+
+.
+ ;;line 2125;; 
+
+.
+ ;;line 2126;; 
+
+.
+ ;;line 2127;; 
+
+.
+ ;;line 2128;; 
+
+.L0476 ;;line 2129;;  data init_rooms_g1
+
+	JMP .skipL0476
+init_rooms_g1
+	.byte           14, 13, 22, 12,  5, 28,  22,  30,  99,    1, 99
+
+.skipL0476
+.
+ ;;line 2132;; 
+
+.L0477 ;;line 2133;;  data init_x_g1
+
+	JMP .skipL0477
+init_x_g1
+	.byte           28,  50, 112, 112, 24,  27,  96,  111,   0,  127,  0
+
+.skipL0477
+.
+ ;;line 2136;; 
+
+.L0478 ;;line 2137;;  data init_y_g1
+
+	JMP .skipL0478
+init_y_g1
+	.byte           42,  12,  42, 28, 42,  16,  36,  42,   0,   8,  0
+
+.skipL0478
+.
+ ;;line 2140;; 
+
+.L0479 ;;line 2141;;  bank 3
 
  if ECHO2
  echo "    ",[(start_bank2 - *)]d , "bytes of ROM space left in bank 2")
@@ -5686,17 +8152,1207 @@ start_bank2 ldx #$ff
  .byte $ff
  repend
 .
- ;;line 1193;; 
+ ;;line 2142;; 
 
-.apply_graphics
- ;;line 1194;; apply_graphics
+._title_screen
+ ;;line 2143;; _title_screen
+
+.L0480 ;;line 2144;;  gate_state = 0  :  temp5 = 0
+
+	LDA #0
+	STA gate_state
+	STA temp5
+.
+ ;;line 2145;; 
+
+._title_loop
+ ;;line 2146;; _title_loop
 
 .
- ;;line 1195;; 
+ ;;line 2147;; 
 
-.L0402 ;;line 1196;;  temp3 = r_bot_obj_hit  :  temp4 = bot_drag_state  :  temp2 = drag_dead  /  8  :  gosub set_sprite_pointers
+.L0481 ;;line 2148;;  if top_room = 1 then goto _title_check_release
 
-	LDA r_bot_obj_hit
+	LDA top_room
+	CMP #1
+     BNE .skipL0481
+.condpart149
+ jmp ._title_check_release
+.skipL0481
+.
+ ;;line 2149;; 
+
+.L0482 ;;line 2150;;  if joy0left then goto _title_move_left
+
+ bit SWCHA
+	BVS .skipL0482
+.condpart150
+ jmp ._title_move_left
+.skipL0482
+.L0483 ;;line 2151;;  if joy0right then goto _title_move_right
+
+ bit SWCHA
+	BMI .skipL0483
+.condpart151
+ jmp ._title_move_right
+.skipL0483
+.L0484 ;;line 2152;;  goto _title_skip_joy
+
+ jmp ._title_skip_joy
+.
+ ;;line 2153;; 
+
+._title_move_left
+ ;;line 2154;; _title_move_left
+
+.L0485 ;;line 2155;;  if gate_state = $00 then goto _title_skip_joy
+
+	LDA gate_state
+	CMP #$00
+     BNE .skipL0485
+.condpart152
+ jmp ._title_skip_joy
+.skipL0485
+.L0486 ;;line 2156;;  gate_state = gate_state  -  $40
+
+	LDA gate_state
+	SEC
+	SBC #$40
+	STA gate_state
+.L0487 ;;line 2157;;  top_room = 1
+
+	LDA #1
+	STA top_room
+.L0488 ;;line 2158;;  goto _title_skip_joy
+
+ jmp ._title_skip_joy
+.
+ ;;line 2159;; 
+
+._title_move_right
+ ;;line 2160;; _title_move_right
+
+.L0489 ;;line 2161;;  if gate_state = $80 then goto _title_skip_joy
+
+	LDA gate_state
+	CMP #$80
+     BNE .skipL0489
+.condpart153
+ jmp ._title_skip_joy
+.skipL0489
+.L0490 ;;line 2162;;  gate_state = gate_state  +  $40
+
+	LDA gate_state
+	CLC
+	ADC #$40
+	STA gate_state
+.L0491 ;;line 2163;;  top_room = 1
+
+	LDA #1
+	STA top_room
+.L0492 ;;line 2164;;  goto _title_skip_joy
+
+ jmp ._title_skip_joy
+.
+ ;;line 2165;; 
+
+._title_check_release
+ ;;line 2166;; _title_check_release
+
+.L0493 ;;line 2167;;  if !joy0left  &&  !joy0right then top_room = 0
+
+ bit SWCHA
+	BVC .skipL0493
+.condpart154
+ bit SWCHA
+	BPL .skip154then
+.condpart155
+	LDA #0
+	STA top_room
+.skip154then
+.skipL0493
+.
+ ;;line 2168;; 
+
+._title_skip_joy
+ ;;line 2169;; _title_skip_joy
+
+.
+ ;;line 2170;; 
+
+.
+ ;;line 2171;; 
+
+.L0494 ;;line 2172;;  if !joy0fire then goto _title_draw
+
+ bit INPT4
+	BPL .skipL0494
+.condpart156
+ jmp ._title_draw
+.skipL0494
+.
+ ;;line 2173;; 
+
+.L0495 ;;line 2174;;  gosub init_level_2 bank2
+
+ sta temp7
+ lda #>(ret_point19-1)
+ pha
+ lda #<(ret_point19-1)
+ pha
+ lda #>(.init_level_2-1)
+ pha
+ lda #<(.init_level_2-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #2
+ jmp BS_jsr
+ret_point19
+.L0496 ;;line 2175;;  if gate_state = $80 then gosub init_game_3
+
+	LDA gate_state
+	CMP #$80
+     BNE .skipL0496
+.condpart157
+ jsr .init_game_3
+.skipL0496
+.L0497 ;;line 2176;;  gosub load_top_room bank1
+
+ sta temp7
+ lda #>(ret_point20-1)
+ pha
+ lda #<(ret_point20-1)
+ pha
+ lda #>(.load_top_room-1)
+ pha
+ lda #<(.load_top_room-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #1
+ jmp BS_jsr
+ret_point20
+.L0498 ;;line 2177;;  gosub load_bottom_room bank1
+
+ sta temp7
+ lda #>(ret_point21-1)
+ pha
+ lda #<(ret_point21-1)
+ pha
+ lda #>(.load_bottom_room-1)
+ pha
+ lda #<(.load_bottom_room-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #1
+ jmp BS_jsr
+ret_point21
+.L0499 ;;line 2178;;  gosub check_gates bank3
+
+ sta temp7
+ lda #>(ret_point22-1)
+ pha
+ lda #<(ret_point22-1)
+ pha
+ lda #>(.check_gates-1)
+ pha
+ lda #<(.check_gates-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #3
+ jmp BS_jsr
+ret_point22
+.L0500 ;;line 2179;;  goto main_loop bank1
+
+ sta temp7
+ lda #>(.main_loop-1)
+ pha
+ lda #<(.main_loop-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #1
+ jmp BS_jsr
+.
+ ;;line 2180;; 
+
+._title_draw
+ ;;line 2181;; _title_draw
+
+.
+ ;;line 2182;; 
+
+.L0501 ;;line 2183;;  gosub drawlogo
+
+ jsr .drawlogo
+.L0502 ;;line 2184;;  goto _title_loop
+
+ jmp ._title_loop
+.
+ ;;line 2185;; 
+
+.
+ ;;line 2186;; 
+
+.
+ ;;line 2187;; 
+
+.L0503 ;;line 2188;;  inline title.asm
+
+ include title.asm
+.
+ ;;line 2189;; 
+
+.
+ ;;line 2190;; 
+
+.
+ ;;line 2191;; 
+
+.
+ ;;line 2192;; 
+
+.
+ ;;line 2193;; 
+
+.init_game_3
+ ;;line 2194;; init_game_3
+
+.
+ ;;line 2195;; 
+
+.L0504 ;;line 2196;;  aux5 = 0  :  aux6 = 0
+
+	LDA #0
+	STA aux5
+	STA aux6
+.L0505 ;;line 2197;;  temp1 = 10
+
+	LDA #10
+	STA temp1
+.
+ ;;line 2198;; 
+
+._g3_loop_top
+ ;;line 2199;; _g3_loop_top
+
+._g3_repick_top
+ ;;line 2200;; _g3_repick_top
+
+.L0506 ;;line 2201;;  temp2 = rand  &  15
+
+ sta temp7
+ lda #>(ret_point23-1)
+ pha
+ lda #<(ret_point23-1)
+ pha
+ lda #>(randomize-1)
+ pha
+ lda #<(randomize-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #4
+ jmp BS_jsr
+ret_point23
+	AND #15
+	STA temp2
+.L0507 ;;line 2202;;  temp3 = g3_rooms[temp2]
+
+	LDX temp2
+	LDA g3_rooms,x
+	STA temp3
+.
+ ;;line 2203;; 
+
+.
+ ;;line 2204;; 
+
+.L0508 ;;line 2205;;  if temp1 = 5 then if temp2 = 11 then goto _g3_repick_top
+
+	LDA temp1
+	CMP #5
+     BNE .skipL0508
+.condpart158
+	LDA temp2
+	CMP #11
+     BNE .skip158then
+.condpart159
+ jmp ._g3_repick_top
+.skip158then
+.skipL0508
+.
+ ;;line 2206;; 
+
+.
+ ;;line 2207;; 
+
+.L0509 ;;line 2208;;  if temp1 = 6 then if temp2  >=  10 then goto _g3_repick_top
+
+	LDA temp1
+	CMP #6
+     BNE .skipL0509
+.condpart160
+	LDA temp2
+	CMP #10
+     BCC .skip160then
+.condpart161
+ jmp ._g3_repick_top
+.skip160then
+.skipL0509
+.L0510 ;;line 2209;;  if temp1 = 7 then if temp2  >=  10 then goto _g3_repick_top
+
+	LDA temp1
+	CMP #7
+     BNE .skipL0510
+.condpart162
+	LDA temp2
+	CMP #10
+     BCC .skip162then
+.condpart163
+ jmp ._g3_repick_top
+.skip162then
+.skipL0510
+.
+ ;;line 2210;; 
+
+.
+ ;;line 2211;; 
+
+.L0511 ;;line 2212;;  if temp1 = 8 then goto _g3_chk_wht_t
+
+	LDA temp1
+	CMP #8
+     BNE .skipL0511
+.condpart164
+ jmp ._g3_chk_wht_t
+.skipL0511
+.L0512 ;;line 2213;;  if temp1 = 9 then goto _g3_chk_blk_t
+
+	LDA temp1
+	CMP #9
+     BNE .skipL0512
+.condpart165
+ jmp ._g3_chk_blk_t
+.skipL0512
+.L0513 ;;line 2214;;  goto _g3_unique_top
+
+ jmp ._g3_unique_top
+.
+ ;;line 2215;; 
+
+._g3_chk_wht_t
+ ;;line 2216;; _g3_chk_wht_t
+
+.
+ ;;line 2217;; 
+
+.L0514 ;;line 2218;;  if temp2 = 14 then goto _g3_repick_top
+
+	LDA temp2
+	CMP #14
+     BNE .skipL0514
+.condpart166
+ jmp ._g3_repick_top
+.skipL0514
+.
+ ;;line 2219;; 
+
+.L0515 ;;line 2220;;  if w_top_obj_room[9]  <>  21 then goto _g3_unique_top
+
+	LDX #9
+	LDA w_top_obj_room,x
+	CMP #21
+     BEQ .skipL0515
+.condpart167
+ jmp ._g3_unique_top
+.skipL0515
+.L0516 ;;line 2221;;  if temp2 = 12 then goto _g3_repick_top
+
+	LDA temp2
+	CMP #12
+     BNE .skipL0516
+.condpart168
+ jmp ._g3_repick_top
+.skipL0516
+.L0517 ;;line 2222;;  if temp2 = 13 then goto _g3_repick_top
+
+	LDA temp2
+	CMP #13
+     BNE .skipL0517
+.condpart169
+ jmp ._g3_repick_top
+.skipL0517
+.L0518 ;;line 2223;;  if temp2 = 15 then goto _g3_repick_top
+
+	LDA temp2
+	CMP #15
+     BNE .skipL0518
+.condpart170
+ jmp ._g3_repick_top
+.skipL0518
+.L0519 ;;line 2224;;  goto _g3_unique_top
+
+ jmp ._g3_unique_top
+.
+ ;;line 2225;; 
+
+._g3_chk_blk_t
+ ;;line 2226;; _g3_chk_blk_t
+
+.
+ ;;line 2227;; 
+
+.L0520 ;;line 2228;;  if temp2 = 12 then goto _g3_repick_top
+
+	LDA temp2
+	CMP #12
+     BNE .skipL0520
+.condpart171
+ jmp ._g3_repick_top
+.skipL0520
+.L0521 ;;line 2229;;  if temp2 = 13 then goto _g3_repick_top
+
+	LDA temp2
+	CMP #13
+     BNE .skipL0521
+.condpart172
+ jmp ._g3_repick_top
+.skipL0521
+.L0522 ;;line 2230;;  if temp2 = 15 then goto _g3_repick_top
+
+	LDA temp2
+	CMP #15
+     BNE .skipL0522
+.condpart173
+ jmp ._g3_repick_top
+.skipL0522
+.L0523 ;;line 2231;;  goto _g3_unique_top
+
+ jmp ._g3_unique_top
+.
+ ;;line 2232;; 
+
+._g3_unique_top
+ ;;line 2233;; _g3_unique_top
+
+.L0524 ;;line 2234;;  if temp2  >=  8 then goto _g3_hi_top
+
+	LDA temp2
+	CMP #8
+     BCC .skipL0524
+.condpart174
+ jmp ._g3_hi_top
+.skipL0524
+.L0525 ;;line 2235;;  temp5 = bit_mask_8[temp2]
+
+	LDX temp2
+	LDA bit_mask_8,x
+	STA temp5
+.L0526 ;;line 2236;;  temp6 = aux5  &  temp5
+
+	LDA aux5
+	AND temp5
+	STA temp6
+.L0527 ;;line 2237;;  if temp6  <>  0 then goto _g3_repick_top
+
+	LDA temp6
+	CMP #0
+     BEQ .skipL0527
+.condpart175
+ jmp ._g3_repick_top
+.skipL0527
+.L0528 ;;line 2238;;  aux5 = aux5  |  temp5
+
+	LDA aux5
+	ORA temp5
+	STA aux5
+.L0529 ;;line 2239;;  goto _g3_place_top
+
+ jmp ._g3_place_top
+._g3_hi_top
+ ;;line 2240;; _g3_hi_top
+
+.L0530 ;;line 2241;;  temp4 = temp2  -  8
+
+	LDA temp2
+	SEC
+	SBC #8
+	STA temp4
+.L0531 ;;line 2242;;  temp5 = bit_mask_8[temp4]
+
+	LDX temp4
+	LDA bit_mask_8,x
+	STA temp5
+.L0532 ;;line 2243;;  temp6 = aux6  &  temp5
+
+	LDA aux6
+	AND temp5
+	STA temp6
+.L0533 ;;line 2244;;  if temp6  <>  0 then goto _g3_repick_top
+
+	LDA temp6
+	CMP #0
+     BEQ .skipL0533
+.condpart176
+ jmp ._g3_repick_top
+.skipL0533
+.L0534 ;;line 2245;;  aux6 = aux6  |  temp5
+
+	LDA aux6
+	ORA temp5
+	STA aux6
+.
+ ;;line 2246;; 
+
+._g3_place_top
+ ;;line 2247;; _g3_place_top
+
+.L0535 ;;line 2248;;  w_top_obj_room[temp1] = temp3
+
+	LDA temp3
+	LDX temp1
+	STA w_top_obj_room,x
+.L0536 ;;line 2249;;  temp7 = rand  &  3
+
+ sta temp7
+ lda #>(ret_point24-1)
+ pha
+ lda #<(ret_point24-1)
+ pha
+ lda #>(randomize-1)
+ pha
+ lda #<(randomize-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #4
+ jmp BS_jsr
+ret_point24
+	AND #3
+	STA temp7
+.L0537 ;;line 2250;;  temp4 = g3_corner_x[temp7]
+
+	LDX temp7
+	LDA g3_corner_x,x
+	STA temp4
+.L0538 ;;line 2251;;  top_obj_x[temp1] = temp4
+
+	LDA temp4
+	LDX temp1
+	STA top_obj_x,x
+.L0539 ;;line 2252;;  temp4 = g3_corner_y[temp7]
+
+	LDX temp7
+	LDA g3_corner_y,x
+	STA temp4
+.L0540 ;;line 2253;;  top_obj_y[temp1] = temp4
+
+	LDA temp4
+	LDX temp1
+	STA top_obj_y,x
+.
+ ;;line 2254;; 
+
+.L0541 ;;line 2255;;  if temp1 = 0 then goto _g3_start_bot
+
+	LDA temp1
+	CMP #0
+     BNE .skipL0541
+.condpart177
+ jmp ._g3_start_bot
+.skipL0541
+.L0542 ;;line 2256;;  temp1 = temp1  -  1
+
+	DEC temp1
+.L0543 ;;line 2257;;  goto _g3_loop_top
+
+ jmp ._g3_loop_top
+.
+ ;;line 2258;; 
+
+._g3_start_bot
+ ;;line 2259;; _g3_start_bot
+
+.
+ ;;line 2260;; 
+
+.L0544 ;;line 2261;;  aux5 = 0  :  aux6 = 0
+
+	LDA #0
+	STA aux5
+	STA aux6
+.L0545 ;;line 2262;;  temp1 = 10
+
+	LDA #10
+	STA temp1
+.
+ ;;line 2263;; 
+
+._g3_loop_bot
+ ;;line 2264;; _g3_loop_bot
+
+._g3_repick_bot
+ ;;line 2265;; _g3_repick_bot
+
+.L0546 ;;line 2266;;  temp2 = rand  &  15
+
+ sta temp7
+ lda #>(ret_point25-1)
+ pha
+ lda #<(ret_point25-1)
+ pha
+ lda #>(randomize-1)
+ pha
+ lda #<(randomize-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #4
+ jmp BS_jsr
+ret_point25
+	AND #15
+	STA temp2
+.L0547 ;;line 2267;;  temp3 = g3_rooms[temp2]
+
+	LDX temp2
+	LDA g3_rooms,x
+	STA temp3
+.
+ ;;line 2268;; 
+
+.
+ ;;line 2269;; 
+
+.L0548 ;;line 2270;;  if temp1 = 5 then if temp2 = 11 then goto _g3_repick_bot
+
+	LDA temp1
+	CMP #5
+     BNE .skipL0548
+.condpart178
+	LDA temp2
+	CMP #11
+     BNE .skip178then
+.condpart179
+ jmp ._g3_repick_bot
+.skip178then
+.skipL0548
+.
+ ;;line 2271;; 
+
+.
+ ;;line 2272;; 
+
+.L0549 ;;line 2273;;  if temp1 = 6 then if temp2  >=  10 then goto _g3_repick_bot
+
+	LDA temp1
+	CMP #6
+     BNE .skipL0549
+.condpart180
+	LDA temp2
+	CMP #10
+     BCC .skip180then
+.condpart181
+ jmp ._g3_repick_bot
+.skip180then
+.skipL0549
+.L0550 ;;line 2274;;  if temp1 = 7 then if temp2  >=  10 then goto _g3_repick_bot
+
+	LDA temp1
+	CMP #7
+     BNE .skipL0550
+.condpart182
+	LDA temp2
+	CMP #10
+     BCC .skip182then
+.condpart183
+ jmp ._g3_repick_bot
+.skip182then
+.skipL0550
+.
+ ;;line 2275;; 
+
+.
+ ;;line 2276;; 
+
+.L0551 ;;line 2277;;  if temp1 = 8 then goto _g3_chk_wht_b
+
+	LDA temp1
+	CMP #8
+     BNE .skipL0551
+.condpart184
+ jmp ._g3_chk_wht_b
+.skipL0551
+.L0552 ;;line 2278;;  if temp1 = 9 then goto _g3_chk_blk_b
+
+	LDA temp1
+	CMP #9
+     BNE .skipL0552
+.condpart185
+ jmp ._g3_chk_blk_b
+.skipL0552
+.L0553 ;;line 2279;;  goto _g3_unique_bot
+
+ jmp ._g3_unique_bot
+.
+ ;;line 2280;; 
+
+._g3_chk_wht_b
+ ;;line 2281;; _g3_chk_wht_b
+
+.L0554 ;;line 2282;;  if temp2 = 14 then goto _g3_repick_bot
+
+	LDA temp2
+	CMP #14
+     BNE .skipL0554
+.condpart186
+ jmp ._g3_repick_bot
+.skipL0554
+.L0555 ;;line 2283;;  if w_bot_obj_room[9]  <>  21 then goto _g3_unique_bot
+
+	LDX #9
+	LDA w_bot_obj_room,x
+	CMP #21
+     BEQ .skipL0555
+.condpart187
+ jmp ._g3_unique_bot
+.skipL0555
+.L0556 ;;line 2284;;  if temp2 = 12 then goto _g3_repick_bot
+
+	LDA temp2
+	CMP #12
+     BNE .skipL0556
+.condpart188
+ jmp ._g3_repick_bot
+.skipL0556
+.L0557 ;;line 2285;;  if temp2 = 13 then goto _g3_repick_bot
+
+	LDA temp2
+	CMP #13
+     BNE .skipL0557
+.condpart189
+ jmp ._g3_repick_bot
+.skipL0557
+.L0558 ;;line 2286;;  if temp2 = 15 then goto _g3_repick_bot
+
+	LDA temp2
+	CMP #15
+     BNE .skipL0558
+.condpart190
+ jmp ._g3_repick_bot
+.skipL0558
+.L0559 ;;line 2287;;  goto _g3_unique_bot
+
+ jmp ._g3_unique_bot
+.
+ ;;line 2288;; 
+
+._g3_chk_blk_b
+ ;;line 2289;; _g3_chk_blk_b
+
+.L0560 ;;line 2290;;  if temp2 = 12 then goto _g3_repick_bot
+
+	LDA temp2
+	CMP #12
+     BNE .skipL0560
+.condpart191
+ jmp ._g3_repick_bot
+.skipL0560
+.L0561 ;;line 2291;;  if temp2 = 13 then goto _g3_repick_bot
+
+	LDA temp2
+	CMP #13
+     BNE .skipL0561
+.condpart192
+ jmp ._g3_repick_bot
+.skipL0561
+.L0562 ;;line 2292;;  if temp2 = 15 then goto _g3_repick_bot
+
+	LDA temp2
+	CMP #15
+     BNE .skipL0562
+.condpart193
+ jmp ._g3_repick_bot
+.skipL0562
+.L0563 ;;line 2293;;  goto _g3_unique_bot
+
+ jmp ._g3_unique_bot
+.
+ ;;line 2294;; 
+
+._g3_unique_bot
+ ;;line 2295;; _g3_unique_bot
+
+.L0564 ;;line 2296;;  if temp2  >=  8 then goto _g3_hi_bot
+
+	LDA temp2
+	CMP #8
+     BCC .skipL0564
+.condpart194
+ jmp ._g3_hi_bot
+.skipL0564
+.L0565 ;;line 2297;;  temp5 = bit_mask_8[temp2]
+
+	LDX temp2
+	LDA bit_mask_8,x
+	STA temp5
+.L0566 ;;line 2298;;  temp6 = aux5  &  temp5
+
+	LDA aux5
+	AND temp5
+	STA temp6
+.L0567 ;;line 2299;;  if temp6  <>  0 then goto _g3_repick_bot
+
+	LDA temp6
+	CMP #0
+     BEQ .skipL0567
+.condpart195
+ jmp ._g3_repick_bot
+.skipL0567
+.L0568 ;;line 2300;;  aux5 = aux5  |  temp5
+
+	LDA aux5
+	ORA temp5
+	STA aux5
+.L0569 ;;line 2301;;  goto _g3_place_bot
+
+ jmp ._g3_place_bot
+._g3_hi_bot
+ ;;line 2302;; _g3_hi_bot
+
+.L0570 ;;line 2303;;  temp4 = temp2  -  8
+
+	LDA temp2
+	SEC
+	SBC #8
+	STA temp4
+.L0571 ;;line 2304;;  temp5 = bit_mask_8[temp4]
+
+	LDX temp4
+	LDA bit_mask_8,x
+	STA temp5
+.L0572 ;;line 2305;;  temp6 = aux6  &  temp5
+
+	LDA aux6
+	AND temp5
+	STA temp6
+.L0573 ;;line 2306;;  if temp6  <>  0 then goto _g3_repick_bot
+
+	LDA temp6
+	CMP #0
+     BEQ .skipL0573
+.condpart196
+ jmp ._g3_repick_bot
+.skipL0573
+.L0574 ;;line 2307;;  aux6 = aux6  |  temp5
+
+	LDA aux6
+	ORA temp5
+	STA aux6
+.
+ ;;line 2308;; 
+
+._g3_place_bot
+ ;;line 2309;; _g3_place_bot
+
+.L0575 ;;line 2310;;  w_bot_obj_room[temp1] = temp3
+
+	LDA temp3
+	LDX temp1
+	STA w_bot_obj_room,x
+.L0576 ;;line 2311;;  temp7 = rand  &  3
+
+ sta temp7
+ lda #>(ret_point26-1)
+ pha
+ lda #<(ret_point26-1)
+ pha
+ lda #>(randomize-1)
+ pha
+ lda #<(randomize-1)
+ pha
+ lda temp7
+ pha
+ txa
+ pha
+ ldx #4
+ jmp BS_jsr
+ret_point26
+	AND #3
+	STA temp7
+.L0577 ;;line 2312;;  temp4 = g3_corner_x[temp7]
+
+	LDX temp7
+	LDA g3_corner_x,x
+	STA temp4
+.L0578 ;;line 2313;;  bot_obj_x[temp1] = temp4
+
+	LDA temp4
+	LDX temp1
+	STA bot_obj_x,x
+.L0579 ;;line 2314;;  temp4 = g3_corner_y[temp7]
+
+	LDX temp7
+	LDA g3_corner_y,x
+	STA temp4
+.L0580 ;;line 2315;;  bot_obj_y[temp1] = temp4
+
+	LDA temp4
+	LDX temp1
+	STA bot_obj_y,x
+.
+ ;;line 2316;; 
+
+.L0581 ;;line 2317;;  if temp1 = 0 then goto _g3_done
+
+	LDA temp1
+	CMP #0
+     BNE .skipL0581
+.condpart197
+ jmp ._g3_done
+.skipL0581
+.L0582 ;;line 2318;;  temp1 = temp1  -  1
+
+	DEC temp1
+.L0583 ;;line 2319;;  goto _g3_loop_bot
+
+ jmp ._g3_loop_bot
+.
+ ;;line 2320;; 
+
+._g3_done
+ ;;line 2321;; _g3_done
+
+.L0584 ;;line 2322;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 2323;; 
+
+.
+ ;;line 2324;; 
+
+.L0585 ;;line 2325;;  data bit_mask_8
+
+	JMP .skipL0585
+bit_mask_8
+	.byte  1, 2, 4, 8, 16, 32, 64, 128
+
+.skipL0585
+.
+ ;;line 2328;; 
+
+.
+ ;;line 2329;; 
+
+.
+ ;;line 2330;; 
+
+.
+ ;;line 2331;; 
+
+.
+ ;;line 2332;; 
+
+.
+ ;;line 2333;; 
+
+.
+ ;;line 2334;; 
+
+.L0586 ;;line 2335;;  data g3_rooms
+
+	JMP .skipL0586
+g3_rooms
+	.byte  2, 4, 5, 9, 11, 13, 14, 16, 27, 28, 30, 1, 12, 19, 21, 22
+
+.skipL0586
+.
+ ;;line 2338;; 
+
+.
+ ;;line 2339;; 
+
+.L0587 ;;line 2340;;  data g3_corner_x
+
+	JMP .skipL0587
+g3_corner_x
+	.byte  32, 118, 32, 118
+
+.skipL0587
+.L0588 ;;line 2343;;  data g3_corner_y
+
+	JMP .skipL0588
+g3_corner_y
+	.byte  16, 16, 40, 40
+
+.skipL0588
+.
+ ;;line 2346;; 
+
+.apply_graphics
+ ;;line 2347;; apply_graphics
+
+.
+ ;;line 2348;; 
+
+.L0589 ;;line 2349;;  gosub update_audio
+
+ jsr .update_audio
+.
+ ;;line 2350;; 
+
+.
+ ;;line 2351;; 
+
+.L0590 ;;line 2352;;  if !room_flags{3} then gosub _gfx_gate  :  goto _set_bot_p0_ptr
+
+	LDA room_flags
+	AND #8
+	BNE .skipL0590
+.condpart198
+ jsr ._gfx_gate
+ jmp ._set_bot_p0_ptr
+.skipL0590
+.L0591 ;;line 2353;;  if p2_ballx  <  33 then bottom_player0x = 13  :  goto _bot_t_y
+
+	LDA p2_ballx
+	CMP #33
+     BCS .skipL0591
+.condpart199
+	LDA #13
+	STA bottom_player0x
+ jmp ._bot_t_y
+.skipL0591
+.L0592 ;;line 2354;;  if p2_ballx  >  131 then bottom_player0x = 112  :  goto _bot_t_y
+
+	LDA #131
+	CMP p2_ballx
+     BCS .skipL0592
+.condpart200
+	LDA #112
+	STA bottom_player0x
+ jmp ._bot_t_y
+.skipL0592
+.L0593 ;;line 2355;;  bottom_player0x = p2_ballx  -  20
+
+	LDA p2_ballx
+	SEC
+	SBC #20
+	STA bottom_player0x
+._bot_t_y
+ ;;line 2356;; _bot_t_y
+
+.L0594 ;;line 2357;;  bottom_player0y = p2_bally  +  5
+
+	LDA p2_bally
+	CLC
+	ADC #5
+	STA bottom_player0y
+.L0595 ;;line 2358;;  gosub _gfx_torch
+
+ jsr ._gfx_torch
+._set_bot_p0_ptr
+ ;;line 2359;; _set_bot_p0_ptr
+
+.L0596 ;;line 2360;;  bottom_p0_ptr_lo = top_p0_ptr_lo
+
+	LDA top_p0_ptr_lo
+	STA bottom_p0_ptr_lo
+.L0597 ;;line 2361;;  bottom_p0_ptr_hi = top_p0_ptr_hi
+
+	LDA top_p0_ptr_hi
+	STA bottom_p0_ptr_hi
+.
+ ;;line 2362;; 
+
+.
+ ;;line 2363;; 
+
+.L0598 ;;line 2364;;  if !room_flags{2} then gosub _gfx_gate  :  goto _skip_top_pos
+
+	LDA room_flags
+	AND #4
+	BNE .skipL0598
+.condpart201
+ jsr ._gfx_gate
+ jmp ._skip_top_pos
+.skipL0598
+.L0599 ;;line 2365;;  if ballx  <  33 then top_player0x = 13  :  goto _top_t_y
+
+	LDA ballx
+	CMP #33
+     BCS .skipL0599
+.condpart202
+	LDA #13
+	STA top_player0x
+ jmp ._top_t_y
+.skipL0599
+.L0600 ;;line 2366;;  if ballx  >  131 then top_player0x = 112  :  goto _top_t_y
+
+	LDA #131
+	CMP ballx
+     BCS .skipL0600
+.condpart203
+	LDA #112
+	STA top_player0x
+ jmp ._top_t_y
+.skipL0600
+.L0601 ;;line 2367;;  top_player0x = ballx  -  20
+
+	LDA ballx
+	SEC
+	SBC #20
+	STA top_player0x
+._top_t_y
+ ;;line 2368;; _top_t_y
+
+.L0602 ;;line 2369;;  top_player0y = bally  +  5
+
+	LDA bally
+	CLC
+	ADC #5
+	STA top_player0y
+.L0603 ;;line 2370;;  gosub _gfx_torch
+
+ jsr ._gfx_torch
+._skip_top_pos
+ ;;line 2371;; _skip_top_pos
+
+.
+ ;;line 2372;; 
+
+.
+ ;;line 2373;; 
+
+.L0604 ;;line 2374;;  temp3 = bot_flicker_idx  :  temp4 = bot_drag_state  :  temp2 = drag_dead  /  8  :  gosub set_sprite_pointers
+
+	LDA bot_flicker_idx
 	STA temp3
 	LDA bot_drag_state
 	STA temp4
@@ -5706,23 +9362,23 @@ start_bank2 ldx #$ff
 	lsr
 	STA temp2
  jsr .set_sprite_pointers
-.L0403 ;;line 1197;;  bottom_p1_ptr_lo = top_p1_ptr_lo
+.L0605 ;;line 2375;;  bottom_p1_ptr_lo = top_p1_ptr_lo
 
 	LDA top_p1_ptr_lo
 	STA bottom_p1_ptr_lo
-.L0404 ;;line 1198;;  bottom_p1_ptr_hi = top_p1_ptr_hi
+.L0606 ;;line 2376;;  bottom_p1_ptr_hi = top_p1_ptr_hi
 
 	LDA top_p1_ptr_hi
 	STA bottom_p1_ptr_hi
 .
- ;;line 1199;; 
+ ;;line 2377;; 
 
 .
- ;;line 1200;; 
+ ;;line 2378;; 
 
-.L0405 ;;line 1201;;  temp3 = r_top_obj_hit  :  temp4 = top_drag_state  :  temp2 = drag_dead  &  7  :  gosub set_sprite_pointers
+.L0607 ;;line 2379;;  temp3 = flicker_idx  :  temp4 = top_drag_state  :  temp2 = drag_dead  &  7  :  gosub set_sprite_pointers
 
-	LDA r_top_obj_hit
+	LDA flicker_idx
 	STA temp3
 	LDA top_drag_state
 	STA temp4
@@ -5731,334 +9387,792 @@ start_bank2 ldx #$ff
 	STA temp2
  jsr .set_sprite_pointers
 .
- ;;line 1202;; 
+ ;;line 2380;; 
 
 .
- ;;line 1203;; 
+ ;;line 2381;; 
 
-.L0406 ;;line 1204;;  if joy0fire then top_carried_item = 255  :  goto _check_bot_pickup
+.L0608 ;;line 2382;;  if !joy0fire then goto _top_try_pickup
 
  bit INPT4
-	BMI .skipL0406
-.condpart119
+	BPL .skipL0608
+.condpart204
+ jmp ._top_try_pickup
+.skipL0608
+.
+ ;;line 2383;; 
+
+.L0609 ;;line 2384;;  if top_carried_item = 255 then goto _check_bot_pickup
+
+	LDA top_carried_item
+	CMP #255
+     BNE .skipL0609
+.condpart205
+ jmp ._check_bot_pickup
+.skipL0609
+.
+ ;;line 2385;; 
+
+.L0610 ;;line 2386;;  top_carried_item = 255
+
 	LDA #255
 	STA top_carried_item
- jmp ._check_bot_pickup
-.skipL0406
-.L0407 ;;line 1205;;  temp1 = r_top_obj_hit
+.L0611 ;;line 2387;;  if top_drag_state = 3 then top_drag_state = 19
 
-	LDA r_top_obj_hit
+	LDA top_drag_state
+	CMP #3
+     BNE .skipL0611
+.condpart206
+	LDA #19
+	STA top_drag_state
+.skipL0611
+.L0612 ;;line 2388;;  goto _check_bot_pickup
+
+ jmp ._check_bot_pickup
+.
+ ;;line 2389;; 
+
+._top_try_pickup
+ ;;line 2390;; _top_try_pickup
+
+.L0613 ;;line 2391;;  temp1 = flicker_idx
+
+	LDA flicker_idx
 	STA temp1
-.L0408 ;;line 1206;;  if temp1  <  3  ||  temp1 = 255 then goto _check_bot_pickup
+.L0614 ;;line 2392;;  if temp1  <  3  ||  temp1 = 255 then goto _check_bot_pickup
 
 	LDA temp1
 	CMP #3
-     BCS .skipL0408
-.condpart120
- jmp .condpart121
-.skipL0408
+     BCS .skipL0614
+.condpart207
+ jmp .condpart208
+.skipL0614
 	LDA temp1
 	CMP #255
-     BNE .skip22OR
-.condpart121
+     BNE .skip20OR
+.condpart208
  jmp ._check_bot_pickup
-.skip22OR
-.L0409 ;;line 1207;;  if temp1 = top_carried_item then goto _check_bot_pickup
+.skip20OR
+.L0615 ;;line 2393;;  if temp1 = top_carried_item then goto _check_bot_pickup
 
 	LDA temp1
 	CMP top_carried_item
-     BNE .skipL0409
-.condpart122
+     BNE .skipL0615
+.condpart209
  jmp ._check_bot_pickup
-.skipL0409
-.
- ;;line 1208;; 
+.skipL0615
+.L0616 ;;line 2394;;  if top_carried_item = 3  &&  top_obj_x[3] = top_player1x then goto _check_bot_pickup
 
-.L0410 ;;line 1209;;  temp5 = ballx  +  4
+	LDA top_carried_item
+	CMP #3
+     BNE .skipL0616
+.condpart210
+	LDX #3
+	LDA top_obj_x,x
+	CMP top_player1x
+     BNE .skip210then
+.condpart211
+ jmp ._check_bot_pickup
+.skip210then
+.skipL0616
+.
+ ;;line 2395;; 
+
+.L0617 ;;line 2396;;  if temp1 = 6 then goto _top_bridge_pickup
+
+	LDA temp1
+	CMP #6
+     BNE .skipL0617
+.condpart212
+ jmp ._top_bridge_pickup
+.skipL0617
+.
+ ;;line 2397;; 
+
+.
+ ;;line 2398;; 
+
+.L0618 ;;line 2399;;  temp5 = ballx  +  4
 
 	LDA ballx
 	CLC
 	ADC #4
 	STA temp5
-.L0411 ;;line 1210;;  temp6 = top_player1x  +  8
+.L0619 ;;line 2400;;  temp6 = top_player1x  +  10
 
 	LDA top_player1x
 	CLC
-	ADC #8
+	ADC #10
 	STA temp6
-.L0412 ;;line 1211;;  if temp5  <  top_player1x  ||  ballx  >  temp6 then goto _check_bot_pickup
+.L0620 ;;line 2401;;  if temp5  <  top_player1x then goto _check_bot_pickup
 
 	LDA temp5
 	CMP top_player1x
-     BCS .skipL0412
-.condpart123
- jmp .condpart124
-.skipL0412
+     BCS .skipL0620
+.condpart213
+ jmp ._check_bot_pickup
+.skipL0620
+.L0621 ;;line 2402;;  if ballx  >  temp6 then goto _check_bot_pickup
+
 	LDA temp6
 	CMP ballx
-     BCS .skip23OR
-.condpart124
+     BCS .skipL0621
+.condpart214
  jmp ._check_bot_pickup
-.skip23OR
+.skipL0621
 .
- ;;line 1212;; 
+ ;;line 2403;; 
 
-.L0413 ;;line 1213;;  temp5 = bally  +  4
+.
+ ;;line 2404;; 
+
+.L0622 ;;line 2405;;  temp5 = bally  +  20
 
 	LDA bally
 	CLC
-	ADC #4
+	ADC #20
 	STA temp5
-.L0414 ;;line 1214;;  temp6 = top_player1y  +  8
+.L0623 ;;line 2406;;  temp2 = temp1  -  3
+
+	LDA temp1
+	SEC
+	SBC #3
+	STA temp2
+.
+ ;;line 2407;; 
+
+.L0624 ;;line 2408;;  temp6 = top_player1y  +  item_hitbox_top[temp2]
 
 	LDA top_player1y
+	LDX temp2
 	CLC
-	ADC #8
+	ADC item_hitbox_top,x
 	STA temp6
-.L0415 ;;line 1215;;  if temp5  <  top_player1y  ||  bally  >  temp6 then goto _check_bot_pickup
+.L0625 ;;line 2409;;  if temp5  <  temp6 then goto _check_bot_pickup
 
 	LDA temp5
-	CMP top_player1y
-     BCS .skipL0415
-.condpart125
- jmp .condpart126
-.skipL0415
-	LDA temp6
-	CMP bally
-     BCS .skip24OR
-.condpart126
+	CMP temp6
+     BCS .skipL0625
+.condpart215
  jmp ._check_bot_pickup
-.skip24OR
+.skipL0625
 .
- ;;line 1216;; 
+ ;;line 2410;; 
+
+.L0626 ;;line 2411;;  temp6 = top_player1y  +  item_hitbox_bot[temp2]
+
+	LDA top_player1y
+	LDX temp2
+	CLC
+	ADC item_hitbox_bot,x
+	STA temp6
+.L0627 ;;line 2412;;  if temp5  >  temp6 then goto _check_bot_pickup
+
+	LDA temp6
+	CMP temp5
+     BCS .skipL0627
+.condpart216
+ jmp ._check_bot_pickup
+.skipL0627
+.
+ ;;line 2413;; 
+
+.L0628 ;;line 2414;;  goto _do_pickup_top
+
+ jmp ._do_pickup_top
+.
+ ;;line 2415;; 
+
+._top_bridge_pickup
+ ;;line 2416;; _top_bridge_pickup
+
+.L0629 ;;line 2417;;  asm
+
+   
+
+   lda bally
+
+   sec
+
+   sbc top_player1y
+
+   clc
+
+   adc #18
+
+   cmp #22
+
+   bcs .t_br_rej
+
+   
+
+   
+
+   lda ballx
+
+   sec
+
+   sbc top_player1x
+
+   clc
+
+   adc #4
+
+   cmp #24
+
+   bcs .t_br_rej
+
+   
+
+   
+
+   lda ballx
+
+   sec
+
+   sbc top_player1x
+
+   cmp #6       
+
+   bcc .t_br_acc
+
+   cmp #13      
+
+   bcs .t_br_acc
+
+   
+
+   
+
+.t_br_rej
+
+.L0630 ;;line 2448;;  goto _check_bot_pickup
+
+ jmp ._check_bot_pickup
+.
+ ;;line 2449;; 
+
+.L0631 ;;line 2450;;  asm
+
+.t_br_acc
 
 .
- ;;line 1217;; 
+ ;;line 2453;; 
 
-.L0416 ;;line 1218;;  top_carried_item = temp1
+.
+ ;;line 2454;; 
+
+._do_pickup_top
+ ;;line 2455;; _do_pickup_top
+
+.L0632 ;;line 2456;;  top_carried_item = temp1
 
 	LDA temp1
 	STA top_carried_item
-.L0417 ;;line 1219;;  w_top_carry_off_x = top_obj_x[temp1]  -  ballx
+.L0633 ;;line 2457;;  if top_drag_state = 3 then top_drag_state = 39
+
+	LDA top_drag_state
+	CMP #3
+     BNE .skipL0633
+.condpart217
+	LDA #39
+	STA top_drag_state
+.skipL0633
+.L0634 ;;line 2458;;  temp2 = top_bat_state  &  15
+
+	LDA top_bat_state
+	AND #15
+	STA temp2
+.L0635 ;;line 2459;;  if temp2 = temp1 then top_bat_state = top_bat_state  |  15  :  bat_fedup =  ( bat_fedup  &  $F0 )   |  6
+
+	LDA temp2
+	CMP temp1
+     BNE .skipL0635
+.condpart218
+	LDA top_bat_state
+	ORA #15
+	STA top_bat_state
+; complex statement detected
+	LDA bat_fedup
+	AND #$F0
+	ORA #6
+	STA bat_fedup
+.skipL0635
+.L0636 ;;line 2460;;  w_top_carry_off_x = top_obj_x[temp1]  -  r_top_oldx
 
 	LDX temp1
 	LDA top_obj_x,x
 	SEC
-	SBC ballx
+	SBC r_top_oldx
 	STA w_top_carry_off_x
-.L0418 ;;line 1220;;  w_top_carry_off_y = top_obj_y[temp1]  -  bally
+.L0637 ;;line 2461;;  w_top_carry_off_y = top_obj_y[temp1]  -  r_top_oldy
 
 	LDX temp1
 	LDA top_obj_y,x
 	SEC
-	SBC bally
+	SBC r_top_oldy
 	STA w_top_carry_off_y
 .
- ;;line 1221;; 
+ ;;line 2462;; 
 
 ._check_bot_pickup
- ;;line 1222;; _check_bot_pickup
+ ;;line 2463;; _check_bot_pickup
 
 .
- ;;line 1223;; 
+ ;;line 2464;; 
 
-.L0419 ;;line 1224;;  if joy1fire then bot_carried_item = 255  :  return otherbank
+.L0638 ;;line 2465;;  if !joy1fire then goto _bot_try_pickup
 
  bit INPT5
-	BMI .skipL0419
-.condpart127
+	BPL .skipL0638
+.condpart219
+ jmp ._bot_try_pickup
+.skipL0638
+.
+ ;;line 2466;; 
+
+.L0639 ;;line 2467;;  if bot_carried_item = 255 then return otherbank
+
+	LDA bot_carried_item
+	CMP #255
+     BNE .skipL0639
+.condpart220
+	JMP BS_return
+.skipL0639
+.
+ ;;line 2468;; 
+
+.L0640 ;;line 2469;;  bot_carried_item = 255
+
 	LDA #255
 	STA bot_carried_item
-	JMP BS_return
-.skipL0419
-.L0420 ;;line 1225;;  temp1 = r_bot_obj_hit
+.L0641 ;;line 2470;;  if bot_drag_state = 3 then bot_drag_state = 19
 
-	LDA r_bot_obj_hit
+	LDA bot_drag_state
+	CMP #3
+     BNE .skipL0641
+.condpart221
+	LDA #19
+	STA bot_drag_state
+.skipL0641
+.L0642 ;;line 2471;;  return otherbank
+
+	JMP BS_return
+.
+ ;;line 2472;; 
+
+._bot_try_pickup
+ ;;line 2473;; _bot_try_pickup
+
+.L0643 ;;line 2474;;  temp1 = bot_flicker_idx
+
+	LDA bot_flicker_idx
 	STA temp1
-.L0421 ;;line 1226;;  if temp1  <  3  ||  temp1 = 255 then return otherbank
+.L0644 ;;line 2475;;  if temp1  <  3  ||  temp1 = 255 then return otherbank
 
 	LDA temp1
 	CMP #3
-     BCS .skipL0421
-.condpart128
- jmp .condpart129
-.skipL0421
+     BCS .skipL0644
+.condpart222
+ jmp .condpart223
+.skipL0644
 	LDA temp1
 	CMP #255
-     BNE .skip25OR
-.condpart129
+     BNE .skip22OR
+.condpart223
 	JMP BS_return
-.skip25OR
-.L0422 ;;line 1227;;  if temp1 = bot_carried_item then return otherbank
+.skip22OR
+.L0645 ;;line 2476;;  if temp1 = bot_carried_item then return otherbank
 
 	LDA temp1
 	CMP bot_carried_item
-     BNE .skipL0422
-.condpart130
+     BNE .skipL0645
+.condpart224
 	JMP BS_return
-.skipL0422
-.
- ;;line 1228;; 
+.skipL0645
+.L0646 ;;line 2477;;  if bot_carried_item = 3  &&  bot_obj_x[3] = bottom_player1x then return otherbank
 
-.L0423 ;;line 1229;;  temp5 = p2_ballx  +  4
+	LDA bot_carried_item
+	CMP #3
+     BNE .skipL0646
+.condpart225
+	LDX #3
+	LDA bot_obj_x,x
+	CMP bottom_player1x
+     BNE .skip225then
+.condpart226
+	JMP BS_return
+.skip225then
+.skipL0646
+.
+ ;;line 2478;; 
+
+.L0647 ;;line 2479;;  if temp1 = 6 then goto _bot_bridge_pickup
+
+	LDA temp1
+	CMP #6
+     BNE .skipL0647
+.condpart227
+ jmp ._bot_bridge_pickup
+.skipL0647
+.
+ ;;line 2480;; 
+
+.
+ ;;line 2481;; 
+
+.L0648 ;;line 2482;;  temp5 = p2_ballx  +  4
 
 	LDA p2_ballx
 	CLC
 	ADC #4
 	STA temp5
-.L0424 ;;line 1230;;  temp6 = bottom_player1x  +  8
+.L0649 ;;line 2483;;  temp6 = bottom_player1x  +  8
 
 	LDA bottom_player1x
 	CLC
 	ADC #8
 	STA temp6
-.L0425 ;;line 1231;;  if temp5  <  bottom_player1x  ||  p2_ballx  >  temp6 then return otherbank
+.L0650 ;;line 2484;;  if temp5  <  bottom_player1x then return otherbank
 
 	LDA temp5
 	CMP bottom_player1x
-     BCS .skipL0425
-.condpart131
- jmp .condpart132
-.skipL0425
+     BCS .skipL0650
+.condpart228
+	JMP BS_return
+.skipL0650
+.L0651 ;;line 2485;;  if p2_ballx  >  temp6 then return otherbank
+
 	LDA temp6
 	CMP p2_ballx
-     BCS .skip26OR
-.condpart132
+     BCS .skipL0651
+.condpart229
 	JMP BS_return
-.skip26OR
+.skipL0651
 .
- ;;line 1232;; 
+ ;;line 2486;; 
 
-.L0426 ;;line 1233;;  temp5 = p2_bally  +  4
+.
+ ;;line 2487;; 
+
+.L0652 ;;line 2488;;  temp5 = p2_bally  +  20
 
 	LDA p2_bally
 	CLC
-	ADC #4
+	ADC #20
 	STA temp5
-.L0427 ;;line 1234;;  temp6 = bottom_player1y  +  8
+.L0653 ;;line 2489;;  temp2 = temp1  -  3
+
+	LDA temp1
+	SEC
+	SBC #3
+	STA temp2
+.
+ ;;line 2490;; 
+
+.L0654 ;;line 2491;;  temp6 = bottom_player1y  +  item_hitbox_top[temp2]
 
 	LDA bottom_player1y
+	LDX temp2
 	CLC
-	ADC #8
+	ADC item_hitbox_top,x
 	STA temp6
-.L0428 ;;line 1235;;  if temp5  <  bottom_player1y  ||  p2_bally  >  temp6 then return otherbank
+.L0655 ;;line 2492;;  if temp5  <  temp6 then return otherbank
 
 	LDA temp5
-	CMP bottom_player1y
-     BCS .skipL0428
-.condpart133
- jmp .condpart134
-.skipL0428
-	LDA temp6
-	CMP p2_bally
-     BCS .skip27OR
-.condpart134
+	CMP temp6
+     BCS .skipL0655
+.condpart230
 	JMP BS_return
-.skip27OR
+.skipL0655
 .
- ;;line 1236;; 
+ ;;line 2493;; 
 
+.L0656 ;;line 2494;;  temp6 = bottom_player1y  +  item_hitbox_bot[temp2]
+
+	LDA bottom_player1y
+	LDX temp2
+	CLC
+	ADC item_hitbox_bot,x
+	STA temp6
+.L0657 ;;line 2495;;  if temp5  >  temp6 then return otherbank
+
+	LDA temp6
+	CMP temp5
+     BCS .skipL0657
+.condpart231
+	JMP BS_return
+.skipL0657
 .
- ;;line 1237;; 
+ ;;line 2496;; 
 
-.L0429 ;;line 1238;;  bot_carried_item = temp1
+.L0658 ;;line 2497;;  goto _do_pickup_bot
+
+ jmp ._do_pickup_bot
+.
+ ;;line 2498;; 
+
+._bot_bridge_pickup
+ ;;line 2499;; _bot_bridge_pickup
+
+.L0659 ;;line 2500;;  asm
+
+   
+
+   lda p2_bally
+
+   sec
+
+   sbc bottom_player1y
+
+   clc
+
+   adc #18
+
+   cmp #22
+
+   bcs .b_br_rej
+
+   
+
+   
+
+   lda p2_ballx
+
+   sec
+
+   sbc bottom_player1x
+
+   clc
+
+   adc #4
+
+   cmp #24
+
+   bcs .b_br_rej
+
+   
+
+   
+
+   lda p2_ballx
+
+   sec
+
+   sbc bottom_player1x
+
+   cmp #6       
+
+   bcc .b_br_acc
+
+   cmp #13      
+
+   bcs .b_br_acc
+
+   
+
+   
+
+.b_br_rej
+
+.L0660 ;;line 2531;;  return otherbank
+
+	JMP BS_return
+.
+ ;;line 2532;; 
+
+.L0661 ;;line 2533;;  asm
+
+.b_br_acc
+
+.L0662 ;;line 2536;;  goto _do_pickup_bot
+
+ jmp ._do_pickup_bot
+.
+ ;;line 2537;; 
+
+._do_pickup_bot
+ ;;line 2538;; _do_pickup_bot
+
+.L0663 ;;line 2539;;  bot_carried_item = temp1
 
 	LDA temp1
 	STA bot_carried_item
-.L0430 ;;line 1239;;  w_bot_carry_off_x = bot_obj_x[temp1]  -  p2_ballx
+.L0664 ;;line 2540;;  if bot_drag_state = 3 then bot_drag_state = 39
+
+	LDA bot_drag_state
+	CMP #3
+     BNE .skipL0664
+.condpart232
+	LDA #39
+	STA bot_drag_state
+.skipL0664
+.L0665 ;;line 2541;;  temp2 = bot_bat_state  &  15
+
+	LDA bot_bat_state
+	AND #15
+	STA temp2
+.L0666 ;;line 2542;;  if temp2 = temp1 then bot_bat_state = bot_bat_state  |  15  :  bat_fedup =  ( bat_fedup  &  $0F )   |  $60
+
+	LDA temp2
+	CMP temp1
+     BNE .skipL0666
+.condpart233
+	LDA bot_bat_state
+	ORA #15
+	STA bot_bat_state
+; complex statement detected
+	LDA bat_fedup
+	AND #$0F
+	ORA #$60
+	STA bat_fedup
+.skipL0666
+.L0667 ;;line 2543;;  w_bot_carry_off_x = bot_obj_x[temp1]  -  r_bottom_oldx
 
 	LDX temp1
 	LDA bot_obj_x,x
 	SEC
-	SBC p2_ballx
+	SBC r_bottom_oldx
 	STA w_bot_carry_off_x
-.L0431 ;;line 1240;;  w_bot_carry_off_y = bot_obj_y[temp1]  -  p2_bally
+.L0668 ;;line 2544;;  w_bot_carry_off_y = bot_obj_y[temp1]  -  r_bottom_oldy
 
 	LDX temp1
 	LDA bot_obj_y,x
 	SEC
-	SBC p2_bally
+	SBC r_bottom_oldy
 	STA w_bot_carry_off_y
-.L0432 ;;line 1241;;  return otherbank
+.L0669 ;;line 2545;;  return otherbank
 
 	JMP BS_return
 .
- ;;line 1242;; 
+ ;;line 2546;; 
 
-.set_sprite_pointers
- ;;line 1243;; set_sprite_pointers
+.
+ ;;line 2547;; 
 
-.L0433 ;;line 1244;;  if temp3  <  3 then goto _select_dragon_pose
+.L0670 ;;line 2548;;  data item_hitbox_top
 
-	LDA temp3
-	CMP #3
-     BCS .skipL0433
-.condpart135
- jmp ._select_dragon_pose
-.skipL0433
-.L0434 ;;line 1245;;  if temp3 = 3 then goto _gfx_magnet
+	JMP .skipL0670
+item_hitbox_top
+	.byte   11,       14,      10,        2,        15,     15,     15,     6
 
-	LDA temp3
-	CMP #3
-     BNE .skipL0434
-.condpart136
- jmp ._gfx_magnet
-.skipL0434
-.L0435 ;;line 1246;;  if temp3 = 4 then goto _gfx_sword
+.skipL0670
+.
+ ;;line 2551;; 
 
-	LDA temp3
-	CMP #4
-     BNE .skipL0435
-.condpart137
- jmp ._gfx_sword
-.skipL0435
-.L0436 ;;line 1247;;  if temp3 = 5 then goto _gfx_chalice
+.L0671 ;;line 2552;;  data item_hitbox_bot
 
-	LDA temp3
-	CMP #5
-     BNE .skipL0436
-.condpart138
- jmp ._gfx_chalice
-.skipL0436
-.L0437 ;;line 1248;;  if temp3 = 6 then goto _gfx_bridge
+	JMP .skipL0671
+item_hitbox_bot
+	.byte   25,       25,      27,        25,       25,     25,     25,     22
 
-	LDA temp3
-	CMP #6
-     BNE .skipL0437
-.condpart139
- jmp ._gfx_bridge
-.skipL0437
-.L0438 ;;line 1249;;  if temp3 = 7  ||  temp3 = 8 then goto _gfx_key
+.skipL0671
+.
+ ;;line 2555;; 
 
-	LDA temp3
-	CMP #7
-     BNE .skipL0438
-.condpart140
- jmp .condpart141
-.skipL0438
-	LDA temp3
-	CMP #8
-     BNE .skip28OR
-.condpart141
- jmp ._gfx_key
-.skip28OR
-.L0439 ;;line 1250;;  if temp3 = 9 then goto _gfx_key
+.
+ ;;line 2556;; 
 
-	LDA temp3
-	CMP #9
-     BNE .skipL0439
-.condpart142
- jmp ._gfx_key
-.skipL0439
-.L0440 ;;line 1251;;  if temp3 = 10 then goto _gfx_bat
+.
+ ;;line 2557;; 
 
-	LDA temp3
-	CMP #10
-     BNE .skipL0440
-.condpart143
- jmp ._gfx_bat
-.skipL0440
-.L0441 ;;line 1252;;  return
+.
+ ;;line 2558;; 
+
+.update_audio
+ ;;line 2559;; update_audio
+
+.
+ ;;line 2560;; 
+
+.L0672 ;;line 2561;;  if r005 = 1 then goto _play_win_sfx
+
+	LDA r005
+	CMP #1
+     BNE .skipL0672
+.condpart234
+ jmp ._play_win_sfx
+.skipL0672
+.L0673 ;;line 2562;;  if r016 = 1 then goto _play_win_sfx
+
+	LDA r016
+	CMP #1
+     BNE .skipL0673
+.condpart235
+ jmp ._play_win_sfx
+.skipL0673
+.L0674 ;;line 2563;;  goto _audio_top_check
+
+ jmp ._audio_top_check
+.
+ ;;line 2564;; 
+
+._play_win_sfx
+ ;;line 2565;; _play_win_sfx
+
+.
+ ;;line 2566;; 
+
+.L0675 ;;line 2567;;  if top_drag_state  <  255 then top_drag_state = top_drag_state  +  1
+
+	LDA top_drag_state
+	CMP #255
+     BCS .skipL0675
+.condpart236
+	INC top_drag_state
+.skipL0675
+.L0676 ;;line 2568;;  if top_drag_state  >  127 then AUDV0 = 0  :  AUDV1 = 0  :  return
+
+	LDA #127
+	CMP top_drag_state
+     BCS .skipL0676
+.condpart237
+	LDA #0
+	STA AUDV0
+	STA AUDV1
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0676
+.
+ ;;line 2569;; 
+
+.
+ ;;line 2570;; 
+
+.L0677 ;;line 2571;;  temp1 =  ( top_drag_state  /  16 )   &  7
+
+; complex statement detected
+	LDA top_drag_state
+	lsr
+	lsr
+	lsr
+	lsr
+	AND #7
+	STA temp1
+.L0678 ;;line 2572;;  AUDC0 = 4  :  AUDF0 = win_freq[temp1]  :  AUDV0 = 8
+
+	LDA #4
+	STA AUDC0
+	LDX temp1
+	LDA win_freq,x
+	STA AUDF0
+	LDA #8
+	STA AUDV0
+.L0679 ;;line 2573;;  AUDC1 = 4  :  AUDF1 = win_freq[temp1]  :  AUDV1 = 8
+
+	LDA #4
+	STA AUDC1
+	LDX temp1
+	LDA win_freq,x
+	STA AUDF1
+	LDA #8
+	STA AUDV1
+.L0680 ;;line 2574;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -6068,82 +10182,662 @@ start_bank2 ldx #$ff
 	JMP BS_return
 	RTS
 .
- ;;line 1253;; 
+ ;;line 2575;; 
 
-._select_dragon_pose
- ;;line 1254;; _select_dragon_pose
+._audio_top_check
+ ;;line 2576;; _audio_top_check
 
 .
- ;;line 1255;; 
+ ;;line 2577;; 
 
-.L0442 ;;line 1256;;  temp2 = temp2  &  bit_mask_b3[temp3]
+.L0681 ;;line 2578;;  temp1 =  ( top_drag_state  &  124 )   /  4
+
+; complex statement detected
+	LDA top_drag_state
+	AND #124
+	lsr
+	lsr
+	STA temp1
+.L0682 ;;line 2579;;  if !top_drag_state{7} then goto _top_not_eaten_sfx
+
+	BIT top_drag_state
+	BMI .skipL0682
+.condpart238
+ jmp ._top_not_eaten_sfx
+.skipL0682
+.L0683 ;;line 2580;;  if temp1 = 0 then AUDV0 = 0  :  goto _audio_bot_check
+
+	LDA temp1
+	CMP #0
+     BNE .skipL0683
+.condpart239
+	LDA #0
+	STA AUDV0
+ jmp ._audio_bot_check
+.skipL0683
+.
+ ;;line 2581;; 
+
+.
+ ;;line 2582;; 
+
+.L0684 ;;line 2583;;  AUDC0 = 15  :  AUDV0 = temp1
+
+	LDA #15
+	STA AUDC0
+	LDA temp1
+	STA AUDV0
+.L0685 ;;line 2584;;  temp2 = 31  -  temp1
+
+	LDA #31
+	SEC
+	SBC temp1
+	STA temp2
+.L0686 ;;line 2585;;  if room_flags{7} then temp2 = temp2  -  4
+
+	BIT room_flags
+	BPL .skipL0686
+.condpart240
+	LDA temp2
+	SEC
+	SBC #4
+	STA temp2
+.skipL0686
+.L0687 ;;line 2586;;  AUDF0 = temp2
+
+	LDA temp2
+	STA AUDF0
+.
+ ;;line 2587;; 
+
+.L0688 ;;line 2588;;  if !room_flags{7} then top_drag_state = top_drag_state  -  4
+
+	BIT room_flags
+	BMI .skipL0688
+.condpart241
+	LDA top_drag_state
+	SEC
+	SBC #4
+	STA top_drag_state
+.skipL0688
+.L0689 ;;line 2589;;  goto _audio_bot_check
+
+ jmp ._audio_bot_check
+.
+ ;;line 2590;; 
+
+._top_not_eaten_sfx
+ ;;line 2591;; _top_not_eaten_sfx
+
+.L0690 ;;line 2592;;  temp2 = top_drag_state  &  3
+
+	LDA top_drag_state
+	AND #3
+	STA temp2
+.L0691 ;;line 2593;;  if temp2  <  3 then goto _top_play_roar
+
+	LDA temp2
+	CMP #3
+     BCS .skipL0691
+.condpart242
+ jmp ._top_play_roar
+.skipL0691
+.L0692 ;;line 2594;;  if temp1 = 0 then AUDV0 = 0  :  goto _audio_bot_check
+
+	LDA temp1
+	CMP #0
+     BNE .skipL0692
+.condpart243
+	LDA #0
+	STA AUDV0
+ jmp ._audio_bot_check
+.skipL0692
+.
+ ;;line 2595;; 
+
+.
+ ;;line 2596;; 
+
+.L0693 ;;line 2597;;  AUDC0 = sfx_audc[temp1]
+
+	LDX temp1
+	LDA sfx_audc,x
+	STA AUDC0
+.L0694 ;;line 2598;;  AUDF0 = sfx_audf[temp1]
+
+	LDX temp1
+	LDA sfx_audf,x
+	STA AUDF0
+.L0695 ;;line 2599;;  AUDV0 = sfx_audv[temp1]
+
+	LDX temp1
+	LDA sfx_audv,x
+	STA AUDV0
+.L0696 ;;line 2600;;  if room_flags{7} then goto _audio_bot_check
+
+	BIT room_flags
+	BPL .skipL0696
+.condpart244
+ jmp ._audio_bot_check
+.skipL0696
+.L0697 ;;line 2601;;  top_drag_state = top_drag_state  -  4
+
+	LDA top_drag_state
+	SEC
+	SBC #4
+	STA top_drag_state
+.L0698 ;;line 2602;;  if temp1 = 1 then top_drag_state = 3
+
+	LDA temp1
+	CMP #1
+     BNE .skipL0698
+.condpart245
+	LDA #3
+	STA top_drag_state
+.skipL0698
+.L0699 ;;line 2603;;  if temp1 = 6 then top_drag_state = 3
+
+	LDA temp1
+	CMP #6
+     BNE .skipL0699
+.condpart246
+	LDA #3
+	STA top_drag_state
+.skipL0699
+.L0700 ;;line 2604;;  if temp1 = 11 then top_drag_state = 3
+
+	LDA temp1
+	CMP #11
+     BNE .skipL0700
+.condpart247
+	LDA #3
+	STA top_drag_state
+.skipL0700
+.L0701 ;;line 2605;;  goto _audio_bot_check
+
+ jmp ._audio_bot_check
+.
+ ;;line 2606;; 
+
+._top_play_roar
+ ;;line 2607;; _top_play_roar
+
+.
+ ;;line 2608;; 
+
+.L0702 ;;line 2609;;  if temp1{0} then AUDC0 = 8 else AUDC0 = 3
+
+	LDA temp1
+	LSR
+	BCC .skipL0702
+.condpart248
+	LDA #8
+	STA AUDC0
+ jmp .skipelse5
+.skipL0702
+	LDA #3
+	STA AUDC0
+.skipelse5
+.L0703 ;;line 2610;;  AUDF0 = $1F
+
+	LDA #$1F
+	STA AUDF0
+.L0704 ;;line 2611;;  temp3 = temp1  /  2
+
+	LDA temp1
+	lsr
+	STA temp3
+.L0705 ;;line 2612;;  AUDV0 = 15  -  temp3
+
+	LDA #15
+	SEC
+	SBC temp3
+	STA AUDV0
+.
+ ;;line 2613;; 
+
+._audio_bot_check
+ ;;line 2614;; _audio_bot_check
+
+.
+ ;;line 2615;; 
+
+.L0706 ;;line 2616;;  temp1 =  ( bot_drag_state  &  124 )   /  4
+
+; complex statement detected
+	LDA bot_drag_state
+	AND #124
+	lsr
+	lsr
+	STA temp1
+.L0707 ;;line 2617;;  if !bot_drag_state{7} then goto _bot_not_eaten_sfx
+
+	BIT bot_drag_state
+	BMI .skipL0707
+.condpart249
+ jmp ._bot_not_eaten_sfx
+.skipL0707
+.L0708 ;;line 2618;;  if temp1 = 0 then AUDV1 = 0  :  return
+
+	LDA temp1
+	CMP #0
+     BNE .skipL0708
+.condpart250
+	LDA #0
+	STA AUDV1
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0708
+.
+ ;;line 2619;; 
+
+.
+ ;;line 2620;; 
+
+.L0709 ;;line 2621;;  AUDC1 = 15  :  AUDV1 = temp1
+
+	LDA #15
+	STA AUDC1
+	LDA temp1
+	STA AUDV1
+.L0710 ;;line 2622;;  temp2 = 31  -  temp1
+
+	LDA #31
+	SEC
+	SBC temp1
+	STA temp2
+.L0711 ;;line 2623;;  if room_flags{7} then temp2 = temp2  -  4
+
+	BIT room_flags
+	BPL .skipL0711
+.condpart251
+	LDA temp2
+	SEC
+	SBC #4
+	STA temp2
+.skipL0711
+.L0712 ;;line 2624;;  AUDF1 = temp2
+
+	LDA temp2
+	STA AUDF1
+.
+ ;;line 2625;; 
+
+.L0713 ;;line 2626;;  if room_flags{7} then bot_drag_state = bot_drag_state  -  4
+
+	BIT room_flags
+	BPL .skipL0713
+.condpart252
+	LDA bot_drag_state
+	SEC
+	SBC #4
+	STA bot_drag_state
+.skipL0713
+.L0714 ;;line 2627;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 2628;; 
+
+._bot_not_eaten_sfx
+ ;;line 2629;; _bot_not_eaten_sfx
+
+.L0715 ;;line 2630;;  temp2 = bot_drag_state  &  3
+
+	LDA bot_drag_state
+	AND #3
+	STA temp2
+.L0716 ;;line 2631;;  if temp2  <  3 then goto _bot_play_roar
+
+	LDA temp2
+	CMP #3
+     BCS .skipL0716
+.condpart253
+ jmp ._bot_play_roar
+.skipL0716
+.L0717 ;;line 2632;;  if temp1 = 0 then AUDV1 = 0  :  return
+
+	LDA temp1
+	CMP #0
+     BNE .skipL0717
+.condpart254
+	LDA #0
+	STA AUDV1
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0717
+.
+ ;;line 2633;; 
+
+.
+ ;;line 2634;; 
+
+.L0718 ;;line 2635;;  AUDC1 = sfx_audc[temp1]
+
+	LDX temp1
+	LDA sfx_audc,x
+	STA AUDC1
+.L0719 ;;line 2636;;  AUDF1 = sfx_audf[temp1]
+
+	LDX temp1
+	LDA sfx_audf,x
+	STA AUDF1
+.L0720 ;;line 2637;;  AUDV1 = sfx_audv[temp1]
+
+	LDX temp1
+	LDA sfx_audv,x
+	STA AUDV1
+.L0721 ;;line 2638;;  if !room_flags{7} then return
+
+	BIT room_flags
+	BMI .skipL0721
+.condpart255
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0721
+.L0722 ;;line 2639;;  bot_drag_state = bot_drag_state  -  4
+
+	LDA bot_drag_state
+	SEC
+	SBC #4
+	STA bot_drag_state
+.L0723 ;;line 2640;;  if temp1 = 1 then bot_drag_state = 3
+
+	LDA temp1
+	CMP #1
+     BNE .skipL0723
+.condpart256
+	LDA #3
+	STA bot_drag_state
+.skipL0723
+.L0724 ;;line 2641;;  if temp1 = 6 then bot_drag_state = 3
+
+	LDA temp1
+	CMP #6
+     BNE .skipL0724
+.condpart257
+	LDA #3
+	STA bot_drag_state
+.skipL0724
+.L0725 ;;line 2642;;  if temp1 = 11 then bot_drag_state = 3
+
+	LDA temp1
+	CMP #11
+     BNE .skipL0725
+.condpart258
+	LDA #3
+	STA bot_drag_state
+.skipL0725
+.L0726 ;;line 2643;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 2644;; 
+
+._bot_play_roar
+ ;;line 2645;; _bot_play_roar
+
+.L0727 ;;line 2646;;  if temp1{0} then AUDC1 = 8 else AUDC1 = 3
+
+	LDA temp1
+	LSR
+	BCC .skipL0727
+.condpart259
+	LDA #8
+	STA AUDC1
+ jmp .skipelse6
+.skipL0727
+	LDA #3
+	STA AUDC1
+.skipelse6
+.L0728 ;;line 2647;;  AUDF1 = $1F
+
+	LDA #$1F
+	STA AUDF1
+.L0729 ;;line 2648;;  temp3 = temp1  /  2
+
+	LDA temp1
+	lsr
+	STA temp3
+.L0730 ;;line 2649;;  AUDV1 = 15  -  temp3
+
+	LDA #15
+	SEC
+	SBC temp3
+	STA AUDV1
+.L0731 ;;line 2650;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 2651;; 
+
+.
+ ;;line 2652;; 
+
+.L0732 ;;line 2653;;  data win_freq
+
+	JMP .skipL0732
+win_freq
+	.byte   15, 12, 10, 8, 15, 12, 10, 8
+
+.skipL0732
+.
+ ;;line 2656;; 
+
+.
+ ;;line 2657;; 
+
+.L0733 ;;line 2658;;  data sfx_audc
+
+	JMP .skipL0733
+sfx_audc
+	.byte   0,  4, 4, 4, 4,  0,  4, 4, 4, 4,  0,  4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
+
+.skipL0733
+.
+ ;;line 2661;; 
+
+.
+ ;;line 2662;; 
+
+.L0734 ;;line 2663;;  data sfx_audf
+
+	JMP .skipL0734
+sfx_audf
+	.byte   0,  15, 12, 9, 6,  0,  6, 9, 12, 15,  0,  $1E,$1D,$1C,$1B,$1A,$19,$18,$17,$16,$15,$14,$13,$12,$11,$10
+
+.skipL0734
+.
+ ;;line 2666;; 
+
+.L0735 ;;line 2667;;  data sfx_audv
+
+	JMP .skipL0735
+sfx_audv
+	.byte   0,  8, 8, 8, 8,  0,  8, 8, 8, 8,  0,  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
+
+.skipL0735
+.
+ ;;line 2670;; 
+
+.set_sprite_pointers
+ ;;line 2671;; set_sprite_pointers
+
+.L0736 ;;line 2672;;  if temp3 = 255 then return
+
+	LDA temp3
+	CMP #255
+     BNE .skipL0736
+.condpart260
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0736
+.
+ ;;line 2673;; 
+
+.L0737 ;;line 2674;;  on temp3 goto _select_dragon_pose _select_dragon_pose _select_dragon_pose _gfx_magnet _gfx_sword _gfx_chalice _gfx_bridge _gfx_key _gfx_key _gfx_key _check_bat_anim
+
+	LDX temp3
+	LDA .L0737jumptablehi,x
+	PHA
+	LDA .L0737jumptablelo,x
+	PHA
+	RTS
+.L0737jumptablehi
+	.byte >(._select_dragon_pose-1)
+	.byte >(._select_dragon_pose-1)
+	.byte >(._select_dragon_pose-1)
+	.byte >(._gfx_magnet-1)
+	.byte >(._gfx_sword-1)
+	.byte >(._gfx_chalice-1)
+	.byte >(._gfx_bridge-1)
+	.byte >(._gfx_key-1)
+	.byte >(._gfx_key-1)
+	.byte >(._gfx_key-1)
+	.byte >(._check_bat_anim-1)
+.L0737jumptablelo
+	.byte <(._select_dragon_pose-1)
+	.byte <(._select_dragon_pose-1)
+	.byte <(._select_dragon_pose-1)
+	.byte <(._gfx_magnet-1)
+	.byte <(._gfx_sword-1)
+	.byte <(._gfx_chalice-1)
+	.byte <(._gfx_bridge-1)
+	.byte <(._gfx_key-1)
+	.byte <(._gfx_key-1)
+	.byte <(._gfx_key-1)
+	.byte <(._check_bat_anim-1)
+.
+ ;;line 2675;; 
+
+._check_bat_anim
+ ;;line 2676;; _check_bat_anim
+
+.L0738 ;;line 2677;;  if room_flags{6} then goto _gfx_bat
+
+	BIT room_flags
+	BVC .skipL0738
+.condpart261
+ jmp ._gfx_bat
+.skipL0738
+.L0739 ;;line 2678;;  goto _gfx_bat2
+
+ jmp ._gfx_bat2
+.
+ ;;line 2679;; 
+
+._select_dragon_pose
+ ;;line 2680;; _select_dragon_pose
+
+.
+ ;;line 2681;; 
+
+.L0740 ;;line 2682;;  temp2 = temp2  &  bit_mask_b3[temp3]
 
 	LDA temp2
 	LDX temp3
 	AND bit_mask_b3,x
 	STA temp2
-.L0443 ;;line 1257;;  if temp2  <>  0 then goto _gfx_dragon_dead
+.L0741 ;;line 2683;;  if temp2  <>  0 then goto _gfx_dragon_dead
 
 	LDA temp2
 	CMP #0
-     BEQ .skipL0443
-.condpart144
+     BEQ .skipL0741
+.condpart262
  jmp ._gfx_dragon_dead
-.skipL0443
+.skipL0741
 .
- ;;line 1258;; 
+ ;;line 2684;; 
 
-.L0444 ;;line 1259;;  if temp4{7} then goto _gfx_dragon
+.L0742 ;;line 2685;;  if temp4{7} then goto _gfx_dragon
 
 	BIT temp4
-	BPL .skipL0444
-.condpart145
+	BPL .skipL0742
+.condpart263
  jmp ._gfx_dragon
-.skipL0444
+.skipL0742
 .
- ;;line 1260;; 
+ ;;line 2686;; 
 
-.L0445 ;;line 1261;;  temp2 = temp4  &  3
+.L0743 ;;line 2687;;  temp2 = temp4  &  3
 
 	LDA temp4
 	AND #3
 	STA temp2
-.L0446 ;;line 1262;;  if temp2 = temp3 then goto _gfx_dragon_roar
+.L0744 ;;line 2688;;  if temp2 = temp3 then goto _gfx_dragon_roar
 
 	LDA temp2
 	CMP temp3
-     BNE .skipL0446
-.condpart146
+     BNE .skipL0744
+.condpart264
  jmp ._gfx_dragon_roar
-.skipL0446
-.L0447 ;;line 1263;;  goto _gfx_dragon
+.skipL0744
+.L0745 ;;line 2689;;  goto _gfx_dragon
 
  jmp ._gfx_dragon
 .
- ;;line 1264;; 
+ ;;line 2690;; 
 
-.L0448 ;;line 1265;;  data bit_mask_b3
+.L0746 ;;line 2691;;  data bit_mask_b3
 
-	JMP .skipL0448
+	JMP .skipL0746
 bit_mask_b3
 	.byte  1, 2, 4
 
-.skipL0448
+.skipL0746
 .
- ;;line 1268;; 
+ ;;line 2694;; 
 
 ._gfx_dragon
- ;;line 1269;; _gfx_dragon
+ ;;line 2695;; _gfx_dragon
 
-.L0449 ;;line 1270;;  player1:
+.L0747 ;;line 2696;;  player1:
 
-	LDX #<playerL0449_1
+	LDX #<playerL0747_1
 	STX player1pointerlo
-	LDA #>playerL0449_1
+	LDA #>playerL0747_1
 	STA player1pointerhi
 	LDA #24
 	STA player1height
-.L0450 ;;line 1297;;  return
+.L0748 ;;line 2723;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -6153,20 +10847,20 @@ bit_mask_b3
 	JMP BS_return
 	RTS
 .
- ;;line 1298;; 
+ ;;line 2724;; 
 
 ._gfx_dragon_roar
- ;;line 1299;; _gfx_dragon_roar
+ ;;line 2725;; _gfx_dragon_roar
 
-.L0451 ;;line 1300;;  player1:
+.L0749 ;;line 2726;;  player1:
 
-	LDX #<playerL0451_1
+	LDX #<playerL0749_1
 	STX player1pointerlo
-	LDA #>playerL0451_1
+	LDA #>playerL0749_1
 	STA player1pointerhi
 	LDA #24
 	STA player1height
-.L0452 ;;line 1327;;  return
+.L0750 ;;line 2753;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -6176,20 +10870,20 @@ bit_mask_b3
 	JMP BS_return
 	RTS
 .
- ;;line 1328;; 
+ ;;line 2754;; 
 
 ._gfx_dragon_dead
- ;;line 1329;; _gfx_dragon_dead
+ ;;line 2755;; _gfx_dragon_dead
 
-.L0453 ;;line 1330;;  player1:
+.L0751 ;;line 2756;;  player1:
 
-	LDX #<playerL0453_1
+	LDX #<playerL0751_1
 	STX player1pointerlo
-	LDA #>playerL0453_1
+	LDA #>playerL0751_1
 	STA player1pointerhi
 	LDA #24
 	STA player1height
-.L0454 ;;line 1357;;  return
+.L0752 ;;line 2783;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -6199,20 +10893,20 @@ bit_mask_b3
 	JMP BS_return
 	RTS
 .
- ;;line 1358;; 
+ ;;line 2784;; 
 
 ._gfx_magnet
- ;;line 1359;; _gfx_magnet
+ ;;line 2785;; _gfx_magnet
 
-.L0455 ;;line 1360;;  player1:
+.L0753 ;;line 2786;;  player1:
 
-	LDX #<playerL0455_1
+	LDX #<playerL0753_1
 	STX player1pointerlo
-	LDA #>playerL0455_1
+	LDA #>playerL0753_1
 	STA player1pointerhi
 	LDA #24
 	STA player1height
-.L0456 ;;line 1387;;  return
+.L0754 ;;line 2813;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -6222,20 +10916,20 @@ bit_mask_b3
 	JMP BS_return
 	RTS
 .
- ;;line 1388;; 
+ ;;line 2814;; 
 
 ._gfx_sword
- ;;line 1389;; _gfx_sword
+ ;;line 2815;; _gfx_sword
 
-.L0457 ;;line 1390;;  player1:
+.L0755 ;;line 2816;;  player1:
 
-	LDX #<playerL0457_1
+	LDX #<playerL0755_1
 	STX player1pointerlo
-	LDA #>playerL0457_1
+	LDA #>playerL0755_1
 	STA player1pointerhi
 	LDA #24
 	STA player1height
-.L0458 ;;line 1417;;  return
+.L0756 ;;line 2843;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -6245,20 +10939,20 @@ bit_mask_b3
 	JMP BS_return
 	RTS
 .
- ;;line 1418;; 
+ ;;line 2844;; 
 
 ._gfx_chalice
- ;;line 1419;; _gfx_chalice
+ ;;line 2845;; _gfx_chalice
 
-.L0459 ;;line 1420;;  player1:
+.L0757 ;;line 2846;;  player1:
 
-	LDX #<playerL0459_1
+	LDX #<playerL0757_1
 	STX player1pointerlo
-	LDA #>playerL0459_1
+	LDA #>playerL0757_1
 	STA player1pointerhi
 	LDA #24
 	STA player1height
-.L0460 ;;line 1447;;  return
+.L0758 ;;line 2873;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -6268,20 +10962,20 @@ bit_mask_b3
 	JMP BS_return
 	RTS
 .
- ;;line 1448;; 
+ ;;line 2874;; 
 
 ._gfx_bridge
- ;;line 1449;; _gfx_bridge
+ ;;line 2875;; _gfx_bridge
 
-.L0461 ;;line 1450;;  player1:
+.L0759 ;;line 2876;;  player1:
 
-	LDX #<playerL0461_1
+	LDX #<playerL0759_1
 	STX player1pointerlo
-	LDA #>playerL0461_1
+	LDA #>playerL0759_1
 	STA player1pointerhi
 	LDA #24
 	STA player1height
-.L0462 ;;line 1477;;  return
+.L0760 ;;line 2903;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -6291,20 +10985,20 @@ bit_mask_b3
 	JMP BS_return
 	RTS
 .
- ;;line 1478;; 
+ ;;line 2904;; 
 
 ._gfx_key
- ;;line 1479;; _gfx_key
+ ;;line 2905;; _gfx_key
 
-.L0463 ;;line 1480;;  player1:
+.L0761 ;;line 2906;;  player1:
 
-	LDX #<playerL0463_1
+	LDX #<playerL0761_1
 	STX player1pointerlo
-	LDA #>playerL0463_1
+	LDA #>playerL0761_1
 	STA player1pointerhi
 	LDA #24
 	STA player1height
-.L0464 ;;line 1507;;  return
+.L0762 ;;line 2933;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -6314,20 +11008,20 @@ bit_mask_b3
 	JMP BS_return
 	RTS
 .
- ;;line 1508;; 
+ ;;line 2934;; 
 
 ._gfx_bat
- ;;line 1509;; _gfx_bat
+ ;;line 2935;; _gfx_bat
 
-.L0465 ;;line 1510;;  player1:
+.L0763 ;;line 2936;;  player1:
 
-	LDX #<playerL0465_1
+	LDX #<playerL0763_1
 	STX player1pointerlo
-	LDA #>playerL0465_1
+	LDA #>playerL0763_1
 	STA player1pointerhi
 	LDA #24
 	STA player1height
-.L0466 ;;line 1537;;  return
+.L0764 ;;line 2963;;  return
 
 	tsx
 	lda 2,x ; check return address
@@ -6337,573 +11031,364 @@ bit_mask_b3
 	JMP BS_return
 	RTS
 .
- ;;line 1538;; 
+ ;;line 2964;; 
+
+._gfx_bat2
+ ;;line 2965;; _gfx_bat2
+
+.L0765 ;;line 2966;;  player1:
+
+	LDX #<playerL0765_1
+	STX player1pointerlo
+	LDA #>playerL0765_1
+	STA player1pointerhi
+	LDA #24
+	STA player1height
+.L0766 ;;line 2993;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 2994;; 
+
+.
+ ;;line 2995;; 
 
 .check_gates
- ;;line 1539;; check_gates
+ ;;line 2996;; check_gates
 
-.L0467 ;;line 1540;;  top_player0y = 255
+.L0767 ;;line 2997;;  top_player0y = 255
 
 	LDA #255
 	STA top_player0y
-.L0468 ;;line 1541;;  bottom_player0y = 255
+.L0768 ;;line 2998;;  bottom_player0y = 255
 
 	LDA #255
 	STA bottom_player0y
+.L0769 ;;line 2999;;  room_flags = room_flags  &  %11110011
+
+	LDA room_flags
+	AND #%11110011
+	STA room_flags
 .
- ;;line 1542;; 
-
-.
- ;;line 1543;; 
-
-.L0469 ;;line 1544;;  if top_room = ENTRY_YELLOW  &&  !gate_state{0} then top_player0y = 31
-
-	LDA top_room
-	CMP #ENTRY_YELLOW
-     BNE .skipL0469
-.condpart147
-	LDA gate_state
-	LSR
-	BCS .skip147then
-.condpart148
-	LDA #31
-	STA top_player0y
-.skip147then
-.skipL0469
-.L0470 ;;line 1545;;  if top_room = ENTRY_WHITE  &&  !gate_state{1} then top_player0y = 31
-
-	LDA top_room
-	CMP #ENTRY_WHITE
-     BNE .skipL0470
-.condpart149
-	LDA gate_state
-	AND #2
-	BNE .skip149then
-.condpart150
-	LDA #31
-	STA top_player0y
-.skip149then
-.skipL0470
-.L0471 ;;line 1546;;  if top_room = ENTRY_BLACK  &&  !gate_state{2} then top_player0y = 31
-
-	LDA top_room
-	CMP #ENTRY_BLACK
-     BNE .skipL0471
-.condpart151
-	LDA gate_state
-	AND #4
-	BNE .skip151then
-.condpart152
-	LDA #31
-	STA top_player0y
-.skip151then
-.skipL0471
-.
- ;;line 1547;; 
+ ;;line 3000;; 
 
 .
- ;;line 1548;; 
+ ;;line 3001;; 
 
-.L0472 ;;line 1549;;  if bottom_room = ENTRY_YELLOW  &&  !gate_state{3} then bottom_player0y = 30
+.L0770 ;;line 3002;;  if bottom_room  >=  8 then if bottom_room  <=  11 then room_flags{3} = 1  :  goto _check_top_gates
+
+	LDA bottom_room
+	CMP #8
+     BCC .skipL0770
+.condpart265
+	LDA #11
+	CMP bottom_room
+     BCC .skip265then
+.condpart266
+	LDA room_flags
+	ORA #8
+	STA room_flags
+ jmp ._check_top_gates
+.skip265then
+.skipL0770
+.L0771 ;;line 3003;;  if bottom_room  >=  25 then if bottom_room  <=  27 then room_flags{3} = 1  :  goto _check_top_gates
+
+	LDA bottom_room
+	CMP #25
+     BCC .skipL0771
+.condpart267
+	LDA #27
+	CMP bottom_room
+     BCC .skip267then
+.condpart268
+	LDA room_flags
+	ORA #8
+	STA room_flags
+ jmp ._check_top_gates
+.skip267then
+.skipL0771
+.
+ ;;line 3004;; 
+
+.L0772 ;;line 3005;;  bottom_player0x = 71
+
+	LDA #71
+	STA bottom_player0x
+.L0773 ;;line 3006;;  if bottom_room = ENTRY_YELLOW  &&  !gate_state{3} then bottom_player0y = 30
 
 	LDA bottom_room
 	CMP #ENTRY_YELLOW
-     BNE .skipL0472
-.condpart153
+     BNE .skipL0773
+.condpart269
 	LDA gate_state
 	AND #8
-	BNE .skip153then
-.condpart154
+	BNE .skip269then
+.condpart270
 	LDA #30
 	STA bottom_player0y
-.skip153then
-.skipL0472
-.L0473 ;;line 1550;;  if bottom_room = ENTRY_WHITE  &&  !gate_state{4} then bottom_player0y = 30
+.skip269then
+.skipL0773
+.L0774 ;;line 3007;;  if bottom_room = ENTRY_WHITE  &&  !gate_state{4} then bottom_player0y = 30
 
 	LDA bottom_room
 	CMP #ENTRY_WHITE
-     BNE .skipL0473
-.condpart155
+     BNE .skipL0774
+.condpart271
 	LDA gate_state
 	AND #16
-	BNE .skip155then
-.condpart156
+	BNE .skip271then
+.condpart272
 	LDA #30
 	STA bottom_player0y
-.skip155then
-.skipL0473
-.L0474 ;;line 1551;;  if bottom_room = ENTRY_BLACK  &&  !gate_state{5} then bottom_player0y = 30
+.skip271then
+.skipL0774
+.L0775 ;;line 3008;;  if bottom_room = ENTRY_BLACK  &&  !gate_state{5} then bottom_player0y = 30
 
 	LDA bottom_room
 	CMP #ENTRY_BLACK
-     BNE .skipL0474
-.condpart157
+     BNE .skipL0775
+.condpart273
 	LDA gate_state
 	AND #32
-	BNE .skip157then
-.condpart158
+	BNE .skip273then
+.condpart274
 	LDA #30
 	STA bottom_player0y
-.skip157then
-.skipL0474
-.L0475 ;;line 1552;;  return otherbank
-
-	JMP BS_return
+.skip273then
+.skipL0775
 .
- ;;line 1553;; 
+ ;;line 3009;; 
 
-.gate_collide_top
- ;;line 1554;; gate_collide_top
+._check_top_gates
+ ;;line 3010;; _check_top_gates
 
-.L0476 ;;line 1555;;  temp1 = top_carried_item
+.
+ ;;line 3011;; 
 
-	LDA top_carried_item
-	STA temp1
-.L0477 ;;line 1556;;  if top_room = ENTRY_YELLOW  &&  temp1 = 7 then gate_state{0} = 1  :  top_player0y = 255  :  return otherbank
-
-	LDA top_room
-	CMP #ENTRY_YELLOW
-     BNE .skipL0477
-.condpart159
-	LDA temp1
-	CMP #7
-     BNE .skip159then
-.condpart160
-	LDA gate_state
-	ORA #1
-	STA gate_state
-	LDA #255
-	STA top_player0y
-	JMP BS_return
-.skip159then
-.skipL0477
-.L0478 ;;line 1557;;  if top_room = ENTRY_WHITE  &&  temp1 = 8 then gate_state{1} = 1  :  top_player0y = 255  :  return otherbank
+.L0776 ;;line 3012;;  if top_room  >=  8 then if top_room  <=  11 then room_flags{2} = 1  :  return otherbank
 
 	LDA top_room
-	CMP #ENTRY_WHITE
-     BNE .skipL0478
-.condpart161
-	LDA temp1
 	CMP #8
-     BNE .skip161then
-.condpart162
-	LDA gate_state
-	ORA #2
-	STA gate_state
-	LDA #255
-	STA top_player0y
-	JMP BS_return
-.skip161then
-.skipL0478
-.L0479 ;;line 1558;;  if top_room = ENTRY_BLACK  &&  temp1 = 9 then gate_state{2} = 1  :  top_player0y = 255  :  return otherbank
-
-	LDA top_room
-	CMP #ENTRY_BLACK
-     BNE .skipL0479
-.condpart163
-	LDA temp1
-	CMP #9
-     BNE .skip163then
-.condpart164
-	LDA gate_state
+     BCC .skipL0776
+.condpart275
+	LDA #11
+	CMP top_room
+     BCC .skip275then
+.condpart276
+	LDA room_flags
 	ORA #4
-	STA gate_state
-	LDA #255
+	STA room_flags
+	JMP BS_return
+.skip275then
+.skipL0776
+.L0777 ;;line 3013;;  if top_room  >=  25 then if top_room  <=  27 then room_flags{2} = 1  :  return otherbank
+
+	LDA top_room
+	CMP #25
+     BCC .skipL0777
+.condpart277
+	LDA #27
+	CMP top_room
+     BCC .skip277then
+.condpart278
+	LDA room_flags
+	ORA #4
+	STA room_flags
+	JMP BS_return
+.skip277then
+.skipL0777
+.
+ ;;line 3014;; 
+
+.L0778 ;;line 3015;;  top_player0x = 71
+
+	LDA #71
+	STA top_player0x
+.L0779 ;;line 3016;;  if top_room = ENTRY_YELLOW  &&  !gate_state{0} then top_player0y = 31
+
+	LDA top_room
+	CMP #ENTRY_YELLOW
+     BNE .skipL0779
+.condpart279
+	LDA gate_state
+	LSR
+	BCS .skip279then
+.condpart280
+	LDA #31
 	STA top_player0y
-	JMP BS_return
-.skip163then
-.skipL0479
-.L0480 ;;line 1559;;  ballx = r_top_oldx  :  bally = r_top_oldy
+.skip279then
+.skipL0779
+.L0780 ;;line 3017;;  if top_room = ENTRY_WHITE  &&  !gate_state{1} then top_player0y = 31
 
-	LDA r_top_oldx
-	STA ballx
-	LDA r_top_oldy
-	STA bally
-.L0481 ;;line 1560;;  return otherbank
-
-	JMP BS_return
-.
- ;;line 1561;; 
-
-.gate_collide_bot
- ;;line 1562;; gate_collide_bot
-
-.L0482 ;;line 1563;;  temp1 = bot_carried_item
-
-	LDA bot_carried_item
-	STA temp1
-.L0483 ;;line 1564;;  if bottom_room = ENTRY_YELLOW  &&  temp1 = 7 then gate_state{3} = 1  :  bottom_player0y = 255  :  return otherbank
-
-	LDA bottom_room
-	CMP #ENTRY_YELLOW
-     BNE .skipL0483
-.condpart165
-	LDA temp1
-	CMP #7
-     BNE .skip165then
-.condpart166
-	LDA gate_state
-	ORA #8
-	STA gate_state
-	LDA #255
-	STA bottom_player0y
-	JMP BS_return
-.skip165then
-.skipL0483
-.L0484 ;;line 1565;;  if bottom_room = ENTRY_WHITE  &&  temp1 = 8 then gate_state{4} = 1  :  bottom_player0y = 255  :  return otherbank
-
-	LDA bottom_room
-	CMP #ENTRY_WHITE
-     BNE .skipL0484
-.condpart167
-	LDA temp1
-	CMP #8
-     BNE .skip167then
-.condpart168
-	LDA gate_state
-	ORA #16
-	STA gate_state
-	LDA #255
-	STA bottom_player0y
-	JMP BS_return
-.skip167then
-.skipL0484
-.L0485 ;;line 1566;;  if bottom_room = ENTRY_BLACK  &&  temp1 = 9 then gate_state{5} = 1  :  bottom_player0y = 255  :  return otherbank
-
-	LDA bottom_room
-	CMP #ENTRY_BLACK
-     BNE .skipL0485
-.condpart169
-	LDA temp1
-	CMP #9
-     BNE .skip169then
-.condpart170
-	LDA gate_state
-	ORA #32
-	STA gate_state
-	LDA #255
-	STA bottom_player0y
-	JMP BS_return
-.skip169then
-.skipL0485
-.L0486 ;;line 1567;;  p2_ballx = r_bottom_oldx  :  p2_bally = r_bottom_oldy
-
-	LDA r_bottom_oldx
-	STA p2_ballx
-	LDA r_bottom_oldy
-	STA p2_bally
-.L0487 ;;line 1568;;  return otherbank
-
-	JMP BS_return
-.
- ;;line 1569;; 
-
-.
- ;;line 1570;; 
-
-.castle_transitions_top
- ;;line 1571;; castle_transitions_top
-
-.L0488 ;;line 1572;;  if bally  >  44 then goto _top_castle_exit_check
-
-	LDA #44
-	CMP bally
-     BCS .skipL0488
-.condpart171
- jmp ._top_castle_exit_check
-.skipL0488
-.L0489 ;;line 1573;;  if ballx  <  71  ||  ballx  >  85 then return otherbank
-
-	LDA ballx
-	CMP #71
-     BCS .skipL0489
-.condpart172
- jmp .condpart173
-.skipL0489
-	LDA #85
-	CMP ballx
-     BCS .skip41OR
-.condpart173
-	JMP BS_return
-.skip41OR
-.L0490 ;;line 1574;;  if bally  <  32  &&  top_room = ENTRY_YELLOW then top_room = CASTLE_YELLOW  :  bally = 42  :  w_top_oldy = 42  :  room_flags{0} = 1  :  return otherbank
-
-	LDA bally
-	CMP #32
-     BCS .skipL0490
-.condpart174
-	LDA top_room
-	CMP #ENTRY_YELLOW
-     BNE .skip174then
-.condpart175
-	LDA #CASTLE_YELLOW
-	STA top_room
-	LDA #42
-	STA bally
-	STA w_top_oldy
-	LDA room_flags
-	ORA #1
-	STA room_flags
-	JMP BS_return
-.skip174then
-.skipL0490
-.L0491 ;;line 1575;;  if bally  <  32  &&  top_room = ENTRY_WHITE then top_room = CASTLE_WHITE  :  bally = 42  :  w_top_oldy = 42  :  room_flags{0} = 1  :  return otherbank
-
-	LDA bally
-	CMP #32
-     BCS .skipL0491
-.condpart176
 	LDA top_room
 	CMP #ENTRY_WHITE
-     BNE .skip176then
-.condpart177
-	LDA #CASTLE_WHITE
-	STA top_room
-	LDA #42
-	STA bally
-	STA w_top_oldy
-	LDA room_flags
-	ORA #1
-	STA room_flags
-	JMP BS_return
-.skip176then
-.skipL0491
-.L0492 ;;line 1576;;  if bally  <  32  &&  top_room = ENTRY_BLACK then top_room = CASTLE_BLACK  :  bally = 42  :  w_top_oldy = 42  :  room_flags{0} = 1  :  return otherbank
+     BNE .skipL0780
+.condpart281
+	LDA gate_state
+	AND #2
+	BNE .skip281then
+.condpart282
+	LDA #31
+	STA top_player0y
+.skip281then
+.skipL0780
+.L0781 ;;line 3018;;  if top_room = ENTRY_BLACK  &&  !gate_state{2} then top_player0y = 31
 
-	LDA bally
-	CMP #32
-     BCS .skipL0492
-.condpart178
 	LDA top_room
 	CMP #ENTRY_BLACK
-     BNE .skip178then
-.condpart179
-	LDA #CASTLE_BLACK
-	STA top_room
-	LDA #42
-	STA bally
-	STA w_top_oldy
-	LDA room_flags
-	ORA #1
-	STA room_flags
-	JMP BS_return
-.skip178then
-.skipL0492
-.L0493 ;;line 1577;;  return otherbank
+     BNE .skipL0781
+.condpart283
+	LDA gate_state
+	AND #4
+	BNE .skip283then
+.condpart284
+	LDA #31
+	STA top_player0y
+.skip283then
+.skipL0781
+.L0782 ;;line 3019;;  return otherbank
 
 	JMP BS_return
 .
- ;;line 1578;; 
+ ;;line 3020;; 
 
-._top_castle_exit_check
- ;;line 1579;; _top_castle_exit_check
-
-.L0494 ;;line 1580;;  if top_room = CASTLE_YELLOW then top_room = ENTRY_YELLOW  :  bally = 34  :  w_top_oldy = 34  :  room_flags{0} = 1  :  return otherbank
-
-	LDA top_room
-	CMP #CASTLE_YELLOW
-     BNE .skipL0494
-.condpart180
-	LDA #ENTRY_YELLOW
-	STA top_room
-	LDA #34
-	STA bally
-	STA w_top_oldy
-	LDA room_flags
-	ORA #1
-	STA room_flags
-	JMP BS_return
-.skipL0494
-.L0495 ;;line 1581;;  if top_room = CASTLE_WHITE then top_room = ENTRY_WHITE  :  bally = 34  :  w_top_oldy = 34  :  room_flags{0} = 1  :  return otherbank
-
-	LDA top_room
-	CMP #CASTLE_WHITE
-     BNE .skipL0495
-.condpart181
-	LDA #ENTRY_WHITE
-	STA top_room
-	LDA #34
-	STA bally
-	STA w_top_oldy
-	LDA room_flags
-	ORA #1
-	STA room_flags
-	JMP BS_return
-.skipL0495
-.L0496 ;;line 1582;;  if top_room = CASTLE_BLACK then top_room = ENTRY_BLACK  :  bally = 34  :  w_top_oldy = 34  :  room_flags{0} = 1  :  return otherbank
-
-	LDA top_room
-	CMP #CASTLE_BLACK
-     BNE .skipL0496
-.condpart182
-	LDA #ENTRY_BLACK
-	STA top_room
-	LDA #34
-	STA bally
-	STA w_top_oldy
-	LDA room_flags
-	ORA #1
-	STA room_flags
-	JMP BS_return
-.skipL0496
-.L0497 ;;line 1583;;  return otherbank
-
-	JMP BS_return
 .
- ;;line 1584;; 
+ ;;line 3021;; 
 
-.castle_transitions_bot
- ;;line 1585;; castle_transitions_bot
-
-.L0498 ;;line 1586;;  if p2_bally  >  45 then goto _bot_castle_exit_check
-
-	LDA #45
-	CMP p2_bally
-     BCS .skipL0498
-.condpart183
- jmp ._bot_castle_exit_check
-.skipL0498
-.L0499 ;;line 1587;;  if p2_ballx  <  76  ||  p2_ballx  >  90 then return otherbank
-
-	LDA p2_ballx
-	CMP #76
-     BCS .skipL0499
-.condpart184
- jmp .condpart185
-.skipL0499
-	LDA #90
-	CMP p2_ballx
-     BCS .skip45OR
-.condpart185
-	JMP BS_return
-.skip45OR
-.L0500 ;;line 1588;;  if p2_bally  <  31  &&  bottom_room = ENTRY_YELLOW then bottom_room = CASTLE_YELLOW  :  p2_bally = 42  :  w_bottom_oldy = 42  :  room_flags{1} = 1  :  return otherbank
-
-	LDA p2_bally
-	CMP #31
-     BCS .skipL0500
-.condpart186
-	LDA bottom_room
-	CMP #ENTRY_YELLOW
-     BNE .skip186then
-.condpart187
-	LDA #CASTLE_YELLOW
-	STA bottom_room
-	LDA #42
-	STA p2_bally
-	STA w_bottom_oldy
-	LDA room_flags
-	ORA #2
-	STA room_flags
-	JMP BS_return
-.skip186then
-.skipL0500
-.L0501 ;;line 1589;;  if p2_bally  <  31  &&  bottom_room = ENTRY_WHITE then bottom_room = CASTLE_WHITE  :  p2_bally = 42  :  w_bottom_oldy = 42  :  room_flags{1} = 1  :  return otherbank
-
-	LDA p2_bally
-	CMP #31
-     BCS .skipL0501
-.condpart188
-	LDA bottom_room
-	CMP #ENTRY_WHITE
-     BNE .skip188then
-.condpart189
-	LDA #CASTLE_WHITE
-	STA bottom_room
-	LDA #42
-	STA p2_bally
-	STA w_bottom_oldy
-	LDA room_flags
-	ORA #2
-	STA room_flags
-	JMP BS_return
-.skip188then
-.skipL0501
-.L0502 ;;line 1590;;  if p2_bally  <  31  &&  bottom_room = ENTRY_BLACK then bottom_room = CASTLE_BLACK  :  p2_bally = 42  :  w_bottom_oldy = 42  :  room_flags{1} = 1  :  return otherbank
-
-	LDA p2_bally
-	CMP #31
-     BCS .skipL0502
-.condpart190
-	LDA bottom_room
-	CMP #ENTRY_BLACK
-     BNE .skip190then
-.condpart191
-	LDA #CASTLE_BLACK
-	STA bottom_room
-	LDA #42
-	STA p2_bally
-	STA w_bottom_oldy
-	LDA room_flags
-	ORA #2
-	STA room_flags
-	JMP BS_return
-.skip190then
-.skipL0502
-.L0503 ;;line 1591;;  return otherbank
-
-	JMP BS_return
 .
- ;;line 1592;; 
+ ;;line 3022;; 
 
-._bot_castle_exit_check
- ;;line 1593;; _bot_castle_exit_check
-
-.L0504 ;;line 1594;;  if bottom_room = CASTLE_YELLOW then bottom_room = ENTRY_YELLOW  :  p2_bally = 33  :  w_bottom_oldy = 33  :  room_flags{1} = 1  :  return otherbank
-
-	LDA bottom_room
-	CMP #CASTLE_YELLOW
-     BNE .skipL0504
-.condpart192
-	LDA #ENTRY_YELLOW
-	STA bottom_room
-	LDA #33
-	STA p2_bally
-	STA w_bottom_oldy
-	LDA room_flags
-	ORA #2
-	STA room_flags
-	JMP BS_return
-.skipL0504
-.L0505 ;;line 1595;;  if bottom_room = CASTLE_WHITE then bottom_room = ENTRY_WHITE  :  p2_bally = 33  :  w_bottom_oldy = 33  :  room_flags{1} = 1  :  return otherbank
-
-	LDA bottom_room
-	CMP #CASTLE_WHITE
-     BNE .skipL0505
-.condpart193
-	LDA #ENTRY_WHITE
-	STA bottom_room
-	LDA #33
-	STA p2_bally
-	STA w_bottom_oldy
-	LDA room_flags
-	ORA #2
-	STA room_flags
-	JMP BS_return
-.skipL0505
-.L0506 ;;line 1596;;  if bottom_room = CASTLE_BLACK then bottom_room = ENTRY_BLACK  :  p2_bally = 33  :  w_bottom_oldy = 33  :  room_flags{1} = 1  :  return otherbank
-
-	LDA bottom_room
-	CMP #CASTLE_BLACK
-     BNE .skipL0506
-.condpart194
-	LDA #ENTRY_BLACK
-	STA bottom_room
-	LDA #33
-	STA p2_bally
-	STA w_bottom_oldy
-	LDA room_flags
-	ORA #2
-	STA room_flags
-	JMP BS_return
-.skipL0506
-.L0507 ;;line 1597;;  return otherbank
-
-	JMP BS_return
 .
- ;;line 1598;; 
+ ;;line 3023;; 
 
-.L0508 ;;line 1599;;  bank 4
+.
+ ;;line 3024;; 
+
+.
+ ;;line 3025;; 
+
+.
+ ;;line 3026;; 
+
+.
+ ;;line 3027;; 
+
+.
+ ;;line 3028;; 
+
+.
+ ;;line 3029;; 
+
+.
+ ;;line 3030;; 
+
+.
+ ;;line 3031;; 
+
+.
+ ;;line 3032;; 
+
+.
+ ;;line 3033;; 
+
+.
+ ;;line 3034;; 
+
+.
+ ;;line 3035;; 
+
+.
+ ;;line 3036;; 
+
+.
+ ;;line 3037;; 
+
+.
+ ;;line 3038;; 
+
+.
+ ;;line 3039;; 
+
+.
+ ;;line 3040;; 
+
+.
+ ;;line 3041;; 
+
+.
+ ;;line 3042;; 
+
+.
+ ;;line 3043;; 
+
+.
+ ;;line 3044;; 
+
+.
+ ;;line 3045;; 
+
+.
+ ;;line 3046;; 
+
+.
+ ;;line 3047;; 
+
+.
+ ;;line 3048;; 
+
+._gfx_gate
+ ;;line 3049;; _gfx_gate
+
+.L0783 ;;line 3050;;  player0:
+
+	LDX #<playerL0783_0
+	STX player0pointerlo
+	LDA #>playerL0783_0
+	STA player0pointerhi
+	LDA #15
+	STA player0height
+.L0784 ;;line 3068;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 3069;; 
+
+._gfx_torch
+ ;;line 3070;; _gfx_torch
+
+.L0785 ;;line 3071;;  player0:
+
+	LDX #<playerL0785_0
+	STX player0pointerlo
+	LDA #>playerL0785_0
+	STA player0pointerhi
+	LDA #15
+	STA player0height
+.L0786 ;;line 3089;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 3090;; 
+
+.L0787 ;;line 3091;;  bank 4
 
  if ECHO3
  echo "    ",[(start_bank3 - *)]d , "bytes of ROM space left in bank 3")
@@ -6970,136 +11455,46 @@ start_bank3 ldx #$ff
  repend
 ; bB.asm file is split here
 .
- ;;line 1600;; 
+ ;;line 3092;; 
 
 .
- ;;line 1601;; 
+ ;;line 3093;; 
 
 .
- ;;line 1602;; 
+ ;;line 3094;; 
 
 .
- ;;line 1603;; 
+ ;;line 3095;; 
 
-.L0509 ;;line 1604;;  vblank
+.
+ ;;line 3096;; 
+
+.
+ ;;line 3097;; 
+
+.L0788 ;;line 3098;;  vblank
 
 vblank_bB_code
-.L0510 ;;line 1605;;  if !room_flags{0} then goto _skip_vblank_top
+.L0789 ;;line 3099;;  if bally = 255 then return
 
-	LDA room_flags
-	LSR
-	BCS .skipL0510
-.condpart195
- jmp ._skip_vblank_top
-.skipL0510
-.L0511 ;;line 1606;;  room_flags{0} = 0
-
-	LDA room_flags
-	AND #254
-	STA room_flags
-.L0512 ;;line 1607;;  gosub load_top_room bank1
-
- sta temp7
- lda #>(ret_point11-1)
- pha
- lda #<(ret_point11-1)
- pha
- lda #>(.load_top_room-1)
- pha
- lda #<(.load_top_room-1)
- pha
- lda temp7
- pha
- txa
- pha
- ldx #1
- jmp BS_jsr
-ret_point11
-.L0513 ;;line 1608;;  gosub check_gates bank3
+	LDA bally
+	CMP #255
+     BNE .skipL0789
+.condpart285
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0789
+.L0790 ;;line 3100;;  gosub apply_graphics bank3
 
  sta temp7
- lda #>(ret_point12-1)
+ lda #>(ret_point27-1)
  pha
- lda #<(ret_point12-1)
- pha
- lda #>(.check_gates-1)
- pha
- lda #<(.check_gates-1)
- pha
- lda temp7
- pha
- txa
- pha
- ldx #3
- jmp BS_jsr
-ret_point12
-.
- ;;line 1609;; 
-
-._skip_vblank_top
- ;;line 1610;; _skip_vblank_top
-
-.L0514 ;;line 1611;;  if !room_flags{1} then goto _skip_vblank_bot
-
-	LDA room_flags
-	AND #2
-	BNE .skipL0514
-.condpart196
- jmp ._skip_vblank_bot
-.skipL0514
-.L0515 ;;line 1612;;  room_flags{1} = 0
-
-	LDA room_flags
-	AND #253
-	STA room_flags
-.L0516 ;;line 1613;;  gosub load_bottom_room bank1
-
- sta temp7
- lda #>(ret_point13-1)
- pha
- lda #<(ret_point13-1)
- pha
- lda #>(.load_bottom_room-1)
- pha
- lda #<(.load_bottom_room-1)
- pha
- lda temp7
- pha
- txa
- pha
- ldx #1
- jmp BS_jsr
-ret_point13
-.L0517 ;;line 1614;;  gosub check_gates bank3
-
- sta temp7
- lda #>(ret_point14-1)
- pha
- lda #<(ret_point14-1)
- pha
- lda #>(.check_gates-1)
- pha
- lda #<(.check_gates-1)
- pha
- lda temp7
- pha
- txa
- pha
- ldx #3
- jmp BS_jsr
-ret_point14
-.
- ;;line 1615;; 
-
-._skip_vblank_bot
- ;;line 1616;; _skip_vblank_bot
-
-.L0518 ;;line 1617;;  gosub apply_graphics bank3
-
- sta temp7
- lda #>(ret_point15-1)
- pha
- lda #<(ret_point15-1)
+ lda #<(ret_point27-1)
  pha
  lda #>(.apply_graphics-1)
  pha
@@ -7111,8 +11506,184 @@ ret_point14
  pha
  ldx #3
  jmp BS_jsr
-ret_point15
-.L0519 ;;line 1618;;  return
+ret_point27
+.
+ ;;line 3101;; 
+
+.
+ ;;line 3102;; 
+
+.L0791 ;;line 3103;;  asm
+
+   ldx top_carried_item
+
+   bmi .skip_top_carry
+
+   lda top_room
+
+   sta w_top_obj_room,x
+
+   
+
+   
+
+   lda ballx
+
+   clc
+
+   adc r_top_carry_off_x
+
+   cmp #200       
+
+   bcs .t_chk_x_min
+
+   cmp #16
+
+   bcc .t_chk_x_min
+
+   cmp #138
+
+   bcc .t_sav_x
+
+   lda #137
+
+   .byte $2C      
+
+.t_chk_x_min
+
+   lda #16
+
+.t_sav_x
+
+   sta top_obj_x,x
+
+   
+
+   
+
+   lda bally
+
+   clc
+
+   adc r_top_carry_off_y
+
+   bmi .t_chk_y_min 
+
+   cmp #1
+
+   bcc .t_chk_y_min
+
+   cmp #54
+
+   bcc .t_sav_y
+
+   lda #53
+
+   .byte $2C
+
+.t_chk_y_min
+
+   lda #1
+
+.t_sav_y
+
+   sta top_obj_y,x
+
+.skip_top_carry
+
+
+
+   ldx bot_carried_item
+
+   bmi .skip_bot_carry
+
+   lda bottom_room
+
+   sta w_bot_obj_room,x
+
+   
+
+   
+
+   lda p2_ballx
+
+   clc
+
+   adc r_bot_carry_off_x
+
+   cmp #200       
+
+   bcs .b_chk_x_min
+
+   cmp #16
+
+   bcc .b_chk_x_min
+
+   cmp #138
+
+   bcc .b_sav_x
+
+   lda #137
+
+   .byte $2C
+
+.b_chk_x_min
+
+   lda #16
+
+.b_sav_x
+
+   sta bot_obj_x,x
+
+   
+
+   
+
+   lda p2_bally
+
+   clc
+
+   adc r_bot_carry_off_y
+
+   bmi .b_chk_y_min 
+
+   cmp #1
+
+   bcc .b_chk_y_min
+
+   cmp #54
+
+   bcc .b_sav_y
+
+   lda #53
+
+   .byte $2C
+
+.b_chk_y_min
+
+   lda #1
+
+.b_sav_y
+
+   sta bot_obj_y,x
+
+.skip_bot_carry
+
+.
+ ;;line 3182;; 
+
+.L0792 ;;line 3183;;  if r005 = 1  ||  r016 = 1 then return
+
+	LDA r005
+	CMP #1
+     BNE .skipL0792
+.condpart286
+ jmp .condpart287
+.skipL0792
+	LDA r016
+	CMP #1
+     BNE .skip30OR
+.condpart287
 	tsx
 	lda 2,x ; check return address
 	eor #(>*) ; vs. current PCH
@@ -7120,306 +11691,1990 @@ ret_point15
 	beq *+5 ; if equal, do normal return
 	JMP BS_return
 	RTS
- if (<*) > (<(*+14))
+.skip30OR
+.L0793 ;;line 3184;;  asm
+
+   lda gate_state
+
+   cmp #$40
+
+   bcc .skip_bat_g1
+
+.L0794 ;;line 3189;;  if !room_flags{7} then room_flags =  ( room_flags  +  $10 )   &  $7F  :  goto update_top_bat
+
+	BIT room_flags
+	BMI .skipL0794
+.condpart288
+; complex statement detected
+	LDA room_flags
+	CLC
+	ADC #$10
+	AND #$7F
+	STA room_flags
+ jmp .update_top_bat
+.skipL0794
+.L0795 ;;line 3190;;  goto update_bot_bat
+
+ jmp .update_bot_bat
+.L0796 ;;line 3191;;  asm
+
+.skip_bat_g1
+
+.L0797 ;;line 3194;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 3195;; 
+
+.
+ ;;line 3196;; 
+
+.
+ ;;line 3197;; 
+
+.
+ ;;line 3198;; 
+
+.
+ ;;line 3199;; 
+
+.update_top_bat
+ ;;line 3200;; update_top_bat
+
+.L0798 ;;line 3201;;  temp6 = r_top_obj_room[10]
+
+	LDX #10
+	LDA r_top_obj_room,x
+	STA temp6
+.L0799 ;;line 3202;;  temp4 = top_obj_x[10]  :  temp5 = top_obj_y[10]
+
+	LDX #10
+	LDA top_obj_x,x
+	STA temp4
+	LDX #10
+	LDA top_obj_y,x
+	STA temp5
+.L0800 ;;line 3203;;  temp2 = top_bat_state  &  15
+
+	LDA top_bat_state
+	AND #15
+	STA temp2
+.L0801 ;;line 3204;;  temp1 = top_bat_state  /  16
+
+	LDA top_bat_state
+	lsr
+	lsr
+	lsr
+	lsr
+	STA temp1
+.
+ ;;line 3205;; 
+
+.
+ ;;line 3206;; 
+
+.L0802 ;;line 3207;;  if top_carried_item = 10 then temp6 = top_room  :  w_top_obj_room[10] = temp6  :  goto _top_bat_sync_item
+
+	LDA top_carried_item
+	CMP #10
+     BNE .skipL0802
+.condpart289
+	LDA top_room
+	STA temp6
+	LDA temp6
+	LDX #10
+	STA w_top_obj_room,x
+ jmp ._top_bat_sync_item
+.skipL0802
+.
+ ;;line 3208;; 
+
+.
+ ;;line 3209;; 
+
+.L0803 ;;line 3210;;  temp3 = bat_fedup  &  15
+
+	LDA bat_fedup
+	AND #15
+	STA temp3
+.L0804 ;;line 3211;;  if temp3 = 0 then goto _top_bat_seek
+
+	LDA temp3
+	CMP #0
+     BNE .skipL0804
+.condpart290
+ jmp ._top_bat_seek
+.skipL0804
+.L0805 ;;line 3212;;  if rand  <  64 then temp3 = temp3  -  1  :  bat_fedup =  ( bat_fedup  &  $F0 )   |  temp3
+
+	LDA rand
+	CMP #64
+     BCS .skipL0805
+.condpart291
+	DEC temp3
+; complex statement detected
+	LDA bat_fedup
+	AND #$F0
+	ORA temp3
+	STA bat_fedup
+.skipL0805
+.L0806 ;;line 3213;;  goto _top_bat_wander
+
+ jmp ._top_bat_wander
+.
+ ;;line 3214;; 
+
+._top_bat_seek
+ ;;line 3215;; _top_bat_seek
+
+.L0807 ;;line 3216;;  asm
+
+   ldx #9
+
+.bat_scan_top
+
+   cpx temp2
+
+   beq .bat_next_top
+
+   lda r_top_obj_room,x
+
+   cmp temp6
+
+   beq .bat_found_top
+
+.bat_next_top
+
+   dex
+
+   bpl .bat_scan_top
+
+   ldx #255
+
+.bat_found_top
+
+   stx temp3
+
+.L0808 ;;line 3231;;  if temp3 = 255 then goto _top_bat_wander
+
+	LDA temp3
+	CMP #255
+     BNE .skipL0808
+.condpart292
+ jmp ._top_bat_wander
+.skipL0808
+.
+ ;;line 3232;; 
+
+.
+ ;;line 3233;; 
+
+.L0809 ;;line 3234;;  temp7 = top_obj_x[temp3]
+
+	LDX temp3
+	LDA top_obj_x,x
+	STA temp7
+.L0810 ;;line 3235;;  if temp4  <  temp7 then temp4 = temp4  +  1
+
+	LDA temp4
+	CMP temp7
+     BCS .skipL0810
+.condpart293
+	INC temp4
+.skipL0810
+.L0811 ;;line 3236;;  if temp4  >  temp7 then temp4 = temp4  -  1
+
+	LDA temp7
+	CMP temp4
+     BCS .skipL0811
+.condpart294
+	DEC temp4
+.skipL0811
+.L0812 ;;line 3237;;  temp7 = top_obj_y[temp3]
+
+	LDX temp3
+	LDA top_obj_y,x
+	STA temp7
+.L0813 ;;line 3238;;  if temp5  <  temp7 then temp5 = temp5  +  1
+
+	LDA temp5
+	CMP temp7
+     BCS .skipL0813
+.condpart295
+	INC temp5
+.skipL0813
+.L0814 ;;line 3239;;  if temp5  >  temp7 then temp5 = temp5  -  1
+
+	LDA temp7
+	CMP temp5
+     BCS .skipL0814
+.condpart296
+	DEC temp5
+.skipL0814
+.
+ ;;line 3240;; 
+
+.
+ ;;line 3241;; 
+
+.L0815 ;;line 3242;;  temp7 = top_obj_x[temp3]  -  temp4  +  6
+
+; complex statement detected
+	LDX temp3
+	LDA top_obj_x,x
+	SEC
+	SBC temp4
+	CLC
+	ADC #6
+	STA temp7
+.L0816 ;;line 3243;;  if temp7  >  12 then goto _top_bat_bounds
+
+	LDA #12
+	CMP temp7
+     BCS .skipL0816
+.condpart297
+ jmp ._top_bat_bounds
+.skipL0816
+.L0817 ;;line 3244;;  temp7 = top_obj_y[temp3]  -  temp5  +  6
+
+; complex statement detected
+	LDX temp3
+	LDA top_obj_y,x
+	SEC
+	SBC temp5
+	CLC
+	ADC #6
+	STA temp7
+.L0818 ;;line 3245;;  if temp7  >  12 then goto _top_bat_bounds
+
+	LDA #12
+	CMP temp7
+     BCS .skipL0818
+.condpart298
+ jmp ._top_bat_bounds
+.skipL0818
+.
+ ;;line 3246;; 
+
+.
+ ;;line 3247;; 
+
+.L0819 ;;line 3248;;  temp2 = temp3
+
+	LDA temp3
+	STA temp2
+.L0820 ;;line 3249;;  if top_carried_item = temp2 then top_carried_item = 255
+
+	LDA top_carried_item
+	CMP temp2
+     BNE .skipL0820
+.condpart299
+	LDA #255
+	STA top_carried_item
+.skipL0820
+.L0821 ;;line 3250;;  if temp6 = top_room  &&  top_drag_state = 3 then top_drag_state = 39
+
+	LDA temp6
+	CMP top_room
+     BNE .skipL0821
+.condpart300
+	LDA top_drag_state
+	CMP #3
+     BNE .skip300then
+.condpart301
+	LDA #39
+	STA top_drag_state
+.skip300then
+.skipL0821
+.L0822 ;;line 3251;;  bat_fedup =  ( bat_fedup  &  $F0 )   |  12
+
+; complex statement detected
+	LDA bat_fedup
+	AND #$F0
+	ORA #12
+	STA bat_fedup
+.L0823 ;;line 3252;;  temp1 = rand  &  7
+
+ jsr randomize
+	AND #7
+	STA temp1
+.L0824 ;;line 3253;;  goto _top_bat_bounds
+
+ jmp ._top_bat_bounds
+.
+ ;;line 3254;; 
+
+._top_bat_wander
+ ;;line 3255;; _top_bat_wander
+
+.L0825 ;;line 3256;;  if rand  <  8 then temp1 = rand  &  7
+
+	LDA rand
+	CMP #8
+     BCS .skipL0825
+.condpart302
+ jsr randomize
+	AND #7
+	STA temp1
+.skipL0825
+.L0826 ;;line 3257;;  temp4 = temp4  +  bat_dx[temp1]
+
+	LDA temp4
+	LDX temp1
+	CLC
+	ADC bat_dx,x
+	STA temp4
+.L0827 ;;line 3258;;  temp5 = temp5  +  bat_dy[temp1]
+
+	LDA temp5
+	LDX temp1
+	CLC
+	ADC bat_dy,x
+	STA temp5
+.
+ ;;line 3259;; 
+
+._top_bat_bounds
+ ;;line 3260;; _top_bat_bounds
+
+.L0828 ;;line 3261;;  if temp5  >=  3 then goto _top_bat_chk_s
+
+	LDA temp5
+	CMP #3
+     BCC .skipL0828
+.condpart303
+ jmp ._top_bat_chk_s
+.skipL0828
+.L0829 ;;line 3262;;  temp3 = bat_move_north[temp6]
+
+	LDX temp6
+	LDA bat_move_north,x
+	STA temp3
+.L0830 ;;line 3263;;  if temp3 = 0 then temp5 = 4  :  temp1 = 4  :  goto _top_bat_chk_w
+
+	LDA temp3
+	CMP #0
+     BNE .skipL0830
+.condpart304
+	LDA #4
+	STA temp5
+	STA temp1
+ jmp ._top_bat_chk_w
+.skipL0830
+.L0831 ;;line 3264;;  temp5 = 44  :  temp6 = temp3
+
+	LDA #44
+	STA temp5
+	LDA temp3
+	STA temp6
+._top_bat_chk_s
+ ;;line 3265;; _top_bat_chk_s
+
+.L0832 ;;line 3266;;  if temp5  <=  44 then goto _top_bat_chk_w
+
+	LDA #44
+	CMP temp5
+     BCC .skipL0832
+.condpart305
+ jmp ._top_bat_chk_w
+.skipL0832
+.L0833 ;;line 3267;;  temp3 = bat_move_south[temp6]
+
+	LDX temp6
+	LDA bat_move_south,x
+	STA temp3
+.L0834 ;;line 3268;;  if temp3 = 0 then temp5 = 43  :  temp1 = 0  :  goto _top_bat_chk_w
+
+	LDA temp3
+	CMP #0
+     BNE .skipL0834
+.condpart306
+	LDA #43
+	STA temp5
+	LDA #0
+	STA temp1
+ jmp ._top_bat_chk_w
+.skipL0834
+.L0835 ;;line 3269;;  temp5 = 3  :  temp6 = temp3
+
+	LDA #3
+	STA temp5
+	LDA temp3
+	STA temp6
+._top_bat_chk_w
+ ;;line 3270;; _top_bat_chk_w
+
+.L0836 ;;line 3271;;  if temp4  >=  17 then goto _top_bat_chk_e
+
+	LDA temp4
+	CMP #17
+     BCC .skipL0836
+.condpart307
+ jmp ._top_bat_chk_e
+.skipL0836
+.L0837 ;;line 3272;;  temp3 = bat_move_west[temp6]
+
+	LDX temp6
+	LDA bat_move_west,x
+	STA temp3
+.L0838 ;;line 3273;;  if temp3 = 0 then temp4 = 18  :  temp1 = 2  :  goto _top_bat_save
+
+	LDA temp3
+	CMP #0
+     BNE .skipL0838
+.condpart308
+	LDA #18
+	STA temp4
+	LDA #2
+	STA temp1
+ jmp ._top_bat_save
+.skipL0838
+.L0839 ;;line 3274;;  temp4 = 139  :  temp6 = temp3
+
+	LDA #139
+	STA temp4
+	LDA temp3
+	STA temp6
+._top_bat_chk_e
+ ;;line 3275;; _top_bat_chk_e
+
+.L0840 ;;line 3276;;  if temp4  <=  139 then goto _top_bat_save
+
+	LDA #139
+	CMP temp4
+     BCC .skipL0840
+.condpart309
+ jmp ._top_bat_save
+.skipL0840
+.L0841 ;;line 3277;;  temp3 = bat_move_east[temp6]
+
+	LDX temp6
+	LDA bat_move_east,x
+	STA temp3
+.L0842 ;;line 3278;;  if temp3 = 0 then temp4 = 138  :  temp1 = 6  :  goto _top_bat_save
+
+	LDA temp3
+	CMP #0
+     BNE .skipL0842
+.condpart310
+	LDA #138
+	STA temp4
+	LDA #6
+	STA temp1
+ jmp ._top_bat_save
+.skipL0842
+.L0843 ;;line 3279;;  temp4 = 17  :  temp6 = temp3
+
+	LDA #17
+	STA temp4
+	LDA temp3
+	STA temp6
+.
+ ;;line 3280;; 
+
+._top_bat_save
+ ;;line 3281;; _top_bat_save
+
+.L0844 ;;line 3282;;  w_top_obj_room[10] = temp6  :  top_obj_x[10] = temp4  :  top_obj_y[10] = temp5
+
+	LDA temp6
+	LDX #10
+	STA w_top_obj_room,x
+	LDA temp4
+	LDX #10
+	STA top_obj_x,x
+	LDA temp5
+	LDX #10
+	STA top_obj_y,x
+.L0845 ;;line 3283;;  asm
+
+   lda temp1
+
+   asl
+
+   asl
+
+   asl
+
+   asl
+
+   ora temp2
+
+   sta top_bat_state
+
+.
+ ;;line 3292;; 
+
+._top_bat_sync_item
+ ;;line 3293;; _top_bat_sync_item
+
+.L0846 ;;line 3294;;  if temp2  >  9 then return
+
+	LDA #9
+	CMP temp2
+     BCS .skipL0846
+.condpart311
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0846
+.L0847 ;;line 3295;;  w_top_obj_room[temp2] = temp6
+
+	LDA temp6
+	LDX temp2
+	STA w_top_obj_room,x
+.L0848 ;;line 3296;;  top_obj_x[temp2] = temp4  +  8
+
+	LDA temp4
+	CLC
+	ADC #8
+	LDX temp2
+	STA top_obj_x,x
+.L0849 ;;line 3297;;  if temp2  <  3 then top_obj_y[temp2] = temp5  +  12  :  return
+
+	LDA temp2
+	CMP #3
+     BCS .skipL0849
+.condpart312
+	LDA temp5
+	CLC
+	ADC #12
+	LDX temp2
+	STA top_obj_y,x
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0849
+.L0850 ;;line 3298;;  top_obj_y[temp2] = temp5  +  2
+
+	LDA temp5
+	CLC
+	ADC #2
+	LDX temp2
+	STA top_obj_y,x
+.L0851 ;;line 3299;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 3300;; 
+
+.update_bot_bat
+ ;;line 3301;; update_bot_bat
+
+.L0852 ;;line 3302;;  temp6 = r_bot_obj_room[10]
+
+	LDX #10
+	LDA r_bot_obj_room,x
+	STA temp6
+.L0853 ;;line 3303;;  temp4 = bot_obj_x[10]  :  temp5 = bot_obj_y[10]
+
+	LDX #10
+	LDA bot_obj_x,x
+	STA temp4
+	LDX #10
+	LDA bot_obj_y,x
+	STA temp5
+.L0854 ;;line 3304;;  temp2 = bot_bat_state  &  15
+
+	LDA bot_bat_state
+	AND #15
+	STA temp2
+.L0855 ;;line 3305;;  temp1 = bot_bat_state  /  16
+
+	LDA bot_bat_state
+	lsr
+	lsr
+	lsr
+	lsr
+	STA temp1
+.
+ ;;line 3306;; 
+
+.
+ ;;line 3307;; 
+
+.L0856 ;;line 3308;;  if bot_carried_item = 10 then temp6 = bottom_room  :  w_bot_obj_room[10] = temp6  :  goto _bot_bat_sync_item
+
+	LDA bot_carried_item
+	CMP #10
+     BNE .skipL0856
+.condpart313
+	LDA bottom_room
+	STA temp6
+	LDA temp6
+	LDX #10
+	STA w_bot_obj_room,x
+ jmp ._bot_bat_sync_item
+.skipL0856
+.
+ ;;line 3309;; 
+
+.
+ ;;line 3310;; 
+
+.L0857 ;;line 3311;;  temp3 = bat_fedup  &  $F0
+
+	LDA bat_fedup
+	AND #$F0
+	STA temp3
+.L0858 ;;line 3312;;  if temp3 = 0 then goto _bot_bat_seek
+
+	LDA temp3
+	CMP #0
+     BNE .skipL0858
+.condpart314
+ jmp ._bot_bat_seek
+.skipL0858
+.L0859 ;;line 3313;;  if rand  <  64 then bat_fedup = bat_fedup  -  16
+
+	LDA rand
+	CMP #64
+     BCS .skipL0859
+.condpart315
+	LDA bat_fedup
+	SEC
+	SBC #16
+	STA bat_fedup
+.skipL0859
+.L0860 ;;line 3314;;  goto _bot_bat_wander
+
+ jmp ._bot_bat_wander
+.
+ ;;line 3315;; 
+
+._bot_bat_seek
+ ;;line 3316;; _bot_bat_seek
+
+.L0861 ;;line 3317;;  asm
+
+   ldx #9
+
+.bat_scan_bot
+
+   cpx temp2
+
+   beq .bat_next_bot
+
+   lda r_bot_obj_room,x
+
+   cmp temp6
+
+   beq .bat_found_bot
+
+.bat_next_bot
+
+   dex
+
+   bpl .bat_scan_bot
+
+   ldx #255
+
+.bat_found_bot
+
+   stx temp3
+
+.L0862 ;;line 3332;;  if temp3 = 255 then goto _bot_bat_wander
+
+	LDA temp3
+	CMP #255
+     BNE .skipL0862
+.condpart316
+ jmp ._bot_bat_wander
+.skipL0862
+.
+ ;;line 3333;; 
+
+.
+ ;;line 3334;; 
+
+.L0863 ;;line 3335;;  temp7 = bot_obj_x[temp3]
+
+	LDX temp3
+	LDA bot_obj_x,x
+	STA temp7
+.L0864 ;;line 3336;;  if temp4  <  temp7 then temp4 = temp4  +  1
+
+	LDA temp4
+	CMP temp7
+     BCS .skipL0864
+.condpart317
+	INC temp4
+.skipL0864
+.L0865 ;;line 3337;;  if temp4  >  temp7 then temp4 = temp4  -  1
+
+	LDA temp7
+	CMP temp4
+     BCS .skipL0865
+.condpart318
+	DEC temp4
+.skipL0865
+.L0866 ;;line 3338;;  temp7 = bot_obj_y[temp3]
+
+	LDX temp3
+	LDA bot_obj_y,x
+	STA temp7
+.L0867 ;;line 3339;;  if temp5  <  temp7 then temp5 = temp5  +  1
+
+	LDA temp5
+	CMP temp7
+     BCS .skipL0867
+.condpart319
+	INC temp5
+.skipL0867
+.L0868 ;;line 3340;;  if temp5  >  temp7 then temp5 = temp5  -  1
+
+	LDA temp7
+	CMP temp5
+     BCS .skipL0868
+.condpart320
+	DEC temp5
+.skipL0868
+.
+ ;;line 3341;; 
+
+.
+ ;;line 3342;; 
+
+.L0869 ;;line 3343;;  temp7 = bot_obj_x[temp3]  -  temp4  +  6
+
+; complex statement detected
+	LDX temp3
+	LDA bot_obj_x,x
+	SEC
+	SBC temp4
+	CLC
+	ADC #6
+	STA temp7
+.L0870 ;;line 3344;;  if temp7  >  12 then goto _bot_bat_bounds
+
+	LDA #12
+	CMP temp7
+     BCS .skipL0870
+.condpart321
+ jmp ._bot_bat_bounds
+.skipL0870
+.L0871 ;;line 3345;;  temp7 = bot_obj_y[temp3]  -  temp5  +  6
+
+; complex statement detected
+	LDX temp3
+	LDA bot_obj_y,x
+	SEC
+	SBC temp5
+	CLC
+	ADC #6
+	STA temp7
+.L0872 ;;line 3346;;  if temp7  >  12 then goto _bot_bat_bounds
+
+	LDA #12
+	CMP temp7
+     BCS .skipL0872
+.condpart322
+ jmp ._bot_bat_bounds
+.skipL0872
+.
+ ;;line 3347;; 
+
+.
+ ;;line 3348;; 
+
+.L0873 ;;line 3349;;  temp2 = temp3
+
+	LDA temp3
+	STA temp2
+.L0874 ;;line 3350;;  if bot_carried_item = temp2 then bot_carried_item = 255
+
+	LDA bot_carried_item
+	CMP temp2
+     BNE .skipL0874
+.condpart323
+	LDA #255
+	STA bot_carried_item
+.skipL0874
+.L0875 ;;line 3351;;  if temp6 = bottom_room  &&  bot_drag_state = 3 then bot_drag_state = 39
+
+	LDA temp6
+	CMP bottom_room
+     BNE .skipL0875
+.condpart324
+	LDA bot_drag_state
+	CMP #3
+     BNE .skip324then
+.condpart325
+	LDA #39
+	STA bot_drag_state
+.skip324then
+.skipL0875
+.L0876 ;;line 3352;;  bat_fedup =  ( bat_fedup  &  $0F )   |  $C0
+
+; complex statement detected
+	LDA bat_fedup
+	AND #$0F
+	ORA #$C0
+	STA bat_fedup
+.L0877 ;;line 3353;;  temp1 = rand  &  7
+
+ jsr randomize
+	AND #7
+	STA temp1
+.L0878 ;;line 3354;;  goto _bot_bat_bounds
+
+ jmp ._bot_bat_bounds
+.
+ ;;line 3355;; 
+
+._bot_bat_wander
+ ;;line 3356;; _bot_bat_wander
+
+.L0879 ;;line 3357;;  if rand  <  8 then temp1 = rand  &  7
+
+	LDA rand
+	CMP #8
+     BCS .skipL0879
+.condpart326
+ jsr randomize
+	AND #7
+	STA temp1
+.skipL0879
+.L0880 ;;line 3358;;  temp4 = temp4  +  bat_dx[temp1]
+
+	LDA temp4
+	LDX temp1
+	CLC
+	ADC bat_dx,x
+	STA temp4
+.L0881 ;;line 3359;;  temp5 = temp5  +  bat_dy[temp1]
+
+	LDA temp5
+	LDX temp1
+	CLC
+	ADC bat_dy,x
+	STA temp5
+.
+ ;;line 3360;; 
+
+._bot_bat_bounds
+ ;;line 3361;; _bot_bat_bounds
+
+.L0882 ;;line 3362;;  if temp5  >=  3 then goto _bot_bat_chk_s
+
+	LDA temp5
+	CMP #3
+     BCC .skipL0882
+.condpart327
+ jmp ._bot_bat_chk_s
+.skipL0882
+.L0883 ;;line 3363;;  temp3 = bat_move_north[temp6]
+
+	LDX temp6
+	LDA bat_move_north,x
+	STA temp3
+.L0884 ;;line 3364;;  if temp3 = 0 then temp5 = 4  :  temp1 = 4  :  goto _bot_bat_chk_w
+
+	LDA temp3
+	CMP #0
+     BNE .skipL0884
+.condpart328
+	LDA #4
+	STA temp5
+	STA temp1
+ jmp ._bot_bat_chk_w
+.skipL0884
+.L0885 ;;line 3365;;  temp5 = 45  :  temp6 = temp3
+
+	LDA #45
+	STA temp5
+	LDA temp3
+	STA temp6
+._bot_bat_chk_s
+ ;;line 3366;; _bot_bat_chk_s
+
+.L0886 ;;line 3367;;  if temp5  <=  45 then goto _bot_bat_chk_w
+
+	LDA #45
+	CMP temp5
+     BCC .skipL0886
+.condpart329
+ jmp ._bot_bat_chk_w
+.skipL0886
+.L0887 ;;line 3368;;  temp3 = bat_move_south[temp6]
+
+	LDX temp6
+	LDA bat_move_south,x
+	STA temp3
+.L0888 ;;line 3369;;  if temp3 = 0 then temp5 = 44  :  temp1 = 0  :  goto _bot_bat_chk_w
+
+	LDA temp3
+	CMP #0
+     BNE .skipL0888
+.condpart330
+	LDA #44
+	STA temp5
+	LDA #0
+	STA temp1
+ jmp ._bot_bat_chk_w
+.skipL0888
+.L0889 ;;line 3370;;  temp5 = 3  :  temp6 = temp3
+
+	LDA #3
+	STA temp5
+	LDA temp3
+	STA temp6
+._bot_bat_chk_w
+ ;;line 3371;; _bot_bat_chk_w
+
+.L0890 ;;line 3372;;  if temp4  >=  17 then goto _bot_bat_chk_e
+
+	LDA temp4
+	CMP #17
+     BCC .skipL0890
+.condpart331
+ jmp ._bot_bat_chk_e
+.skipL0890
+.L0891 ;;line 3373;;  temp3 = bat_move_west[temp6]
+
+	LDX temp6
+	LDA bat_move_west,x
+	STA temp3
+.L0892 ;;line 3374;;  if temp3 = 0 then temp4 = 18  :  temp1 = 2  :  goto _bot_bat_save
+
+	LDA temp3
+	CMP #0
+     BNE .skipL0892
+.condpart332
+	LDA #18
+	STA temp4
+	LDA #2
+	STA temp1
+ jmp ._bot_bat_save
+.skipL0892
+.L0893 ;;line 3375;;  temp4 = 139  :  temp6 = temp3
+
+	LDA #139
+	STA temp4
+	LDA temp3
+	STA temp6
+._bot_bat_chk_e
+ ;;line 3376;; _bot_bat_chk_e
+
+.L0894 ;;line 3377;;  if temp4  <=  139 then goto _bot_bat_save
+
+	LDA #139
+	CMP temp4
+     BCC .skipL0894
+.condpart333
+ jmp ._bot_bat_save
+.skipL0894
+.L0895 ;;line 3378;;  temp3 = bat_move_east[temp6]
+
+	LDX temp6
+	LDA bat_move_east,x
+	STA temp3
+.L0896 ;;line 3379;;  if temp3 = 0 then temp4 = 138  :  temp1 = 6  :  goto _bot_bat_save
+
+	LDA temp3
+	CMP #0
+     BNE .skipL0896
+.condpart334
+	LDA #138
+	STA temp4
+	LDA #6
+	STA temp1
+ jmp ._bot_bat_save
+.skipL0896
+.L0897 ;;line 3380;;  temp4 = 17  :  temp6 = temp3
+
+	LDA #17
+	STA temp4
+	LDA temp3
+	STA temp6
+.
+ ;;line 3381;; 
+
+._bot_bat_save
+ ;;line 3382;; _bot_bat_save
+
+.L0898 ;;line 3383;;  w_bot_obj_room[10] = temp6  :  bot_obj_x[10] = temp4  :  bot_obj_y[10] = temp5
+
+	LDA temp6
+	LDX #10
+	STA w_bot_obj_room,x
+	LDA temp4
+	LDX #10
+	STA bot_obj_x,x
+	LDA temp5
+	LDX #10
+	STA bot_obj_y,x
+.L0899 ;;line 3384;;  asm
+
+   lda temp1
+
+   asl
+
+   asl
+
+   asl
+
+   asl
+
+   ora temp2
+
+   sta bot_bat_state
+
+.
+ ;;line 3393;; 
+
+._bot_bat_sync_item
+ ;;line 3394;; _bot_bat_sync_item
+
+.L0900 ;;line 3395;;  if temp2  >  9 then return
+
+	LDA #9
+	CMP temp2
+     BCS .skipL0900
+.condpart335
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0900
+.L0901 ;;line 3396;;  w_bot_obj_room[temp2] = temp6
+
+	LDA temp6
+	LDX temp2
+	STA w_bot_obj_room,x
+.L0902 ;;line 3397;;  bot_obj_x[temp2] = temp4  +  8
+
+	LDA temp4
+	CLC
+	ADC #8
+	LDX temp2
+	STA bot_obj_x,x
+.L0903 ;;line 3398;;  if temp2  <  3 then bot_obj_y[temp2] = temp5  +  12  :  return
+
+	LDA temp2
+	CMP #3
+     BCS .skipL0903
+.condpart336
+	LDA temp5
+	CLC
+	ADC #12
+	LDX temp2
+	STA bot_obj_y,x
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.skipL0903
+.L0904 ;;line 3399;;  bot_obj_y[temp2] = temp5  +  2
+
+	LDA temp5
+	CLC
+	ADC #2
+	LDX temp2
+	STA bot_obj_y,x
+.L0905 ;;line 3400;;  return
+
+	tsx
+	lda 2,x ; check return address
+	eor #(>*) ; vs. current PCH
+	and #$E0 ;  mask off all but top 3 bits
+	beq *+5 ; if equal, do normal return
+	JMP BS_return
+	RTS
+.
+ ;;line 3401;; 
+
+.
+ ;;line 3402;; 
+
+.
+ ;;line 3403;; 
+
+.
+ ;;line 3404;; 
+
+.gate_collide_top
+ ;;line 3405;; gate_collide_top
+
+.L0906 ;;line 3406;;  temp1 = top_carried_item
+
+	LDA top_carried_item
+	STA temp1
+.L0907 ;;line 3407;;  if top_room = ENTRY_YELLOW  &&  temp1 = 7 then gate_state{0} = 1  :  goto _unlock_top_gate
+
+	LDA top_room
+	CMP #ENTRY_YELLOW
+     BNE .skipL0907
+.condpart337
+	LDA temp1
+	CMP #7
+     BNE .skip337then
+.condpart338
+	LDA gate_state
+	ORA #1
+	STA gate_state
+ jmp ._unlock_top_gate
+.skip337then
+.skipL0907
+.L0908 ;;line 3408;;  if top_room = ENTRY_WHITE  &&  temp1 = 8 then gate_state{1} = 1  :  goto _unlock_top_gate
+
+	LDA top_room
+	CMP #ENTRY_WHITE
+     BNE .skipL0908
+.condpart339
+	LDA temp1
+	CMP #8
+     BNE .skip339then
+.condpart340
+	LDA gate_state
+	ORA #2
+	STA gate_state
+ jmp ._unlock_top_gate
+.skip339then
+.skipL0908
+.L0909 ;;line 3409;;  if top_room = ENTRY_BLACK  &&  temp1 = 9 then gate_state{2} = 1  :  goto _unlock_top_gate
+
+	LDA top_room
+	CMP #ENTRY_BLACK
+     BNE .skipL0909
+.condpart341
+	LDA temp1
+	CMP #9
+     BNE .skip341then
+.condpart342
+	LDA gate_state
+	ORA #4
+	STA gate_state
+ jmp ._unlock_top_gate
+.skip341then
+.skipL0909
+.L0910 ;;line 3410;;  ballx = r_top_oldx  :  bally = r_top_oldy
+
+	LDA r_top_oldx
+	STA ballx
+	LDA r_top_oldy
+	STA bally
+.L0911 ;;line 3411;;  temp5 = 1
+
+	LDA #1
+	STA temp5
+.L0912 ;;line 3412;;  return otherbank
+
+	JMP BS_return
+._unlock_top_gate
+ ;;line 3413;; _unlock_top_gate
+
+.L0913 ;;line 3414;;  if top_drag_state = 3 then top_drag_state = 39
+
+	LDA top_drag_state
+	CMP #3
+     BNE .skipL0913
+.condpart343
+	LDA #39
+	STA top_drag_state
+.skipL0913
+.L0914 ;;line 3415;;  top_player0y = 255  :  return otherbank
+
+	LDA #255
+	STA top_player0y
+	JMP BS_return
+.
+ ;;line 3416;; 
+
+.gate_collide_bot
+ ;;line 3417;; gate_collide_bot
+
+.L0915 ;;line 3418;;  temp1 = bot_carried_item
+
+	LDA bot_carried_item
+	STA temp1
+.L0916 ;;line 3419;;  if bottom_room = ENTRY_YELLOW  &&  temp1 = 7 then gate_state{3} = 1  :  goto _unlock_bot_gate
+
+	LDA bottom_room
+	CMP #ENTRY_YELLOW
+     BNE .skipL0916
+.condpart344
+	LDA temp1
+	CMP #7
+     BNE .skip344then
+.condpart345
+	LDA gate_state
+	ORA #8
+	STA gate_state
+ jmp ._unlock_bot_gate
+.skip344then
+.skipL0916
+.L0917 ;;line 3420;;  if bottom_room = ENTRY_WHITE  &&  temp1 = 8 then gate_state{4} = 1  :  goto _unlock_bot_gate
+
+	LDA bottom_room
+	CMP #ENTRY_WHITE
+     BNE .skipL0917
+.condpart346
+	LDA temp1
+	CMP #8
+     BNE .skip346then
+.condpart347
+	LDA gate_state
+	ORA #16
+	STA gate_state
+ jmp ._unlock_bot_gate
+.skip346then
+.skipL0917
+.L0918 ;;line 3421;;  if bottom_room = ENTRY_BLACK  &&  temp1 = 9 then gate_state{5} = 1  :  goto _unlock_bot_gate
+
+	LDA bottom_room
+	CMP #ENTRY_BLACK
+     BNE .skipL0918
+.condpart348
+	LDA temp1
+	CMP #9
+     BNE .skip348then
+.condpart349
+	LDA gate_state
+	ORA #32
+	STA gate_state
+ jmp ._unlock_bot_gate
+.skip348then
+.skipL0918
+.L0919 ;;line 3422;;  p2_ballx = r_bottom_oldx  :  p2_bally = r_bottom_oldy
+
+	LDA r_bottom_oldx
+	STA p2_ballx
+	LDA r_bottom_oldy
+	STA p2_bally
+.L0920 ;;line 3423;;  temp6 = 1
+
+	LDA #1
+	STA temp6
+.L0921 ;;line 3424;;  return otherbank
+
+	JMP BS_return
+._unlock_bot_gate
+ ;;line 3425;; _unlock_bot_gate
+
+.L0922 ;;line 3426;;  if bot_drag_state = 3 then bot_drag_state = 39
+
+	LDA bot_drag_state
+	CMP #3
+     BNE .skipL0922
+.condpart350
+	LDA #39
+	STA bot_drag_state
+.skipL0922
+.L0923 ;;line 3427;;  bottom_player0y = 255  :  return otherbank
+
+	LDA #255
+	STA bottom_player0y
+	JMP BS_return
+.
+ ;;line 3428;; 
+
+.
+ ;;line 3429;; 
+
+.
+ ;;line 3430;; 
+
+.
+ ;;line 3431;; 
+
+.bridge_pf_check_top
+ ;;line 3432;; bridge_pf_check_top
+
+.L0924 ;;line 3433;;  asm
+
+   
+
+   lda r_top_obj_room+6
+
+   cmp top_room
+
+   bne .top_bridge_bounce
+
+   lda top_carried_item
+
+   cmp #6
+
+   beq .top_bridge_bounce
+
+   
+
+   
+
+   lda ballx
+
+   sec
+
+   sbc var6
+
+   cmp #2
+
+   bcc .top_bridge_bounce
+
+   cmp #13
+
+   bcs .top_bridge_bounce
+
+   
+
+   
+
+   lda bally
+
+   clc
+
+   adc #18
+
+   cmp var17
+
+   bcc .top_bridge_bounce
+
+   
+
+   lda var17
+
+   clc
+
+   adc #2
+
+   cmp bally
+
+   bcs .top_bridge_safe
+
+.top_bridge_bounce
+
+.L0925 ;;line 3465;;  temp5 = 1
+
+	LDA #1
+	STA temp5
+.L0926 ;;line 3466;;  goto _do_top_pf_knockback
+
+ jmp ._do_top_pf_knockback
+.
+ ;;line 3467;; 
+
+.L0927 ;;line 3468;;  asm
+
+.top_bridge_safe
+
+.L0928 ;;line 3471;;  return otherbank
+
+	JMP BS_return
+.
+ ;;line 3472;; 
+
+.
+ ;;line 3473;; 
+
+.
+ ;;line 3474;; 
+
+.
+ ;;line 3475;; 
+
+.
+ ;;line 3476;; 
+
+.
+ ;;line 3477;; 
+
+.
+ ;;line 3478;; 
+
+.
+ ;;line 3479;; 
+
+.
+ ;;line 3480;; 
+
+.
+ ;;line 3481;; 
+
+.
+ ;;line 3482;; 
+
+.
+ ;;line 3483;; 
+
+._do_top_pf_knockback
+ ;;line 3484;; _do_top_pf_knockback
+
+.L0929 ;;line 3485;;  asm
+
+   lda r_top_oldx
+
+   sta ballx
+
+   lda r_top_oldy
+
+   sta bally
+
+.L0930 ;;line 3491;;  return otherbank
+
+	JMP BS_return
+.
+ ;;line 3492;; 
+
+.bridge_pf_check_bot
+ ;;line 3493;; bridge_pf_check_bot
+
+.L0931 ;;line 3494;;  asm
+
+   
+
+   lda r_bot_obj_room+6
+
+   cmp bottom_room
+
+   bne .bot_bridge_bounce
+
+   lda bot_carried_item
+
+   cmp #6
+
+   beq .bot_bridge_bounce
+
+   
+
+   
+
+   lda p2_ballx
+
+   sec
+
+   sbc var28
+
+   cmp #2
+
+   bcc .bot_bridge_bounce
+
+   cmp #13
+
+   bcs .bot_bridge_bounce
+
+   
+
+   
+
+   lda p2_bally
+
+   clc
+
+   adc #18
+
+   cmp var39
+
+   bcc .bot_bridge_bounce
+
+   
+
+   lda var39
+
+   clc
+
+   adc #2
+
+   cmp p2_bally
+
+   bcs .bot_bridge_safe
+
+.bot_bridge_bounce
+
+.L0932 ;;line 3526;;  temp6 = 1
+
+	LDA #1
+	STA temp6
+.L0933 ;;line 3527;;  goto _do_bot_pf_knockback
+
+ jmp ._do_bot_pf_knockback
+.
+ ;;line 3528;; 
+
+.L0934 ;;line 3529;;  asm
+
+.bot_bridge_safe
+
+.L0935 ;;line 3532;;  return otherbank
+
+	JMP BS_return
+.
+ ;;line 3533;; 
+
+._do_bot_pf_knockback
+ ;;line 3534;; _do_bot_pf_knockback
+
+.L0936 ;;line 3535;;  asm
+
+   lda r_bottom_oldx
+
+   sta p2_ballx
+
+   lda r_bottom_oldy
+
+   sta p2_bally
+
+.L0937 ;;line 3541;;  return otherbank
+
+	JMP BS_return
+.
+ ;;line 3542;; 
+
+.L0938 ;;line 3543;;  data bat_dx
+
+	JMP .skipL0938
+bat_dx
+	.byte  0, 1, 1, 1, 0, 255, 255, 255
+
+.skipL0938
+.
+ ;;line 3546;; 
+
+.L0939 ;;line 3547;;  data bat_dy
+
+	JMP .skipL0939
+bat_dy
+	.byte  255, 255, 0, 1, 1, 1, 0, 255
+
+.skipL0939
+.
+ ;;line 3550;; 
+
+.
+ ;;line 3551;; 
+
+.L0940 ;;line 3552;;  data bat_move_north
+
+	JMP .skipL0940
+bat_move_north
+	.byte  0,30,0,2,3,4,0,14,10,9,8,9,11,0,7
+
+	.byte  13,15,5,22,21,18,19,20,21,0,16,25,26,0,28
+
+	.byte  5,17,6,24
+
+.skipL0940
+.
+ ;;line 3557;; 
+
+.L0941 ;;line 3558;;  data bat_move_east
+
+	JMP .skipL0941
+bat_move_east
+	.byte  0,1,2,6,7,3,5,4,9,10,11,8,12,13,15
+
+	.byte  16,14,14,19,18,21,20,22,23,27,26,25,29,28,24
+
+	.byte  30,0,0,0
+
+.skipL0941
+.
+ ;;line 3563;; 
+
+.L0942 ;;line 3564;;  data bat_move_south
+
+	JMP .skipL0942
+bat_move_south
+	.byte  0,2,3,4,5,30,0,14,10,11,8,12,13,15,7
+
+	.byte  16,25,0,20,21,22,23,18,24,0,26,27,0,29,0
+
+	.byte  1,28,6,0
+
+.skipL0942
+.
+ ;;line 3569;; 
+
+.L0943 ;;line 3570;;  data bat_move_west
+
+	JMP .skipL0943
+bat_move_west
+	.byte  0,1,2,5,7,6,3,4,11,8,9,10,12,13,16
+
+	.byte  14,15,16,19,18,21,20,22,23,29,26,25,24,28,27
+
+	.byte  30,0,0,0
+
+.skipL0943
+ if (<*) > (<(*+24))
 	repeat ($100-<*)
 	.byte 0
 	repend
 	endif
-playerL097_0
+playerL0747_1
+	.byte  %00111111
+	.byte  %11100001
+	.byte  %10001111
+	.byte  %00001000
+	.byte  %00111100
+	.byte  %11111111
+	.byte  %11000111
+	.byte  %11000011
+	.byte  %11000011
+	.byte  %11100011
 	.byte  %01111111
+	.byte  %00111111
+	.byte  %00011110
+	.byte  %00000100
+	.byte  %00000100
+	.byte  %00001110
+	.byte  %11111110
+	.byte  %11110011
+	.byte  %00001111
+	.byte  %00000110
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+ if (<*) > (<(*+24))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL0749_1
+	.byte  %11100000
+	.byte  %10000000
+	.byte  %11111000
+	.byte  %00001000
+	.byte  %00111100
+	.byte  %11111111
+	.byte  %11111111
+	.byte  %11111111
+	.byte  %11111111
+	.byte  %11111111
+	.byte  %01111111
+	.byte  %00111111
+	.byte  %00011110
+	.byte  %10000100
+	.byte  %01000100
+	.byte  %00101110
+	.byte  %00011110
+	.byte  %00010011
+	.byte  %00101111
+	.byte  %01000110
+	.byte  %10000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+ if (<*) > (<(*+24))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL0751_1
+	.byte  %01111111
+	.byte  %01000001
+	.byte  %01101111
+	.byte  %00100000
+	.byte  %01111100
+	.byte  %01111110
+	.byte  %11111110
+	.byte  %11111111
+	.byte  %11111111
+	.byte  %11111110
+	.byte  %10000000
+	.byte  %11001110
+	.byte  %01111111
+	.byte  %00011011
+	.byte  %00001110
+	.byte  %00001100
+	.byte  %00001100
+	.byte  %00001100
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+ if (<*) > (<(*+24))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL0753_1
+	.byte  %11000011
+	.byte  %11000011
+	.byte  %11000011
+	.byte  %11000011
+	.byte  %11000011
+	.byte  %11100111
+	.byte  %01111110
+	.byte  %00111100
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+ if (<*) > (<(*+24))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL0755_1
+	.byte  %00100000
+	.byte  %01000000
+	.byte  %11111111
+	.byte  %01000000
+	.byte  %00100000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+ if (<*) > (<(*+24))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL0757_1
+	.byte  %01111110
+	.byte  %00011000
+	.byte  %00011000
+	.byte  %00111100
+	.byte  %01111110
+	.byte  %01111110
+	.byte  %11000011
+	.byte  %10000001
+	.byte  %10000001
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+ if (<*) > (<(*+24))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL0759_1
+	.byte  %11000011
+	.byte  %11000011
+	.byte  %01000010
+	.byte  %01000010
+	.byte  %01000010
+	.byte  %01000010
+	.byte  %01000010
+	.byte  %01000010
+	.byte  %01000010
+	.byte  %01000010
+	.byte  %01000010
+	.byte  %01000010
+	.byte  %01000010
+	.byte  %11000011
+	.byte  %11000011
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+ if (<*) > (<(*+24))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL0761_1
+	.byte  %10100111
+	.byte  %11111101
+	.byte  %00000111
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+ if (<*) > (<(*+24))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL0763_1
+	.byte  %10000001
+	.byte  %10000001
+	.byte  %10000001
+	.byte  %11000011
+	.byte  %01100110
+	.byte  %01011010
+	.byte  %00111100
+	.byte  %10000000
+	.byte  %00000001
+	.byte  %10000000
+	.byte  %00000001
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+ if (<*) > (<(*+24))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL0765_1
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %01100110
+	.byte  %01011010
+	.byte  %11111111
+	.byte  %11000011
+	.byte  %11000011
+	.byte  %10000001
+	.byte  %10000001
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00000000
+ if (<*) > (<(*+15))
+	repeat ($100-<*)
+	.byte 0
+	repend
+	endif
+playerL0783_0
+	.byte  %00000000
+	.byte  %01010101
 	.byte  %01010101
 	.byte  %01111111
 	.byte  %01010101
-	.byte  %01111111
 	.byte  %01010101
 	.byte  %01111111
 	.byte  %01010101
-	.byte  %01111111
 	.byte  %01010101
 	.byte  %01111111
 	.byte  %01010101
-	.byte  %01111111
 	.byte  %01010101
 	.byte  %01111111
- if (<*) > (<(*+24))
+	.byte  %01010101
+	.byte  %01010101
+	.byte  %01111111
+ if (<*) > (<(*+15))
 	repeat ($100-<*)
 	.byte 0
 	repend
 	endif
-playerL0449_1
-	.byte   %00111111
-	.byte   %11100001
-	.byte   %10001111
-	.byte   %00001000
-	.byte   %00111100
-	.byte   %11111111
-	.byte   %11000111
-	.byte   %11000011
-	.byte   %11000011
-	.byte   %11100011
-	.byte   %01111111
-	.byte   %00111111
-	.byte   %00011110
-	.byte   %00000100
-	.byte   %00000100
-	.byte   %00001110
-	.byte   %11111110
-	.byte   %11110011
-	.byte   %00001111
-	.byte   %00000110
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
- if (<*) > (<(*+24))
-	repeat ($100-<*)
-	.byte 0
-	repend
-	endif
-playerL0451_1
-	.byte   %00011100
-	.byte   %00001000
-	.byte   %00111100
-	.byte   %11111110
-	.byte   %11000011
-	.byte   %00000111
-	.byte   %00011111
-	.byte   %00111110
-	.byte   %01111000
-	.byte   %01110000
-	.byte   %01110000
-	.byte   %01111001
-	.byte   %00111111
-	.byte   %00011111
-	.byte   %11001110
-	.byte   %11100100
-	.byte   %00001100
-	.byte   %00111110
-	.byte   %11101111
-	.byte   %11000111
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
- if (<*) > (<(*+24))
-	repeat ($100-<*)
-	.byte 0
-	repend
-	endif
-playerL0453_1
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000110
-	.byte   %00100011
-	.byte   %10010001
-	.byte   %01111110
-	.byte   %01001000
-	.byte   %00011100
-	.byte   %00111110
-	.byte   %01111011
-	.byte   %11111001
-	.byte   %10111111
-	.byte   %11011111
-	.byte   %01001110
-	.byte   %00100100
-	.byte   %00011100
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
- if (<*) > (<(*+24))
-	repeat ($100-<*)
-	.byte 0
-	repend
-	endif
-playerL0455_1
-	.byte   %11000011
-	.byte   %11000011
-	.byte   %11000011
-	.byte   %11000011
-	.byte   %11000011
-	.byte   %11100111
-	.byte   %01111110
-	.byte   %00111100
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
- if (<*) > (<(*+24))
-	repeat ($100-<*)
-	.byte 0
-	repend
-	endif
-playerL0457_1
-	.byte   %00100000
-	.byte   %01000000
-	.byte   %11111111
-	.byte   %01000000
-	.byte   %00100000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
- if (<*) > (<(*+24))
-	repeat ($100-<*)
-	.byte 0
-	repend
-	endif
-playerL0459_1
-	.byte   %01111110
-	.byte   %00011000
-	.byte   %00011000
-	.byte   %00111100
-	.byte   %01111110
-	.byte   %01111110
-	.byte   %11000011
-	.byte   %10000001
-	.byte   %10000001
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
- if (<*) > (<(*+24))
-	repeat ($100-<*)
-	.byte 0
-	repend
-	endif
-playerL0461_1
-	.byte   %11000011
-	.byte   %11000011
-	.byte   %11000011
-	.byte   %11000011
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %01000010
-	.byte   %11000011
-	.byte   %11000011
-	.byte   %11000011
-	.byte   %00000000
- if (<*) > (<(*+24))
-	repeat ($100-<*)
-	.byte 0
-	repend
-	endif
-playerL0463_1
-	.byte   %10100111
-	.byte   %11111101
-	.byte   %00000111
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
- if (<*) > (<(*+24))
-	repeat ($100-<*)
-	.byte 0
-	repend
-	endif
-playerL0465_1
-	.byte   %01100110
-	.byte   %01011010
-	.byte   %11111111
-	.byte   %11000011
-	.byte   %11000011
-	.byte   %10000001
-	.byte   %10000001
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
-	.byte   %00000000
+playerL0785_0
+	.byte  %00000000
+	.byte  %00000000
+	.byte  %00011110
+	.byte  %00011110
+	.byte  %00111111
+	.byte  %00111111
+	.byte  %00111111
+	.byte  %00111111
+	.byte  %00111111
+	.byte  %00111111
+	.byte  %00111111
+	.byte  %00111111
+	.byte  %00011110
+	.byte  %00011110
+	.byte  %00000000
+	.byte  %00000000
  if ECHOFIRST
        echo "    ",[(scoretable - *)]d , "bytes of ROM space left in bank 4")
  endif 

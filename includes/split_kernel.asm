@@ -12,6 +12,8 @@ top_p1_ptr_hi    = player1pointerhi
 top_colup0       = COLUP0
 top_colup1       = COLUP1
 top_colupf       = COLUPF
+top_colubk       = COLUBK
+top_nusiz1       = NUSIZ1
 
      ifnconst vertical_reflect
 kernel
@@ -770,30 +772,32 @@ beginscore
 ; =========================================================
 ; THE DIVIDER & SWAP ROUTINE 
 ; =========================================================
+     if (<*) > $90
+         align 256
+     endif
 SplitDoDivider
      txa                ; Push playfield offset X to stack (Cycle 37)
      pha                ; (Cycle 40)
      
      ; --- CACHE TOP SCREEN COLLISIONS ---
+     ; (Removed unused CXP1FB read & duplicate CXCLR to save 9 cycles -> Ends at Cycle 63!)
      lda CXBLPF         ; (Cycle 43)
      sta top_cxblpf     ; (Cycle 46)
      lda CXP0FB         ; (Cycle 49)
      sta top_cxp0fb     ; (Cycle 52)
-     lda CXP1FB         ; (Cycle 55)
-     sta top_cxp1fb     ; (Cycle 58)
-     sta CXCLR          ; (Cycle 61)
      
      ; Clear leftover top-screen sprites & ball before divider scanlines
      ; (GRP1 MUST be written last to latch GRP0 and ENABL via VDELP0/VDELBL)
-     lda #0             ; (Cycle 63)
-     sta GRP0           ; (Cycle 66)
-     sta ENABL          ; (Cycle 69)
-     sta GRP1           ; (Cycle 72 -before Cycle 76 WSYNC)
+     lda #0             ; (Cycle 54)
+     sta GRP0           ; (Cycle 57)
+     sta ENABL          ; (Cycle 60)
+     sta GRP1           ; (Cycle 63 - 13 cycles of safe margin before Cycle 76!)
      
      ; Scanline 1: The 1-Pixel Colored Line + Pointer Swaps
      sta WSYNC
      ifconst split_color
-         lda #split_color
+        ;lda #split_color  ; Use the # if you want to define this as a constant
+         lda split_color   ; Do not use the # if you want to dim this as a variable in bB
          sta COLUBK    
      endif
      
@@ -812,6 +816,8 @@ SplitDoDivider
 
      ; Fast Clamp Bottom Player 1 X 
      lda bottom_player1x
+     clc               
+     adc #13           ; CHANGED: Add 13 to align perfectly with bottom ball and top screen
      cmp #160          
      bcc .d_safe
      lda #159          
@@ -820,102 +826,113 @@ SplitDoDivider
          
      ; Fast Clamp Bottom Player 0 X 
      lda bottom_player0x
+     clc               
+     adc #13           ; CHANGED: Add 13 to align perfectly with bottom ball and top screen          
      cmp #160
      bcc .c_safe
      lda #159
 .c_safe  
      tay               
          
-     ; Scanline 2: Position Bottom P0
+     ; Scanline 2: Position Bottom P0 (Starts loop at exact Cycle 14)
      sta WSYNC
-     ifconst split_color
-         lda #0
-         sta COLUBK      
-         lda temp1       
-         nop             
-     else
-         sleep 10        
-     endif
-     tya               
-     sec
+     lda #bottom_colubk_val ; 2 cycles (constant; frees w030 for CTRLPF)
+     sta COLUBK          ; 3 cycles
+     sleep 5             ; 5 cycles (Total = 10)
+     tya                 ; 2 cycles (12)
+     sec                 ; 2 cycles (14)
 SplitPosP0
      sbc #15
      bcs SplitPosP0
      sta RESP0         
-     tay               
+     tay             
      
-     ; Scanline 3: Position Bottom P1 
+     ; Scanline 3: Position Bottom P1 (Starts loop at exact Cycle 14)
      sta WSYNC
-     sleep 10          
-     txa               
-     sec
+     sleep 10            ; 10 cycles
+     txa                 ; 2 cycles (12)
+     sec                 ; 2 cycles (14)
 SplitPosP1
      sbc #15
      bcs SplitPosP1
      sta RESP1         
      tax               
 
-     ; Scanline 4: Position Bottom Ball
+     ; Scanline 4: Position Bottom Ball (Starts loop at exact Cycle 14!)
      sta WSYNC
-     sleep 10          
-     lda p2_ballx
-     sec
+     sleep 5             ; 5 cycles
+     lda p2_ballx        ; 3 cycles (8)
+     clc                 ; 2 cycles (10)
+     adc #13             ; 2 cycles (12) -> Matches old sleep 10 + sbc #2 visual offset
+     sec                 ; 2 cycles (14)
 SplitPosBall
      sbc #15
      bcs SplitPosBall
      sta RESBL
-     pha               ; PUSH remainder to stack
      
-     ; Scanline 5: Fine Positioning Math + Remaining Swaps
-     sta WSYNC
-     sta HMCLR         
+     ; NO pha here! The Accumulator holds the Ball remainder safely!
      
+     ; Scanline 5: Fine Positioning Math + Color Swaps + Early HMOVE
+     sta WSYNC         ; Halts CPU until end of Scanline 4
+     sta HMCLR         ; 3 cycles
+     
+     ; 1. Process Bottom Ball remainder first (already in A)
+     eor #7
+     asl
+     asl
+     asl
+     asl
+     sta HMBL          ; Total: 16 cycles
+     
+     ; 2. Process Bottom P0 remainder (in Y)
      tya               
      eor #7
      asl
      asl
      asl
      asl
-     sta HMP0
+     sta HMP0          ; Total: 31 cycles
 
+     ; 3. Process Bottom P1 remainder (in X)
      txa               
      eor #7
      asl
      asl
      asl
      asl
-     sta HMP1
+     sta HMP1          ; Total: 46 cycles
      
-     pla               ; PULL ball remainder from stack
-     eor #7
-     asl
-     asl
-     asl
-     asl
-     sta HMBL
-     
-     ; Offload remaining color swaps 
-     lda bottom_colupf
+     ; Offload standard color swaps 
+     lda bottom_colupf 
      sta top_colupf        
      lda bottom_colup0
      sta top_colup0        
      lda bottom_colup1
-     sta top_colup1        
+     sta top_colup1    ; Total: 64 cycles
      
-     ; Scanline 6: Apply fine position, restore playfield, and phase sync
-     sta WSYNC
-     sta HMOVE         
+     ; Pad exactly 7 cycles to hit Early HMOVE perfectly on cycle 73
+     lda r_bottom_ctrlpf ; 4 cycles  - bottom CTRLPF (priority bit for torch)
+     sta CTRLPF        ; 3 cycles (Total: 71 cycles)  [was: sta CXCLR / nop / nop]
      
-     ; Swap Ball Y-Coordinate 
-     ; (The kernel automatically restores the true top 'bally' at the end of the frame)
+     ; Early HMOVE Strobe
+     sta HMOVE
+
+     ; --- SCANLINE 6 (Seamlessly crossed into from the HMOVE above) ---
      lda p2_bally
      sta bally
+     
+     lda r_bottom_nusiz1
+     sta top_nusiz1
 
-     pla
-     tax               
+     pla                 ; Pull Playfield offset X from the stack
+     tax                 ; Restore it to X
          
-     ; Proven playfield phase sync (25 cycles minus 12 cycles used above = 13)
-     sleep 13
+     ; Proven playfield phase sync: 11 cycles (was sleep 11).  Now does useful work:
+     lda bot_nusiz0      ; 3 cycles - bottom P0 size (gate = 5, torch = 7)
+     sta NUSIZ0          ; 3 cycles
+     sta CXCLR           ; 3 cycles (moved here from the end of scanline 5)
+     sleep 9             ; steve - commented out nop below and added sleep 9 to fix playfield render issue on room 16 in bottom half
+     ;nop                 ; 2 cycles (Total: 11)
          
      jmp SplitReturnFromDivider
 SplitReturnSafely
@@ -930,5 +947,3 @@ noshakescreen
          inx
          rts
      endif
-
-
