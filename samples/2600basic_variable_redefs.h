@@ -1,30 +1,22 @@
 ; This file contains variable mapping and other information for the current project.
 
-bat_move_west_length = .skipL0943-bat_move_west 
+bat_move_west_length = .skipL0857-bat_move_west 
  
-bat_move_south_length = .skipL0942-bat_move_south 
+bat_move_south_length = .skipL0856-bat_move_south 
  
-bat_move_east_length = .skipL0941-bat_move_east 
+bat_move_east_length = .skipL0855-bat_move_east 
  
-bat_move_north_length = .skipL0940-bat_move_north 
+bat_move_north_length = .skipL0854-bat_move_north 
  
-bat_dy_length = .skipL0939-bat_dy 
+bat_dy_length = .skipL0853-bat_dy 
  
-bat_dx_length = .skipL0938-bat_dx 
+bat_dx_length = .skipL0852-bat_dx 
  
-bit_mask_b3_length = .skipL0746-bit_mask_b3 
+bit_mask_b3_length = .skipL0667-bit_mask_b3 
  
-sfx_audv_length = .skipL0735-sfx_audv 
+item_hitbox_bot_length = .skipL0653-item_hitbox_bot 
  
-sfx_audf_length = .skipL0734-sfx_audf 
- 
-sfx_audc_length = .skipL0733-sfx_audc 
- 
-win_freq_length = .skipL0732-win_freq 
- 
-item_hitbox_bot_length = .skipL0671-item_hitbox_bot 
- 
-item_hitbox_top_length = .skipL0670-item_hitbox_top 
+item_hitbox_top_length = .skipL0652-item_hitbox_top 
  
 g3_corner_y_length = .skipL0588-g3_corner_y 
  
@@ -34,44 +26,44 @@ g3_rooms_length = .skipL0586-g3_rooms
  
 bit_mask_8_length = .skipL0585-bit_mask_8 
  
-init_y_g1_length = .skipL0478-init_y_g1 
+init_y_g1_length = .skipL0477-init_y_g1 
  
-init_x_g1_length = .skipL0477-init_x_g1 
+init_x_g1_length = .skipL0476-init_x_g1 
  
-init_rooms_g1_length = .skipL0476-init_rooms_g1 
+init_rooms_g1_length = .skipL0475-init_rooms_g1 
  
-obj_colors_length = .skipL0475-obj_colors 
+obj_colors_length = .skipL0470-obj_colors 
  
-bot_bit_mask_length = .skipL0468-bot_bit_mask 
+bot_bit_mask_length = .skipL0463-bot_bit_mask 
  
-bit_mask_length = .skipL0467-bit_mask 
+bit_mask_length = .skipL0462-bit_mask 
  
-move_west_b2_length = .skipL0247-move_west_b2 
+move_west_b2_length = .skipL0240-move_west_b2 
  
-move_south_b2_length = .skipL0246-move_south_b2 
+move_south_b2_length = .skipL0239-move_south_b2 
  
-move_east_b2_length = .skipL0245-move_east_b2 
+move_east_b2_length = .skipL0238-move_east_b2 
  
-move_north_b2_length = .skipL0244-move_north_b2 
+move_north_b2_length = .skipL0237-move_north_b2 
  
-init_y_length = .skipL0243-init_y 
+init_y_length = .skipL0236-init_y 
  
-init_x_length = .skipL0242-init_x 
+init_x_length = .skipL0235-init_x 
  
-init_rooms_length = .skipL0241-init_rooms 
+init_rooms_length = .skipL0234-init_rooms 
  
 bscode_length = 32
-room_color_length = .skipL0209-room_color 
+room_color_length = .skipL0201-room_color 
  
-room_shape_length = .skipL0208-room_shape 
+room_shape_length = .skipL0200-room_shape 
  
-move_west_length = .skipL0207-move_west 
+move_west_length = .skipL0199-move_west 
  
-move_south_length = .skipL0206-move_south 
+move_south_length = .skipL0198-move_south 
  
-move_east_length = .skipL0205-move_east 
+move_east_length = .skipL0197-move_east 
  
-move_north_length = .skipL0204-move_north 
+move_north_length = .skipL0196-move_north 
  
 top_cxp0fb = z
  
@@ -125,7 +117,11 @@ bottom_colup1 = b
  
 bottom_colup0 = a
  
-bottom_colubk_val = $06
+bottom_colubk_val = $E0
+ 
+flash_timer = aux6
+ 
+trap_state = aux5
  
 drag_awake = aux3
  
@@ -237,6 +233,10 @@ top_p0_ptr_lo = player0pointerlo
  
 top_colupf = COLUPF
  
+top_colup1_sh = aux2
+ 
+top_nusiz1_sh = aux1
+ 
 top_colup1 = COLUP1
  
 top_colup0 = COLUP0
@@ -249,13 +249,17 @@ top_player0y = player0y
  
 top_player0x = player0x
  
-logo_height = 48
+logo_height = 76
  
 logo_color = $00
  
 split_color = aux4
  
 DEBUG_NO_SWALLOW = 0
+ 
+overscan_time = 33
+ 
+vblank_time = 47
  
 noscore = 1
  

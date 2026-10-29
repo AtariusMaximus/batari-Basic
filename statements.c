@@ -36,6 +36,7 @@ int doingfunction = 0;
 int sprite_index = 0;
 int multisprite = 0;
 int split_kernel = 0;
+int pf_data_only = 0;	// set pfdataonly on: playfield: emits only the data bytes (no RAM copy loop)
 int lifekernel = 0;
 int playfield_number = 0;
 int extra = 0;
@@ -764,6 +765,8 @@ void playfield(char **statement)
     }
     else if (bs != 28)		// RAM pf, as in std_kernel, not DPC+
     {
+	if (!pf_data_only)
+	{
 	printf("  ifconst pfres\n");
 //      printf("    ldx #4*pfres-1\n");
 	printf("	  ldx #(%d>pfres)*(pfres*pfwidth-1)+(%d<=pfres)*%d\n", l, l, l * 4 - 1);
@@ -773,6 +776,7 @@ void playfield(char **statement)
 	printf("	  ldx #((%d*pfwidth-1)*((%d*pfwidth-1)<47))+(47*((%d*pfwidth-1)>=47))\n", l, l, l);
 	printf("  endif\n");
 	printf("	jmp pflabel%d\n", playfield_number);
+	}
 
 	// no need to align to page boundaries
 
@@ -807,6 +811,8 @@ void playfield(char **statement)
 	    printf("\n endif\n");
 	}
 
+	if (!pf_data_only)
+	{
 	printf("pflabel%d\n", playfield_number);
 	printf("	lda PF_data%d,x\n", playfield_number);
 	if (superchip)
@@ -827,6 +833,7 @@ void playfield(char **statement)
 	}
 	printf("	dex\n");
 	printf("	bpl pflabel%d\n", playfield_number);
+	}
 	playfield_number++;
 
     }
@@ -5905,6 +5912,12 @@ void set(char **statement)
 	}
 	else
 	    prerror("set TV: invalid TV type\n");
+    }
+    else if (!strncmp(statement[2], "pfdataonly\0", 10))
+    {
+	// set pfdataonly on : playfield: blocks become pure ROM data (labelled PF_dataN),
+	// for games that copy rooms themselves through pointers. Saves ~14 bytes per block.
+	pf_data_only = !strncmp(statement[3], "on\0", 2);
     }
     else if (!strncmp(statement[2], "smartbranching\0", 14))
     {

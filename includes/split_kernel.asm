@@ -795,11 +795,11 @@ SplitDoDivider
      
      ; Scanline 1: The 1-Pixel Colored Line + Pointer Swaps
      sta WSYNC
-     ifconst split_color
+     ;ifconst split_color
         ;lda #split_color  ; Use the # if you want to define this as a constant
          lda split_color   ; Do not use the # if you want to dim this as a variable in bB
          sta COLUBK    
-     endif
+     ;endif
      
      lda bottom_player0y
      sta top_player0y
@@ -836,9 +836,7 @@ SplitDoDivider
          
      ; Scanline 2: Position Bottom P0 (Starts loop at exact Cycle 14)
      sta WSYNC
-     lda #bottom_colubk_val ; 2 cycles (constant; frees w030 for CTRLPF)
-     sta COLUBK          ; 3 cycles
-     sleep 5             ; 5 cycles (Total = 10)
+     sleep 10            ; Replaces lda, sta, and sleep 5 to maintain exactly 10 cycles
      tya                 ; 2 cycles (12)
      sec                 ; 2 cycles (14)
 SplitPosP0
@@ -918,21 +916,23 @@ SplitPosBall
      sta HMOVE
 
      ; --- SCANLINE 6 (Seamlessly crossed into from the HMOVE above) ---
-     lda p2_bally
-     sta bally
+     lda #bottom_colubk_val ; 2 cycles
+     sta COLUBK             ; 3 cycles (Executes completely off-screen in HBLANK)
      
-     lda r_bottom_nusiz1
-     sta top_nusiz1
+     lda p2_bally           ; 3 cycles
+     sta bally              ; 3 cycles
+     
+     lda r_bottom_nusiz1    ; 3 cycles
+     sta top_nusiz1         ; 3 cycles
 
-     pla                 ; Pull Playfield offset X from the stack
-     tax                 ; Restore it to X
+     pla                    ; 4 cycles
+     tax                    ; 2 cycles
          
-     ; Proven playfield phase sync: 11 cycles (was sleep 11).  Now does useful work:
-     lda bot_nusiz0      ; 3 cycles - bottom P0 size (gate = 5, torch = 7)
-     sta NUSIZ0          ; 3 cycles
-     sta CXCLR           ; 3 cycles (moved here from the end of scanline 5)
-     sleep 9             ; steve - commented out nop below and added sleep 9 to fix playfield render issue on room 16 in bottom half
-     ;nop                 ; 2 cycles (Total: 11)
+     ; Proven playfield phase sync 
+     lda bot_nusiz0         ; 3 cycles 
+     sta NUSIZ0             ; 3 cycles
+     sta CXCLR              ; 3 cycles 
+     sleep 4                ; 4 cycles (Pads the exact remaining cycles to match your original sleep 9)
          
      jmp SplitReturnFromDivider
 SplitReturnSafely

@@ -62,6 +62,14 @@ overscan
          TAX ; save it for later
      endif
 
+     ifconst DEBUG_SLACK
+         ; red divider line = post-kernel logic ran past its timer (scanline roll risk)
+         lda INTIM
+         bmi dbglogicok
+         lda #$44
+         sta split_color
+dbglogicok
+     endif
 overscanloop
      lda INTIM ;wait for sync
      bmi overscanloop
@@ -202,6 +210,7 @@ adjustloop2
 
 
 
+     ifnconst noscore
      ;set score pointers
      lax score+2
      jsr scorepointerset
@@ -215,11 +224,20 @@ adjustloop2
      jsr scorepointerset
      sty scorepointers+3
      stx scorepointers
+     endif
 
 vblk
      ; run possible vblank bB code
      ifconst vblank_bB_code
          jsr vblank_bB_code
+     endif
+     ifconst DEBUG_SLACK
+         ; yellow divider line = VBLANK code ran past its timer this frame
+         lda INTIM
+         bmi dbgvblankok
+         lda #$1E
+         sta split_color
+dbgvblankok
      endif
 vblk2
      LDA INTIM
@@ -231,6 +249,7 @@ vblk2
      .byte $F0,$E0,$D0,$C0,$B0,$A0,$90
 repostable
 
+     ifnconst noscore
 scorepointerset
      and #$0F
      asl
@@ -245,3 +264,4 @@ scorepointerset
      adc #<scoretable
      tax
      rts
+     endif
